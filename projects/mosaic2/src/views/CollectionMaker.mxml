@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" label="Collections" width="100%" height="100%" 
+	xmlns:views="views.*">
+			<mx:constraintRows>
+				<mx:ConstraintRow id="WindowedApplication2_row1" height="60%"/>
+				<mx:ConstraintRow id="WindowedApplication2_row2" height="40%"/>
+			</mx:constraintRows>
+			<mx:Script>
+				<![CDATA[
+					import mosaic.MosaicImage;
+					import mosaic.MosaicCollection;
+					import mosaic.MosaicController;
+					public function MakeCollection():void
+					{
+						
+						var c:MosaicCollection = MosaicController.instance.createCollection();
+						c.save();
+						updateSelectedCollection(c);
+					}
+					public function SyncCollection():void
+					{
+						if(selectedCollection == null)
+							return;
+													
+						statusUI.text = "Building collection...";
+						var f:File = new File(File.applicationDirectory.nativePath);
+						f = f.resolvePath("../images/" + dirNameUI.text);
+						
+						selectedCollection.removeAllImages();
+						
+						var images:Array = buildRecursiveFileList(f);
+						var o:Object = {images:images,collection:selectedCollection, count:images.length};
+						for(var i:int = 0;i<100;i++)
+						{
+							createOneImage(o);
+						}
+						
+					}
+					
+					[Bindable] public var selectedCollection:MosaicCollection;
+					
+					private function buildRecursiveFileList(dir:File):Array
+					{
+						var result:Array = [];
+						var files:Array = dir.getDirectoryListing();
+						for(var i:int = 0;i<files.length;i++)
+						{
+							var child:File = files[i];
+							if(child.isDirectory)
+								result = result.concat(buildRecursiveFileList(child));
+							else
+								result.push(child);
+						}
+						return result;
+					}
+					
+					private function createOneImage(o:Object):void
+					{
+						var images:Array = o.images;
+						var c:MosaicCollection = o.collection;
+						
+						if(images.length == 0)
+							return;
+
+						var imgFile:File = images.pop();
+						MosaicController.instance.createLocalImage(c,imgFile.url,
+						function(success:Boolean,img:MosaicImage):void
+						{
+							c.addImage(img);
+							statusUI.text = (o.count - c.images.length) + " remaining..."; 
+							if(c.images.length == o.count)
+							{
+								c.save();
+								statusUI.text = "";
+							}
+							else
+							{
+								createOneImage(o);
+							}
+						}
+						);
+						
+					}
+					
+					public function deleteCollection():void
+					{
+						var c:MosaicCollection = collectionList.selectedItem as MosaicCollection;
+						if(c == null)
+							return;
+						MosaicController.instance.deleteCollection(c);							
+					}
+					public function saveCollection():void
+					{
+						if(selectedCollection != null)
+							selectedCollection.save();
+					}
+					public function updateName():void
+					{
+						if(selectedCollection == null)
+							return;
+						selectedCollection.name = nameUI.text;
+						saveCollection();
+					}
+					public function updateSelectedCollection(c:MosaicCollection = null):void
+					{
+						if(c == null)							
+							c = collectionList.selectedItem as MosaicCollection;
+						selectedCollection  = c;
+						selectedCollection.load();
+					}
+				]]>
+			</mx:Script>
+
+			<mx:List x="10" labelField="name" id="collectionList" 
+				dataProvider="{MosaicController.instance.collections}" 
+				selectedItem="{selectedCollection}"
+				change="updateSelectedCollection();"
+				top="WindowedApplication2_row1:60" width="166" bottom="WindowedApplication2_row1:46"/>
+			<mx:Label x="10" y="34" text="Collections:"/>
+			<mx:Button label="New" click="MakeCollection()" bottom="WindowedApplication2_row1:16" left="122"/>
+			<mx:Button label="Delete" click="deleteCollection()" bottom="WindowedApplication2_row1:16" left="50"/>
+			<mx:Label x="184" y="63" text="Name:"/>
+			<mx:TextInput x="234" y="61" id="nameUI" text="{selectedCollection.name}" change="updateName()"/>
+			<mx:Label x="184" y="143" id="statusUI" width="210"/>
+			<mx:Label x="184" y="117" text="Sync to Directory:"/>
+			<mx:TextInput x="294" y="115" id="dirNameUI"/>
+			<mx:Button x="462" y="115" label="Sync Now" click="SyncCollection()"/>
+			<mx:Label x="191" y="91" text="Size:"/>
+			<mx:Label x="232" y="91" text="{selectedCollection.length}" id="sizeUI"/>
+</mx:Canvas>

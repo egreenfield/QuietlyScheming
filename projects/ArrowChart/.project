@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ArrowChart</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>bin</name>
+			<type>2</type>
+			<location>C:/dev/qs/web/public/arrowChart</location>
+		</link>
+		<link>
+			<name>[source path] lib</name>
+			<type>2</type>
+			<location>C:/dev/qs/lib</location>
+		</link>
+	</linkedResources>
+</projectDescription>

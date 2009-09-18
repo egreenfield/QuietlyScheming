@@ -1,0 +1,71 @@
+<Application initialize="initApp()" xmlns="http://www.macromedia.com/2003/mxml" xmlns:l="*"
+    width="100%" height="100%"
+    verticalGap="0" creationComplete="showInstructions()">
+
+
+	<Panel id="p" width="100%" height="100%">
+		<ConstraintCanvas id="canvas"  width="100%" height="100%">
+			<Button label="World" id="testChild" x="200" y="200" width="200"/>
+			<Button label="Hello" id="testChild2" x="200" y="200" width="200"/>
+			<constraints>
+				<Array>
+					<SimpleConstraint targetID="testChild" targetProperty="right" sourceProperty="right" offset="-20" />
+					<SimpleConstraint targetID="testChild2" targetProperty="right" sourceProperty="left" sourceID="testChild" offset="-20" />
+<!--				<SimpleConstraint targetID="testChild" targetProperty="width" percent="50" sourceProperty="width" margin="60" />
+					<SimpleConstraint targetID="testChild" targetProperty="vCenter" sourceProperty="vCenter"  />
+					<SimpleConstraint targetID="testChild" targetProperty="height" sourceProperty="height" margin="40"/>
+
+
+					<SimpleConstraint targetID="testChild2" targetProperty="left" sourceProperty="left" offset="20" />
+					<SimpleConstraint targetID="testChild2" targetProperty="width" percent="50" sourceProperty="width" margin="60" />
+					<SimpleConstraint targetID="testChild2" targetProperty="height" sourceID="testChild" sourceProperty="height" margin="40"/>
+					<SimpleConstraint targetID="testChild2" targetProperty="vCenter" sourceProperty="vCenter"  />
+
+					<SimpleConstraint targetID="testChild3" targetProperty="right" sourceProperty="left" sourceID="testChild" offset="20" />
+-->
+				</Array>
+			</constraints>
+		</ConstraintCanvas>
+	</Panel>
+
+	<Script>
+	<![CDATA[
+
+		import mx.utils.*;
+		import mx.managers.*;
+		import mx.containers.*;
+
+		function initApp()
+		{
+		}
+
+		import mx.util.*;
+
+
+		import mx.controls.*;
+
+
+		function showInstructions()
+		{
+
+//		canvas.activate();
+		return;
+			alert(
+			"- drag items from the children panel to populate container with children\n" +
+			"- click and drag on the upper left corner of a child to move it\n" +
+			"- click and drag on the lower right cornder of a child to resize it\n" +
+			"\n" +
+			"- click and drag from the guides panel to drag out a new guide\n" +
+			"- click and drag on a guide to move it after it's been created\n" +
+			"- shift-click and drag on a guide to change its size\n" +
+			"\n" +
+			"- drag a child close to a guide to bind it to the guide\n" +
+			"\n" +
+			"- select a guide and hit 'properties' to change its binding\n" +
+			""
+			,"Instructions"
+			);
+		}
+	]]>
+	</Script>
+</Application>

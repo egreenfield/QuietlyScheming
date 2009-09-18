@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of RedirectedMXML</title>
+	<nodes>
+		<node label="RedirectedChildren.mxml" icon="mxmlIcon" url="source/RedirectedChildren.mxml.html"/>
+		<node selected="true" label="RedirectedMXML.mxml" icon="mxmlAppIcon" url="source/RedirectedMXML.mxml.html"/>
+	</nodes>
+</index>

@@ -1,0 +1,1463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="DisplayObject3D,org.papervision3d.objects.DisplayObject3D,visible,name,id,extra,container,material,materials,scene,parent,transform,view,projected,faces,geometry,screenZ,_transformDirty,_sorted,x,y,z,rotationX,rotationY,rotationZ,scale,scaleX,scaleY,scaleZ,ZERO,addGeometry,distanceTo,hitTestPoint,hitTestObject,getMaterialByName,materialsList,project,render,moveForward,moveBackward,moveLeft,moveRight,moveUp,moveDown,translate,pitch,yaw,roll,lookAt,copyPosition,copyTransform,updateTransform,toString" name="keywords">
+<title>org.papervision3d.objects.DisplayObject3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'DisplayObject3D - Papervision3D API Documentation';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?org/papervision3d/objects/DisplayObject3D.html&amp;org/papervision3d/objects/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;DisplayObject3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class DisplayObject3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.objects</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class DisplayObject3D</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">DisplayObject3D <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> <a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../core/proto/CameraObject3D.html">CameraObject3D</a>, <a href="../objects/Collada.html">Collada</a>, <a href="../core/geom/Vertices3D.html">Vertices3D</a></td>
+</tr>
+</table>
+<p></p>
+The DisplayObject class represents instances of 3D objects that are contained in the scene.
+<p/>
+That includes all objects in the scene, not only those that can be rendered, but also the camera and its target.
+<p/>
+The DisplayObject3D class supports basic functionality like the x, y and z position of an object, as well as rotationX, rotationY, rotationZ, scaleX, scaleY and scaleZ and visible. It also supports more advanced properties of the object such as its transform Matrix3D.
+<p/>
+<p/>
+DisplayObject3D is not an abstract base class; therefore, you can call DisplayObject3D directly. Invoking new DisplayObject() creates a new empty object in 3D space, like when you used createEmptyMovieClip().
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#children">children</a> : Object<div class="summaryTableDescription">
+ Returns the children object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#container">container</a> : Sprite<div class="summaryTableDescription">
+ The Sprite that you draw into when rendering in a MovieScene3D.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#extra">extra</a> : Object<div class="summaryTableDescription">
+ An object that contains user defined properties.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#faces">faces</a> : Array<div class="summaryTableDescription">
+ [internal-use]
+ </div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#geometry">geometry</a> : <a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a>
+<div class="summaryTableDescription">
+ The GeometryObject3D object that contains the 3D definition of this instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : int<div class="summaryTableDescription">
+ [read-only] Unique id of this instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#material">material</a> : <a href="../core/proto/MaterialObject3D.html">MaterialObject3D</a>
+<div class="summaryTableDescription">
+ The default material for the object instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#materials">materials</a> : <a href="../materials/MaterialsList.html">MaterialsList</a>
+<div class="summaryTableDescription">
+ The list of materials for this instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#name">name</a> : String<div class="summaryTableDescription">
+ An optional object name.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#numChildren">numChildren</a> : int<div class="summaryTableDescription">
+ Returns the number of children of this object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#parent">parent</a> : <a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+<div class="summaryTableDescription">
+ [read-only] Indicates the DisplayObjectContainer3D object that contains this display object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#projected">projected</a> : Dictionary<div class="summaryTableDescription">
+ [internal-use]
+ </div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#root">root</a> : <a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+<div class="summaryTableDescription">
+ [read-only] [read-only] The scene, which is the top-most displayObjectContainer3D in the tree structure.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotationX">rotationX</a> : Number<div class="summaryTableDescription">
+ Specifies the rotation around the X axis from its original orientation.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotationY">rotationY</a> : Number<div class="summaryTableDescription">
+ Specifies the rotation around the Y axis from its original orientation.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotationZ">rotationZ</a> : Number<div class="summaryTableDescription">
+ Specifies the rotation around the Z axis from its original orientation.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scale">scale</a> : Number<div class="summaryTableDescription">[write-only]
+ Sets the 3D scale as applied from the registration point of the object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scaleX">scaleX</a> : Number<div class="summaryTableDescription">[write-only]
+ Sets the scale along the local X axis as applied from the registration point of the object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scaleY">scaleY</a> : Number<div class="summaryTableDescription">[write-only]
+ Sets the scale along the local Y axis as applied from the registration point of the object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scaleZ">scaleZ</a> : Number<div class="summaryTableDescription">[write-only]
+ Sets the scale along the local Z axis as applied from the registration point of the object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scene">scene</a> : <a href="../core/proto/SceneObject3D.html">SceneObject3D</a>
+<div class="summaryTableDescription">
+ The scene where the object belongs.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#screenZ">screenZ</a> : Number<div class="summaryTableDescription">
+ [internal-use] The depth (z coordinate) of the transformed object's center.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#transform">transform</a> : <a href="../core/Matrix3D.html">Matrix3D</a>
+<div class="summaryTableDescription">
+ A Matrix3D object containing values that affect the scaling, rotation, and translation of the display object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#view">view</a> : <a href="../core/Matrix3D.html">Matrix3D</a>
+<div class="summaryTableDescription">
+ [internal-use] A camera transformed Matrix3D object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#visible">visible</a> : Boolean<div class="summaryTableDescription">
+ Whether or not the display object is visible.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#x">x</a> : Number<div class="summaryTableDescription">
+ An Number that sets the X coordinate of a object relative to the scene coordinate system.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#y">y</a> : Number<div class="summaryTableDescription">
+ An Number that sets the Y coordinate of a object relative to the scene coordinates.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#z">z</a> : Number<div class="summaryTableDescription">
+ An Number that sets the Z coordinate of a object relative to the scene coordinates.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ZERO">ZERO</a> : <a href="../objects/DisplayObject3D.html">DisplayObject3D</a>
+<div class="summaryTableDescription">[static][read-only]
+ Returns an empty DiplayObject3D object positioned in the center of the 3D coordinate system (0, 0 ,0).</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#_children">_children</a> : Dictionary<div class="summaryTableDescription">
+ [internal-use] Names indexed by children.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#_childrenByName">_childrenByName</a> : Object<div class="summaryTableDescription">
+ [internal-use] Children indexed by name.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_sorted">_sorted</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_transformDirty">_transformDirty</a> : Boolean = false<div class="summaryTableDescription">
+ [internal-use]
+ </div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#DisplayObject3D()">DisplayObject3D</a>(name:String = null, geometry:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a> = null, initObject:Object = null)</div>
+<div class="summaryTableDescription">
+ Creates a new DisplayObject3D instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#addChild()">addChild</a>(child:<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>, name:String = null):<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds a child DisplayObject3D instance to this DisplayObjectContainer instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#addChildren()">addChildren</a>(parent:<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds all the children of a DisplayObject3D instance to this DisplayObjectContainer instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#addCollada()">addCollada</a>(filename:String, materials:<a href="../materials/MaterialsList.html">MaterialsList</a> = null, scale:Number = 1):void</div>
+<div class="summaryTableDescription">
+ This method has been deprecated.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addGeometry()">addGeometry</a>(geometry:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a> = null):void</div>
+<div class="summaryTableDescription">
+ Adds a geometry definition to the instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#childrenList()">childrenList</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of objects.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copyPosition()">copyPosition</a>(reference:*):void</div>
+<div class="summaryTableDescription">
+ Copies the position information (x, y and z coordinates) from another object or Matrix3D.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copyTransform()">copyTransform</a>(reference:*):void</div>
+<div class="summaryTableDescription">
+ Copies the transformation information (position, rotation and scale) from another object or Matrix3D.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#distanceTo()">distanceTo</a>(obj:<a href="DisplayObject3D.html">DisplayObject3D</a>):Number</div>
+<div class="summaryTableDescription">
+ Gets the distance to the position of the given object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#getChildByName()">getChildByName</a>(name:String):<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Returns the child display object that exists with the specified name.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getMaterialByName()">getMaterialByName</a>(name:String):<a href="../core/proto/MaterialObject3D.html">MaterialObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Returns the material that exists with the specified name in the materials list.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hitTestObject()">hitTestObject</a>(obj:<a href="DisplayObject3D.html">DisplayObject3D</a>, multiplier:Number = 1):Boolean</div>
+<div class="summaryTableDescription">
+ Evaluates the display object to see if it overlaps or intersects with the obj display object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hitTestPoint()">hitTestPoint</a>(x:Number, y:Number, z:Number):Boolean</div>
+<div class="summaryTableDescription">
+ Evaluates the display object to see if it overlaps or intersects with the point specified by the x, y and z parameters.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#lookAt()">lookAt</a>(targetObject:<a href="DisplayObject3D.html">DisplayObject3D</a>, upAxis:<a href="../core/Number3D.html">Number3D</a> = null):void</div>
+<div class="summaryTableDescription">
+ Make the object look at a specific position.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#materialsList()">materialsList</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of material names of the materials list.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveBackward()">moveBackward</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object in the opposite direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveDown()">moveDown</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object downwards, with respect to the direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveForward()">moveForward</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object in the direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveLeft()">moveLeft</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object lateraly, to the left of the direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveRight()">moveRight</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object lateraly, to the right of the direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moveUp()">moveUp</a>(distance:Number):void</div>
+<div class="summaryTableDescription">
+ Translate the display object upwards, with respect to the direction it is facing, i.e.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#pitch()">pitch</a>(angle:Number):void</div>
+<div class="summaryTableDescription">
+ Rotate the display object around its lateral or transverse axis an axis running from the pilot's left to right in piloted aircraft, and parallel to the wings of a winged aircraft; thus the nose pitches up and the tail down, or vice-versa.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#project()">project</a>(parent:<a href="DisplayObject3D.html">DisplayObject3D</a>, camera:<a href="../core/proto/CameraObject3D.html">CameraObject3D</a>, sorted:Array = null):Number</div>
+<div class="summaryTableDescription">
+ [internal-use] Projects three dimensional coordinates onto a two dimensional plane to simulate the relationship of the camera to subject.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#removeChild()">removeChild</a>(child:<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the specified child DisplayObject3D instance from the child list of the DisplayObjectContainer3D instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../core/proto/DisplayObjectContainer3D.html#removeChildByName()">removeChildByName</a>(name:String):<a href="../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the child DisplayObject3D instance that exists with the specified name, from the child list of the DisplayObjectContainer3D instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#render()">render</a>(scene:<a href="../core/proto/SceneObject3D.html">SceneObject3D</a>):void</div>
+<div class="summaryTableDescription">
+ [internal-use] Render the projected object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#roll()">roll</a>(angle:Number):void</div>
+<div class="summaryTableDescription">
+ Rotate the display object around the longitudinal axis an axis drawn through the body of the vehicle from tail to nose in the normal direction of flight, or the direction the object is facing.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value representing the three-dimensional position values of the display object instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#translate()">translate</a>(distance:Number, axis:<a href="../core/Number3D.html">Number3D</a>):void</div>
+<div class="summaryTableDescription">
+ Move the object along a given direction.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#yaw()">yaw</a>(angle:Number):void</div>
+<div class="summaryTableDescription">
+ Rotate the display object around about the vertical axis an axis drawn from top to bottom.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#updateTransform()">updateTransform</a>():void</div>
+<div class="summaryTableDescription">
+ [internal-use] Updates the transform Matrix3D with the current rotation and scale values.</div>
+</td><td class="summaryTableOwnerCol">DisplayObject3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="container"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">container</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var container:Sprite</code><p>
+ The Sprite that you draw into when rendering in a MovieScene3D.
+  While Scene3D uses a single Sprite container for all the objects, MovieScene3D renders each object in its own unique Sprite.
+  You can use the container like any other Sprite. For example, you can add events to it, apply filters or change the blend mode.
+ </p></div>
+<a name="extra"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">extra</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var extra:Object</code><p>
+ An object that contains user defined properties.
+ <p/>
+ All properties of the extra field are copied into the new instance. The properties specified with extra are publicly available.
+ </p></div>
+<a name="faces"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">faces</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var faces:Array</code><p>
+ [internal-use]
+ </p></div>
+<a name="geometry"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">geometry</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var geometry:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a></code><p>
+ The GeometryObject3D object that contains the 3D definition of this instance.
+ <p/>
+ When different objects share the same geometry, they become instances. They are the same object, displayed multiple times. Changing the shape of this object changes the shape of all of its instances.
+ <p/>
+ Instancing an object saves system memory, and is useful to display an object multiple times while maintaining its shape.
+ <p/>
+ For example, you could create armies and forests full of duplicate objects without needing the memory to handle that much actual geometry. Each instance has its own transform node so it can have its own position, rotation, and scaling.
+ </p></div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:int</code><p>
+ [read-only] Unique id of this instance.
+ </p></div>
+<a name="material"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">material</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var material:<a href="../core/proto/MaterialObject3D.html">MaterialObject3D</a></code><p>
+ The default material for the object instance. Materials collect data about how objects appear when rendered.
+ </p></div>
+<a name="materials"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">materials</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var materials:<a href="../materials/MaterialsList.html">MaterialsList</a></code><p>
+ The list of materials for this instance.
+ </p></div>
+<a name="name"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">name</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var name:String</code><p>
+ An optional object name.
+ </p></div>
+<a name="parent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var parent:<a href="../core/proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></code><p>
+ [read-only] Indicates the DisplayObjectContainer3D object that contains this display object.
+ </p></div>
+<a name="projected"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">projected</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var projected:Dictionary</code><p>
+ [internal-use]
+ </p></div>
+<a name="rotationX"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationX</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>rotationX:Number</code>&nbsp;&nbsp;[read-write]<p>
+ Specifies the rotation around the X axis from its original orientation.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rotationX():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rotationX(value:Number):void</code>
+<br>
+</div>
+<a name="rotationY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>rotationY:Number</code>&nbsp;&nbsp;[read-write]<p>
+ Specifies the rotation around the Y axis from its original orientation.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rotationY():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rotationY(value:Number):void</code>
+<br>
+</div>
+<a name="rotationZ"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationZ</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>rotationZ:Number</code>&nbsp;&nbsp;[read-write]<p>
+ Specifies the rotation around the Z axis from its original orientation.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rotationZ():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rotationZ(value:Number):void</code>
+<br>
+</div>
+<a name="scale"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scale</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>scale:Number</code>&nbsp;&nbsp;[write-only]<p>
+ Sets the 3D scale as applied from the registration point of the object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scale(value:Number):void</code>
+<br>
+</div>
+<a name="scaleX"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scaleX</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>scaleX:Number</code>&nbsp;&nbsp;[write-only]<p>
+ Sets the scale along the local X axis as applied from the registration point of the object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scaleX(value:Number):void</code>
+<br>
+</div>
+<a name="scaleY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scaleY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>scaleY:Number</code>&nbsp;&nbsp;[write-only]<p>
+ Sets the scale along the local Y axis as applied from the registration point of the object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scaleY(value:Number):void</code>
+<br>
+</div>
+<a name="scaleZ"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scaleZ</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>scaleZ:Number</code>&nbsp;&nbsp;[write-only]<p>
+ Sets the scale along the local Z axis as applied from the registration point of the object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scaleZ(value:Number):void</code>
+<br>
+</div>
+<a name="scene"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scene</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var scene:<a href="../core/proto/SceneObject3D.html">SceneObject3D</a></code><p>
+ The scene where the object belongs.
+ </p></div>
+<a name="screenZ"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">screenZ</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var screenZ:Number</code><p>
+ [internal-use] The depth (z coordinate) of the transformed object's center. Also known as the distance from the camera. Used internally for z-sorting.
+ </p></div>
+<a name="_sorted"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_sorted</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _sorted:Array</code>
+</div>
+<a name="transform"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">transform</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var transform:<a href="../core/Matrix3D.html">Matrix3D</a></code><p>
+ A Matrix3D object containing values that affect the scaling, rotation, and translation of the display object.
+ </p></div>
+<a name="_transformDirty"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_transformDirty</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _transformDirty:Boolean = false</code><p>
+ [internal-use]
+ </p></div>
+<a name="view"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">view</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var view:<a href="../core/Matrix3D.html">Matrix3D</a></code><p>
+ [internal-use] A camera transformed Matrix3D object.
+ </p></div>
+<a name="visible"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">visible</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var visible:Boolean</code><p>
+ Whether or not the display object is visible.
+ <p/>
+ A Boolean value that indicates whether the object is projected, transformed and rendered. A value of false will effectively ignore the object. The default value is true.
+ </p></div>
+<a name="x"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">x</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>x:Number</code>&nbsp;&nbsp;[read-write]<p>
+ An Number that sets the X coordinate of a object relative to the scene coordinate system.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get x():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set x(value:Number):void</code>
+<br>
+</div>
+<a name="y"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">y</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>y:Number</code>&nbsp;&nbsp;[read-write]<p>
+ An Number that sets the Y coordinate of a object relative to the scene coordinates.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get y():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set y(value:Number):void</code>
+<br>
+</div>
+<a name="z"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">z</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>z:Number</code>&nbsp;&nbsp;[read-write]<p>
+ An Number that sets the Z coordinate of a object relative to the scene coordinates.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get z():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set z(value:Number):void</code>
+<br>
+</div>
+<a name="ZERO"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ZERO</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>ZERO:<a href="../objects/DisplayObject3D.html">DisplayObject3D</a></code>&nbsp;&nbsp;[read-only]<p>
+ Returns an empty DiplayObject3D object positioned in the center of the 3D coordinate system (0, 0 ,0).
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public static function get ZERO():<a href="../objects/DisplayObject3D.html">DisplayObject3D</a></code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="DisplayObject3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DisplayObject3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function DisplayObject3D(name:String = null, geometry:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a> = null, initObject:Object = null)</code><p>
+ Creates a new DisplayObject3D instance. After creating the instance, call the addChild() method of a DisplayObjectContainer3D.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> (default = <code>null</code>)<code></code> &mdash;  [optional] - The name of the newly created object.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">geometry</span>:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a></code> (default = <code>null</code>)<code></code> &mdash; [optional] - The geometry of the newly created object.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">initObject</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; [optional] - An object that contains user defined properties with which to populate the newly created DisplayObject3D.
+  <ul>
+ <li><b>x</b></b>: An Number that sets the X coordinate of a object relative to the scene coordinate system.</li>
+ <p/>
+ <li><b>y</b>: An Number that sets the Y coordinate of a object relative to the scene coordinate system.</li>
+ <p/>
+ <li><b>z</b>: An Number that sets the Z coordinate of a object relative to the scene coordinate system.</li>
+ <p/>
+ <li><b>rotationX</b>: Specifies the rotation around the X axis from its original orientation.</li>
+ <p/>
+ <li><b>rotationY</b>: Specifies the rotation around the Y axis from its original orientation.</li>
+ <p/>
+ <li><b>rotationZ</b>: Specifies the rotation around the Z axis from its original orientation.</li>
+ <p/>
+ <li><b>scaleX</b>: Sets the scale along the local X axis as applied from the registration point of the object.</li>
+ <p/>
+ <li><b>scaleY</b>: Sets the scale along the local Y axis as applied from the registration point of the object.</li>
+ <p/>
+ <li><b>scaleZ</b>: Sets the scale along the local Z axis as applied from the registration point of the object.</li>
+ <p/>
+ <li><b>visible</b>: Whether or not the display object is visible.
+ <p/>
+ A Boolean value that indicates whether the object is projected, transformed and rendered. A value of false will effectively ignore the object. The default value is true.</li>
+ <p/>
+ <li><b>container</b>: The MovieClip that you draw into when rendering. Use only when the object is rendered in its own unique MovieClip.
+ <p/>
+ It's Boolean value determines whether the container MovieClip should be cleared before rendering.</li>
+ <p/>
+ <li><b>extra</b>: An object that contains user defined properties.
+ <p/>
+ All properties of the extra field are copied into the new instance. The properties specified with extra are publicly available.</li>
+ </ul>
+ </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="addGeometry()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addGeometry</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addGeometry(geometry:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a> = null):void</code><p>
+ Adds a geometry definition to the instance.
+  A geometry describes the visual shape and appearance of an object in a scene.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">geometry</span>:<a href="../core/proto/GeometryObject3D.html">GeometryObject3D</a></code> (default = <code>null</code>)<code></code> &mdash; A geometry definition.
+ </td>
+</tr>
+</table>
+</div>
+<a name="copyPosition()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copyPosition</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function copyPosition(reference:*):void</code><p>
+ Copies the position information (x, y and z coordinates) from another object or Matrix3D.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">reference</span>:*</code> &mdash; A DisplayObject3D or Matrix3D object to copy the position from.
+ </td>
+</tr>
+</table>
+</div>
+<a name="copyTransform()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copyTransform</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function copyTransform(reference:*):void</code><p>
+ Copies the transformation information (position, rotation and scale) from another object or Matrix3D.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">reference</span>:*</code> &mdash; A DisplayObject3D or Matrix3D object to copy the position from.
+ </td>
+</tr>
+</table>
+</div>
+<a name="distanceTo()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">distanceTo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function distanceTo(obj:<a href="DisplayObject3D.html">DisplayObject3D</a>):Number</code><p>
+ Gets the distance to the position of the given object.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">obj</span>:<a href="DisplayObject3D.html">DisplayObject3D</a></code> &mdash;  The display object to measure the distance to.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code> &mdash; The distance to the registration point of the given object.
+ </td>
+</tr>
+</table>
+</div>
+<a name="getMaterialByName()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getMaterialByName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getMaterialByName(name:String):<a href="../core/proto/MaterialObject3D.html">MaterialObject3D</a></code><p>
+ Returns the material that exists with the specified name in the materials list.
+ </p>
+ If more that one material object has the specified name, the method returns the first material object in the materials list.
+ </p>
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; The name of the material to return.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/proto/MaterialObject3D.html">MaterialObject3D</a></code> &mdash; 
+                        The material object with the specified name.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="hitTestObject()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hitTestObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hitTestObject(obj:<a href="DisplayObject3D.html">DisplayObject3D</a>, multiplier:Number = 1):Boolean</code><p>
+ Evaluates the display object to see if it overlaps or intersects with the obj display object.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">obj</span>:<a href="DisplayObject3D.html">DisplayObject3D</a></code> &mdash;  The display object to test against.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">multiplier</span>:Number</code> (default = <code>1</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; true if the display objects intersect; false if not.
+ </td>
+</tr>
+</table>
+</div>
+<a name="hitTestPoint()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hitTestPoint</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hitTestPoint(x:Number, y:Number, z:Number):Boolean</code><p>
+ Evaluates the display object to see if it overlaps or intersects with the point specified by the x, y and z parameters.
+ <p/>
+ The x, y and z parameters specify a point in the coordinate space of the instance parent object, not the scene (unless that parent object is the scene).
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code> &mdash; The x coordinate to test against this object.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code> &mdash; The y coordinate to test against this object.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">z</span>:Number</code> &mdash; The z coordinate to test against this object.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; true if the display object overlaps or intersects with the specified point; false otherwise.
+ </td>
+</tr>
+</table>
+</div>
+<a name="lookAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lookAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function lookAt(targetObject:<a href="DisplayObject3D.html">DisplayObject3D</a>, upAxis:<a href="../core/Number3D.html">Number3D</a> = null):void</code><p>
+ Make the object look at a specific position.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">targetObject</span>:<a href="DisplayObject3D.html">DisplayObject3D</a></code> &mdash; Object to look at.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">upAxis</span>:<a href="../core/Number3D.html">Number3D</a></code> (default = <code>null</code>)<code></code> &mdash;   The vertical axis of the universe. Normally the positive Y axis.
+ </td>
+</tr>
+</table>
+</div>
+<a name="materialsList()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">materialsList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function materialsList():String</code><p>
+ Returns a string value with the list of material names of the materials list.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; A string.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveBackward()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveBackward</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveBackward(distance:Number):void</code><p>
+ Translate the display object in the opposite direction it is facing, i.e. it's negative Z axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move backward.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveDown()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveDown</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveDown(distance:Number):void</code><p>
+ Translate the display object downwards, with respect to the direction it is facing, i.e. it's negative Y axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move down.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveForward()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveForward</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveForward(distance:Number):void</code><p>
+ Translate the display object in the direction it is facing, i.e. it's positive Z axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move forward.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveLeft()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveLeft</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveLeft(distance:Number):void</code><p>
+ Translate the display object lateraly, to the left of the direction it is facing, i.e. it's negative X axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move left.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveRight()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveRight</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveRight(distance:Number):void</code><p>
+ Translate the display object lateraly, to the right of the direction it is facing, i.e. it's positive X axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move right.
+ </td>
+</tr>
+</table>
+</div>
+<a name="moveUp()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moveUp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moveUp(distance:Number):void</code><p>
+ Translate the display object upwards, with respect to the direction it is facing, i.e. it's positive Y axis.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should move up.
+ </td>
+</tr>
+</table>
+</div>
+<a name="pitch()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">pitch</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function pitch(angle:Number):void</code><p>
+ Rotate the display object around its lateral or transverse axis an axis running from the pilot's left to right in piloted aircraft, and parallel to the wings of a winged aircraft; thus the nose pitches up and the tail down, or vice-versa.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code> &mdash; The angle to rotate.
+ </td>
+</tr>
+</table>
+</div>
+<a name="project()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">project</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function project(parent:<a href="DisplayObject3D.html">DisplayObject3D</a>, camera:<a href="../core/proto/CameraObject3D.html">CameraObject3D</a>, sorted:Array = null):Number</code><p>
+ [internal-use] Projects three dimensional coordinates onto a two dimensional plane to simulate the relationship of the camera to subject.
+ <p/>
+ This is the first step in the process of representing three dimensional shapes two dimensionally.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">parent</span>:<a href="DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The DisplayObject3D object that contains this display object.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">camera</span>:<a href="../core/proto/CameraObject3D.html">CameraObject3D</a></code> &mdash; Camera3D object to render from.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">sorted</span>:Array</code> (default = <code>null</code>)<code></code> &mdash;  The list of faces of the current sort branch.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code></td>
+</tr>
+</table>
+</div>
+<a name="render()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">render</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function render(scene:<a href="../core/proto/SceneObject3D.html">SceneObject3D</a>):void</code><p>
+ [internal-use] Render the projected object.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">scene</span>:<a href="../core/proto/SceneObject3D.html">SceneObject3D</a></code> &mdash; The scene where the object belongs.
+ </td>
+</tr>
+</table>
+</div>
+<a name="roll()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">roll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function roll(angle:Number):void</code><p>
+ Rotate the display object around the longitudinal axis an axis drawn through the body of the vehicle from tail to nose in the normal direction of flight, or the direction the object is facing.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code></td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function toString():String</code><p>
+ Returns a string value representing the three-dimensional position values of the display object instance.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; A string.
+ </td>
+</tr>
+</table>
+</div>
+<a name="translate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">translate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function translate(distance:Number, axis:<a href="../core/Number3D.html">Number3D</a>):void</code><p>
+ Move the object along a given direction.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">distance</span>:Number</code> &mdash; The distance that the object should travel.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">axis</span>:<a href="../core/Number3D.html">Number3D</a></code> &mdash;  The direction that the object should move towards.
+ </td>
+</tr>
+</table>
+</div>
+<a name="updateTransform()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">updateTransform</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function updateTransform():void</code><p>
+ [internal-use] Updates the transform Matrix3D with the current rotation and scale values.
+ </p></div>
+<a name="yaw()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">yaw</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function yaw(angle:Number):void</code><p>
+ Rotate the display object around about the vertical axis an axis drawn from top to bottom.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code> &mdash; The angle to rotate.
+ </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

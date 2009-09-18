@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<qg:RoundedBox cornerRadius="5" xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:qg="qs.graphics.*" 
+>
+	<qg:states>
+		<State name="selected">
+			<SetStyle name="fill">
+				<value>
+					<SolidColor color="#FFFFCC" alpha=".2" />					
+				</value>
+			</SetStyle>
+			<SetStyle name="stroke">
+				<value>
+					<Stroke color="#888833" alpha=".9" weight="4" />					
+				</value>
+			</SetStyle>
+		</State>
+	</qg:states>
+</qg:RoundedBox>

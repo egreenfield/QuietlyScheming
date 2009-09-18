@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#444444" xmlns:filters="flash.filters.*"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="goToStep(0);">
+	<Style>
+		@font-face
+		{
+		   font-family: MyArial;
+		   src: local("Arial");
+		}
+		Application {
+			font-size: 14;
+			font-family: MyArial;
+			backgroundColor: #343434;
+			color: #FFFFFF;
+		}		
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+					
+			private var currentDemo:Demo;
+			private function goToStep(index:Number):void
+			{
+				if(index < 0)
+					return;
+				if(index >= steps.length)
+					return;
+					
+				var step:DemoStep = steps[index];
+				
+				if(currentDemo != null)
+					removeChild(currentDemo);
+				currentDemo = null;
+				titleUI.text = step.title;
+				stepUI.selectedIndex = index;
+				if(step.implementation != null)
+				{
+					var c:Class = step.implementation;
+					currentDemo = new c();
+					addChild(currentDemo);
+					currentDemo.dataSet = dataSet;
+					currentDemo.setStyle("horizontalCenter",0);
+					currentDemo.setStyle("verticalCenter",0);
+				}								
+			}
+		]]>
+	</Script>
+
+	<Array id="dataSet">
+		<String>img/photos400/photo01.jpg</String>			
+		<String>img/photos400/photo02.jpg</String>			
+		<String>img/photos400/photo03.jpg</String>			
+		<String>img/photos400/photo04.jpg</String>			
+		<String>img/photos400/photo05.jpg</String>			
+		<String>img/photos400/photo06.jpg</String>			
+		<String>img/photos400/photo07.jpg</String>			
+		<String>img/photos400/photo08.jpg</String>			
+		<String>img/photos400/photo09.jpg</String>			
+		<String>img/photos400/photo10.jpg</String>			
+		<String>img/photos400/photo11.jpg</String>			
+		<String>img/photos400/photo12.jpg</String>			
+		<String>img/photos400/photo13.jpg</String>			
+		<String>img/photos400/photo14.jpg</String>			
+		<String>img/photos400/photo15.jpg</String>			
+		<String>img/photos400/photo16.jpg</String>			
+		<String>img/photos400/photo17.jpg</String>			
+		<String>img/photos400/photo18.jpg</String>			
+		<String>img/photos400/photo19.jpg</String>					
+	</Array>
+
+	<Array id="steps">
+		<local:DemoStep label="0. Start" title="" />
+		<local:DemoStep label="0. Goal" title="Our Finished Product" implementation="Demo99_Final" />
+		<local:DemoStep label="1. Rendering" title="Rendering" implementation="Demo01Graphics" />
+		<local:DemoStep label="2.0 Layout" title="Layout" implementation="Demo02_1NoLayout" />
+		<local:DemoStep label="2.1 Measurement" title="Measurement" implementation="Demo02_2Layout" />
+		<local:DemoStep label="3. Data" title="Data" implementation="Demo04_Data" />
+		<local:DemoStep label="5.1 Simple Animation" title="Simple Animation" implementation="Demo07_1SimpleAnimation" />
+		<local:DemoStep label="5.2 Advanced Animation" title="Advanced Animation" implementation="Demo07_2AdvancedAnimation" />
+		<local:DemoStep label="4. Templating" title="Templating" implementation="Demo03_Templating" />
+		<local:DemoStep label="5. Keyboard" title="Step 5: Keyboard" implementation="Demo05_Keyboard" />
+		<local:DemoStep label="6. Async" title="Step 6: Handling Async Data" implementation="Demo06_Async" />
+
+		<local:DemoStep label="8. Final" title="Final" implementation="Demo99_Final" />
+	</Array>
+
+	<Label x="10" y="10" id="titleUI" text="Step 1: Rendering" width="690" height="56" fontSize="36"/>
+	<Button label="&gt;" width="27" right="10" top="10" color="#000000" click="goToStep(stepUI.selectedIndex+1);"/>
+	<Button label="&lt;" width="27" right="203" top="10" color="#000000" click="goToStep(stepUI.selectedIndex-1);"/>
+	<ComboBox id="stepUI" width="150" color="#000000" right="45" top="8" dataProvider="{steps}" 
+		labelField="label" change="goToStep(stepUI.selectedIndex);"/>
+
+	
+</Application>

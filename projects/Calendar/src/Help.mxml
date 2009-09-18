@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Panel color="#000000" xmlns="http://www.adobe.com/2006/mxml" width="500" height="500" title="HELP!?">
+	<Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			[Bindable] public var helpText:String =
+			"1. What am I looking at?\n" + 
+			"  This is a sample Calendar component I've been playing around with.\n\n" + 
+			"2. Cool! Is this the one Adobe Consulting is building?\n" + 
+			"  Nope. They're building a scheduling component, and will be much more full featured than this.  This one is buggy, and more of a proof of concept I've been working on." + 
+			"  But worth checking out for some inspiration. At least to tide you over until they release theirs :).\n\n" + 
+			"3. I don't see any data!\n" + 
+			"  Yeah, the server's a little slow. Just be patient.\n\n" + 
+			"4. Cool, now I see data. What can I do?" + 
+			"  Here are some things to try:\n" + 
+			"  - click the left and right arrows at the top right.\n" + 
+			"  - click the month/year/day buttons to change the view.\n" + 
+			"  - click on the small calendar to go right to a day.\n" + 
+			"  - now shift click on a different day on the small calendar to select a range\n" + 
+			"  - try selecting large and small ranges...2 days, 2 weeks, etc.\n" + 
+			"  - in the month view, click and drag an event to move it from day to day\n" + 
+			"  - in the day view, click and drag an event to change its duration or start time\n" + 
+			"  - in month view, you can click on a day (not an event...the day background) to zoom to that day." + 
+			"\n\n" + 
+			"5. Cool. How do I load more data?\n" + 
+			"  click the 'add calendar' button under the 'default' legend on the left.\n\n" + 
+			"6. What can I load?\n" + 
+			"  There's two default calendars to choose from. Make sure to pick a color, and enter a name.\n\n" + 
+			"7. Is that it?\n" + 
+			"  Well, it's loading ics files, so in theory you could put in any ics url (i.e., a google calendar). But the ics parsing is " + 
+			"  really rudimentary...just enough to get some data in I could work with...so don't hold your breath.\n\n" + 
+			"8. Hey! I found a bug!\n" + 
+			"   I certainly hope so! If you didn't, you probably weren't using it at all. Like I said, it's a proof of concept.\n\n" + 
+			"9. Cool. Can I use this?\n" + 
+			"   By all means.  I'll be posting the code in a little while.\n\n" + 
+			"10. I really want this, but it's too buggy!\n" +
+			"   I've got to get back to actually working on the SDK...so I'm looking for someone (or someones) to take over this code.  Are you volunteering?";
+			
+		]]>
+	</Script>
+	<TextArea editable="false" fontSize="12" width="100%" height="100%" text="{helpText}"/>
+	<ControlBar horizontalAlign="right">
+		<Button label="OK" click="PopUpManager.removePopUp(this);" />
+	</ControlBar>
+</Panel>

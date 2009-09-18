@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="SceneObject3D,org.papervision3d.core.proto.SceneObject3D,container,stats,objects,materials,addChild,removeChild,renderCamera,renderObjects" name="keywords">
+<title>org.papervision3d.core.proto.SceneObject3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'SceneObject3D - Papervision3D API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/papervision3d/core/proto/SceneObject3D.html&amp;org/papervision3d/core/proto/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SceneObject3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SceneObject3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.core.proto</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class SceneObject3D</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SceneObject3D <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../scenes/Scene3D.html">Scene3D</a></td>
+</tr>
+</table>
+<p></p>
+The SceneObject3D class is the base class for all scenes.
+<p/>
+A scene is the place where objects are placed, it contains the 3D environment.
+<p/>
+The scene manages all objects rendered in Papervision3D. It extends the DisplayObjectContainer3D class to arrange the display objects.
+<p/>
+SceneObject3D is an abstract base class; therefore, you cannot call SceneObject3D directly.
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="DisplayObjectContainer3D.html#children">children</a> : Object<div class="summaryTableDescription">
+ Returns the children object.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#container">container</a> : Sprite<div class="summaryTableDescription">
+ The Sprite that you draw into when rendering.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#materials">materials</a> : <a href="../../materials/MaterialsList.html">MaterialsList</a>
+<div class="summaryTableDescription">
+ It contains a list of materials in the scene.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="DisplayObjectContainer3D.html#numChildren">numChildren</a> : int<div class="summaryTableDescription">
+ Returns the number of children of this object.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#objects">objects</a> : Array<div class="summaryTableDescription">
+ It contains a list of DisplayObject3D objects in the scene.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="DisplayObjectContainer3D.html#root">root</a> : <a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+<div class="summaryTableDescription">
+ [read-only] [read-only] The scene, which is the top-most displayObjectContainer3D in the tree structure.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#stats">stats</a> : Object<div class="summaryTableDescription">
+ An object that contains total and current statistics.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="DisplayObjectContainer3D.html#_children">_children</a> : Dictionary<div class="summaryTableDescription">
+ [internal-use] Names indexed by children.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="DisplayObjectContainer3D.html#_childrenByName">_childrenByName</a> : Object<div class="summaryTableDescription">
+ [internal-use] Children indexed by name.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#SceneObject3D()">SceneObject3D</a>(container:Sprite)</div>
+<div class="summaryTableDescription">
+ The SceneObject3D class lets you create scene classes.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addChild()">addChild</a>(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, name:String = null):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds a child DisplayObject3D instance to the scene.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#addChildren()">addChildren</a>(parent:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds all the children of a DisplayObject3D instance to this DisplayObjectContainer instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#addCollada()">addCollada</a>(filename:String, materials:<a href="../../materials/MaterialsList.html">MaterialsList</a> = null, scale:Number = 1):void</div>
+<div class="summaryTableDescription">
+ This method has been deprecated.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#childrenList()">childrenList</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of objects.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#getChildByName()">getChildByName</a>(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Returns the child display object that exists with the specified name.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeChild()">removeChild</a>(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the specified child DisplayObject3D instance from the child and object list of the scene.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#removeChildByName()">removeChildByName</a>(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the child DisplayObject3D instance that exists with the specified name, from the child list of the DisplayObjectContainer3D instance.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#renderCamera()">renderCamera</a>(camera:<a href="CameraObject3D.html">CameraObject3D</a>):void</div>
+<div class="summaryTableDescription">
+ Generates an image from the camera's point of view and the visible models of the scene.</div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="DisplayObjectContainer3D.html#toString()">toString</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of objects.</div>
+</td><td class="summaryTableOwnerCol"><a href="DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#renderObjects()">renderObjects</a>(sort:Boolean):void</div>
+<div class="summaryTableDescription">
+ [internal-use]
+  </div>
+</td><td class="summaryTableOwnerCol">SceneObject3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="container"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">container</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var container:Sprite</code><p>
+ The Sprite that you draw into when rendering.
+ </p></div>
+<a name="materials"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">materials</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var materials:<a href="../../materials/MaterialsList.html">MaterialsList</a></code><p>
+ It contains a list of materials in the scene.
+ </p></div>
+<a name="objects"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">objects</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var objects:Array</code><p>
+ It contains a list of DisplayObject3D objects in the scene.
+ </p></div>
+<a name="stats"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">stats</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var stats:Object</code><p>
+ An object that contains total and current statistics.
+ <ul>
+ <li>points</li>
+ <li>polys</li>
+ <li>triangles</li>
+ <li>performance<li>
+ <li>rendered<li>
+ </ul>
+ </p></div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="SceneObject3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SceneObject3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function SceneObject3D(container:Sprite)</code><p>
+ The SceneObject3D class lets you create scene classes.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">container</span>:Sprite</code> &mdash; The Sprite that you draw into when rendering. If not defined, each object must have it's own private container.
+ </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="addChild()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addChild(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, name:String = null):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Adds a child DisplayObject3D instance to the scene.
+  If you add a GeometryObject3D symbol, a new DisplayObject3D instance is created.
+  [TODO: If you add a child object that already has a different display object container as a parent, the object is removed from the child list of the other display object container.]
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">child</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The GeometryObject3D symbol or DisplayObject3D instance to add as a child of the scene.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> (default = <code>null</code>)<code></code> &mdash; An optional name of the child to add or create. If no name is provided, the child name will be used.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The DisplayObject3D instance that you have added or created.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="removeChild()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeChild(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Removes the specified child DisplayObject3D instance from the child and object list of the scene.
+ </p>
+ [TODO: The parent property of the removed child is set to null, and the object is garbage collected if no other references to the child exist.]
+ </p>
+ The garbage collector is the process by which Flash Player reallocates unused memory space. When a variable or object is no longer actively referenced or stored somewhere, the garbage collector sweeps through and wipes out the memory space it used to occupy if no other references to it exist.
+ </p>
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">child</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The DisplayObject3D instance to remove.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The DisplayObject3D instance that you pass in the child parameter.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="renderCamera()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">renderCamera</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function renderCamera(camera:<a href="CameraObject3D.html">CameraObject3D</a>):void</code><p>
+ Generates an image from the camera's point of view and the visible models of the scene.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">camera</span>:<a href="CameraObject3D.html">CameraObject3D</a></code> &mdash;  camera to render from.
+ </td>
+</tr>
+</table>
+</div>
+<a name="renderObjects()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">renderObjects</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function renderObjects(sort:Boolean):void</code><p>
+ [internal-use]
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">sort</span>:Boolean</code></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

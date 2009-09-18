@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Style>
+		.quadLabel {
+			color: #666666;
+			fontSize: 36;
+			fontWeight: bold;	
+			fontFamily: Verdana;
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.controls.Button;
+
+		import qs.charts.dataShapes.*;
+
+		[Embed(source="/assets/dotFinal.png")]
+		public var dot:Class;
+		
+		override public function get descriptions():Array {
+		return ["An example that uses data drawing and data based component children together. In this example, we draw the quadrant" + 
+				"values as before. But we also place a label component in the corner of each qudrant to label it.  The labels are bound" + 
+				"using constraints to the data point that defines the intersection of the four quadrants.  Each label is bound" + 
+				"against different edges (left,top,right,bottom), placing them in the appropriate corner.\n\n" + 
+				"The Labels are created in MXML, as children of the DataDrawingCanvas, but their position is updated programmatically," + 
+				"from actiosncript.\n\n" + 
+				"In this example, we set the includeInRanges flag on the DataDrawingCanvas to true. That indicates to the chart that the ranges" + 
+				"automatically generated for the axes should be large enough to include the graphics and values drawn in this data canvas.  You can" + 
+				"choose whether that makes sense for your scenario. In this case, because we wanted the user to see the quadrant labels and " + 
+				"all four quadrants even when the data is only in a single quadrant, we set it to true."];
+		}
+
+
+		public function drawData():void
+		{
+			canvas.clear();
+
+			canvas.lineStyle(0,0,0);
+
+			canvas.beginFill(0xFFDDDD);
+			canvas.drawRect(quadBoundary.value,Edge.TOP,Edge.RIGHT,quadBoundary.value);
+			canvas.endFill();
+
+			canvas.beginFill(0xDDBBBB);
+			canvas.drawRect(Edge.LEFT,Edge.TOP,quadBoundary.value,quadBoundary.value);
+			canvas.endFill();
+
+			canvas.beginFill(0xBB9999);
+			canvas.drawRect(quadBoundary.value,quadBoundary.value,Edge.RIGHT,Edge.BOTTOM);
+			canvas.endFill();
+
+			canvas.beginFill(0x997777);
+			canvas.drawRect(Edge.LEFT,quadBoundary.value,quadBoundary.value,Edge.BOTTOM);
+			canvas.endFill();
+
+			
+			canvas.updateDataChild(upperRightLabel, {left: [quadBoundary.value,20], bottom: [quadBoundary.value,-20]});
+			canvas.updateDataChild(upperLeftLabel, {right: [quadBoundary.value,-20], bottom: [quadBoundary.value,-20]});
+			canvas.updateDataChild(lowerLeftLabel, {right: [quadBoundary.value,-20], top: [quadBoundary.value,20]});
+			canvas.updateDataChild(lowerRightLabel, {left: [quadBoundary.value,20], top: [quadBoundary.value,20]} );
+
+		}
+
+		]]>
+	</Script>
+
+	<s:controls>
+		<Label text="Quadrant boundary value:" />
+		<HSlider change="drawData()" liveDragging="true" value="50" id="quadBoundary" minimum="-400" maximum="400" width="100%" />		
+	</s:controls>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<PlotChart width="100%" height="100%" creationComplete="drawData();" horizontalAxisStyleName="linedNumericAxis"
+		verticalAxisStyleName="linedNumericAxis">
+		<backgroundElements>
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="true">
+				<Label id="upperRightLabel" text="On Target" styleName="quadLabel" />
+				<Label id="upperLeftLabel" text="Underfunded" styleName="quadLabel" />
+				<Label id="lowerRightLabel" text="Underserved" styleName="quadLabel" />
+				<Label id="lowerLeftLabel" text="Critical Condition" styleName="quadLabel" />
+			</dataShapes:DataDrawingCanvas>
+		</backgroundElements>
+		<series>
+			<PlotSeries dataProvider="{dataSamples.sample}" filterData="false" 
+				xField="@value" yField="@resource" itemRenderer="mx.charts.renderers.CircleItemRenderer">
+				<fill>
+					<SolidColor color="#000099" />
+				</fill>
+			</PlotSeries>
+		</series>
+	</PlotChart>
+
+</s:ExampleBase>

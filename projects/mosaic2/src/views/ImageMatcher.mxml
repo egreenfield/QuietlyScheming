@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" label="Match Images" width="100%" height="100%" 
+	xmlns:views="views.*">
+	<mx:constraintRows>
+		<mx:ConstraintRow id="Canvas1_row1" height="50%"/>
+		<mx:ConstraintRow id="Canvas1_row2" height="50%"/>
+	</mx:constraintRows>
+	<mx:Script>
+		<![CDATA[
+			import mosaic.PaletteEntry;
+			import mosaic.Palette;
+			import mosaic.MosaicController;
+			import mosaic.MosaicImage;
+			
+			[Bindable] public var selectedPalette:Palette;
+			[Bindable] public var selectedImage:MosaicImage;
+			
+			public function matchImage():void
+			{
+				selectedPalette = paletteList.selectedItem as Palette;
+				
+				if(selectedPalette == null)
+					return;
+				if(selectedImage == null)
+					return;
+					
+				selectedPalette.validate(
+				function(success:Boolean,palette:Palette):void
+				{
+					selectedImage.loadAtSize(holder.width,holder.height,selectedPalette.aspectRatio,"crop",
+					function(success:Boolean,data:BitmapData):void
+					{
+						var ref:PaletteEntry = selectedPalette.matchBitmapData(data);
+						var img:MosaicImage = ref.resolve();
+						result.source = img;					
+					}
+					);
+				}
+				);
+				return;
+			}
+		]]>
+	</mx:Script>
+	<mx:List id="imageList"  labelField="url" dataProvider="{browseImageCollectionList.selectedItem.images}" 
+		bottom="Canvas1_row1:15" top="Canvas1_row1:15" left="183" width="162" 
+		change="selectedImage = imageList.selectedItem as MosaicImage"
+		 />
+	<mx:VBox backgroundColor="#FFFFFF" borderColor="#000000" borderStyle="solid" right="10" top="Canvas1_row1:15" left="353" bottom="Canvas1_row1:15">	
+		<views:MosaicImageRenderer id="holder" width="100%" height="100%"  
+			fillPolicy="crop"
+			aspectRatio="{selectedPalette.aspectRatio}" 
+			fill="false" 
+			source="{selectedImage}" 
+			load="matchImage()" />
+	</mx:VBox>
+	<mx:List x="9" labelField="name" id="browseImageCollectionList" 
+		dataProvider="{MosaicController.instance.collections}" 
+		change="browseImageCollectionList.selectedItem.load()"
+		width="166" bottom="Canvas1_row1:15" top="Canvas1_row1:15"/>
+	<mx:List bottom="Canvas1_row2:10" change="matchImage()" labelField="name" top="Canvas1_row2:13" left="183" dataProvider="{MosaicController.instance.palettes}" id="paletteList" />
+	<mx:VBox backgroundColor="#FFFFFF" borderColor="#000000" borderStyle="solid" right="10" top="Canvas1_row2:15" left="353" bottom="Canvas1_row2:15">	
+		<views:MosaicImageRenderer id="result" width="100%" height="100%"
+			fillPolicy="crop"
+			aspectRatio="{selectedPalette.aspectRatio}" 
+			fill="false" 			
+			  />
+	</mx:VBox>
+</mx:Canvas>

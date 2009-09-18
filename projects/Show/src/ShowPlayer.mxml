@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:ShowPlayer_Base xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*">
+	<HBox id="playPanel"  backgroundAlpha=".5" alpha=".2" borderStyle="solid" borderColor="#FFFFFF" verticalAlign="middle" borderThickness="1" cornerRadius="6"  backgroundColor="#FFFFFF" left="0" right="0" bottom="0" >
+		<Spacer width="50" />
+		<LinkButton label="P" id="playButton" />			
+		<LinkButton label="S" id="stopButton" />			
+		<HSlider width="100%" id="clockTime" liveDragging="true" mouseDown="sliderClicked()" change="updateClockFromSlider()"/>
+		<Spacer width="50" />
+	</HBox>
+</local:ShowPlayer_Base>

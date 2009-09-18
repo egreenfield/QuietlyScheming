@@ -1,0 +1,501 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="DisplayObjectContainer3D,org.papervision3d.core.proto.DisplayObjectContainer3D,root,_children,_childrenByName,numChildren,children,addCollada,addChild,addChildren,removeChild,getChildByName,removeChildByName,toString,childrenList" name="keywords">
+<title>org.papervision3d.core.proto.DisplayObjectContainer3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'DisplayObjectContainer3D - Papervision3D API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/papervision3d/core/proto/DisplayObjectContainer3D.html&amp;org/papervision3d/core/proto/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;DisplayObjectContainer3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class DisplayObjectContainer3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.core.proto</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class DisplayObjectContainer3D</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">DisplayObjectContainer3D <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, <a href="../proto/SceneObject3D.html">SceneObject3D</a></td>
+</tr>
+</table>
+<p></p>
+The DisplayObjectContainer3D class is the base class for all objects that can serve as DisplayObject3D containers.
+<p/>
+Each DisplayObjectContainer3D object has its own child list.
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#children">children</a> : Object<div class="summaryTableDescription">[read-only]
+ Returns the children object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#numChildren">numChildren</a> : int<div class="summaryTableDescription">[read-only]
+ Returns the number of children of this object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#root">root</a> : <a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+<div class="summaryTableDescription">
+ [read-only] [read-only] The scene, which is the top-most displayObjectContainer3D in the tree structure.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_children">_children</a> : Dictionary<div class="summaryTableDescription">
+ [internal-use] Names indexed by children.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_childrenByName">_childrenByName</a> : Object<div class="summaryTableDescription">
+ [internal-use] Children indexed by name.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#DisplayObjectContainer3D()">DisplayObjectContainer3D</a>()</div>
+<div class="summaryTableDescription">
+ Creates a new DisplayObjectContainer3D object.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addChild()">addChild</a>(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, name:String = null):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds a child DisplayObject3D instance to this DisplayObjectContainer instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addChildren()">addChildren</a>(parent:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a>
+</div>
+<div class="summaryTableDescription">
+ Adds all the children of a DisplayObject3D instance to this DisplayObjectContainer instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addCollada()">addCollada</a>(filename:String, materials:<a href="../../materials/MaterialsList.html">MaterialsList</a> = null, scale:Number = 1):void</div>
+<div class="summaryTableDescription">
+ This method has been deprecated.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#childrenList()">childrenList</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of objects.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getChildByName()">getChildByName</a>(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Returns the child display object that exists with the specified name.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeChild()">removeChild</a>(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the specified child DisplayObject3D instance from the child list of the DisplayObjectContainer3D instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeChildByName()">removeChildByName</a>(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Removes the child DisplayObject3D instance that exists with the specified name, from the child list of the DisplayObjectContainer3D instance.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value with the list of objects.</div>
+</td><td class="summaryTableOwnerCol">DisplayObjectContainer3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="_children"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_children</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _children:Dictionary</code><p>
+ [internal-use] Names indexed by children.
+ </p></div>
+<a name="children"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">children</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>children:Object</code>&nbsp;&nbsp;[read-only]<p>
+ Returns the children object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get children():Object</code>
+<br>
+</div>
+<a name="_childrenByName"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_childrenByName</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _childrenByName:Object</code><p>
+ [internal-use] Children indexed by name.
+ </p></div>
+<a name="numChildren"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">numChildren</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>numChildren:int</code>&nbsp;&nbsp;[read-only]<p>
+ Returns the number of children of this object.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get numChildren():int</code>
+<br>
+</div>
+<a name="root"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">root</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var root:<a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></code><p>
+ [read-only] [read-only] The scene, which is the top-most displayObjectContainer3D in the tree structure.
+ </p></div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="DisplayObjectContainer3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DisplayObjectContainer3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function DisplayObjectContainer3D()</code><p>
+ Creates a new DisplayObjectContainer3D object.
+ </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="addChild()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addChild(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, name:String = null):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Adds a child DisplayObject3D instance to this DisplayObjectContainer instance.
+  [TODO: If you add a child object that already has a different display object container as a parent, the object is removed from the child list of the other display object container.]
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">child</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The DisplayObject3D instance to add as a child of this DisplayObjectContainer3D instance.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> (default = <code>null</code>)<code></code> &mdash; An optional name of the child to add or create. If no name is provided, the child name will be used.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The DisplayObject3D instance that you have added or created.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="addChildren()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addChildren</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addChildren(parent:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></code><p>
+ Adds all the children of a DisplayObject3D instance to this DisplayObjectContainer instance.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">parent</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The DisplayObjectContainer3D instance that contains the children to add.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../proto/DisplayObjectContainer3D.html">DisplayObjectContainer3D</a></code> &mdash; 
+                        The DisplayObject3D instance that you have added or created.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="addCollada()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addCollada</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addCollada(filename:String, materials:<a href="../../materials/MaterialsList.html">MaterialsList</a> = null, scale:Number = 1):void</code><p>
+ This method has been deprecated.
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">filename</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">materials</span>:<a href="../../materials/MaterialsList.html">MaterialsList</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">scale</span>:Number</code> (default = <code>1</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="childrenList()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">childrenList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function childrenList():String</code><p>
+ Returns a string value with the list of objects.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; A string.
+ </td>
+</tr>
+</table>
+</div>
+<a name="getChildByName()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getChildByName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getChildByName(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Returns the child display object that exists with the specified name.
+ </p>
+ If more that one child display object has the specified name, the method returns the first object in the child list.
+ </p>
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; The name of the child to return.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The child display object with the specified name.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="removeChild()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeChild(child:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Removes the specified child DisplayObject3D instance from the child list of the DisplayObjectContainer3D instance.
+ </p>
+ [TODO: The parent property of the removed child is set to null, and the object is garbage collected if no other references to the child exist.]
+ </p>
+ The garbage collector is the process by which Flash Player reallocates unused memory space. When a variable or object is no longer actively referenced or stored somewhere, the garbage collector sweeps through and wipes out the memory space it used to occupy if no other references to it exist.
+ </p>
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">child</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The DisplayObject3D instance to remove.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The DisplayObject3D instance that you pass in the child parameter.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="removeChildByName()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeChildByName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeChildByName(name:String):<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code><p>
+ Removes the child DisplayObject3D instance that exists with the specified name, from the child list of the DisplayObjectContainer3D instance.
+ </p>
+ If more that one child display object has the specified name, the method removes the first object in the child list.
+ </p>
+ [TODO: The parent property of the removed child is set to null, and the object is garbage collected if no other references to the child exist.]
+ </p>
+ The garbage collector is the process by which Flash Player reallocates unused memory space. When a variable or object is no longer actively referenced or stored somewhere, the garbage collector sweeps through and wipes out the memory space it used to occupy if no other references to it exist.
+ </p>
+ </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; The name of the child to remove.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; 
+                        The DisplayObject3D instance that was removed.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function toString():String</code><p>
+ Returns a string value with the list of objects.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; A string.
+ </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

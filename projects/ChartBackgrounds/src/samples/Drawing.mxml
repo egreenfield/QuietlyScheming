@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Script>
+		<![CDATA[
+
+		import qs.charts.dataShapes.*;
+
+		override public function get descriptions():Array {
+			return ["A basic example of how you can use the Data drawing API" + 
+					" to add custom content onto a chart. This example draws" + 
+					" A red box onto the foreground of the chart, in front of" + 
+					" the items.  The chart is drawn in data-space...its bounds" + 
+					" are (C,60,Q,130).  Using the slider blow, you can " + 
+					" adjust the range of the vertical axis.  As the axis changes, the box updates" + 
+					" to stay locked to the data values specified. \n\n"  +
+					" uncheck the 'fix axis' checkbox to let the chart autogenerate the ranges"];
+		}
+
+		[Embed(source="/assets/Stripe.png")]
+		private var stripeClass:Class;
+		
+		public function drawData():void
+		{
+			var bmp:Bitmap = new stripeClass();
+			canvas.clear();
+
+			canvas.lineStyle(2,0xAAFFAA,1,false,"normal",null,JointStyle.MITER);
+			var m:Matrix = new Matrix();
+			m.rotate(45);			
+			canvas.beginBitmapFill(bmp.bitmapData,undefined,undefined,m);
+			canvas.drawRect(leftVal.selectedItem,topVal.value,rightVal.selectedItem,bottomVal.value);
+			canvas.endFill();
+
+		}
+		public function initControls():void
+		{
+			var vals:XMLList = categories.category.@name;
+			
+			for(var i:int =0;i<vals.length();i++)
+			{
+				if(vals[i] == "C")
+					leftVal.selectedIndex = i;
+				if(vals[i] == "Q")
+					rightVal.selectedIndex = i;
+			}
+		}
+
+		]]>
+	</Script>
+	<s:controls>
+		<CheckBox label="fix vertical axis" id="fix" /> <HSlider change="fix.selected = true" liveDragging="true" thumbCount="2" values="{[0,180]}" id="axisValues" minimum="-500" maximum="500" width="100%" />		
+		<Label text="Hilight Region:" />
+		<HBox>
+			<Label text="left:" /> 
+			<ComboBox change="drawData();" id="leftVal" selectedItem="C" dataProvider="{categories.category.@name}" />
+			<Label text="right:" /> 
+			<ComboBox change="drawData();"  id="rightVal" selectedItem="Q" dataProvider="{categories.category.@name}" />
+		</HBox>
+		<HBox>
+			<Label text="top:" /> 
+			<NumericStepper value="130" change="drawData();" id="bottomVal" minimum="-400" maximum="400" />
+			<Label text="bottom:" /> 
+			<NumericStepper value="60" change="drawData();" id="topVal" minimum="-400" maximum="400" />
+		</HBox>
+	</s:controls>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<ColumnChart width="100%" height="100%" creationComplete="initControls(); drawData();">
+		<backgroundElements>
+			<GridLines />
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="true" />
+		</backgroundElements>
+		<series>
+			<ColumnSeries dataProvider="{dataSamples.sample.@value}" filterData="false" />
+		</series>
+		<verticalAxis>
+			<LinearAxis minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+		</verticalAxis>
+		<horizontalAxis>
+			<CategoryAxis dataProvider="{categories.category.@name}" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</s:ExampleBase>

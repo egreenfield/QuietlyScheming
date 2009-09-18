@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" label="Make a Mosaic" width="100%" height="100%" 
+	xmlns:views="views.*">
+	<mx:constraintRows>
+		<mx:ConstraintRow id="Canvas1_row1" height="46.9%"/>
+		<mx:ConstraintRow id="Canvas1_row2" height="53.1%"/>
+	</mx:constraintRows>
+	<mx:Script>
+		<![CDATA[
+			import mosaic.Tile;
+			import mosaic.Palette;
+			import mosaic.Mosaic;
+			import mosaic.MosaicCollection;
+			import mosaic.MosaicController;
+			import mosaic.MosaicImage;
+			
+			[Bindable] public var selectedCollection:MosaicCollection;
+			[Bindable] public var selectedMosaic:Mosaic;
+			[Bindable] public var selectedImage:MosaicImage;
+			
+			public function assignImage():void
+			{
+				if(imageList == null)
+					return;
+
+				if(selectedMosaic != null)
+				{
+					selectedMosaic.sourceImage = imageList.selectedItem as MosaicImage;
+					selectedMosaic.save();
+				}
+				selectedImage = imageList.selectedItem as MosaicImage;
+				
+				updateRowColumnCount();
+			}			
+			
+			public function createMosaic():void
+			{
+				mosaicList.selectedItem = MosaicController.instance.createMosaic();				
+			}
+
+			public function updateCollection():void
+			{
+				selectedCollection = browseImageCollectionList.selectedItem as MosaicCollection;
+				selectedCollection.load();
+			}
+			public function updatePalette():void
+			{
+				if(selectedMosaic == null)
+					return;
+				selectedMosaic.palette = paletteUI.selectedItem as Palette;
+				selectedMosaic.save();
+				updateRowColumnCount();
+			}
+			public function updateRowColumnCount():void
+			{
+			}
+			
+			public function updateName():void
+			{
+				if(selectedMosaic == null)
+					return;
+				selectedMosaic.name = nameUI.text;
+				selectedMosaic.save();
+			}
+			
+			public function updateMosaic():void
+			{
+				selectedMosaic = mosaicList.selectedItem as Mosaic;
+				if(selectedMosaic.loaded == false)
+				{
+					selectedMosaic.load(
+					function(success:Boolean,m:Mosaic):void
+					{
+						updateMosaic();
+					}
+					);
+					return;
+				}
+				selectedImage = selectedMosaic.sourceImage;
+								
+			}
+
+			public function deleteMosaic():void
+			{
+				if(selectedMosaic == null)
+					return;
+				MosaicController.instance.deleteMosaic(selectedMosaic);
+			}
+			public function updateRows():void
+			{
+				if(selectedMosaic == null)
+					return;
+				selectedMosaic.rowCount = rowUI.value;
+				selectedMosaic.save();
+			}
+
+			public function updateColumns():void
+			{
+				if(selectedMosaic == null)
+					return;
+				selectedMosaic.columnCount = columnUI.value;
+				selectedMosaic.save();
+			}
+			
+			public function processImage():void
+			{
+				if(selectedMosaic == null)
+					return;
+				selectedMosaic.validate(
+				function(success:Boolean):void
+				{					
+					selectedMosaic.save();
+				}
+				,
+				null,
+				function(statuses:Array,statusMessages:Array,counts:Array):void
+				{
+					holder.invalidateDisplayList();
+				}
+				);
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:List id="imageList" change="assignImage()" labelField="url" dataProvider="{browseImageCollectionList.selectedItem.images}" bottom="Canvas1_row2:10" top="Canvas1_row2:62" left="82" width="162"></mx:List>
+	<mx:VBox backgroundColor="#FFFFFF" borderColor="#000000" borderStyle="solid" right="10" top="Canvas1_row2:29" left="353" bottom="Canvas1_row2:10">	
+		<views:MosaicGridRenderer id="holder" width="100%" height="100%" source="{selectedMosaic}" />
+	</mx:VBox>
+	<mx:ComboBox x="82" labelField="name" id="browseImageCollectionList" 
+		dataProvider="{MosaicController.instance.collections}" 
+		change="updateCollection()"
+		creationComplete="updateCollection()"
+		width="161" top="Canvas1_row2:32"/>
+	<mx:List id="mosaicList" bottom="Canvas1_row1:38" top="Canvas1_row1:10" left="14"
+			dataProvider="{MosaicController.instance.mosaics}" labelField="name"  width="162"
+			change="updateMosaic()" />
+	<mx:Button x="126" label="New" bottom="Canvas1_row1:8" click="createMosaic()"/>
+	<mx:Button label="Delete" bottom="Canvas1_row1:8" left="53" click="deleteMosaic()" />
+	<mx:Label x="192" y="12" text="Name:"/>
+	<mx:Label x="192" y="38" text="Palette:"/>
+	<mx:Label x="10" y="254" text="Source" fontWeight="bold"/>
+	<mx:Label x="10" y="279" text="Collection:"/>
+	<mx:Label x="27" y="296" text="Image:"/>
+	<mx:TextInput x="250" y="10" id="nameUI" text="{selectedMosaic.name}" width="160"
+		change="updateName()" />
+	<mx:ComboBox x="249" y="36" id="paletteUI" dataProvider="{MosaicController.instance.palettes}" width="161" 
+		selectedItem="{selectedMosaic.palette}" labelField="name" 
+		change="updatePalette()" />
+	<mx:Label x="206" y="64" text="rows:"/>
+	<mx:Label x="184" y="90" text="columns:"/>
+	<mx:NumericStepper x="248" y="62" width="67" id="rowUI" minimum="1" maximum="10000" value="{selectedMosaic.rowCount}" change="updateRows()"/>
+	<mx:NumericStepper x="248" y="88" width="67" id="columnUI" minimum="1" maximum="1000" value="{selectedMosaic.columnCount}" change="updateColumns()" />
+	<mx:Button x="184" y="116" label="Process" click="processImage()" />
+		
+</mx:Canvas>

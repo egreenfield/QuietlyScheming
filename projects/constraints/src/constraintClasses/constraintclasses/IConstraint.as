@@ -1,0 +1,3 @@
+class constraintclasses.IConstraint
+{
+}

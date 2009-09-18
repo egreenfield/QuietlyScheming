@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>JASBridge sample</title>
+<style>
+body { margin: 0px;
+ overflow:hidden }
+
+textarea {
+	font-size: 1em;
+}
+</style>
+
+</head>
+<body scroll='no' style="font-size:.9em;">
+<div style="margin-bottom: 20px;">
+	<textarea id="expr" cols="80" rows="20" >type in javascript code here.  use the radio buttons below to view sample JASBridge code</textarea>
+	<textarea id="output" cols="40" rows="20"></textarea><br>
+	<button onClick="testEval();return false;">execute</button>
+</div>
+<div style="margin-left: 20px">
+	<p>Sample Code:<br>
+		<input id="get_slider" 				onClick="updateCode(event.target.id)" name="code" type="radio"><label for="get_slider">get slider value</label>
+		<input id="set_check" 				onClick="updateCode(event.target.id)" name="code" type="radio"><label for="set_check">set checkbox value</label>
+		<input id="invoke_as" 				onClick="updateCode(event.target.id)" name="code" type="radio"><label for="invoke_as">invoke actionscript function</label>
+		<br>
+		<input id="button_event_handler" 	onClick="updateCode(event.target.id)" name="code" type="radio"><label for="button_event_handler">call javascript from AS button</label>
+		<input id="slider_event_handler" 	onClick="updateCode(event.target.id)" name="code" type="radio"><label for="slider_event_handler">listen for slider changes</label>
+		<input id="create_datagrid" 		onClick="updateCode(event.target.id)" name="code" type="radio"><label for="create_datagrid">create and populate a datagrid</label>
+	</p>
+</div>
+<div style="margin-top:20px;width:auto">
+<noscript>
+<object id='flexApp' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,5,0,0' height='400' width='auto'>
+<param name='flashvars' value=''/>
+<param name='src' value='app.swf'/>
+<embed name='flexApp' pluginspage='http://www.macromedia.com/go/getflashplayer' src='app.swf' height='100%' width='100%' flashvars=''/>
+</object>
+</noscript>
+<script language='javascript' charset='utf-8'>
+document.write("<object id='flexApp' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,5,0,0' height='100%' width=''>");
+document.write("<param name='flashvars' value=''/>");
+document.write("<param name='src' value='app.swf'/>");
+document.write("<embed name='flexApp' pluginspage='http://www.macromedia.com/go/getflashplayer' src='app.swf' height='100%' width='100%' flashvars=''/>");
+document.write("</object>");
+</script>
+<br>
+<br>
+</div>
+<script src="../src/bridge/JASBridge.js" ></script>
+<script src="JASBridgeSample.js" ></script>
+</body>
+</html>

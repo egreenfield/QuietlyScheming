@@ -1,0 +1,26 @@
+
+
+<%=
+		update_element_function("title",
+					:content => ( (@title.nil?)? "":@title.to_s) )
+%>
+<%=
+	update_element_function("description",
+					:content => ((@description.nil?)? "":@description.to_s))
+%>
+<%=
+	update_element_function("owner",
+					:content => "taken by " + @owner)
+%>
+
+<%=
+
+	update_element_function("imageHolder",
+					:content => image_tag(@source, :size => "#{@width}x#{@height}" ))
+
+%>
+//$('ContentHolder').width = <%= @width %>
+
+
+
+//new Effect.Appear($('ContentHolder'));

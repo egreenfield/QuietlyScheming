@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://www.adobe.com/2006/mxml" width="600" height="600" 
+	 color="#FDFDFD" fontFamily="Arial"
+	 horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<Label x="10" y="6" text="{data.@symbol}" fontSize="28" fontWeight="bold" />
+	
+	<ColumnChart left="320" right="20" top="50" color="#bababa" bottom="10" dataProvider="{data..sample}"
+		horizontalAxisStyleName="hangingCategoryAxis" verticalAxisStyleName="linedNumericAxis"
+		gutterLeft="40">
+		<backgroundElements>
+			<GridLines>
+				<horizontalStroke>
+					<Stroke color="#bababa" alpha=".5" />
+				</horizontalStroke>
+			</GridLines>
+		</backgroundElements>
+		<series>
+			<ColumnSeries yField="{seriesList.selectedItem.field}">
+				<fill>
+					<SolidColor color="#E6F534" alpha=".3"/>
+				</fill>
+				<stroke>
+					<Stroke color="#3a3a3a" weight="1" alpha=".9" />
+				</stroke>
+				<showDataEffect>
+					<SeriesInterpolate elementOffset="2" />
+				</showDataEffect>
+			</ColumnSeries>
+		</series>
+	</ColumnChart>
+	<Label x="38" y="399" text="Show:"/>
+	<List id="seriesList" backgroundAlpha=".2" selectedIndex="0" backgroundColor="#000000" x="38" y="427" width="252" labelField="label" borderStyle="none"
+		themeColor="#2a2a2a" rollOverColor="#6a6a6a" textRollOverColor="#c3c3c3" textSelectedColor="#000000" selectionColor="#E0E87D">
+		<dataProvider>
+			<Object field="@influx" label="influx" />
+			<Object field="@outflux" label="outflux" />
+		</dataProvider>
+	</List>
+	<VRule x="26.8" y="427" width="3.1599998" height="163"  strokeColor="#8a8a8a"/>
+	<Label x="10" y="53" text="{data.@name}" id="cname" fontSize="12" fontWeight="bold"  height="40" width="280"/>
+	<Label x="10" y="101" text="Descriptoin:"/>
+	<Text text="Text" width="263.2" left="26.8" top="128" bottom="201" id="descriptoin" condenseWhite="true" htmlText="{data.description}"/>
+</Canvas>

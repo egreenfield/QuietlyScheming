@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300" >
+	<mx:Metadata>
+		[DefaultProperty("innerChildren")]
+	</mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+
+			private var _innerChildren:Array = [];
+			
+			public function set innerChildren(value:Array):void
+			{
+				_innerChildren = value;
+				assignInnerChildren();
+			}
+			public function get innerChildren():Array
+			{
+				return _innerChildren;
+			}
+			private function assignInnerChildren():void
+			{
+				if(secondaryChildHolder == null)
+					return;
+				secondaryChildHolder.removeAllChildren();
+				for(var i:int = 0;i<_innerChildren.length;i++)
+				{
+					secondaryChildHolder.addChild(_innerChildren[i]);
+				}				
+			}
+			override protected function createChildren():void
+			{
+				super.createChildren();
+				assignInnerChildren();
+			}
+		]]>
+	</mx:Script>
+	<mx:Label text="this is the first child" />
+	<mx:HBox id="secondaryChildHolder" />
+	<mx:Label text="this is the second child" />
+</mx:VBox>

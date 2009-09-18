@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:ex="examples.*"
+	horizontalGap="0" horizontalAlign="left" paddingLeft="0" paddingTop="0" paddingBottom="0" paddingRight="0"
+	layout="horizontal"
+	width="100%" height="100%"
+	initialize="initApp()" viewSourceURL="srcview/index.html">
+
+	<Style>
+
+		Application {
+			backgroundColor: #343434;
+		}
+
+		@font-face
+		{
+		   font-family: EmbeddedArial;
+		   src: url("arial.ttf");
+		}
+
+
+		.frame {
+			padding-left: 30;
+			padding-top: 30;
+			padding-right: 30;
+			padding-bottom: 30;
+		}
+		FormItemLabel, Label, LinkButton, Text, Tree, CheckBox {
+			color: #FFFFFF;
+			roll-over-color: #FFFFFF;
+		}
+		VRule
+		{
+			strokeColor: #FFFFFF;
+			strokeWidth: 1;
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import examples.ExampleBase;
+			import support.Example;
+			import mx.core.UIComponent;
+
+			[Bindable] public var currentExampleInstance:ExampleBase;
+			[Bindable] public var currentExampleIndex:int;
+			[Bindable] public var currentExample:Example;
+
+			public function initApp():void
+			{
+			}
+			public function showExample(ex:Example):void
+			{
+				if(ex == currentExample)
+					return;
+
+				if(ex.classRef != null)
+				{
+					if(currentExampleInstance != null)
+					{
+						currentExampleInstance.stop();
+						holder.removeChild(currentExampleInstance);
+					}
+					currentExample = ex;
+					var c:Class = ex.classRef;
+					currentExampleInstance = new c();
+					holder.addChild(currentExampleInstance);
+
+					if(currentExampleInstance.controls != null)
+					{
+						controlOwner.removeAllChildren();
+						for(var i:int=0;i<currentExampleInstance.controls.length;i++)
+						{
+							controlOwner.addChild(currentExampleInstance.controls[i]);
+						}
+					}
+					currentExampleInstance.start();
+				}
+				exTree.selectedItem = currentExample;
+
+			}
+			private function nextExample():void
+			{
+//				if (currentExampleIndex < exampleSet.length - 1)
+//					showExample(currentExampleIndex+1);
+			}
+			private function prevExample():void
+			{
+//				if (currentExampleIndex > 0)
+//					showExample(currentExampleIndex-1);
+			}
+
+		]]>
+	</Script>
+
+	<Array xmlns:s="support.*" id="exampleSet">
+		<s:Example label="Series Types">
+			<s:Example label="Columns and bars">
+				<s:Example label="Simple Columns" classRef="examples.columns.Columns" />
+				<s:Example label="Floating Bars" classRef="examples.columns.SimpleBars" />
+				<s:Example label="Floating Columns" classRef="examples.columns.FloatingColumns" />
+				<s:Example label="Grouping Columns" classRef="examples.columns.StackingColumns" />
+				<s:Example label="column widths" classRef="examples.columns.ColumnWidth" />
+				<s:Example label="complex stacking" classRef="examples.columns.ComplexColumns" />
+			</s:Example>
+			<s:Example label="Lines">
+				<s:Example label="Simple Lines" classRef="examples.lines.SimpleLines" />
+				<s:Example label="Line Types" classRef="examples.lines.LineForm" />
+				<s:Example label="Missing Values" classRef="examples.lines.MissingValues" />
+				<s:Example label="rendering items" classRef="examples.lines.LineItems" />
+				<s:Example label="Non Linear" classRef="examples.lines.NonLinear" />
+			</s:Example>
+			<s:Example label="Areas">
+				<s:Example label="Simple Areas" classRef="examples.area.SimpleArea" />
+				<s:Example label="Area Types" classRef="examples.area.AreaForm" />
+				<s:Example label="rendering items" classRef="examples.area.AreaItems" />
+				<s:Example label="Floating Area" classRef="examples.area.FloatingArea" />
+				<s:Example label="Stacking Areas" classRef="examples.area.StackedArea" />
+			</s:Example>
+			<s:Example label="Bubble and Plot">
+				<s:Example label="Simple Bubble Series" classRef="examples.bubble.SimpleBubble" />
+				<s:Example label="Simple Plot Series" classRef="examples.plot.SimplePlot" />
+			</s:Example>
+			<s:Example label="Pie Series">
+				<s:Example label="Simple Pie Series" classRef="examples.pie.SimplePie" />
+				<s:Example label="Pie Labels" classRef="examples.pie.PieLabels" />
+				<s:Example label="Exploding Pie" classRef="examples.pie.PieExplode" />
+			</s:Example>
+		</s:Example>
+		<s:Example label="General Features">
+			<s:Example label="Field based data schema" classRef="examples.series.FieldTypes" />
+			<s:Example label="datatips" classRef="examples.general.Datatips" />
+			<s:Example label="Secondary Axes" classRef="examples.general.Seconds" />
+			<s:Example label="watching collections" classRef="examples.general.RT" />
+		</s:Example>
+		<s:Example label="Axes">
+			<s:Example label="Linear" classRef="examples.axes.Linear" />
+			<s:Example label="Log" classRef="examples.axes.Log" />
+			<s:Example label="Date/Time" classRef="examples.axes.DateTime" />
+		</s:Example>
+		<s:Example label="Styles">
+			<s:Example label="Fills" classRef="examples.styling.Fills" />
+			<s:Example label="chart series styles" classRef="examples.styling.ChartSeriesStyles" />
+			<s:Example label="MXML styles" classRef="examples.styling.MXMLStyles" />
+			<s:Example label="Axis Labels" classRef="examples.styling.AxisLabels" />
+			<s:Example label="Item Renderers" classRef="examples.styling.ItemRenderer" />
+		</s:Example>
+		<s:Example label="Effects">
+			<s:Example label="Interpolate" classRef="examples.effects.Interpolate" />
+			<s:Example label="Zoom" classRef="examples.effects.Zoom" />
+			<s:Example label="Slide" classRef="examples.effects.Slide" />
+		</s:Example>
+		<s:Example label="Customization">
+			<s:Example label="Per Column Colors" classRef="examples.customizing.SimpleRenderer" />
+			<s:Example label="Bar Labels" classRef="examples.customizing.BarWithLabel" />
+			<s:Example label="Custom Annotation" classRef="examples.customizing.CustomAnnotation" />
+			<s:Example label="Mouse Handling" classRef="examples.customizing.MouseHandling" />
+		</s:Example>
+	</Array>
+
+
+	<Tree id="exTree" width="200" backgroundColor="#565656" height="100%" dataProvider="{exampleSet}" labelField="label" showRoot="true" change="showExample(Example(exTree.selectedItem))" />
+	<VRule height="100%"  />
+	<Form height="100%" backgroundColor="#565656" minHeight="0">
+		<FormItem label="example">
+			<Label text="{currentExample.label}"/>
+		</FormItem>
+		<FormItem label="description">
+			<Text width="200" text="{currentExampleInstance.currentStepDescription}" />
+		</FormItem>
+		<FormItem label="controls" id="controlOwner" visible="{currentExampleInstance.controls != null}" includeInLayout="{currentExampleInstance.controls != null}">
+		</FormItem>
+		</Form>
+	<HBox id="frame" width="100%" height="100%" styleName="frame">
+		<HBox id="holder" width="100%" height="100%" styleName="frame" backgroundColor="#FFFFFF">
+		</HBox>
+	</HBox>
+</Application>

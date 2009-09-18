@@ -1,0 +1,112 @@
+<root xmlns="">
+	<node label="menus">
+		<node label="document" >
+			<node icon="img/document/document-new.png" label="new" />
+			<node icon="img/document/document-open.png" label="open" />
+			<node icon="img/document/document-print-preview.png" label="print-preview" />
+			<node icon="img/document/document-print.png" label="print" />
+			<node icon="img/document/document-properties.png" label="properties" />
+			<node icon="img/document/document-save.png" label="save" />
+		</node>
+		<node label="edit" >
+			<node icon="img/edit/edit-copy.png" label="copy" />
+			<node icon="img/edit/edit-cut.png" label="cut" />
+			<node icon="img/edit/edit-delete.png" label="delete" />
+			<node icon="img/edit/edit-find-replace.png" label="edit-replace" />
+			<node icon="img/edit/edit-find.png" label="find" />
+			<node icon="img/edit/edit-paste.png" label="paste" />
+			<node icon="img/edit/edit-redo.png" label="redo" />
+			<node icon="img/edit/edit-select-all.png" label="edit-all" />
+			<node icon="img/edit/edit-undo.png" label="undo" />
+		</node>
+		<node label="format" >
+			<node icon="img/format/format-indent-less.png" label="indent less" />
+			<node icon="img/format/format-indent-more.png" label="indent more" />
+			<node icon="img/format/format-justify-center.png" label="indent center" />
+			<node icon="img/format/format-justify-fill.png" label="indent fill" />
+			<node icon="img/format/format-justify-left.png" label="justify left" />
+			<node icon="img/format/format-justify-right.png" label="justify right" />
+			<node icon="img/format/format-text-bold.png" label="text bold" />
+			<node icon="img/format/format-text-italic.png" label="text italic" />
+			<node icon="img/format/format-text-strikethrough.png" label="text strikethrough" />
+			<node icon="img/format/format-text-underline.png" label="text underline" />
+		</node>
+		<node label="go" >
+			<node icon="img/go/go-bottom.png" label="bottom" />
+			<node icon="img/go/go-down.png" label="down" />
+			<node icon="img/go/go-first.png" label="first" />
+			<node icon="img/go/go-home.png" label="home" />
+			<node icon="img/go/go-jump.png" label="jump" />
+			<node icon="img/go/go-last.png" label="last" />
+			<node icon="img/go/go-next.png" label="next" />
+			<node icon="img/go/go-previous.png" label="previous" />
+			<node icon="img/go/go-top.png" label="top" />
+			<node icon="img/go/go-up.png" label="up" />
+		</node>
+	</node>
+	<node label="PIM">
+		<node label="calendar">
+			<node icon="img/PIM/address-book-new.png" label="new address" />
+			<node icon="img/PIM/appointment-new.png" label="new appointment" />
+			<node icon="img/PIM/contact-new.png" label="new contact" />
+		</node>
+		<node label="mail" >
+			<node icon="img/mail/mail-forward.png" label="forward" />
+			<node icon="img/mail/mail-mark-junk.png" label="mark-junk" />
+			<node icon="img/mail/mail-reply-all.png" label="reply-all" />
+			<node icon="img/mail/mail-reply-sender.png" label="reply-sender" />
+			<node icon="img/mail/mail-send-receive.png" label="send-receive" />
+		</node>
+	</node>
+	<node label="apps">
+
+		<node label="applications" >
+			<node icon="img/applications/applications-accessories.png" label="accessories" />
+			<node icon="img/applications/applications-development.png" label="development" />
+			<node icon="img/applications/applications-games.png" label="games" />
+			<node icon="img/applications/applications-graphics.png" label="graphics" />
+			<node icon="img/applications/applications-internet.png" label="internet" />
+			<node icon="img/applications/applications-multimedia.png" label="multimedia" />
+			<node icon="img/applications/applications-office.png" label="office" />
+			<node icon="img/applications/applications-other.png" label="other" />
+			<node icon="img/applications/applications-system.png" label="system" />
+		</node>
+		<node label="media" >
+			<node icon="img/media/media-eject.png" label="eject" />
+			<node icon="img/media/media-playback-pause.png" label="playback-pause" />
+			<node icon="img/media/media-playback-start.png" label="playback-start" />
+			<node icon="img/media/media-playback-stop.png" label="playback-stop" />
+			<node icon="img/media/media-record.png" label="record" />
+			<node icon="img/media/media-seek-backward.png" label="seek-backward" />
+			<node icon="img/media/media-seek-forward.png" label="seek-forward" />
+			<node icon="img/media/media-skip-backward.png" label="skip-backward" />
+			<node icon="img/media/media-skip-forward.png" label="skip-forward" />
+		</node>
+	</node>
+	<node label="system">
+		<node label="preferences" >
+			<node icon="img/preferences/preferences-desktop-accessibility.png" label="desktop-accessibility" />
+			<node icon="img/preferences/preferences-desktop-font.png" label="desktop-font" />
+			<node icon="img/preferences/preferences-desktop-locale.png" label="desktop-locale" />
+			<node icon="img/preferences/preferences-desktop-screensaver.png" label="desktop-screensaver" />
+			<node icon="img/preferences/preferences-desktop-theme.png" label="desktop-theme" />
+			<node icon="img/preferences/preferences-desktop-wallpaper.png" label="desktop-wallpaper" />
+			<node icon="img/preferences/system-file-manager.png" label="file-manager" />
+			<node icon="img/preferences/system-software-update.png" label="software-update" />
+			<node icon="img/preferences/utilities-terminal.png" label="terminal" />
+		</node>
+		<node label="desktop" >
+			<node icon="img/system/folder-remote.png" label="remote" />
+			<node icon="img/system/folder.png" label="list.txt" />
+			<node icon="img/system/network-server.png" label="server" />
+			<node icon="img/system/network-workgroup.png" label="workgroup" />
+			<node icon="img/system/start-here.png" label="here" />
+			<node icon="img/system/system-lock-screen.png" label="lock-screen" />
+			<node icon="img/system/system-log-out.png" label="log-out" />
+			<node icon="img/system/system-search.png" label="search" />
+			<node icon="img/system/user-desktop.png" label="desktop" />
+			<node icon="img/system/user-home.png" label="home" />
+			<node icon="img/system/view-fullscreen.png" label="fullscreen" />
+		</node>
+	</node>
+</root>			

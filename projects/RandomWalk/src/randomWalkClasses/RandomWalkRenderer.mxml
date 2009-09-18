@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Label xmlns="http://www.adobe.com/2006/mxml" implements="randomWalkClasses.IRandomWalkRenderer" >
+
+	<Script>
+		<![CDATA[
+		
+		private var _selected:Number;	
+		private var _highlighted:Boolean;
+		
+		public function set selectedState(value:Number):void
+		{
+			if(value > 0)
+				currentState = "selected";
+			else if (value == 0)
+				currentState = "unselected";
+			else
+				currentState = null;
+			_selected= value;
+		}
+		
+		public function get selectedState():Number
+		{
+			return _selected;
+		}
+
+		public function set highlighted(value:Boolean):void
+		{
+			_highlighted = value;
+		}
+		
+		public function get highlighted():Boolean
+		{
+			return _highlighted;
+		}
+		override public function set data(value:Object):void
+		{
+			super.data = value.@label;
+		}
+		private function rollOverHandler():void
+		{
+			if(_selected == 0)	
+				currentState = "unselectedOver";
+			else
+				currentState = "selectedOver";
+		}
+		
+		private function rollOutHandler():void
+		{
+		}
+		
+		]]>
+	</Script>		
+	
+	<states>
+		<State name="selected">
+			<SetStyle name="color" value="#AA0000" />
+			<SetStyle name="fontSize" value="16" />
+		</State>
+		<State name="unselected">
+			<SetStyle name="color" value="#AAAAAA" />
+			<SetStyle name="fontSize" value="10" />
+		</State>
+	</states>
+</Label>

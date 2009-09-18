@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#0080c0, #8080c0]">
+
+	<Script>
+		<![CDATA[
+			
+			private var regions:Array = ("CA,MA,MO,FL,AZ,WA,DC,ME,AK,CO").split(",");
+			private var products:Array = ("Televisions,Radios,Phones,MP3 Players,Stereos,DVRs,DVD Players").split(",");
+			private var demo:Array = ("10-20,20-30,30-40,40-70").split(",");
+			private var measures:Array = ("cost,sales,min,max,high,low,profit").split(",");
+			private var dateLen:Number = 5;
+			
+			private function generate():void
+			{
+				var root:XML = <data />;
+				for(var d:int = 0;d<dateLen;d++)
+				{
+					var tmpDate:Date = new Date();
+					tmpDate.date += d;
+					
+					for(var r:int = 0;r<regions.length;r++)
+					{
+						for(var p:int = 0;p<products.length;p++)
+						{
+							for(var g:int = 0;g<demo.length;g++)
+							{
+								var node:XML = <sample 	date={tmpDate.month + "/" + tmpDate.date + "/" + tmpDate.fullYear} region={regions[r]} product={products[p]} demo={demo[g]} />
+								for(var m:int = 0;m < measures.length;m++)
+								{
+									node["@"+measures[m]] = Math.floor(Math.random() * 1000);
+								}
+								root.appendChild(node);
+							}
+						}
+					}
+				}
+				
+				output.text = root.toXMLString();
+				
+			}
+		]]>
+	</Script>
+
+	<TextArea id="output" right="10" left="10" top="10" bottom="40"/>
+	<Button label="Go" right="10" bottom="10" click="generate()" />
+	
+</Application>

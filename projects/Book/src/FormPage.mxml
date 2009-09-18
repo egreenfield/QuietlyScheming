@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" >
+	<mx:Label x="10" y="10" text="First Name:"/>
+	<mx:TextInput y="8" left="86" right="10"/>
+	<mx:Label x="47" y="36" text="Age:"/>
+	<mx:NumericStepper x="86" y="34"/>
+	<mx:Label x="43" y="62" text="DOB:"/>
+	<mx:Label x="30" y="90" text="Status:"/>
+	<mx:DateField y="60" left="85" width="91"/>
+	<mx:Label x="10" y="115" text="More Details:"/>
+	<mx:TextArea right="10" left="10" top="141" bottom="10"/>
+	<mx:ComboBox y="88" left="86" width="160"></mx:ComboBox>
+	
+</mx:Canvas>

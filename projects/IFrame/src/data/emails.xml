@@ -1,0 +1,34 @@
+<emails>
+	<email from="QT&amp;T Accounts" subject="Requesting Information for your AT&amp;T Account" contentID="account" folder="Receipts" />
+	<email from="Netflix Offers" subject="Come back from just $4.95 per month!" contentID="netflix" folder="Receipts" />
+	<email from="TicketWeb" subject="Order Confirmation" contentID="ticketweb" folder="Receipts" />
+	<email from="B&amp;H Photo" subject="B&amp;H Photo" contentID="bhphoto" folder="Receipts" />
+	<email from="Hotel Los Gatos" subject="Your Upcoming Trip" contentID="hotel" folder="Receipts" />
+	<email from="Expedia Travel Deals" subject="Expedia Travel Deals" contentID="travel" folder="Receipts" />
+	<email from="GoldenState ScholarShare" subject="529 Plan Tax Information" contentID="529" folder="Receipts" />
+	<email from="AirSet" subject="Email Confirmation" contentID="airset" folder="Receipts" />
+	<email from="Staples" subject="Three Free Gifts: You Choose!" contentID="staples" folder="Receipts" />
+	<email from="ThinkGeek" subject="Your Purchase" contentID="" folder="Receipts" />
+	<email from="ITunes" subject="Your Music is Available" contentID="" folder="Receipts" />
+
+	<email from="Frances Thomas" subject="Flash Player 9 now available" folder="Inbox" />
+	<email from="David Wadhwani" subject="Fw: FABridge usage notes" folder="Inbox" />
+	<email from="Alan Greenfield" subject="Great Seeing you the other day" folder="Inbox" />
+	<email from="Matt Horn" sobject="Re: issues when selecting a column series" folder="Inbox" />
+	<email from="Etrade Alerts" subject="Change in prospectus delivery" folder="Inbox" />
+	<email from="Phil Costa" subject="great site built with flex" folder="Inbox" />
+	<email from="Jason Williams" subject="Integrating Flex Data Services with other host containers" folder="Inbox" />
+	<email from="wordpress@quietlyscheming.com" subject="New Comment waiting for your approval" folder="Inbox" />
+	<email from="Ed Rowe" subject="Using Flex to build UIs for desktop applications" folder="Inbox" />
+	<email from="Brian Deitte" subject="anyone have a power cord I could borrow?" folder="Inbox" />
+	<email from="Frances Thomas" subject="Flash Player 9 now available" folder="Inbox" />
+	<email from="David Wadhwani" subject="Fw: FABridge usage notes" folder="Inbox" />
+	<email from="Alan Greenfield" subject="Great Seeing you the other day" folder="Inbox" />
+	<email from="Matt Horn" sobject="Re: issues when selecting a column series" folder="Inbox" />
+	<email from="Etrade Alerts" subject="Change in prospectus delivery" folder="Inbox" />
+	<email from="Phil Costa" subject="great site built with flex" folder="Inbox" />
+	<email from="Jason Williams" subject="Integrating Flex Data Services with other host containers" folder="Inbox" />
+	<email from="wordpress@quietlyscheming.com" subject="New Comment waiting for your approval" folder="Inbox" />
+	<email from="Ed Rowe" subject="Using Flex to build UIs for desktop applications" folder="Inbox" />
+	<email from="Brian Deitte" subject="anyone have a power cord I could borrow?" folder="Inbox" />
+</emails>

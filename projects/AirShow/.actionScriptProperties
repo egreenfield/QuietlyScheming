@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="AirShow.mxml" projectUUID="381b9d80-7f15-4553-8bd3-13063df9ad36" version="4">
+  <compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" verifyDigests="true" warn="true">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="/Users/egreenfi/dev/qs/lib"/>
+    </compilerSourcePath>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path=""/>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="AirShow.mxml">
+      <airExcludes/>
+    </application>
+  </applications>
+  <modules/>
+  <buildCSSFiles/>
+</actionScriptProperties>

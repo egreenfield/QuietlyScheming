@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MText debug</title>
+<script type="text/javascript" src="/mt/mxml.js"></script>
+<style type="text/css">@import "/mt/styles.css";</style>
+</head>
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header"><h1>Open Web Flex</h1></div>
+	<div id="nav">
+		<ul>
+			<li><a href="#">Option 1</a></li>
+			<li><a href="#">Option 2</a></li>
+			<li><a href="#">Option 3</a></li>
+
+			<li><a href="#">Option 4</a></li>
+			<li><a href="#">Option 5</a></li>
+		</ul>
+	</div>
+	<div id="main">
+		<div id="sandbox">
+		</div>
+	</div>
+	<div id="sidebar">
+		<div id="source">
+			<textarea class="sourceInput" id="sourceEditor" tabindex='1' accesskey="," name="mxmlSource" rows='60' cols='80'>
+<?mxml-module href="/mt/libraries/CommonControls.swf" ?>
+<?mxml-module href="/mt/libraries/CommonContainers.swf" ?>
+<?mxml-module href="/mt/libraries/VectorGraphics.swf" ?>
+<?mxml-module href="/mt/libraries/DataControls.swf" ?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Label text="binding:" />
+	<mx:HBox>
+		<mx:NumericStepper id="ns" />
+		<mx:TextInput text="{ns.value}" />
+	</mx:HBox>
+
+	<mx:Label text="nested faceless components:" />
+	<mx:DataGrid width="200" height="200">
+		<mx:columns>
+			<mx:DataGridColumn dataField="hello" />
+			<mx:DataGridColumn dataField="world" />
+		</mx:columns>
+	</mx:DataGrid>
+
+	<mx:Text percentWidth="100" text="dynamic component libraries: (this checkbox...and every component on screen...is not
+	part of this swf. It's part of a library downloaded via an XML processing directive in the external source)" />
+	<mx:CheckBox width="200" label="hello, world" />
+
+	<mx:Label text="calling to javascript:" />
+	<mx:Button label="add Button" click="addButton(bridge)" />
+	<mx:Tile percentWidth="100" id="buttonWrapper">
+	</mx:Tile>
+
+	<mx:Label text="setting innerXML (text nodes and child nodes) from javascript" />
+	<mx:HBox>
+		<mx:Button label="talk to JS" click="docFunction('happy')" fontSize="24" />
+		<mx:Button label="grow me" id="grow (style tag)" click="growButton()">
+			<mx:fontSize id="growButtonFontSize">14</mx:fontSize>
+		</mx:Button>
+	</mx:HBox>
+
+	<mx:Label text="Graphics tags" />
+	<mx:Graphic click="findRootName(bridge)">
+		<mx:Ellipse width="80" height="80" x="20" y="20">
+			<mx:fill>
+				<mx:SolidColor id="bigFill" >#0000FF</mx:SolidColor>
+			</mx:fill>
+			<mx:stroke>
+				<mx:Stroke weight="8" color="#000000" />
+			</mx:stroke>
+		</mx:Ellipse>
+		<mx:Ellipse height="20" x="20" y="100">
+			<mx:width>20</mx:width>
+			<mx:fill>
+				<mx:SolidColor id="smallCircleFill" color="#FF0000"  />
+			</mx:fill>
+		</mx:Ellipse>
+	</mx:Graphic>
+</mx:VBox>
+
+			</textarea><br/>
+			<input tabindex='5' id='save' type='submit' value="save changes" name="save" onClick="loadSource();return false" accesskey="s" title="Save your changes [alt-s]"/>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+
+<body>
+
+
+
+
+
+	<script type="text/javascript">
+		bridge = new MTBridge("sandbox","../mxmltext-debug.swf","flash","500","750");
+		bridge.write();
+
+		function loadSource() {
+			var source = document.getElementById("sourceEditor").value;
+			mxmlDocument = bridge.document;
+			bridge.setMarkup(source);
+		}
+	</script>
+
+</body>
+</html>

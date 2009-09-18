@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	width="200" height="300" 
+	title="Your Comments" 
+	cornerRadius="7" headerHeight="14"
+	fontSize="10"
+	borderThicknessLeft="2"
+	borderThicknessRight="2"
+	borderThicknessTop="2"
+	borderThicknessBottom="2"
+	headerColors="{[0x22AA22,0x88FF88]}"
+	borderColor="0x22AA22"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable] public var text:String;
+			
+			private var startPt:Point;
+			private var startSize:Point;
+			private function startTracking():void
+			{
+				systemManager.addEventListener(MouseEvent.MOUSE_MOVE,track,true);
+				systemManager.addEventListener(MouseEvent.MOUSE_UP,endTrack,true);				
+				startPt = new Point(mouseX,mouseY);
+				startSize = new Point(width,height);
+			}
+			private function track(e:MouseEvent):void
+			{
+				width = startSize.x + mouseX - startPt.x;
+				height = startSize.y + mouseY - startPt.y;
+				e.updateAfterEvent();
+			}
+			private function endTrack(e:MouseEvent):void
+			{
+				systemManager.removeEventListener(MouseEvent.MOUSE_MOVE,track,true);
+				systemManager.removeEventListener(MouseEvent.MOUSE_UP,endTrack,true);				
+			}
+			private function addComment():void
+			{
+				if(newComment.text == "")
+					return;
+				text = "<FONT color='#0000FF'><B>A Visitor Said:</B></FONT><BR/>" + newComment.text + "<BR/>" + text;
+				newComment.text= "";
+			}
+			
+			private var _clear:Boolean = false;
+			private function submitOnEnter(e:KeyboardEvent):void
+			{
+				if(e.keyCode == Keyboard.ENTER)
+				{
+					addComment();
+					_clear= true;
+				}
+			}
+			private function checkForClear():void
+			{
+				if(_clear)
+					newComment.text = "";
+				_clear = false;
+			}
+		]]>
+	</mx:Script>
+	<mx:TextArea editable="false" id="comments" fontSize="12" right="0" left="0" top="0" bottom="96" htmlText="{text}" />
+	<mx:Image height="97" maintainAspectRatio="false" source="@Embed(source='/assets/dragBarBg.png')" right="0" bottom="0" left="0" />	
+	<mx:Image height="16" source="@Embed(source='/assets/drag.png')" right="0" bottom="0"  mouseDown="startTracking();"/>	
+	<mx:Label text="Add a comment:" color="#000000" left="10" bottom="70"/>
+	<mx:TextArea right="22" bottom="25" left="10" id="newComment" keyDown="submitOnEnter(event)" change="checkForClear();"/>
+	<mx:LinkButton label="Add" height="19" right="22" bottom="2" click="addComment()" />
+</mx:Panel>

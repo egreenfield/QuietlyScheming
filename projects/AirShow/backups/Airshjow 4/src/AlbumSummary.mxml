@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://www.adobe.com/2006/mxml" xmlns:ns1="*" styleName="dark" initialize="initData()" xmlns:test="test.*">
+	
+	<Script>
+		<![CDATA[
+			import mx.utils.ObjectProxy;
+		private function initData():void
+		{
+			var c:Array = [];
+			for(var i:int = 0;i<30;i++)
+			{
+				var o:ObjectProxy = new ObjectProxy();
+				o.color = Utilities.randomColor();
+				o.value = i;
+				o.width = i*10 + 30;
+				c.push(o);//{color: Utilities.randomColor(),width:i*10+30,value: i});
+			}
+			content = c;
+		}
+		[Bindable] public var content:Array = [];	
+		]]>
+	</Script>
+	<Label x="10" y="10" text="AlbumName" color="#FFFFFF" fontSize="24"/>
+	<ns1:ScrollList id="crawler" right="10" top="42" left="10" bottom="10"  content="{content}" itemRenderer="ASTile" />
+<!--		<ns1:itemRenderer>
+			<Component>
+				<ns1:Tile text="{'' + data.value}" backgroundColor="{data.color}" width="{data.width}"/>
+			</Component>
+		</ns1:itemRenderer>
+	</ns1:ScrollList>
+	-->
+</Canvas>

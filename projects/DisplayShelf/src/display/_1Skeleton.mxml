@@ -1,0 +1,22 @@
+<mx:?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:local="*" height="100%">
+
+	<mx:VBox horizontalAlign="center" horizontalCenter="0" verticalCenter="0" verticalGap="30">
+			<mx:Label id="description" fontSize="18" text=" " />		
+
+			<mx:HBox>
+				<local:TiltingPane angle="{angle.value}" width="400" height="400"
+					source="img/photos400/photo06.jpg" />
+			</mx:HBox>
+	</mx:VBox>
+
+	<mx:VBox bottom="10" horizontalCenter="0">
+		<mx:HSlider liveDragging="true" id="angle" minimum="-90" 
+			value="0" maximum="90" snapInterval=".01" width="600" />
+		<mx:HBox>
+			<mx:Button label="&lt;" click="prevStep();" />
+			<mx:Button label="&gt;" click="nextStep();" />
+		</mx:HBox>
+	</mx:VBox>
+
+</mx:mx:Application>>

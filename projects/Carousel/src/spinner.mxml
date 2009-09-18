@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" layout="vertical"
+	backgroundColor="#000000" viewSourceURL="/etech/bin/srcview/index.html" fillColors="">
+
+	<bridge:FABridge xmlns:bridge="bridge.*" />
+
+	<Carousel width="100%" height="100%" id="carousel" tiltAngle=".2" />
+
+</mx:Application>

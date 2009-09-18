@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple two series column chart"];
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<ColumnChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<fill>
+			<LinearGradient angle="70">
+				<GradientEntry color="#FF6666" />
+				<GradientEntry color="#FFAAAA" />
+			</LinearGradient>
+		</fill>
+		<series>
+			<ColumnSeries yField="revenue">
+				<fill>
+					<SolidColor color="#FF0000" />
+				</fill>
+			</ColumnSeries>
+			<ColumnSeries yField="costs" >
+				<fill>
+					<LinearGradient>
+						<GradientEntry color="#A6A602" ratio="0"  />
+						<GradientEntry color="#DFDF97" ratio=".2"  />
+						<GradientEntry color="#A6A602" ratio=".4"  />
+						<GradientEntry color="#F5F655" ratio=".8"  />
+						<GradientEntry color="#A6A602" ratio="1"  />
+					</LinearGradient>
+				</fill>
+			</ColumnSeries>
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+	<BubbleChart id="bchart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<fill>
+			<LinearGradient angle="70">
+				<GradientEntry color="#6666FF" />
+				<GradientEntry color="#DDDDFF" />
+			</LinearGradient>
+		</fill>
+		<series>
+			<BubbleSeries xField="revenue" yField="costs" radiusField="overhead">
+				<fill>
+					<RadialGradient focalPointRatio=".3">
+						<GradientEntry color="#A6A602" ratio="0" alpha="100" />
+						<GradientEntry color="#DFDF97" ratio=".2" alpha="100" />
+						<GradientEntry color="#A6A602" ratio=".4" alpha="100" />
+						<GradientEntry color="#F5F655" ratio=".8" alpha="100" />
+						<GradientEntry color="#A6A602" ratio="1" alpha="100" />
+					</RadialGradient>
+				</fill>
+			</BubbleSeries>
+		</series>
+	</BubbleChart>
+
+</ex:ExampleBase>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<players>
+	<player firstName="David" lastName="Wadhwani" nickname="Jefe" ranking="23rd" />
+	<player firstName="Matt" lastName="Chotin" nickname="Answerator" ranking="151st" />
+	<player firstName="Alex" lastName="Harui"  nickname="Messinator" ranking="2nd" />
+	<player firstName="Gordon" lastName="Smith"  nickname="enforcer" ranking="17th" />
+	<player firstName="Glenn" lastName="Ruehle"  nickname="Skininator" ranking="4th" />
+	<player firstName="Ely" lastName="Greenfield"  nickname="Naginator" ranking="12th" />
+	<player firstName="Deepa" lastName="Subrama..."  nickname="Terminator" ranking="15th" />
+	<player firstName="Dave" lastName="George"  nickname="simplinator" ranking="18th" />
+	<player firstName="Susan" lastName="Lally" nickname="Cat Herder" ranking="1st" />
+	<player firstName="Basil" lastName="Hosmer"  nickname="languigator" ranking="3rd" />
+	<player firstName="Roger" lastName="Gonzalez"  nickname="shiny-nator" ranking="15th" />
+	<player firstName="Dan" lastName="Smith"  nickname="Scotchinator" ranking="11th" />
+	<player firstName="Paul" lastName="Reilly" nickname="Boof-inator" ranking="18th" />
+	<player firstName="Clement" lastName="Wong" nickname="Compilinator" ranking="13th" />
+	<player firstName="Brian" lastName="Deitte" nickname="MIA" ranking="23rd" />
+	<player firstName="Michael" lastName="Montagna" nickname="Treeinator" ranking="4th" />
+	<player firstName="Todd" lastName="Rein"  nickname="Rover" ranking="10th" />
+	<player firstName="Sasha" lastName="Magee" nickname="Automator" rakning="15th" />
+</players>	

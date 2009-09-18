@@ -1,0 +1,28 @@
+<project>
+
+	<taskdef resource="flexTasks.tasks" classpath="C:/dev/flex_ant_tasks/lib/flexTasks.jar" />
+	<property name="FLEX_ROOT" value="C:/dev/f2/sdk"/>
+	<property name="SOURCE_ROOT" value="${basedir}/src"/>  
+	<property name="OUTPUT_ROOT" value="${basedir}/../../../web/public/mt"/>  
+    <property name="FLEX_HOME" value="C:/dev/f2/sdk"/>        		
+
+	<target name="main">
+	    <antcall target="buildSwf">     
+    		<param name="SWF_NAME" value="MXMLSimple" />
+    	</antcall>
+    </target>
+	
+
+
+
+
+     <target name="buildSwf">
+         <mxmlc file="${SOURCE_ROOT}/${SWF_NAME}.as" output="${OUTPUT_ROOT}/${SWF_NAME}.swf" >
+             <load-config filename="${FLEX_ROOT}/frameworks/flex-config.xml"/>
+             <load-config filename="${SOURCE_ROOT}/${SWF_NAME}-config.xml"/>
+             <source-path path-element="${FLEX_ROOT}/frameworks"/>
+            <source-path path-element="../src"/>
+         </mxmlc>
+     </target>  
+
+</project>

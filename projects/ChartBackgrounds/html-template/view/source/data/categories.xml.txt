@@ -1,0 +1,23 @@
+<categories>
+	<category name="A" />
+	<category name="B" />
+	<category name="C" />
+	<category name="D" />
+	<category name="E" />
+	<category name="F" />
+	<category name="G" />
+	<category name="H" />
+	<category name="I" />
+	<category name="J" />
+	<category name="K" />
+	<category name="L" />
+	<category name="M" />
+	<category name="N" />
+	<category name="O" />
+	<category name="P" />
+	<category name="Q" />
+	<category name="R" />
+	<category name="S" />
+	<category name="T" />
+</categories>
+	

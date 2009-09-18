@@ -1,0 +1,73 @@
+<Application initialize="initApp()" xmlns="http://www.macromedia.com/2003/mxml" xmlns:l="*"
+    width="100%" height="100%"
+    verticalGap="0" creationComplete="showInstructions()">
+
+	<Style>
+		Canvas {
+			backgroundColor:#FFCCCC;
+		}
+	</Style>
+	<Panel id="p" width="100%" height="100%">
+		<ConstraintCanvas id="canvas"  width="100%" height="100%">
+
+			<Button label="Hello" id="helloChild" x="200" y="200" width="200" minWidth="100"/>
+			<Button label="World" id="worldChild" x="200" y="200" width="200" minWidth="100"/>
+
+			<constraints>
+				<Array>
+
+					<SimpleConstraint targetID="helloChild" targetProperty="top" sourceProperty="top" offset="20" />
+					<SimpleConstraint targetID="helloChild" targetProperty="bottom" sourceProperty="bottom" offset="-20" />
+					<SimpleConstraint targetID="helloChild" targetProperty="left" sourceProperty="left" offset="20" />
+
+					<SimpleConstraint targetID="worldChild" targetProperty="top" sourceProperty="top" offset="20" />
+					<SimpleConstraint targetID="worldChild" targetProperty="bottom" sourceProperty="bottom" offset="-20" />
+					<SimpleConstraint targetID="worldChild" targetProperty="left" sourceProperty="right" sourceID="helloChild" offset="20" />
+					<SimpleConstraint targetID="worldChild" targetProperty="right" sourceProperty="right" offset="-20" />
+
+				</Array>
+			</constraints>
+		</ConstraintCanvas>
+	</Panel>
+
+	<Script>
+	<![CDATA[
+
+		import mx.utils.*;
+		import mx.managers.*;
+		import mx.containers.*;
+
+		function initApp()
+		{
+		}
+
+		import mx.util.*;
+
+
+		import mx.controls.*;
+
+
+		function showInstructions()
+		{
+
+//		canvas.activate();
+		return;
+			alert(
+			"- drag items from the children panel to populate container with children\n" +
+			"- click and drag on the upper left corner of a child to move it\n" +
+			"- click and drag on the lower right cornder of a child to resize it\n" +
+			"\n" +
+			"- click and drag from the guides panel to drag out a new guide\n" +
+			"- click and drag on a guide to move it after it's been created\n" +
+			"- shift-click and drag on a guide to change its size\n" +
+			"\n" +
+			"- drag a child close to a guide to bind it to the guide\n" +
+			"\n" +
+			"- select a guide and hit 'properties' to change its binding\n" +
+			""
+			,"Instructions"
+			);
+		}
+	]]>
+	</Script>
+</Application>

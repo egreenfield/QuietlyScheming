@@ -1,0 +1,28 @@
+<project>
+
+	<taskdef resource="flexTasks.tasks" classpath="C:/dev/flex_ant_tasks/lib/flexTasks.jar" />
+	<property name="FLEX_ROOT" value="C:/dev/f2/sdk"/>
+	<property name="SOURCE_ROOT" value="C:/dev/qs/projects/mt/simpleLibs/src"/>  
+	<property name="OUTPUT_ROOT" value="C:/dev/qs/web/public/mt/libraries"/>  
+    <property name="FLEX_HOME" value="C:/dev/f2/sdk"/>        		
+
+	<target name="main">
+	    <antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="GraphicsLib" />
+    	</antcall>
+    </target>
+	
+
+
+
+
+     <target name="buildLibrary">
+
+         <mxmlc file="${SOURCE_ROOT}/${LIB_NAME}.as" output="${OUTPUT_ROOT}/${LIB_NAME}.swf" >
+             <load-config filename="${FLEX_ROOT}/frameworks/flex-config.xml"/>
+             <load-config filename="lib-config.xml"/>
+             <source-path path-element="${FLEX_ROOT}/frameworks"/>
+         </mxmlc>
+     </target>  
+
+</project>

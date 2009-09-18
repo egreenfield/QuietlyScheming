@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#444444" xmlns:filters="flash.filters.*">
+	<Style>
+		@font-face
+		{
+		   font-family: MyArial;
+		   src: local("Arial");
+		}
+		Application {
+			font-size: 14;
+			font-family: MyArial;
+			backgroundColor: #343434;
+			color: #FFFFFF;
+		}		
+	</Style>
+
+	<VBox borderColor="#000000" borderStyle="solid" horizontalCenter="0" verticalCenter="0" width="100%" height="100%"
+		horizontalAlign="center" verticalAlign="middle">	 	
+		<HBox>
+			<local:TiltingPane01 angle="{angle.value}" width="400" height="400"
+				source="img/photos400/photo01.jpg" />
+			<local:TiltingPane01 angle="{angle.value}" id="maskTilter" includeInLayout="false" visible="false" width="400" height="400"  maskContent="false" 
+				source="img/photos400/photo01.jpg" />
+		</HBox>
+
+		<HSlider liveDragging="true" id="angle" minimum="-90" value="0" maximum="90" snapInterval=".1" width="400" />
+		<Button label="show masking" click="maskTilter.visible = true;maskTilter.includeInLayout = true" />
+
+	</VBox>
+</Application>

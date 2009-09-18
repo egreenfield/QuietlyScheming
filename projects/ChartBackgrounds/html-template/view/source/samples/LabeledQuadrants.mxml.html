@@ -1,0 +1,111 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>LabeledQuadrants.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;s:ExampleBase</span>  
+    xmlns:s=&quot;<span class="mxmlString">qs.samples.*</span>&quot; 
+    xmlns=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot;
+    xmlns:charts=&quot;<span class="mxmlString">qs.charts.*</span>&quot;  xmlns:local=&quot;<span class="mxmlString">*</span>&quot;
+    xmlns:dataShapes=&quot;<span class="mxmlString">qs.charts.dataShapes.*</span>&quot; 
+    xmlns:graphics=&quot;<span class="mxmlString">qs.graphics.*</span>&quot;<span class="mxmlComponent">&gt;</span>
+
+    <span class="mxmlTag">&lt;Style&gt;</span>
+        <span class="cssSelector">.quadLabel </span><span class="cssSymbol">{</span>
+            <span class="cssPropName">color</span><span class="cssSymbol">:</span> <span class="cssPropValue">#666666</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontSize</span><span class="cssSymbol">:</span> <span class="cssPropValue">36</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontWeight</span><span class="cssSymbol">:</span> <span class="cssPropValue">bold</span><span class="cssSymbol">;</span>    
+            <span class="cssPropName">fontFamily</span><span class="cssSymbol">:</span> <span class="cssPropValue">Verdana</span><span class="cssSymbol">;</span>
+        <span class="cssSymbol">}</span>
+    <span class="mxmlTag">&lt;/Style&gt;</span>
+    <span class="mxmlTag">&lt;Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asReserved">import</span> mx.controls.Button;
+
+        <span class="asReserved">import</span> qs.charts.dataShapes.<span class="asOperator">*</span>;
+
+        <span class="asBracket">[</span>Embed<span class="asBracket">(</span>source<span class="asOperator">=</span><span class="asString">&quot;/assets/dotFinal.png&quot;</span><span class="asBracket">)]</span>
+        <span class="asReserved">public</span> <span class="asVar">var</span> dot<span class="asOperator">:</span>Class;
+        
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> descriptions<span class="asBracket">()</span><span class="asOperator">:</span>Array <span class="asBracket">{</span>
+        <span class="asReserved">return</span> <span class="asBracket">[</span><span class="asString">&quot;An example that uses data drawing and data based component children together. In this example, we draw the quadrant&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;values as before. But we also place a label component in the corner of each qudrant to label it.  The labels are bound&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;using constraints to the data point that defines the intersection of the four quadrants.  Each label is bound&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;against different edges (left,top,right,bottom), placing them in the appropriate corner.\n\n&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;The Labels are created in MXML, as children of the DataDrawingCanvas, but their position is updated programmatically,&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;from actiosncript.\n\n&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;In this example, we set the includeInRanges flag on the DataDrawingCanvas to true. That indicates to the chart that the ranges&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;automatically generated for the axes should be large enough to include the graphics and values drawn in this data canvas.  You can&quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;choose whether that makes sense for your scenario. In this case, because we wanted the user to see the quadrant labels and &quot;</span> <span class="asOperator">+</span> 
+                <span class="asString">&quot;all four quadrants even when the data is only in a single quadrant, we set it to true.&quot;</span><span class="asBracket">]</span>;
+        <span class="asBracket">}</span>
+
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawData<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            canvas.clear<span class="asBracket">()</span>;
+
+            canvas.lineStyle<span class="asBracket">(</span>0,0,0<span class="asBracket">)</span>;
+
+            canvas.beginFill<span class="asBracket">(</span>0xFFDDDD<span class="asBracket">)</span>;
+            canvas.drawRect<span class="asBracket">(</span>quadBoundary.value,Edge.TOP,Edge.RIGHT,quadBoundary.value<span class="asBracket">)</span>;
+            canvas.endFill<span class="asBracket">()</span>;
+
+            canvas.beginFill<span class="asBracket">(</span>0xDDBBBB<span class="asBracket">)</span>;
+            canvas.drawRect<span class="asBracket">(</span>Edge.LEFT,Edge.TOP,quadBoundary.value,quadBoundary.value<span class="asBracket">)</span>;
+            canvas.endFill<span class="asBracket">()</span>;
+
+            canvas.beginFill<span class="asBracket">(</span>0xBB9999<span class="asBracket">)</span>;
+            canvas.drawRect<span class="asBracket">(</span>quadBoundary.value,quadBoundary.value,Edge.RIGHT,Edge.BOTTOM<span class="asBracket">)</span>;
+            canvas.endFill<span class="asBracket">()</span>;
+
+            canvas.beginFill<span class="asBracket">(</span>0x997777<span class="asBracket">)</span>;
+            canvas.drawRect<span class="asBracket">(</span>Edge.LEFT,quadBoundary.value,quadBoundary.value,Edge.BOTTOM<span class="asBracket">)</span>;
+            canvas.endFill<span class="asBracket">()</span>;
+
+            
+            canvas.updateDataChild<span class="asBracket">(</span>upperRightLabel, <span class="asBracket">{</span>left<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,20<span class="asBracket">]</span>, bottom<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,<span class="asOperator">-</span>20<span class="asBracket">]})</span>;
+            canvas.updateDataChild<span class="asBracket">(</span>upperLeftLabel, <span class="asBracket">{</span>right<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,<span class="asOperator">-</span>20<span class="asBracket">]</span>, bottom<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,<span class="asOperator">-</span>20<span class="asBracket">]})</span>;
+            canvas.updateDataChild<span class="asBracket">(</span>lowerLeftLabel, <span class="asBracket">{</span>right<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,<span class="asOperator">-</span>20<span class="asBracket">]</span>, top<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,20<span class="asBracket">]})</span>;
+            canvas.updateDataChild<span class="asBracket">(</span>lowerRightLabel, <span class="asBracket">{</span>left<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,20<span class="asBracket">]</span>, top<span class="asOperator">:</span> <span class="asBracket">[</span>quadBoundary.value,20<span class="asBracket">]}</span> <span class="asBracket">)</span>;
+
+        <span class="asBracket">}</span>
+
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/Script&gt;</span>
+
+    <span class="mxmlComponent">&lt;s:controls&gt;</span>
+        <span class="mxmlComponent">&lt;Label</span> text=&quot;<span class="mxmlString">Quadrant boundary value:</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;HSlider</span> change=&quot;drawData<span class="asBracket">()</span>&quot; liveDragging=&quot;<span class="mxmlString">true</span>&quot; value=&quot;<span class="mxmlString">50</span>&quot; id=&quot;<span class="mxmlString">quadBoundary</span>&quot; minimum=&quot;<span class="mxmlString">-400</span>&quot; maximum=&quot;<span class="mxmlString">400</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; <span class="mxmlComponent">/&gt;</span>        
+    <span class="mxmlComponent">&lt;/s:controls&gt;</span>
+
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/categories.xml</span>&quot; id=&quot;<span class="mxmlString">categories</span>&quot; <span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/samples.xml</span>&quot; id=&quot;<span class="mxmlString">dataSamples</span>&quot; <span class="mxmlTag">/&gt;</span>
+
+    <span class="mxmlComponent">&lt;PlotChart</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; creationComplete=&quot;drawData<span class="asBracket">()</span>;&quot; horizontalAxisStyleName=&quot;<span class="mxmlString">linedNumericAxis</span>&quot;
+        verticalAxisStyleName=&quot;<span class="mxmlString">linedNumericAxis</span>&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;backgroundElements&gt;</span>
+            <span class="mxmlComponent">&lt;dataShapes:DataDrawingCanvas</span> id=&quot;<span class="mxmlString">canvas</span>&quot; includeInRanges=&quot;<span class="mxmlString">true</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;Label</span> id=&quot;<span class="mxmlString">upperRightLabel</span>&quot; text=&quot;<span class="mxmlString">On Target</span>&quot; styleName=&quot;<span class="mxmlString">quadLabel</span>&quot; <span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;Label</span> id=&quot;<span class="mxmlString">upperLeftLabel</span>&quot; text=&quot;<span class="mxmlString">Underfunded</span>&quot; styleName=&quot;<span class="mxmlString">quadLabel</span>&quot; <span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;Label</span> id=&quot;<span class="mxmlString">lowerRightLabel</span>&quot; text=&quot;<span class="mxmlString">Underserved</span>&quot; styleName=&quot;<span class="mxmlString">quadLabel</span>&quot; <span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;Label</span> id=&quot;<span class="mxmlString">lowerLeftLabel</span>&quot; text=&quot;<span class="mxmlString">Critical Condition</span>&quot; styleName=&quot;<span class="mxmlString">quadLabel</span>&quot; <span class="mxmlComponent">/&gt;</span>
+            <span class="mxmlComponent">&lt;/dataShapes:DataDrawingCanvas&gt;</span>
+        <span class="mxmlComponent">&lt;/backgroundElements&gt;</span>
+        <span class="mxmlComponent">&lt;series&gt;</span>
+            <span class="mxmlComponent">&lt;PlotSeries</span> dataProvider=&quot;<span class="mxmlString">{</span>dataSamples.sample<span class="mxmlString">}</span>&quot; filterData=&quot;<span class="mxmlString">false</span>&quot; 
+                xField=&quot;<span class="mxmlString">@value</span>&quot; yField=&quot;<span class="mxmlString">@resource</span>&quot; itemRenderer=&quot;<span class="mxmlString">mx.charts.renderers.CircleItemRenderer</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;fill&gt;</span>
+                    <span class="mxmlComponent">&lt;SolidColor</span> color=&quot;<span class="mxmlString">#000099</span>&quot; <span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;/fill&gt;</span>
+            <span class="mxmlComponent">&lt;/PlotSeries&gt;</span>
+        <span class="mxmlComponent">&lt;/series&gt;</span>
+    <span class="mxmlComponent">&lt;/PlotChart&gt;</span>
+
+<span class="mxmlComponent">&lt;/s:ExampleBase&gt;</span></pre></body>
+</html>

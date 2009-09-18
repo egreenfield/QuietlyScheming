@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:app_code xmlns:local="*" xmlns="http://www.adobe.com/2006/mxml" xmlns:qs="qs.controls.*"   xmlns:g="qs.graphics.*"
+	xmlns:qc="qs.containers.*"
+	creationComplete="load();" xmlns:ns1="qs.containers.*" xmlns:effects="qs.effects.*">
+
+	<Style source="calendar.css" />
+	<Style source="styles.css" />
+	<Script source="app_imports.as" />
+	
+	<ApplicationControlBar dock="true" direction="vertical">
+	</ApplicationControlBar>
+	
+	<HBox width="100%" height="100%"  >		
+		<VBox>			
+			<VBox minWidth="250" horizontalAlign="center" styleName="calendarsContainer" >			
+				<HBox>
+					<Button label="&lt;&lt;" click="cal.previous();" />
+					<Button label="today" click="goToToday();" />
+					<Button label="&gt;&gt;" click="cal.next();" />
+				</HBox>
+				<Label styleName="headerLabel" text="showing: {formatDate(cal.range.start)}" />			
+				<ToggleButtonBar dataProvider="{displayOptions}" selectedIndex="0"  id="displayMode" itemClick="displayModeItemClickHandler()"/>				
+				<CheckBox label="animated" selected="true" id="animated" />							
+			</VBox>
+			<VBox minWidth="250" horizontalAlign="center" styleName="calendarsContainer" >			
+				<local:DataBox width="100%" dataProvider="{calSet.calendars}">
+					<local:itemRenderer>
+						<Component>
+							<local:CalListEntry removeCalendar="outerDocument.removeCalendar(data)" />
+						</Component>
+					</local:itemRenderer>
+				</local:DataBox>
+				<HRule width="100%" />
+				<HBox horizontalAlign="right" width="100%">
+					<Button click="addCalendar();" label="Add Calendar..." minWidth="20" minHeight="20" height="20" />
+				</HBox>		
+				<DateChooser id="chooser" change="updateRange()" allowDisjointSelection="false" allowMultipleSelection="true" width="100%">
+					<selectedDate>
+						<Date month="8" date="1" fullYear="2006" />
+					</selectedDate>
+				</DateChooser>
+				<Button width="100%" label="HELP!" click="showHelp();" />
+			</VBox>
+			<local:Busy minWidth="250" id="busy" />
+		</VBox>
+		<qs:CalendarDisplay id="cal" width="100%" height="100%" 
+			headerClick="headerClickHandler(event.dateTime)" 
+			dayClick="dayClickHandler(event.dateTime)"
+			displayModeChange="displayModeHandler()"
+			animated="{animated.selected}"
+			change="rangeChangeHandler()" />
+	</HBox>
+	
+</local:app_code>

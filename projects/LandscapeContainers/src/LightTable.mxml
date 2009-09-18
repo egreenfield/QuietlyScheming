@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:LightTable_code xmlns="http://www.adobe.com/2006/mxml" 
+	xmlns:local="*"
+	layout="absolute" xmlns:qc="qs.containers.*" xmlns:fg="flash.geom.*" xmlns:qcon="qs.controls.*"
+	viewSourceURL="srcview/Landscape.html"> 
+
+	<Style source="styles.css" />
+
+
+	<Label text="LightTable" styleName="title" top="11" left="10" right="10"/>
+	
+	<Label x="10" y="59" text="Search For:"/>
+	<TextInput x="86" y="59" id="searchTerm" enter="startSearch()" text="red"/>
+	<Button x="254" y="59" label="Go" click="startSearch()" />
+
+
+	<HRule left="10" right="10" top="89" />
+	<qc:Landscape id="viewer" left="10" right="10" paddingTop="20" paddingBottom="20" paddingLeft="20" paddingRight="20" top="95" bottom="95" zoomLimit="none" resize="viewerSizeChanged()" >
+		<qc:DataTile id="table" x="0" y="0" tileWidth="{TILE_SIZE}" tileHeight="{TILE_SIZE}" height="1000" direction="vertical" horizontalAlign="center" verticalAlign="middle"
+				dataProvider="{dataSet}" horizontalScrollPolicy="off" horizontalGap="{GAP_SIZE}" verticalGap="{GAP_SIZE}"
+				resize="viewerSizeChanged()"
+				>
+				<qc:itemRenderer>
+					<Component>
+						<local:LightSlide width="100%" height="100%" click="outerDocument.focusView(event.currentTarget)" />
+					</Component>
+				</qc:itemRenderer>
+			</qc:DataTile>
+	</qc:Landscape>
+	<HRule left="10" right="10" bottom="89" />
+
+
+	<LinkButton label="&lt; Prev" click="prevPage();" fontSize="10" top="29" right="60" width="52"/>
+	<LinkButton label="Next &gt;" click="nextPage();" fontSize="10" top="29" right="10" width="52"/>
+	<LinkButton label="&lt; Prev" click="prevItem();" fontSize="10" top="55" right="60" width="52"/>
+	<LinkButton label="Next &gt;" click="nextItem();" fontSize="10" top="55" right="10" width="52"/>
+	<Label text="image {currentItem+1} of {itemCount}" top="57" right="112"/>
+	<Label text="Page {currentPage+1} of {pageCount}" top="31" right="112"/>
+</local:LightTable_code>

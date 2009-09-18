@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of ChartBackgrounds</title>
+	<nodes>
+		<node label="[source path] lib" icon="classpathIcon" expanded="true">
+			<node label="qs.charts" icon="packageIcon" expanded="true">
+			</node>
+			<node label="qs.charts.dataShapes" icon="packageIcon" expanded="true">
+				<node label="DataCache.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/DataCache.as.html"/>
+				<node label="DataChild.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/DataChild.as.html"/>
+				<node label="DataDrawingCanvas.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/DataDrawingCanvas.as.html"/>
+				<node label="DataGraphics.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/DataGraphics.as.html"/>
+				<node label="Edge.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/Edge.as.html"/>
+				<node label="OpCode.as" icon="actionScriptIcon" url="source/[source path] lib/qs/charts/dataShapes/OpCode.as.html"/>
+			</node>
+		</node>
+		<node label="assets">
+			<node label="dot.png" icon="imageIcon" url="source/assets/dot.png.html"/>
+			<node label="dotFinal.png" icon="imageIcon" url="source/assets/dotFinal.png.html"/>
+			<node label="drag.png" icon="imageIcon" url="source/assets/drag.png.html"/>
+			<node label="dragBarBg.png" icon="imageIcon" url="source/assets/dragBarBg.png.html"/>
+			<node label="dragBarBgSource.png" icon="imageIcon" url="source/assets/dragBarBgSource.png.html"/>
+			<node label="dragSource.png" icon="imageIcon" url="source/assets/dragSource.png.html"/>
+		</node>
+		<node label="data">
+			<node label="categories.xml" url="source/data/categories.xml.txt"/>
+			<node label="samples.xml" url="source/data/samples.xml.txt"/>
+		</node>
+		<node label="samples" icon="packageIcon" expanded="true">
+			<node label="Comments.mxml" icon="mxmlIcon" url="source/samples/Comments.mxml.html"/>
+			<node label="DateSelection.mxml" icon="mxmlIcon" url="source/samples/DateSelection.mxml.html"/>
+			<node label="Drawing.mxml" icon="mxmlIcon" url="source/samples/Drawing.mxml.html"/>
+			<node label="DropLines.mxml" icon="mxmlIcon" url="source/samples/DropLines.mxml.html"/>
+			<node label="LabeledQuadrants.mxml" icon="mxmlIcon" url="source/samples/LabeledQuadrants.mxml.html"/>
+			<node label="Labels.mxml" icon="mxmlIcon" url="source/samples/Labels.mxml.html"/>
+			<node label="Note.mxml" icon="mxmlIcon" url="source/samples/Note.mxml.html"/>
+			<node label="Quadrants.mxml" icon="mxmlIcon" url="source/samples/Quadrants.mxml.html"/>
+		</node>
+		<node selected="true" label="app.mxml" icon="mxmlAppIcon" url="source/app.mxml.html"/>
+		<node label="styles.css" icon="cssIcon" url="source/styles.css.html"/>
+	</nodes>
+	<zipfile label="Download source (ZIP, 104K)" url="ChartBackgrounds.zip"/>
+	<sdklink label="Download Flex 2 SDK" url="http://www.adobe.com/go/flex2_sdk"/>
+</index>

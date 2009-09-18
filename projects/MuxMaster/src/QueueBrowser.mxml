@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.dataGridClasses.DataGridColumn;
+			public var model:MuxModel;
+			public var controller:MuxController;
+			
+			public function mixFunction(item:DownloadQueueItem,column:DataGridColumn):String
+			{
+				return (item.tape == null)? "{single}":item.tape.name;			
+			}
+			public function songFunction(item:DownloadQueueItem,column:DataGridColumn):String
+			{
+				return item.song.name			
+			}
+			public function percentFunction(item:DownloadQueueItem,column:DataGridColumn):String
+			{
+				return "" + Math.floor(item.percentLoaded * 100) + "%";	
+			}
+		]]>
+	</mx:Script>
+	<mx:DataGrid id="queueUI" dataProvider="{model.downloadQueue}"  left="10" top="189" bottom="10" right="10">
+		<mx:columns>
+			<mx:DataGridColumn headerText="mix" labelFunction="mixFunction" />
+			<mx:DataGridColumn headerText="song" labelFunction="songFunction" />			
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:DataGrid id="inProgress" dataProvider="{model.activeQueue}" top="39" right="10" left="10" height="114">
+		<mx:columns>
+			<mx:DataGridColumn headerText="song" labelFunction="songFunction" />			
+			<mx:DataGridColumn headerText="percent" labelFunction="percentFunction" />			
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Label text="Queue" fontSize="18" left="10" top="161"/>
+	<mx:Label x="10" y="10" text="Active..." fontSize="18"/>
+	
+</mx:Canvas>

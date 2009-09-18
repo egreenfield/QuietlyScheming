@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBox xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+			public var stepCount:Number;
+		]]>
+	</Script>	
+</VBox>

@@ -1,0 +1,80 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Note.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;mx:Panel</span> xmlns:mx=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot; layout=&quot;<span class="mxmlString">absolute</span>&quot; 
+    width=&quot;<span class="mxmlString">200</span>&quot; height=&quot;<span class="mxmlString">300</span>&quot; 
+    title=&quot;<span class="mxmlString">Your Comments</span>&quot; 
+    cornerRadius=&quot;<span class="mxmlString">7</span>&quot; headerHeight=&quot;<span class="mxmlString">14</span>&quot;
+    fontSize=&quot;<span class="mxmlString">10</span>&quot;
+    borderThicknessLeft=&quot;<span class="mxmlString">2</span>&quot;
+    borderThicknessRight=&quot;<span class="mxmlString">2</span>&quot;
+    borderThicknessTop=&quot;<span class="mxmlString">2</span>&quot;
+    borderThicknessBottom=&quot;<span class="mxmlString">2</span>&quot;
+    headerColors=&quot;<span class="mxmlString">{</span><span class="asBracket">[</span>0x22AA22,0x88FF88<span class="asBracket">]</span><span class="mxmlString">}</span>&quot;
+    borderColor=&quot;<span class="mxmlString">0x22AA22</span>&quot;
+    <span class="mxmlComponent">&gt;</span>
+    
+    <span class="mxmlTag">&lt;mx:Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span> <span class="asReserved">public</span> <span class="asVar">var</span> text<span class="asOperator">:</span>String;
+            
+            <span class="asReserved">private</span> <span class="asVar">var</span> startPt<span class="asOperator">:</span>Point;
+            <span class="asReserved">private</span> <span class="asVar">var</span> startSize<span class="asOperator">:</span>Point;
+            <span class="asReserved">private</span> <span class="asFunction">function</span> startTracking<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                systemManager.addEventListener<span class="asBracket">(</span>MouseEvent.MOUSE_MOVE,track,<span class="asReserved">true</span><span class="asBracket">)</span>;
+                systemManager.addEventListener<span class="asBracket">(</span>MouseEvent.MOUSE_UP,endTrack,<span class="asReserved">true</span><span class="asBracket">)</span>;                
+                startPt <span class="asOperator">=</span> <span class="asReserved">new</span> Point<span class="asBracket">(</span>mouseX,mouseY<span class="asBracket">)</span>;
+                startSize <span class="asOperator">=</span> <span class="asReserved">new</span> Point<span class="asBracket">(</span>width,height<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            <span class="asReserved">private</span> <span class="asFunction">function</span> track<span class="asBracket">(</span>e<span class="asOperator">:</span>MouseEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                width <span class="asOperator">=</span> startSize.x <span class="asOperator">+</span> mouseX <span class="asOperator">-</span> startPt.x;
+                height <span class="asOperator">=</span> startSize.y <span class="asOperator">+</span> mouseY <span class="asOperator">-</span> startPt.y;
+                e.updateAfterEvent<span class="asBracket">()</span>;
+            <span class="asBracket">}</span>
+            <span class="asReserved">private</span> <span class="asFunction">function</span> endTrack<span class="asBracket">(</span>e<span class="asOperator">:</span>MouseEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                systemManager.removeEventListener<span class="asBracket">(</span>MouseEvent.MOUSE_MOVE,track,<span class="asReserved">true</span><span class="asBracket">)</span>;
+                systemManager.removeEventListener<span class="asBracket">(</span>MouseEvent.MOUSE_UP,endTrack,<span class="asReserved">true</span><span class="asBracket">)</span>;                
+            <span class="asBracket">}</span>
+            <span class="asReserved">private</span> <span class="asFunction">function</span> addComment<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>newComment.text <span class="asOperator">==</span> <span class="asString">&quot;&quot;</span><span class="asBracket">)</span>
+                    <span class="asReserved">return</span>;
+                text <span class="asOperator">=</span> <span class="asString">&quot;&lt;FONT color=&apos;#0000FF&apos;&gt;&lt;B&gt;A Visitor Said:&lt;/B&gt;&lt;/FONT&gt;&lt;BR/&gt;&quot;</span> <span class="asOperator">+</span> newComment.text <span class="asOperator">+</span> <span class="asString">&quot;&lt;BR/&gt;&quot;</span> <span class="asOperator">+</span> text;
+                newComment.text<span class="asOperator">=</span> <span class="asString">&quot;&quot;</span>;
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asVar">var</span> _clear<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>;
+            <span class="asReserved">private</span> <span class="asFunction">function</span> submitOnEnter<span class="asBracket">(</span>e<span class="asOperator">:</span>KeyboardEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>e.keyCode <span class="asOperator">==</span> Keyboard.ENTER<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    addComment<span class="asBracket">()</span>;
+                    _clear<span class="asOperator">=</span> <span class="asReserved">true</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+            <span class="asReserved">private</span> <span class="asFunction">function</span> checkForClear<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>_clear<span class="asBracket">)</span>
+                    newComment.text <span class="asOperator">=</span> <span class="asString">&quot;&quot;</span>;
+                _clear <span class="asOperator">=</span> <span class="asReserved">false</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/mx:Script&gt;</span>
+    <span class="mxmlComponent">&lt;mx:TextArea</span> editable=&quot;<span class="mxmlString">false</span>&quot; id=&quot;<span class="mxmlString">comments</span>&quot; fontSize=&quot;<span class="mxmlString">12</span>&quot; right=&quot;<span class="mxmlString">0</span>&quot; left=&quot;<span class="mxmlString">0</span>&quot; top=&quot;<span class="mxmlString">0</span>&quot; bottom=&quot;<span class="mxmlString">96</span>&quot; htmlText=&quot;<span class="mxmlString">{</span>text<span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+    <span class="mxmlComponent">&lt;mx:Image</span> height=&quot;<span class="mxmlString">97</span>&quot; maintainAspectRatio=&quot;<span class="mxmlString">false</span>&quot; source=&quot;<span class="mxmlString">@Embed(source=&apos;/assets/dragBarBg.png&apos;)</span>&quot; right=&quot;<span class="mxmlString">0</span>&quot; bottom=&quot;<span class="mxmlString">0</span>&quot; left=&quot;<span class="mxmlString">0</span>&quot; <span class="mxmlComponent">/&gt;</span>    
+    <span class="mxmlComponent">&lt;mx:Image</span> height=&quot;<span class="mxmlString">16</span>&quot; source=&quot;<span class="mxmlString">@Embed(source=&apos;/assets/drag.png&apos;)</span>&quot; right=&quot;<span class="mxmlString">0</span>&quot; bottom=&quot;<span class="mxmlString">0</span>&quot;  mouseDown=&quot;startTracking<span class="asBracket">()</span>;&quot;<span class="mxmlComponent">/&gt;</span>    
+    <span class="mxmlComponent">&lt;mx:Label</span> text=&quot;<span class="mxmlString">Add a comment:</span>&quot; color=&quot;<span class="mxmlString">#000000</span>&quot; left=&quot;<span class="mxmlString">10</span>&quot; bottom=&quot;<span class="mxmlString">70</span>&quot;<span class="mxmlComponent">/&gt;</span>
+    <span class="mxmlComponent">&lt;mx:TextArea</span> right=&quot;<span class="mxmlString">22</span>&quot; bottom=&quot;<span class="mxmlString">25</span>&quot; left=&quot;<span class="mxmlString">10</span>&quot; id=&quot;<span class="mxmlString">newComment</span>&quot; keyDown=&quot;submitOnEnter<span class="asBracket">(</span>event<span class="asBracket">)</span>&quot; change=&quot;checkForClear<span class="asBracket">()</span>;&quot;<span class="mxmlComponent">/&gt;</span>
+    <span class="mxmlComponent">&lt;mx:LinkButton</span> label=&quot;<span class="mxmlString">Add</span>&quot; height=&quot;<span class="mxmlString">19</span>&quot; right=&quot;<span class="mxmlString">22</span>&quot; bottom=&quot;<span class="mxmlString">2</span>&quot; click=&quot;addComment<span class="asBracket">()</span>&quot; <span class="mxmlComponent">/&gt;</span>
+<span class="mxmlComponent">&lt;/mx:Panel&gt;</span></pre></body>
+</html>

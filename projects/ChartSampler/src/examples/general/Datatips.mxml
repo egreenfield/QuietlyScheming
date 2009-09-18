@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple two series column chart"];
+			}
+
+			public function dtf(...args):String
+			{
+				return "look at me!<br/>I'm a custom datatip with <b>embedded</b><br/> HTML";
+			}
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<VBox>
+		<ColumnChart showDataTips="true" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+			<series>
+				<ColumnSeries yField="revenue" minField="costs" displayName="revenue-cost gap"/>
+			</series>
+			<horizontalAxis>
+				<CategoryAxis categoryField="month" displayName="Month"/>
+			</horizontalAxis>
+			<verticalAxis>
+				<LinearAxis displayName="Gap" />
+			</verticalAxis>
+		</ColumnChart>
+		<BubbleChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}" showDataTips="true" dataTipFunction="dtf">
+			<series>
+				<BubbleSeries yField="revenue" xField="costs" radiusField="overhead"/>
+			</series>
+		</BubbleChart>
+	</VBox>
+
+</ex:ExampleBase>
+

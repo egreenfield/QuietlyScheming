@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" borderColor="#FFFFFF" xmlns:local="*"	
+	creationComplete="controller.loadMainPage()"  showFlexChrome="true" width="800" height="800" status="{model.status}"
+	title="MuxMaster" >
+	
+	<local:MuxModel id="model" />
+	<local:MuxController id="controller" model="{model}" />
+	
+	<mx:TabNavigator left="10" right="10" top="10" bottom="10">
+		<local:ListBrowser label="random mixes" model="{model}" controller="{controller}" tapeList="{model.random}" />
+		<local:ListBrowser label="History" model="{model}" controller="{controller}" tapeList="{model.history}" addToHistory="false" />
+		<local:QueueBrowser label="download queue" model="{model}" controller="{controller}"  />
+		<local:Preferences label="Preferences"  model="{model}" controller="{controller}"  />
+	</mx:TabNavigator>
+	
+</mx:WindowedApplication>

@@ -1,0 +1,48 @@
+	getNSPrefix: function(uri) {
+		var prefix = this.nsMap[uri];
+		if(prefix == null) {
+			prefix = "ns" + this.nsCount++;
+			this.nsMap[uri] = prefix;
+		}
+		return prefix;
+	},
+	
+	getNodeMarkup: function(elt) {
+		switch(elt.nodeType) {
+			case Node.ELEMENT_NODE:
+				return this.getElementMarkup(elt);
+				break;
+			case Node.TEXT_NODE:
+				return this.getTextMarkup(elt);
+				break;
+		}
+	},
+	
+	getElementMarkup: function(elt) {
+		var prefix = this.getNSPrefix(elt.namespaceURI);
+		var eltName = elt.localName;
+		if(elt.firstChild == null)
+		{
+			return "<" + prefix + ":" + eltName + " />";
+		}
+		else
+		{
+			return "<" + prefix + ":" + eltName + ">" + this.getElementContentMarkup(elt) + 
+			"</" + prefix + ":" + eltName + ">";
+		}
+	},
+	
+	getTextMarkup: function(elt) {
+		return elt.textContent;
+	},
+	
+	getElementContentMarkup: function(elt) {
+		return elt.innerHTML;
+		var result = "";
+		var c = elt.firstChild;
+		while(c != null) {
+			result += this.getNodeMarkup(c);
+			c = c.nextSibling;
+		}
+		return result;
+	},

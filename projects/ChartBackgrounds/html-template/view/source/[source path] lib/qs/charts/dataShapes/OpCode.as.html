@@ -1,0 +1,237 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>OpCode.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="asPackage">package</span> qs.charts.dataShapes
+<span class="asBracket">{</span>
+    <span class="asReserved">import</span> flash.display.Graphics;
+    <span class="asReserved">import</span> qs.charts.DashedLineRenderer;
+    <span class="asReserved">import</span> qs.utils.GraphicsUtils;
+    <span class="asReserved">import</span> flash.geom.Matrix;
+    <span class="asReserved">import</span> qs.ipeControls.classes.CorrectText;
+    
+    <span class="asReserved">public</span> <span class="asClass">class</span> OpCode
+    <span class="asBracket">{</span>
+        <span class="asReserved">public</span> <span class="asVar">var</span> canvas<span class="asOperator">:</span>DataDrawingCanvas;
+        <span class="asReserved">public</span> <span class="asVar">var</span> code<span class="asOperator">:</span>int;
+        <span class="asReserved">public</span> <span class="asVar">var</span> params<span class="asOperator">:</span>Object;
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> OpCode<span class="asBracket">(</span>canvas<span class="asOperator">:</span>DataDrawingCanvas,code<span class="asOperator">:</span>int, params<span class="asOperator">:</span>Object <span class="asOperator">=</span> <span class="asReserved">null</span> <span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">this</span>.canvas <span class="asOperator">=</span> canvas;
+            <span class="asReserved">this</span>.code <span class="asOperator">=</span> code;
+            <span class="asReserved">this</span>.params <span class="asOperator">=</span> <span class="asBracket">(</span>params <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span><span class="asOperator">?</span> <span class="asBracket">{}</span><span class="asOperator">:</span>params;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> MOVE_TO<span class="asOperator">:</span>int <span class="asOperator">=</span>         0;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> LINE_TO<span class="asOperator">:</span>int <span class="asOperator">=</span>         1;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> BEGIN_FILL<span class="asOperator">:</span>int <span class="asOperator">=</span>     2;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> LINE_STYLE<span class="asOperator">:</span>int <span class="asOperator">=</span>     3;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> DRAW_ELLIPSE<span class="asOperator">:</span>int <span class="asOperator">=</span>    5;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> DRAW_RECT<span class="asOperator">:</span>int <span class="asOperator">=</span>     6;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> DRAW_ROUNDRECT<span class="asOperator">:</span>int <span class="asOperator">=</span> 7;    
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> END_FILL<span class="asOperator">:</span>int <span class="asOperator">=</span>         8;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> CURVE_TO<span class="asOperator">:</span>int <span class="asOperator">=</span>         9;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> DRAW<span class="asOperator">:</span>int <span class="asOperator">=</span>             10;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> LINE_DASH<span class="asOperator">:</span>int <span class="asOperator">=</span>     11;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> BEGIN_BITMAP_FILL<span class="asOperator">:</span>int <span class="asOperator">=</span>     12;
+        <span class="asReserved">public</span> <span class="asReserved">static</span> <span class="asReserved">const</span> DASHED_LINE<span class="asOperator">:</span>int <span class="asOperator">=</span>     13;
+
+        <span class="asReserved">private</span> <span class="asVar">var</span> _data<span class="asOperator">:*</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _offset<span class="asOperator">:</span>Number;
+        <span class="asReserved">private</span> <span class="asFunction">function</span> split<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                _data <span class="asOperator">=</span> v<span class="asBracket">[</span>0<span class="asBracket">]</span>;
+                _offset <span class="asOperator">=</span> v<span class="asBracket">[</span>1<span class="asBracket">]</span>;
+                <span class="asReserved">if</span><span class="asBracket">(</span>isNaN<span class="asBracket">(</span>_offset<span class="asBracket">))</span>
+                    _offset <span class="asOperator">=</span> 0;
+            <span class="asBracket">}</span>
+            <span class="asReserved">else</span>
+            <span class="asBracket">{</span>
+                _data <span class="asOperator">=</span> v;
+                _offset <span class="asOperator">=</span> 0;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> data<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:*</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+                <span class="asReserved">return</span> v<span class="asBracket">[</span>0<span class="asBracket">]</span>;
+            <span class="asReserved">else</span>
+                <span class="asReserved">return</span> v;
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> offset<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span>Number
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+                <span class="asReserved">return</span> v<span class="asBracket">[</span>1<span class="asBracket">]</span>;
+            <span class="asReserved">else</span>
+                <span class="asReserved">return</span> 0;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> collectValues<span class="asBracket">(</span>cache<span class="asOperator">:</span>DataCache<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">switch</span><span class="asBracket">(</span>code<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">case</span> BEGIN_BITMAP_FILL<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.x<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.y<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> CURVE_TO<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.anchorX<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.anchorY<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.controlX<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.controlY<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DASHED_LINE<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.xFrom<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.yFrom<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.xTo<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.yTo<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> MOVE_TO<span class="asOperator">:</span>
+                <span class="asReserved">case</span> LINE_TO<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.x<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.y<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> CURVE_TO<span class="asOperator">:</span>
+                    cache.storeX<span class="asBracket">(</span>params.x,Math.max<span class="asBracket">(</span>0,<span class="asOperator">-</span>params.xOffset<span class="asOperator">+</span> params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>,
+                                          Math.max<span class="asBracket">(</span>0,params.xOffset <span class="asOperator">+</span> params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">))</span>;
+                    cache.storeY<span class="asBracket">(</span>params.y,Math.max<span class="asBracket">(</span>0,<span class="asOperator">-</span>params.yOffset<span class="asOperator">+</span> params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>,
+                                          Math.max<span class="asBracket">(</span>0,params.yOffset <span class="asOperator">+</span> params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">))</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_ELLIPSE<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_RECT<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_ROUNDRECT<span class="asOperator">:</span>
+                    split<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    cache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    cache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2,_offset<span class="asOperator">+</span>params.borderWidth<span class="asOperator">/</span>2<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> render<span class="asBracket">(</span>target<span class="asOperator">:</span>DataDrawingCanvas,cache<span class="asOperator">:</span>DataCache<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> left<span class="asOperator">:</span>Number;
+            <span class="asVar">var</span> top<span class="asOperator">:</span>Number;
+            <span class="asVar">var</span> right<span class="asOperator">:</span>Number;
+            <span class="asVar">var</span> bottom<span class="asOperator">:</span>Number;
+            
+            <span class="asVar">var</span> g<span class="asOperator">:</span>Graphics <span class="asOperator">=</span> target.graphics;
+
+            <span class="asReserved">switch</span><span class="asBracket">(</span>code<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">case</span> BEGIN_FILL<span class="asOperator">:</span>
+                    g.beginFill<span class="asBracket">(</span>params.color,params.alpha<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> BEGIN_BITMAP_FILL<span class="asOperator">:</span>
+                    <span class="asVar">var</span> m<span class="asOperator">:</span>Matrix;
+                    <span class="asReserved">if</span><span class="asBracket">(</span>params.matrix <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                        m <span class="asOperator">=</span> <span class="asReserved">new</span> Matrix<span class="asBracket">()</span>;
+                    <span class="asReserved">else</span>
+                        m <span class="asOperator">=</span> params.matrix.clone<span class="asBracket">()</span>;
+                        
+                    <span class="asVar">var</span> d<span class="asOperator">:*</span> <span class="asOperator">=</span> data<span class="asBracket">(</span>params.x<span class="asBracket">)</span>;
+                    <span class="asReserved">if</span><span class="asBracket">(</span>d <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                        m.tx <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>d<span class="asBracket">)</span>;
+                    m.tx  <span class="asOperator">+=</span> offset<span class="asBracket">(</span>params.x<span class="asBracket">)</span>;
+                    d <span class="asOperator">=</span> data<span class="asBracket">(</span>params.y<span class="asBracket">)</span>;
+                    <span class="asReserved">if</span><span class="asBracket">(</span>d <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                        m.ty <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>d<span class="asBracket">)</span>;
+                    m.ty <span class="asOperator">+=</span> offset<span class="asBracket">(</span>params.y<span class="asBracket">)</span>;
+                    g.beginBitmapFill<span class="asBracket">(</span>params.bitmap,m,params.repeat,params.smooth<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> END_FILL<span class="asOperator">:</span>
+                    g.endFill<span class="asBracket">()</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> LINE_STYLE<span class="asOperator">:</span>
+                    g.lineStyle<span class="asBracket">(</span>params.thickness,params.color,params.alpha,params.pixleHinting,params.scaleMode,params.caps,params.joints,params.miterLimit<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> MOVE_TO<span class="asOperator">:</span>
+                    g.moveTo<span class="asBracket">(</span>cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.x<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.x<span class="asBracket">)</span>, cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.y<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.y<span class="asBracket">))</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> LINE_TO<span class="asOperator">:</span>
+                    g.lineTo<span class="asBracket">(</span>cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.x<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.x<span class="asBracket">)</span>, cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.y<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.y<span class="asBracket">))</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DASHED_LINE<span class="asOperator">:</span>
+                    GraphicsUtils.drawDashedLine<span class="asBracket">(</span>g,params.stroke,params.pattern,
+                        cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.xFrom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.xFrom<span class="asBracket">)</span>,
+                        cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.yFrom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.yFrom<span class="asBracket">)</span>,
+                        cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.xTo<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.xTo<span class="asBracket">)</span>,
+                        cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.yTo<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.yTo<span class="asBracket">))</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> CURVE_TO<span class="asOperator">:</span>
+                    g.curveTo<span class="asBracket">(</span>    cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.controlX<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.controlX<span class="asBracket">)</span>,
+                                cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.controlY<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.controlY<span class="asBracket">)</span>,
+                                cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.anchorX<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.anchorX<span class="asBracket">)</span>,
+                                cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.anchorY<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.anchorY<span class="asBracket">))</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_ELLIPSE<span class="asOperator">:</span>
+                    left <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.left<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    top <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.top<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    right <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.right<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    bottom <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.bottom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    g.drawEllipse<span class="asBracket">(</span>left, top, 
+                                right <span class="asOperator">-</span> left,bottom <span class="asOperator">-</span> top<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_RECT<span class="asOperator">:</span>
+                    left <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.left<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    top <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.top<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    right <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.right<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    bottom <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.bottom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    g.drawRect<span class="asBracket">(</span>left, top, 
+                                right <span class="asOperator">-</span> left,bottom <span class="asOperator">-</span> top<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                <span class="asReserved">case</span> DRAW_ROUNDRECT<span class="asOperator">:</span>
+                    left <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.left<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.left<span class="asBracket">)</span>;
+                    top <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.top<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.top<span class="asBracket">)</span>;
+                    right <span class="asOperator">=</span> cache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>params.right<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.right<span class="asBracket">)</span>;
+                    bottom <span class="asOperator">=</span> cache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>params.bottom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>params.bottom<span class="asBracket">)</span>;
+                    g.drawRoundRect<span class="asBracket">(</span>left, top, 
+                                right <span class="asOperator">-</span> left,bottom <span class="asOperator">-</span> top,params.cornerRadius,params.cornerRadius<span class="asBracket">)</span>;
+                    <span class="asReserved">break</span>;
+                
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+    <span class="asBracket">}</span>
+<span class="asBracket">}</span></pre></body>
+</html>

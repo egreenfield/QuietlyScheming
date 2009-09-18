@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" horizontalAlign="left" layout="vertical" backgroundColor="#343434" initialize="createData()" height="800">
+	<Script>
+		<![CDATA[
+			[Bindable] public var src:Array;
+			[Bindable] public var images:Array;
+			
+			
+			private function createData():void
+			{
+				src = ("Now is the time for all good men to come to the aid of the party. The quick brown fox jumped over the lazy dog").split(" ");	
+				var images:Array = [];
+				for(var i:int=1;i<=14;i++)
+				{
+					images.push("img/img"+i+".jpg");
+				}
+				this.images = images;
+			}
+			
+			private function numberData(v:*,i:int):String
+			{
+				return i + ". " + v;
+			}
+		]]>
+	</Script>
+	
+	<Style>
+		Fisheye {
+			fontSize: 38;	
+		}
+	</Style>
+		<HBox width="100%" height="100%">			
+			<qs:Fisheye xmlns:qs="qs.controls.*" height="100%" dataProvider="{src}" 
+				hilightScaleSlope="3" hilightMinScale=".2"  
+				stateProperty="currentState" rolloverValue="rollOver" defaultValue="" selectedValue="selected"
+				horizontalAlign="left" 
+				>
+				<qs:itemRenderer>
+					<Component>
+						<qs:CachedLabel xmlns:f="flash.filters.*" color="#FFFFFF">
+							<qs:states>
+								<State name="selected">
+									<SetProperty name="filters">
+										<value>
+											<Array>
+												<f:GlowFilter  color="#888888"/>
+											</Array>
+										</value>
+									</SetProperty>
+									<SetStyle name="color" value="#E27C0E" />
+								</State>
+								<State name="rollOver">
+									<SetProperty name="filters">
+										<value>
+											<Array>
+												<f:GlowFilter  color="#BBBBBB"/>
+											</Array>
+										</value>
+									</SetProperty>
+								</State>
+							</qs:states>
+						</qs:CachedLabel>					
+					</Component>
+				</qs:itemRenderer>
+				
+			</qs:Fisheye>
+			<qs:Fisheye xmlns:qs="qs.controls.*" height="100%" dataProvider="{images}" 
+				hilightScaleSlope="3" hilightMinScale=".2"  defaultSpacing="4" 
+				stateProperty="currentState" rolloverValue="" defaultValue="" selectedValue="selected"
+				horizontalAlign="center" >			
+				<qs:itemRenderer>
+					<Component>
+						<qs:BitmapTile>
+							<qs:states>
+								<State name="selected">
+									<SetStyle name="borderColor" value="#E27C0E" />
+									<SetStyle name="borderAlpha" value="1" />
+									<SetStyle name="borderWidth" value="3" />
+								</State>
+							</qs:states>						
+						</qs:BitmapTile>
+					</Component>
+				</qs:itemRenderer>
+				
+			</qs:Fisheye>
+		</HBox>
+</Application>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["LineSeries can either interpolate through missing data values, or break the line and continue when" +
+						"valid values are available"];
+			}
+
+		]]>
+	</Script>
+
+	<ex:controls>
+		<CheckBox label="interpolate missing values" id="interp" selected="false" />
+	</ex:controls>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<LineChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<LineSeries yField="oneTime" interpolateValues="{interp.selected}"/>
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</LineChart>
+
+</ex:ExampleBase>

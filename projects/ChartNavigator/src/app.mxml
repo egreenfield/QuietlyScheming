@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application horizontalAlign="center" xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:qs="qs.charts.*" backgroundColor="#FFFFFF"
+	initialize="initApp()" paddingTop="30">
+
+	<Style>
+		YearLabels {
+			color: #B5B2B5;
+			font-size: 24;
+			font-family: Arial;
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.events.DynamicEvent;
+
+			private function initApp():void
+			{
+				zoomRegion.addEventListener("change",function():void { trace("change called"); } );
+			}
+			private function pan(e:*):void
+			{
+				zoomRegion.panBy(e.delta);
+			}
+			private function tenk(value:Number,prevValue:Number,axis:*):String
+			{
+				return "$" + ((value/1000000).toString()) + "M";
+			}
+			private function parseDate(value:*):Date
+			{
+				if(value is Date)
+					return value;
+
+				var parts:Array = value.toString().split("-");
+				var year:Number=  parseFloat(parts[2]);
+				if(year < 10)
+					year += 2000;
+				else
+					year += 1900;
+				return new Date(year,parseFloat(parts[1]),parseFloat(parts[0]));
+			}
+
+			private function makeDate(v:Number):Date
+			{
+				return new Date(v);
+			}
+
+			private function filterDetails():void
+			{
+				var allQuotes:XMLList = history..quote;
+				var newFilter:XMLList = new XMLList;
+				var len:int = allQuotes.length();
+				for(var i:int=0;i<len;i++)
+				{
+					var quote:XML = allQuotes[i];
+					var date:Number = parseDate(quote.@date).getTime();
+
+					if(date >= zoomRegion.min && date <= zoomRegion.max)
+						newFilter += quote;
+				}
+				filteredQuotes = newFilter;
+			}
+			[Bindable] private var filteredQuotes:XMLList;
+		]]>
+	</Script>
+
+	<XML source="../data/ADBE.xml" id="history" />
+	<DateTimeAxis id="sharedHAxis" displayName="week" parseFunction="parseDate"  dataUnits="days"
+		minimum="{new Date(zoomRegion.min)}" maximum="{new Date(zoomRegion.max)}"/>
+
+	<VBox borderStyle="solid" borderColor="#CECFCE" paddingBottom="30">
+		<HBox borderStyle="solid" borderColor="#CECFCE" >
+			<AreaChart dataProvider="{history..quote}" width="700" height="75">
+				<horizontalAxisRenderer>
+					<AxisRenderer showLabels="false" placement="top" showLine="false" tickPlacement="none"
+						minorTickPlacement="inside" minorTickLength="10" >
+						<minorTickStroke>
+							<Stroke color="#9C9A9C" weight="1" />
+						</minorTickStroke>
+					</AxisRenderer>
+
+				</horizontalAxisRenderer>
+
+				<verticalAxisRenderer>
+					<AxisRenderer showLabels="false" showLine="false" tickPlacement="none" minorTickPlacement="none"/>
+				</verticalAxisRenderer>
+				<fill>
+					<SolidColor color="#F7F7F7" />
+				</fill>
+				<annotationElements>
+					<GridLines direction="vertical">
+						<verticalStroke>
+							<Stroke color="#ADBAAD" weight="1" />
+						</verticalStroke>
+					</GridLines>
+					<qs:HorizontalRegion id="zoomRegion"  changeFunction="filterDetails"/>
+				</annotationElements>
+
+				<backgroundElements>
+					<qs:YearLabels />
+				</backgroundElements>
+
+				<series>
+					<AreaSeries yField="@adjClose" xField="@date" displayName="ADBE">
+						<areaRenderer>
+							<Component>
+								<qs:HilightAreaRenderer minWindow="{outerDocument.zoomRegion.min}" maxWindow="{outerDocument.zoomRegion.max}" />
+							</Component>
+						</areaRenderer>
+						<areaFill>
+							<SolidColor color="#EFEBEF" />
+						</areaFill>
+						<areaStroke>
+							<Stroke color="#9C9A9C" weight="1" />
+						</areaStroke>
+					</AreaSeries>
+				</series>
+				<verticalAxis>
+					<LinearAxis baseAtZero="false" displayName="closing price" />
+				</verticalAxis>
+				<horizontalAxis>
+					<DateTimeAxis displayName="week" parseFunction="parseDate" labelUnits="years"
+						interval="1" minorTickUnits="months" minorTickInterval="3"/>
+				</horizontalAxis>
+			</AreaChart>
+		</HBox>
+		<AreaChart width="700" height="400" dataProvider="{filteredQuotes}" gutterLeft="50" gutterTop="50" gutterRight="50" >
+			<series>
+				<AreaSeries yField="@adjClose" xField="@date" >
+					<areaFill>
+						<SolidColor color="0x0065DE" alpha=".1" />
+					</areaFill>
+					<areaStroke>
+						<Stroke color="#0065DE" weight="1" />
+					</areaStroke>
+					<showDataEffect>
+						<SeriesInterpolate elementOffset="0"/>
+					</showDataEffect>
+				</AreaSeries>
+			</series>
+			<verticalAxis>
+				<LinearAxis autoAdjust="false" />
+			</verticalAxis>
+			<horizontalAxis>
+				{sharedHAxis}
+			</horizontalAxis>
+			<backgroundElements>
+				<GridLines styleName="bothGridLines" />
+			</backgroundElements>
+			<annotationElements>
+				<qs:Panner  pan="pan(event);"/>
+			</annotationElements>
+			<verticalAxisRenderer>
+				<AxisRenderer>
+					<axisStroke>
+						<Stroke weight="1" color="#000000" />
+					</axisStroke>
+				</AxisRenderer>
+			</verticalAxisRenderer>
+			<horizontalAxisRenderer>
+				<AxisRenderer>
+					<axisStroke>
+						<Stroke weight="1" color="#000000" />
+					</axisStroke>
+				</AxisRenderer>
+			</horizontalAxisRenderer>
+					</AreaChart>
+		<ColumnChart maxColumnWidth="1" width="700" height="75" dataProvider="{filteredQuotes}" gutterLeft="50" gutterTop="5" gutterRight="50" gutterBottom="5">
+			<seriesFilters>
+				<Array />
+			</seriesFilters>
+			<series>
+				<ColumnSeries yField="@volume" xField="@date">
+					<fill>
+						<SolidColor color="0x0065DE" />
+					</fill>
+				</ColumnSeries>
+			</series>
+			<annotationElements>
+				<qs:Panner  pan="pan(event);"/>
+			</annotationElements>
+						
+			<horizontalAxis>
+				{sharedHAxis}
+			</horizontalAxis>
+			<verticalAxis>
+				<LinearAxis labelFunction="tenk" />
+			</verticalAxis>
+			<verticalAxisRenderer>
+				<AxisRenderer>
+					<axisStroke>
+						<Stroke weight="1" color="#000000" />
+					</axisStroke>
+				</AxisRenderer>
+			</verticalAxisRenderer>
+			<horizontalAxisRenderer>
+				<AxisRenderer showLabels="false" tickPlacement="none" minorTickPlacement="none">
+					<axisStroke>
+						<Stroke weight="1" color="#000000" />
+					</axisStroke>
+				</AxisRenderer>
+			</horizontalAxisRenderer>
+		</ColumnChart>
+	</VBox>
+</Application>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	xmlns:controls="qs.controls.*" backgroundColor="#282828"
+	creationComplete="initApp();" xmlns:containers="qs.containers.*" xmlns:effects="qs.effects.*"
+	viewSourceURL="/source/Book.zip"
+	>
+	
+	
+	<Style>
+		Book {
+			
+			color: #000000;
+			textRollOverColor: 	#000000;
+			
+			border-thickness: 0;
+			border-style: none;
+			page-slope: .6;
+			auto-turn-duration: 1500;
+		}
+		
+		Application {
+			color: #F1F1CC;
+			textRollOverColor: 	#FFFFFF;
+			backgroundGradientColors: #000000, #282828;
+			backgroundColor: #282828;
+		}
+		
+		SuperImage {
+			border-thickness: 0;
+			border-style: none;			
+		}		
+	</Style>
+
+	<Script>
+		<![CDATA[
+			import qs.caching.ContentCache;
+			import qs.controls.bookClasses.BookEvent;
+		
+			import mx.core.UIComponent;
+			
+			private function initApp():void
+			{
+			}
+			
+			private var instructionsVisible:Boolean= true;
+			private function hideInstructions():void
+			{
+				if(instructionsVisible)
+					hideInstructionsEffect.play();
+				instructionsVisible = false;
+			}
+			private function loadContent(event:BookEvent):void
+			{
+			}
+
+		]]>
+	</Script>
+		
+		<effects:AnimateColorProperty id="hideInstructionsEffect" target="{instructions}" startDelay="2000" isStyle="true" 
+			property="color" toValue="#282828" fromValue="#dddddd" duration="7000" />
+		<XML id="dataSet" source="data/companies.xml" />
+
+			<controls:Book id="book" y="47" width="620" top="40" height="620" horizontalCenter="0" 
+				animateCurrentPageIndex="true"
+				mouseDown="hideInstructions()"
+				itemRenderer="CompanyPage"
+				content="{dataSet..company}"
+				borderStyle="solid"
+				edgeAndCornerSize="80"
+				activeGrabArea="edge"
+				borderColor="#525252"
+				borderThickness="1.5"
+				backgroundColor="#101010" 
+				backgroundImage="@Embed('assets/pageBackground.png')"
+				turnEnd="loadContent(event)"
+				/>
+			<Text id="instructions" horizontalCenter="9" condenseWhite="true" textAlign="center" fontSize="14" top="680" fontFamily="Verdana" color="#dddddd">
+				<htmlText>
+					<![CDATA[
+						Use the list on the left page to control the chart on the right.
+						click and drag on the edge of the page to turn to a different company.
+					]]>
+				</htmlText>
+			</Text>
+		
+		
+</Application>

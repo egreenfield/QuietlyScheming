@@ -1,0 +1,19 @@
+<history>
+	<samples>
+		<sample name="Train" 	revenueDelta="12" 	costDelta="-8" 		marketSize="13" />
+		<sample name="Duck" 	revenueDelta="-7" 	costDelta="4" 		marketSize="18" />
+		<sample name="Bubble" 	revenueDelta="18" 	costDelta="12"		marketSize="14" />
+		<sample name="Car" 		revenueDelta="42" 	costDelta="16"		marketSize="2" />
+		<sample name="Bottle" 	revenueDelta="-22" 	costDelta="-18"		marketSize="35" />
+		<sample name="Water" 	revenueDelta="2" 		costDelta="-25"	marketSize="21" />
+		<sample name="Spoon" 	revenueDelta="-38" 	costDelta="32"		marketSize="28" />
+		<sample name="Shoes" 	revenueDelta="28" 	costDelta="28"		marketSize="58" />
+		<sample name="Mommy" 	revenueDelta="4" 		costDelta="-4"	marketSize="14" />
+		<sample name="Turtle" 	revenueDelta="15" 	costDelta="17"		marketSize="27" />
+		<sample name="Moo" 		revenueDelta="-12" 	costDelta="-32"		marketSize="13" />
+		<sample name="Abuelo" 	revenueDelta="-47" 	costDelta="-25"		marketSize="15" />
+		<sample name="Nose" 	revenueDelta="73" 	costDelta="14"		marketSize="8" />
+		<sample name="DingDing" revenueDelta="-8" 	costDelta="7"		marketSize="4" />
+		<sample name="YaYa" 	revenueDelta="35" 	costDelta="-23"		marketSize="47" />
+	</samples>
+</history>

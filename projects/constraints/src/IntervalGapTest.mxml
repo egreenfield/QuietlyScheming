@@ -1,0 +1,73 @@
+<Application initialize="initApp()" xmlns="http://www.macromedia.com/2003/mxml" xmlns:l="*"
+    width="100%" height="100%"
+    verticalGap="0" creationComplete="showInstructions()">
+
+
+	<Panel id="p" width="100%" height="100%">
+		<ConstraintCanvas id="canvas"  width="100%" height="100%">
+			<Button label="World" id="testChild" x="200" y="10" />
+			<Button label="Hello" id="testChild2" x="200" y="10" />
+			<Button label="Hello" id="testChild3" x="200" y="10" />
+			<constraints>
+				<Array>
+					<GapConstraint targetID="testChild" targetProperty="width" openProperty="left" closeProperty="right" margin="80" percent="33" />
+					<SimpleConstraint targetID="testChild" targetProperty="left" sourceProperty="left" offset="20"  />
+					<SimpleConstraint targetID="testChild" targetProperty="bottom" sourceProperty="bottom" offset="-20"  />
+					<SimpleConstraint targetID="testChild" targetProperty="top" sourceProperty="top" offset="20"  />
+
+					<GapConstraint targetID="testChild2" targetProperty="width" openProperty="left" closeProperty="right" margin="80" percent="33" />
+					<SimpleConstraint targetID="testChild2" targetProperty="left" sourceID="testChild" sourceProperty="right" offset="20"  />
+					<SimpleConstraint targetID="testChild2" targetProperty="bottom" sourceProperty="bottom" offset="-20"  />
+					<SimpleConstraint targetID="testChild2" targetProperty="top" sourceProperty="top" offset="20"  />
+
+					<GapConstraint targetID="testChild3" targetProperty="width" openProperty="left" closeProperty="right" margin="80" percent="33" />
+					<SimpleConstraint targetID="testChild3" targetProperty="left" sourceID="testChild2" sourceProperty="right" offset="20"  />
+					<SimpleConstraint targetID="testChild3" targetProperty="bottom" sourceProperty="bottom" offset="-20"  />
+					<SimpleConstraint targetID="testChild3" targetProperty="top" sourceProperty="top" offset="20"  />
+				</Array>
+			</constraints>
+		</ConstraintCanvas>
+	</Panel>
+
+	<Script>
+	<![CDATA[
+
+		import mx.utils.*;
+		import mx.managers.*;
+		import mx.containers.*;
+
+		function initApp()
+		{
+		}
+
+		import mx.util.*;
+
+
+		import mx.controls.*;
+
+
+		function showInstructions()
+		{
+
+//		canvas.activate();
+		return;
+			alert(
+			"- drag items from the children panel to populate container with children\n" +
+			"- click and drag on the upper left corner of a child to move it\n" +
+			"- click and drag on the lower right cornder of a child to resize it\n" +
+			"\n" +
+			"- click and drag from the guides panel to drag out a new guide\n" +
+			"- click and drag on a guide to move it after it's been created\n" +
+			"- shift-click and drag on a guide to change its size\n" +
+			"\n" +
+			"- drag a child close to a guide to bind it to the guide\n" +
+			"\n" +
+			"- select a guide and hit 'properties' to change its binding\n" +
+			""
+			,"Instructions"
+			);
+		}
+	]]>
+	</Script>
+</Application>
+

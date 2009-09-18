@@ -1,0 +1,21 @@
+<mx:?xml version="1.0" encoding="utf-8"?>
+<mx:Parallel xmlns="http://www.adobe.com/2006/mxml">
+	
+	<mx:Script>
+		<mx:![CDATA[
+			import mx.core.UIComponent;
+			[Bindable] public var xTo:Number;
+			[Bindable] public var yTo:Number;
+			[Bindable] public var angleTo:Number;
+			[Bindable] public var animationTarget:UIComponent;
+			[Bindable] public var scaleTo:Number;
+		]]>
+	</mx:Script>
+	
+	<mx:children>		
+		<mx:Move xTo="{xTo}" yTo="{yTo}" duration="2000" target="{animationTarget}" />
+		<mx:AnimateProperty property="actualAngle" toValue="{angleTo}" duration="1000" target="{animationTarget}" />
+		<mx:AnimateProperty property="unmeasuredScale" toValue="{scaleTo}" duration="1000" target="{animationTarget}" />
+	</mx:children>
+
+</mx:Parallel>

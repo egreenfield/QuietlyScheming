@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:ipe="qs.ipeControls.*"  viewSourceURL="srcview/">
+
+	<Script>
+		<![CDATA[
+		
+			[Bindable] private var editable:Boolean = false;
+			
+			private function toggleEdit():void
+			{
+				editable = !editable;
+				edit.label = (editable)? "done":"edit";
+								
+			}
+		]]>
+	</Script>
+	<Style source="qs/ipeControls/styles/style.css" />
+	
+	<Panel width="100%" height="100%" layout="horizontal">
+			<Form>
+				<Text width="100%" text="Use the controls below to modify the behavior of the IPE controls.  Hover over each control for more information." />
+				<HRule width="100%" />
+				<FormItem label="Icons:" >
+					<CheckBox label="Visible" id="showIcon" enabled="{!interactive.selected}" selected="{interactive.selected || showIcon.selected}"
+						toolTip="shows an icon next to the control showing its current status"/>
+					<CheckBox label="Interactive" id="interactive" toolTip="Allows the user to click the edit icon to start editing a field"/>
+				</FormItem>
+				<FormItem label="Focus:">
+					<CheckBox label="Edit on Enter Key" id="editWithFocus" toolTip="when the control has focus, pressing enter will start an in place edit. Tab to the control to try it out"/>
+					<CheckBox label="Commit on Enter Key" id="commitWithFocus" toolTip="When editing the control, pressing Enter will commit the change."/>
+					<CheckBox label="Commit on Blur" id="commitOnBlur" toolTip="When editing the control, Tabbing away to another control will commit the change."/>
+				</FormItem>				
+				<FormItem label="mouse:">
+					<CheckBox label="edit on click" id="eoc" toolTip="clicking on an IPE Control will begin an edit"/>
+				</FormItem>
+				<HRule width="100%" />
+				<Button id="edit" label="edit form" click="toggleEdit()" />
+				<HRule width="100%" />
+				<LinkButton label="View Source..." click="navigateToURL(new URLRequest(viewSourceURL),'_blank');" />
+				<LinkButton label="Download Source..." click="navigateToURL(new URLRequest(viewSourceURL + 'IPEControls.zip'));" />
+			</Form>
+			<VRule height="100%" />
+			<VBox horizontalAlign="right" >				
+				<ipe:IPEForm id="form" editable="{editable}" label="editable form" >
+					<FormItem label="Name">				
+						<ipe:IPETextInput showIcon="{showIcon.selected}" enableIcon="{interactive.selected}"  editOnEnter="{editWithFocus.selected}" editOnClick="{eoc.selected}"  commitOnEnter="{commitWithFocus.selected}" commitOnBlur="{commitOnBlur.selected}"   width="100%" text="Ely Greenfield" />
+					</FormItem>
+					<FormItem label="Dependants">				
+						<ipe:IPENumericStepper showIcon="{showIcon.selected}" enableIcon="{interactive.selected}"  editOnEnter="{editWithFocus.selected}" editOnClick="{eoc.selected}"  commitOnEnter="{commitWithFocus.selected}" commitOnBlur="{commitOnBlur.selected}"   width="100%" value="2" />
+					</FormItem>
+					<FormItem label="Birthday">				
+						<ipe:IPEDateField showIcon="{showIcon.selected}" enableIcon="{interactive.selected}"  editOnEnter="{editWithFocus.selected}" editOnClick="{eoc.selected}"  commitOnEnter="{commitWithFocus.selected}" commitOnBlur="{commitOnBlur.selected}"   width="100%">
+							<ipe:selectedDate>
+								<Date fullYear="1973" month="1" date="10" />
+							</ipe:selectedDate>
+						</ipe:IPEDateField>
+					</FormItem>
+					<FormItem label="Risk Factor">				
+						<ipe:IPEHSlider showIcon="{showIcon.selected}" enableIcon="{interactive.selected}"  editOnEnter="{editWithFocus.selected}" editOnClick="{eoc.selected}"  commitOnEnter="{commitWithFocus.selected}" commitOnBlur="{commitOnBlur.selected}"   width="100%" value="4"/>
+					</FormItem>
+					<FormItem label="notes" width="100%">				
+						<ipe:IPETextArea showIcon="{showIcon.selected}" enableIcon="{interactive.selected}"  editOnEnter="{editWithFocus.selected}" editOnClick="{eoc.selected}"  commitOnEnter="{commitWithFocus.selected}" commitOnBlur="{commitOnBlur.selected}"   width="100%" height="200" >
+							<ipe:text>Architect on the Flex SDK at Adobe Systems. Really should spend more time with his family instead of writing components.</ipe:text>
+						</ipe:IPETextArea>
+					</FormItem>
+				</ipe:IPEForm>
+			</VBox> 
+
+			
+	</Panel>
+</Application>

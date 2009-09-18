@@ -1,0 +1,231 @@
+<project>
+
+	<taskdef resource="flexTasks.tasks" classpath="C:/dev/flex_ant_tasks/lib/flexTasks.jar" />
+	<property name="FLEX_ROOT" value="C:/dev/f2/sdk"/>
+	<property name="APP_ROOT" value="C:/dev/qs/temp/zipFile/src"/>  
+	<property name="OUTPUT_ROOT" value="C:/dev/qs/temp/output"/>  
+    <property name="FLEX_HOME" value="C:/dev/f2/sdk"/>        		
+
+	<target name="main" depends="dist" />
+
+    <target name="dist">
+        <zip destfile="qs.zip" basedir=".">
+        	<include name="lib/qs/charts/**" />
+        	<include name="lib/qs/containers/**" />
+        	<include name="lib/qs/controls/**" />
+        	<include name="lib/qs/data/**" />
+        	<include name="lib/qs/effects/**" />
+        	<include name="lib/qs/graphics/**" />
+        	<include name="lib/qs/ipeControls/**" />
+        	<include name="lib/qs/utils/**" />
+
+        	<include name="projects/ArrowChart/**" />
+        	<include name="projects/Carousel/**" />
+        	<include name="projects/ChartSampler/**" />
+        	<include name="projects/Containers/**" />
+        	<include name="projects/Dashes/**" />
+        	<include name="projects/DataBasedRenderers/**" />
+        	<include name="projects/DragTile/**" />
+        	<include name="projects/DrillDown/**" />
+        	<include name="projects/fisheye/**" />
+        	<include name="projects/FlipControls/**" />
+        	<include name="projects/IFrame/**" />
+        	<include name="projects/InteractiveBubble/**" />
+        	<include name="projects/LandscapeContainers/**" />
+        	<include name="projects/OverlayDemo/**" />
+        	<include name="projects/RandomWalk/**" />
+        	<include name="projects/SizedPieCharts/**" />
+        	<include name="projects/ArrowChart/**" />        	
+        </zip>
+    </target>
+
+    <target name="calDist">
+    	<copy todir="temp/src">
+    		<fileset dir="lib">
+				<include name="qs/controls/CalendarDisplay.as" />
+				<include name="qs/controls/calendarDisplayClasses/**" />
+				<include name="qs/controls/LayoutAnimator.as" />
+				<include name="qs/controls/LayoutTarget.as" />
+				<include name="qs/effects/AnimateColorProperty.as" />
+				<include name="qs/effects/effectClasses/AnimateColorPropertyInstance.as" />
+				<include name="qs/graphics/**" />
+				<include name="qs/utils/**" />
+				<include name="qs/calendar/**" />
+	        </fileset>
+	    </copy>
+	    <copy todir="temp">
+    		<fileset dir="projects/calendar">
+    			<exclude name="src/data/*family*" />
+    		</fileset>
+	    </copy>
+
+        <zip destfile="calendar.zip" basedir="temp">
+        	<include name="**" />
+        </zip>
+        
+        <delete dir="temp" />
+        
+    </target>
+
+    <target name="drilldownDist">
+    	<property name="APP_NAME" value="app.mxml"/>  
+
+        <delete dir="temp" />
+
+		<copy todir="temp/src">
+    		<fileset dir="lib">
+				<include name="qs/charts/effects/**" />
+				<include name="qs/utils/ColorUtils.as" />
+	        </fileset>
+	    </copy>
+	    <copy todir="temp">
+    		<fileset dir="projects/DrillDown">
+    		</fileset>
+	    </copy>
+
+<!--	    <antcall target="testSource" />     -->
+
+        
+        <zip destfile="drillDown.zip" basedir="temp">
+        	<include name="**" />
+        </zip>
+
+        <delete dir="temp" />
+
+    </target>
+
+
+
+
+     <target name="testSource">
+
+         <mxmlc file="${APP_ROOT}/${APP_NAME}" output="${OUTPUT_ROOT}/${APP_NAME}" >
+             <load-config filename="${FLEX_ROOT}/frameworks/flex-config.xml"/>
+             <source-path path-element="${FLEX_ROOT}/frameworks"/>
+         </mxmlc>
+     </target>  
+     
+     
+     
+     
+    <target name="SuperImageDist">
+    	<copy todir="temp/src">
+    		<fileset dir="lib">
+				<include name="qs/controls/SuperImage.as" />
+				<include name="qs/caching/**" />
+				<include name="qs/utils/DLinkedList.as" />
+				<include name="qs/utils/DLinkedListNode.as" />
+	        </fileset>
+	    </copy>
+	    <copy todir="temp">
+    		<fileset dir="projects/SuperImage">
+    		</fileset>
+	    </copy>
+
+        <zip destfile="web/public/source/SuperImage.zip" basedir="temp">
+        	<include name="**" />
+        </zip>
+        
+        <delete dir="temp" />
+        
+    </target>
+
+    <target name="DragTileDist">
+    	<copy todir="temp/zipFile/src">
+    		<fileset dir="lib">
+				<include name="qs/controls/DragTile.as" />
+				<include name="qs/controls/LayoutAnimator.as" />
+				<include name="qs/controls/LayoutTarget.as" />
+				<include name="qs/controls/CachedLabel.as" />
+				<include name="qs/controls/UIBitmap.as" />
+				<include name="qs/controls/BitmapTile.as" />
+				<include name="qs/utils/AssociativeInstanceCache.as" />
+				<include name="qs/controls/LayoutAnimator.as" />
+	        </fileset>
+	    </copy>
+	    <copy todir="temp/zipFile">
+    		<fileset dir="projects/DragTile">
+    		</fileset>
+	    </copy>
+
+	    <antcall target="testSource">     
+    		<param name="APP_NAME" value="Alphabet.mxml" />
+    	</antcall>
+	    <antcall target="testSource">     
+    		<param name="APP_NAME" value="DragDrop.mxml" />
+    	</antcall>
+	    <antcall target="testSource">     
+    		<param name="APP_NAME" value="TeamMgr.mxml" />
+    	</antcall>
+
+        <zip destfile="web/public/source/DragTile.zip" basedir="temp/zipFile">
+        	<include name="**" />
+        </zip>
+        
+<!--        <delete dir="temp" /> -->
+        
+    </target>
+
+
+    <target name="DashedLineDist">
+    	<property name="APP_NAME" value="Dashes.mxml"/>  
+
+    	<copy todir="temp/zipFile/src">
+    		<fileset dir="lib">
+				<include name="qs/utils/GraphicsUtils.as" />
+				<include name="qs/charts/DashedLineRenderer.as" />
+	        </fileset>
+	    </copy>
+	    <copy todir="temp/zipFile">
+    		<fileset dir="projects/Dashes">
+    		</fileset>
+	    </copy>
+
+	    <antcall target="testSource" />     
+
+        <zip destfile="web/public/source/Dashes.zip" basedir="temp/zipFile">
+        	<include name="**" />
+        </zip>
+        
+        <delete dir="temp" />
+        
+    </target>
+
+
+    <target name="ChartBackgroundsDist">
+    	<copy todir="temp/src">
+    		<fileset dir="lib">
+				<include name="qs/charts/dataShapes/**" />
+				<include name="qs/samples/**" />
+				<include name="qs/utils/GraphicsUtils.as" />
+	        </fileset>
+	    </copy>
+
+	    <copy todir="temp">
+    		<fileset dir="projects/ChartBackgrounds">
+    		</fileset>
+	    </copy>
+
+        <zip destfile="web/public/source/ChartBackgrounds.zip" basedir="temp">
+        	<include name="**" />
+        </zip>
+        
+      	<delete dir="temp" />
+        
+    </target>
+
+    <target name="chartNavigatorDist">
+        <zip destfile="chartNavigator.zip" basedir=".">
+        	<include name="lib/qs/controls/**" />
+        	<include name="lib/qs/charts/**" />
+        	
+        	<include name="projects/ChartNavigator/**" />
+        </zip>
+    </target>
+
+	<target name="cleanDebug">
+	  <delete>
+		<fileset dir="web/public" includes="**/*-debug.*"/>
+	  </delete>
+	</target>
+</project>

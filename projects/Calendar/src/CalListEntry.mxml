@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HBox xmlns="http://www.adobe.com/2006/mxml"  xmlns:g="qs.graphics.*"
+	verticalAlign="middle" horizontalGap="4" width="100%">
+	<Metadata>
+		[Event("removeCalendar")]
+	</Metadata>
+	<Script>
+		<![CDATA[
+			import mx.graphics.SolidColor;
+
+			override public function set data(value:Object):void
+			{
+				// unfortunately, fills don't trigger re-renders correctly, so we need to kick it manually.
+				mark.setStyle("fill",new SolidColor(value.contextColor));
+				super.data = value;
+			}
+			private function removeCalendar():void
+			{
+				dispatchEvent(new Event("removeCalendar"));
+			}
+		]]>
+	</Script>
+<!--	<CheckBox label="{data.name}" selected="{data.enabled}" />					 -->
+	<Label text="{data.name}" />
+	<Spacer width="100%" />
+	<g:Ellipse id="mark" width="12" height="12" />
+	<LinkButton styleName="smallCalButton" label="X" width="18" height="18" click="removeCalendar()" />
+</HBox>					

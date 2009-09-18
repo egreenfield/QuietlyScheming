@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#444444" xmlns:filters="flash.filters.*">
+	<Style>
+		@font-face
+		{
+		   font-family: MyArial;
+		   src: local("Arial");
+		}
+		Application {
+			font-size: 14;
+			font-family: MyArial;
+			backgroundColor: #343434;
+			color: #FFFFFF;
+		}		
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			private function toggle(t:UIComponent):void
+			{
+				if (TiltingPane02(t).angle == 45)
+					showIt.play([t]);
+				else
+					hideIt.play([t]);
+			}
+		]]>
+	</Script>
+	<AnimateProperty property="angle" fromValue="45" toValue="0" id="showIt" />
+	<AnimateProperty property="angle" fromValue="0" toValue="45" id="hideIt" />
+	
+	<VBox borderColor="#000000" borderStyle="solid" horizontalCenter="0" verticalCenter="0" width="100%" height="100%"
+		horizontalAlign="center" verticalAlign="middle">	 	
+		<HBox>
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo01.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo02.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo03.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo04.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo05.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo06.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo07.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo08.jpg" />									
+			<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+				source="img/photos400/photo09.jpg" />									
+		</HBox>
+
+	</VBox>
+</Application>

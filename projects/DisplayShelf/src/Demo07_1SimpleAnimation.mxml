@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Demo xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" >
+	
+	
+	<Binding source="sel.value" destination="shelf.selectedIndex" />
+	<Binding destination="sel.value" source="shelf.selectedIndex" />
+
+	<VBox horizontalCenter="0" verticalCenter="0" horizontalAlign="center" verticalAlign="middle">	 	
+		
+		<local:DisplayShelf07_Simple id="shelf" dataProvider="{dataSet}" />
+			
+		<HBox>
+			<Label text="Selection:" />
+			<HSlider liveDragging="true" id="sel" minimum="0" value="0" maximum="{shelf.dataProvider.length}" snapInterval="1" width="400" />
+		</HBox>
+
+	</VBox>
+</local:Demo>

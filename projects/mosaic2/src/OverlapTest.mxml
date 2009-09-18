@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
+	paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#FFFFFF, #FFFFFF]"
+	width="1000" height="800">
+	
+	<mx:Script>
+		<![CDATA[
+			import mosaic.MosaicController;
+			public function renderNow():void
+			{
+				var rcBounds:Rectangle = new Rectangle(0,0,canvas.width,canvas.height);
+				var rowCount:Number = rowCountUI.value;
+				var columns:Number;
+				var aspectRatio:Number;
+				if(arUI.value >= 0)
+				{
+					aspectRatio = (arUI.value) / 10 + 1;
+				}
+				else
+				{
+					aspectRatio = 1/ ((-arUI.value)/10 + 1);
+				}
+				
+				var rowHeight:Number = rcBounds.height / rowCount;
+				var colCount:Number = Math.ceil(rcBounds.width / rowHeight);
+				var rcCircle:Rectangle = new Rectangle(0,0,rowHeight,rowHeight);
+				var boxes:Array = [];
+				var overlappingRadius:Number = Math.sqrt(2*rowHeight*rowHeight);
+				
+				var boxHeight:Number;
+				var boxWidth:Number;
+				if(aspectRatio > 1)
+				{
+					boxHeight = overlappingRadius;
+				  	boxWidth  = overlappingRadius*aspectRatio;
+				}
+				else
+				{
+					boxWidth = overlappingRadius;
+					boxHeight = overlappingRadius / aspectRatio;
+				}
+				
+				var g:Graphics = canvas.graphics;
+				g.clear();
+				g.beginFill(0xFFAAAA);
+				g.drawRect(0,0,rcBounds.width,rcBounds.height);
+				g.endFill();
+				
+				var m:Matrix;
+				for(var i:int = 0;i<rowCount;i++)
+				{
+					for(var j:int = 0;j<colCount;j++)
+					{
+						m = new Matrix();
+						boxes.push({matrix:m,row:i,column:j});
+						m.translate(-boxWidth/2,-boxHeight/2);
+						var scaleFactor:Number = 1;
+//						m.scale(scaleFactor,scaleFactor);
+						m.rotate(( Math.random() * rotateAngle.value - rotateAngle.value/2) * Math.PI/180);
+						m.translate(rowHeight/2 + j*rowHeight, rowHeight/2 + i*rowHeight); 
+
+					}
+				}
+				MosaicController.randomize(boxes);
+				var origin:Point = new Point(0,0);
+				var boxBR:Point = new Point(boxWidth,boxHeight);
+				var boxTR:Point = new Point(boxWidth,0);
+				var boxBL:Point = new Point(0,boxHeight);
+				var boxWidthDiff:Number = boxWidth- rowHeight;
+				var overlapDifference:Number = overlappingRadius - rowHeight;
+				for(i=0;i<boxes.length;i++)
+				{
+					m = boxes[i].matrix;
+
+					var tl:Point = m.transformPoint(origin);
+					var br:Point = m.transformPoint(boxBR);
+					var tr:Point = m.transformPoint(boxTR);
+					var bl:Point = m.transformPoint(boxBL);
+					g.lineStyle(1,0x0000FF);
+					
+					g.beginFill(0xEEEE00 | (0xEE + (0xFF - 0xEE) * Math.random()));
+					g.moveTo(tl.x,tl.y);
+					g.lineTo(tr.x,tr.y);
+					g.lineTo(br.x,br.y);
+					g.lineTo(bl.x,bl.y);
+					g.lineTo(tl.x,tl.y);
+					g.endFill();
+
+					g.lineStyle(1,0xFFAAAA);
+					g.drawRect(boxes[i].column*rowHeight,boxes[i].row*rowHeight,rowHeight,rowHeight);
+					g.drawEllipse(boxes[i].column*rowHeight-overlapDifference/2,boxes[i].row*rowHeight-overlapDifference/2,overlappingRadius,overlappingRadius);
+				}
+
+				for(var i:int = 0;i<rowCount;i++)
+				{
+					for(var j:int = 0;j<colCount;j++)
+					{
+//						g.drawEllipse(j*rowHeight,i*rowHeight,rowHeight,rowHeight);
+					}
+				}
+				
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:UIComponent id="canvas" width="100%" height="100%" />
+	<mx:HBox width="100%">
+		<mx:Button label="draw" click="renderNow()" />
+		<mx:HSlider minimum="0" maximum="180" id="rotateAngle" liveDragging="true" change="renderNow()" />
+		<mx:HSlider minimum="0" maximum="100" value="30" id="rowCountUI" liveDragging="true" change="renderNow()" />
+		<mx:HSlider minimum="-100" maximum="100" value="0" id="arUI" liveDragging="true" change="renderNow()" />
+	</mx:HBox>	
+</mx:WindowedApplication>

@@ -1,0 +1,85 @@
+<Application initialize="initApp()" xmlns="http://www.macromedia.com/2003/mxml" xmlns:l="*"
+    width="100%" height="100%"
+    verticalGap="0" creationComplete="showInstructions()">
+
+	<Style>
+		Canvas {
+			backgroundColor:#FFCCCC;
+		}
+	</Style>
+	<Panel id="p" width="100%" height="100%">
+		<ConstraintCanvas id="canvas"  width="100%" height="100%">
+
+			<Button label="World" id="testChild" x="200" y="200" width="200"/>
+
+			<Canvas width="40" height="40" id="left" />
+			<Canvas width="40" height="40" id="top" />
+			<Canvas width="40" height="40" id="right" />
+			<Canvas width="40" height="40" id="bottom" />
+			<constraints>
+				<Array>
+					<SimpleConstraint targetID="testChild" targetProperty="hCenter" sourceProperty="hCenter" />
+					<SimpleConstraint targetID="testChild" targetProperty="vCenter" sourceProperty="vCenter" />
+
+					<SimpleConstraint targetID="left" targetProperty="right" sourceProperty="left" sourceID="testChild" offset="-20" />
+					<SimpleConstraint targetID="left" targetProperty="vCenter" sourceProperty="vCenter" sourceID="testChild" />
+					<SimpleConstraint targetID="left" targetProperty="height" sourceProperty="height" sourceID="testChild" />
+
+					<SimpleConstraint targetID="top" targetProperty="bottom" sourceProperty="top" sourceID="testChild" offset="-20" />
+					<SimpleConstraint targetID="top" targetProperty="hCenter" sourceProperty="hCenter" sourceID="testChild" />
+					<SimpleConstraint targetID="top" targetProperty="width" sourceProperty="width" sourceID="testChild" />
+
+					<SimpleConstraint targetID="right" targetProperty="left" sourceProperty="right" sourceID="testChild" offset="20" />
+					<SimpleConstraint targetID="right" targetProperty="vCenter" sourceProperty="vCenter" sourceID="testChild" />
+					<SimpleConstraint targetID="right" targetProperty="height" sourceProperty="height" sourceID="testChild" />
+
+					<SimpleConstraint targetID="bottom" targetProperty="top" sourceProperty="bottom" sourceID="testChild" offset="20" />
+					<SimpleConstraint targetID="bottom" targetProperty="hCenter" sourceProperty="hCenter" sourceID="testChild" />
+					<SimpleConstraint targetID="bottom" targetProperty="width" sourceProperty="width" sourceID="testChild" />
+
+				</Array>
+			</constraints>
+		</ConstraintCanvas>
+	</Panel>
+
+	<Script>
+	<![CDATA[
+
+		import mx.utils.*;
+		import mx.managers.*;
+		import mx.containers.*;
+
+		function initApp()
+		{
+		}
+
+		import mx.util.*;
+
+
+		import mx.controls.*;
+
+
+		function showInstructions()
+		{
+
+//		canvas.activate();
+		return;
+			alert(
+			"- drag items from the children panel to populate container with children\n" +
+			"- click and drag on the upper left corner of a child to move it\n" +
+			"- click and drag on the lower right cornder of a child to resize it\n" +
+			"\n" +
+			"- click and drag from the guides panel to drag out a new guide\n" +
+			"- click and drag on a guide to move it after it's been created\n" +
+			"- shift-click and drag on a guide to change its size\n" +
+			"\n" +
+			"- drag a child close to a guide to bind it to the guide\n" +
+			"\n" +
+			"- select a guide and hit 'properties' to change its binding\n" +
+			""
+			,"Instructions"
+			);
+		}
+	]]>
+	</Script>
+</Application>

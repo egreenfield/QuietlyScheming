@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:flex="org.papervision3d.flex.*"
+	layout="absolute"
+	pageTitle="PaperVision3D Flex Example" 
+	frameRate="60"
+	applicationComplete="initPV3D()">
+	
+	<!--
+		This example shows the simplest way to intergrate PV3D in your Flex Application.
+		Structure and style are meant as an example, so consider it that way.
+	-->
+	
+	<mx:Script>
+		<![CDATA[
+			import org.papervision3d.examples.FocusApp;
+			
+			private var focusApp:FocusApp;
+		
+			private function initPV3D():void
+			{
+				//Here our logic resides.
+				focusApp = new FocusApp(paperCanvas.canvas);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Panel id="mainPanel" title="PaperVision3D Flex Example" 
+		horizontalCenter="0" 
+		verticalCenter="0">
+		
+		<!--Canvas3D canvas property should be used as the container for the scene-->
+		<flex:Canvas3D id="paperCanvas"
+			backgroundColor="#000000"
+			backgroundAlpha="1"
+			width="640" 
+			height="480"/>	
+	</mx:Panel>
+	
+</mx:Application>

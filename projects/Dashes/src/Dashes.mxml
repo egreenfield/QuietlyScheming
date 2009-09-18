@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" backgroundColor="#FFFFFF" creationComplete="drawLine(pts)"> 
+
+	<Script>
+		<![CDATA[
+			import mx.graphics.Stroke;
+			import qs.utils.GraphicsUtils;
+			
+			private var pts:Array = [
+			]
+			private var pattern:Array = [20,5,5,5];
+			
+			public function addPoint():void
+			{
+				pts.push({x: canvas.mouseX,y: canvas.mouseY});
+				drawLine(pts);
+			}
+			public function rubberBand():void
+			{
+				var tmp:Array = pts.concat();
+				tmp.push({x: canvas.mouseX,y: canvas.mouseY});
+				drawLine(tmp);
+			}
+			public function drawLine(points:Array):void
+			{
+				canvas.graphics.clear();
+				canvas.graphics.beginFill(0xFFFFFF);
+				canvas.graphics.drawRect(0,0,canvas.width,canvas.height);
+				canvas.graphics.endFill();
+				
+				GraphicsUtils.drawDashedPolyLine(canvas.graphics,new Stroke(0xFF0000,3,1,false,"normal",CapsStyle.NONE),pattern,points);
+			}
+			public function updatePattern():void
+			{
+				var parsedPattern:Array = patternUI.text.split(",");
+				for(var i:int = 0;i<parsedPattern.length;i++)
+				{
+					var value:Number = parseFloat(parsedPattern[i]);
+					if(isNaN(value))
+						return;
+					parsedPattern[i]  = value;
+				}
+				if(parsedPattern.length == 0)
+					return;
+				pattern = parsedPattern;
+				drawLine(pts);
+				
+			}
+		]]>
+	</Script>
+	<HBox borderColor="#000000" borderStyle="solid" borderThickness="3" width="100%" height="100%">
+		<Form>
+			<FormItem label="pattern">
+				<HBox>
+					<TextInput id="patternUI" text="20,5,5,5" change="updatePattern();" />
+					<Button label="update" click="updatePattern();" />
+				</HBox>
+			</FormItem>
+			<FormItem label="points">
+				<Button label="clear" click="pts = [];drawLine(pts);" />
+			</FormItem>
+			<Text width="100%">
+				<text>Click in the area to the right to add a point to the line.</text>
+			</Text>
+		</Form>
+		<VRule height="100%" />
+		<UIComponent width="100%" height="100%" id="canvas" mouseDown="addPoint()" mouseMove="rubberBand()" rollOut="drawLine(pts);"/>
+	</HBox>
+</Application>

@@ -1,0 +1,17 @@
+<flex-config>
+   <compiler>
+
+      <!-- Keep the following AS3 metadata in the bytecodes.                                             -->
+      <!-- Warning: For the data binding feature in the Flex framework to work properly,                 -->
+      <!--          the following metadata must be kept:                                                 -->
+      <!--          1. Bindable                                                                          -->
+      <!--          2. Managed                                                                           -->
+      <!--          3. ChangeEvent                                                                       -->
+      <!--          4. NonCommittingChangeEvent                                                          -->
+      <!--          5. Transient                                                                         -->
+      <keep-as3-metadata>
+          <name>Bind</name>
+          <name>HandleEvent</name>
+      </keep-as3-metadata>
+   </compiler>
+</flex-config>

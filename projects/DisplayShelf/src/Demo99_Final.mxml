@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Demo xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" height="100%">
+	
+	<Binding source="sel.value" destination="shelf.selectedIndex" />
+	<Binding destination="sel.value" source="shelf.selectedIndex" />
+	
+	<!--
+	<Binding source="angle.value" destination="shelf.angle" />
+	<Binding source="pop.value" destination="shelf.popout" />
+	-->
+	
+	<local:DisplayShelfN id="shelf"  horizontalCenter="0" verticalCenter="0"
+		borderThickness="10" borderColor="#FFFFFF" dataProvider="{dataSet}"  enableHistory="true" />
+
+	<VBox horizontalCenter="0" bottom="10"
+		horizontalAlign="center" verticalAlign="middle">	 	
+
+<!--		<HBox>
+			<Label text="Angle:" />
+			<HSlider liveDragging="true" id="angle" minimum="5" value="35" maximum="90" snapInterval=".1" width="400" />
+		</HBox>
+-->
+		<HBox>
+			<Label text="Selection:" />
+			<HSlider liveDragging="true" id="sel" minimum="0" value="0" maximum="{shelf.dataProvider.length}" snapInterval="1" width="400" />
+		</HBox>
+<!--
+		<HBox>
+			<Label text="pop:" />
+			<HSlider liveDragging="true" id="pop" minimum="0" value=".43" maximum="1" snapInterval=".01" width="400" />
+		</HBox>
+-->
+	</VBox>
+</local:Demo>

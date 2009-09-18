@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" showFlexChrome="true" xmlns:utils="mosaic.utils.*">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.messaging.channels.StreamingAMFChannel;
+			import mx.events.FileEvent;
+			import mx.rpc.IResponder;
+			import mx.rpc.AsyncToken;
+			import mx.rpc.http.HTTPService;
+			import mx.rpc.Responder;			
+			
+			public function fetchTags(tags:String,pageIndex:Number = 1,callback:Function = null):void
+			{
+				var h:HTTPService = new HTTPService();	
+				h.url = "http://api.flickr.com/services/rest/";
+				h.useProxy = false;
+				h.resultFormat = "e4x";
+				var token:AsyncToken = h.send({
+					method: "flickr.photos.search",
+					api_key: "f84e6f9decf9b0633d2bb85d0e67b52f",
+					tags: tags,
+					per_page: PAGE_SIZE,
+					page: pageIndex
+				});
+				
+				token.addResponder(new mx.rpc.Responder(
+				function(info:Object):void
+				{
+					var count:Number = parseInt(info.result.photos.@total.toString());
+					var nodes:XMLList = info.result.photos.photo;
+					var currentPage:Number = parseInt(info.result.photos.@page);
+					callback(tags,count,nodes,currentPage);
+				}
+				,
+				fetchStatus));								
+			}
+			public function fetchCurrentTags():void
+			{
+				fetchTags(tagUI.text,1,
+				function(tags:String,totalResultCount:Number,newNodes:XMLList,pageIndex:Number):void
+				{
+					fetchedTags = tags;
+					count = totalResultCount;
+					nextDownload = 0;
+					countUI.value = count;
+					resultField.text = "Results returned " + count;
+					nodes = newNodes;
+					currentPage = pageIndex;
+				}					
+				);	
+			}
+			
+			public function fetchInteresting():void
+			{
+				var date:Date = downloadDate.selectedDate;
+				
+				if(date == null)
+					date = new Date();
+				var m:String = date.month.toString();
+				if(m.length == 1)
+					m = "0" + m;
+				var dateNum:String = date.date.toString();
+				if(dateNum.length == 1)
+					dateNum = "0" + dateNum;
+				
+				var h:HTTPService = new HTTPService();	
+				h.url = "http://api.flickr.com/services/rest/";
+				h.useProxy = false;
+				h.resultFormat = "e4x";
+				var token:AsyncToken = h.send({
+					method: "flickr.interestingness.getList",
+					api_key: "f84e6f9decf9b0633d2bb85d0e67b52f",
+					date: date.fullYear.toString() + "-" + m + "-" + dateNum,
+					per_page: PAGE_SIZE
+				});
+				
+				token.addResponder(new mx.rpc.Responder(fetchResult,fetchStatus));				
+			}
+			
+			private var downloadData:Object;
+			
+			private function stopDownload():void
+			{
+				if(downloadData != null)
+					downloadData.stopRequested = true;
+				downloadData = null;
+			}
+			
+			private function startDownload():void
+			{
+				downloadData = {
+					tags: fetchedTags,
+					first: nextDownload,
+					count: countUI.value,
+					next: nextDownload,
+					last: nextDownload + countUI.value - 1, //inclusive
+					currentPageIndex: currentPage,
+					nodes: nodes,
+					requestedPage: NaN,
+					completeCount: 0,
+					stopRequested:false,
+					pending: []
+				}
+				for(var i:int = 0;i<20;i++)
+				{
+					downloadNext(downloadData);
+				}
+			}
+			private static const PAGE_SIZE:Number = 500;
+						
+			private function pageFor(index:Number):Number
+			{
+				return Math.floor(index/PAGE_SIZE)+1;
+			}
+
+			private function indexInPage(index:Number):Number
+			{
+				return index % PAGE_SIZE;
+			}
+			
+			private function downloadNext(downloadData:Object):void
+			{
+				if(downloadData.completeCount >= downloadData.count)
+					return;
+				if(downloadData.next > downloadData.last)
+					return;
+					
+				
+				var index:Number = downloadData.next++;
+				download(index,downloadData);
+			}
+
+			private function download(index:Number,downloadData:Object):void
+			{
+				var page:Number = pageFor(index);
+				if(downloadData.stopRequested == true)
+					return;
+					
+				if (page == downloadData.currentPageIndex)
+				{
+					var node:XML = downloadData.nodes[indexInPage(index)];
+					var url:String = 
+					"http://static.flickr.com/" + node.@server.toString() + "/" + node.@id.toString() + "_" + node.@secret.toString() + ".jpg";				
+					
+					resultField.text = "downloading item " + index;
+					
+					var request:URLRequest = new URLRequest(url);
+	
+					var loader:URLLoader = new URLLoader();
+					loader.addEventListener(Event.COMPLETE,function(o:*):void { requestComplete(o,index,node,downloadData)});
+					loader.addEventListener(IOErrorEvent.IO_ERROR,function(o:*):void { requestError(o,node)});
+					loader.dataFormat = URLLoaderDataFormat.BINARY;		
+					loader.load(request);
+				}
+				else
+				{
+					if(isNaN(downloadData.requestedPage))
+					{
+						downloadData.requestedPage = page;
+						fetchTags(downloadData.tags,page,
+						function(tags:String,totalResultCount:Number,nodes:XMLList,pageIndex:Number):void
+						{
+							downloadData.nodes = nodes;
+							downloadData.requestedPage = NaN;
+							downloadData.currentPageIndex = pageIndex;
+							var resume:Array = downloadData.pending;
+							downloadData.pending = [];
+							for (var i:int = 0;i<resume.length;i++)
+								download(resume[i],downloadData);
+						}
+						);
+					}
+					downloadData.pending.push(index);
+				}				
+			}
+			
+			
+			[Bindable] public var nextDownload:Number = 0;
+			[Bindable] public var count:Number;
+			private var nodes:XMLList;			
+			private var currentPage:Number;
+			private var fetchedTags:String;
+			
+			private var loader:URLLoader = new URLLoader();
+			
+			
+			private function browseForFolder():void
+			{
+				var f:File = new File(File.applicationDirectory.url  + folder);
+				f.addEventListener(Event.SELECT,function(e:Event):void {
+					folder.text = (e.target as File).getRelativePath(File.applicationDirectory);
+				});
+				f.browseForDirectory("save to...");
+				 
+			}
+			
+			private function requestComplete(o:*,index:Number,node:XML,downloadData:Object):void
+			{
+				if(downloadData.stopRequested == true)
+					return;
+
+				resultField.text = "success on " + node.@id;
+				var l:Loader;
+				if(display.numChildren == 0)
+				{
+					 l = new Loader();
+					 display.addChild(l);
+				}
+				else
+					l  = display.getChildAt(0) as Loader;
+
+				var data:ByteArray = o.target.data;
+				l.loadBytes(data);
+				
+				var f:File = new File(File.applicationDirectory.nativePath).resolvePath("../images/");
+				
+						
+				f = f.resolvePath(folder.text + "/page_" + pageFor(index) + "/" + 
+								node.@server.toString() + "_" + node.@id.toString() + "_" + node.@secret.toString() + ".jpg");
+				var s:FileStream = new FileStream();
+				
+				s.open(f,FileMode.WRITE);
+				s.writeBytes(data);
+				s.close();
+				
+				downloadData.completeCount++;
+				
+				downloadNext(downloadData);
+				
+			}
+
+			private function requestError(o:*,node:XML):void
+			{
+				resultField.text = "failure on " + node.@id;
+			}
+
+			private function fetchResult(info:Object):void
+			{
+				count = parseInt(info.result.photos.@total.toString());
+				nextDownload = 0;
+				countUI.value = count;
+				resultField.text = "Results returned " + count;
+				nodes = info.result.photos.photo;
+				currentPage = parseInt(info.result.photos.@page);
+			}
+			
+			private function fetchStatus(info:Object):void
+			{
+				resultField.text = "oops";
+			}
+		]]>
+	</mx:Script>
+
+	<utils:Persist>
+		<mx:String>folder.text</mx:String>
+		<mx:String>tagUI.text</mx:String>
+	</utils:Persist>
+	
+	<mx:DateField x="266" y="72" id="downloadDate" />
+	<mx:Label x="27" y="74" text="Get Interesting Photos For:" width="231" textAlign="right"/>
+	<mx:Button x="364" y="72" label="Go" id="getResults" click="fetchInteresting()"/>
+	<mx:Label x="104" y="100" text="Results:" width="301" id="resultField"/>
+	<mx:Label x="104" y="191" text="Downloaded:"/>
+	<mx:Label x="104" y="158" text="Download"/>
+	<mx:NumericStepper x="326" y="156" id="downloadNumber" maximum="{count}" value="{nextDownload}" change="nextDownload = downloadNumber.value"  width="97"/>
+	<mx:Button x="431" y="156" label="Go" id="downloadButton" click="startDownload()" />
+	<mx:Image x="189" y="191" width="253" height="253" id="display"/>
+	<mx:Label x="104" y="128" text="put into folder:"/>
+	<mx:TextInput x="197" y="126" id="folder" text="images/"/>
+	<mx:Button x="365" y="126" label="Browse" id="browse" click="browseForFolder()" />
+	<mx:Label x="104" y="48" text="Search for tags:"/>
+	<mx:TextInput x="196" y="46" id="tagUI"/>
+	<mx:Button x="364" y="46" label="Go" click="fetchCurrentTags()"/>
+	<mx:NumericStepper x="164" y="156" id="countUI" maximum="{count - nextDownload}" minimum="0" width="75"/>
+	<mx:Label x="247" y="158" text="starting with" width="88"/>
+	<mx:Button x="480" y="156" label="Stop" click="stopDownload()"/>
+</mx:WindowedApplication>

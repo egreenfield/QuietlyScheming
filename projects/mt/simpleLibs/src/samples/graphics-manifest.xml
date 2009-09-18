@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<componentPackage>
+	<component id="XGraphic" class="mxml.display.XGraphic" />
+	<component id="Ellipse" class="mx.graphics.Ellipse" />
+	<component id="SolidColor" class="mx.graphics.SolidColor" />
+	<component id="BitmapGraphic" class="mx.graphics.BitmapGraphic" />
+	<component id="CubicBezierSegment" class="mx.graphics.CubicBezierSegment" />
+	<component id="Ellipse" class="mx.graphics.Ellipse" />
+	<component id="FilledElement" class="mx.graphics.FilledElement" />
+	<component id="Group" class="mx.graphics.Group" />
+	<component id="IDisplayObjectElement" class="mx.graphics.IDisplayObjectElement" />
+	<component id="IGraphic" class="mx.graphics.IGraphic" />
+	<component id="IGraphicElement" class="mx.graphics.IGraphicElement" />
+	<component id="IGraphicElementHost" class="mx.graphics.IGraphicElementHost" />
+	<component id="Line" class="mx.graphics.Line" />
+	<component id="LineSegment" class="mx.graphics.LineSegment" />
+	<component id="MoveSegment" class="mx.graphics.MoveSegment" />
+	<component id="Path" class="mx.graphics.Path" />
+	<component id="PathSegment" class="mx.graphics.PathSegment" />
+	<component id="QuadraticBezierSegment" class="mx.graphics.QuadraticBezierSegment" />
+	<component id="Rect" class="mx.graphics.Rect" />
+	<component id="StrokedElement" class="mx.graphics.StrokedElement" />
+	<component id="TextGraphic" class="mx.graphics.TextGraphic" />
+</componentPackage>

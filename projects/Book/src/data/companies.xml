@@ -1,0 +1,79 @@
+<companies>
+	<company symbol="PARG" name="The Great North &amp; South Apple Company" established="1998" founder="Jack Black">
+		<description>
+		<![CDATA[
+The Great North & South Apple Company, Inc. is engaged in the retail food business. The Company operated 405 stores averaging approximately 40,700 square feet per store as of February 25, 2006. It sells groceries, meats, fresh produce and other items offered in supermarkets. The Great North & South Apple Company, Inc. markets its products under the brand names, Super Duper, Sav-A-Sav, Farmer Brown, and The Food Hut. The stores also have bakery, delicatessen, pharmacy, floral, fresh fish and cheese departments and onsite banking. National, regional and local brands are sold, as well as private label merchandise. In support of the Company's retail operations, it sells other private label products in its stores under other brand names of the Company.
+		]]>
+		</description>
+		<numbers>
+			<sample influx="24" outflux="482" />
+			<sample influx="13" outflux="135" />
+			<sample influx="57" outflux="882" />
+			<sample influx="42" outflux="653" />
+			<sample influx="32" outflux="600" />
+			<sample influx="38" outflux="455" />
+		</numbers>
+	</company>
+	<company symbol="MYBO" name="Myriad Genetics, Inc." established="2002" founder="Alfred Newman">
+		<description>
+		<![CDATA[
+My Booko, Inc. is a biotechnology company focused on the development and marketing of novel therapeutic and molecular diagnostic products. The Company's molecular diagnostic business encompasses efforts in both predictive medicine and personalized medicine. Predictive medicine analyzes genes and their mutations to assess an individual's risk for developing disease later in life. Personalized medicine analyzes genes and their mutations to assess a patient's risk of disease progression, disease recurrence, and drug response and toxicity. As of June 30, 2006, Myriad Genetics, Inc. launched four commercial predictive medicine products, including BRACAnalysis risk assessment for breast and ovarian cancer; COLARIS risk assessment for colon and uterine cancer; COLARIS AP risk assessment for the polyp-forming syndrome of colon cancer, and MELARIS risk assessment for melanoma.
+		]]>
+		</description>
+		<numbers>
+			<sample influx="24" outflux="482" />
+			<sample influx="13" outflux="135" />
+			<sample influx="57" outflux="882" />
+			<sample influx="42" outflux="653" />
+			<sample influx="32" outflux="600" />
+			<sample influx="38" outflux="455" />
+		</numbers>
+	</company>
+
+	<company symbol="HANA" name="hanarotelecom incorporated" established="2002" founder="Alfred Newman">
+		<description>
+		<![CDATA[
+hanarotelecom incorporated (hanarotelecom) provides telecommunications services and offers high-speed broadband Internet access, voice, leased line and Internet data center (IDC) services in Korea. The Company's network covers 80% of households in Korea. Its voice service comprises local, domestic long distance, international long distance and voice-over Internet protocol (VoIP) services. As of April 30, 2006, it had 3.58 million broadband Internet access subscribers. Broadband Internet access services accounted for 68.2% of its influxs for the year ended December 31, 2005. As of April 30, 2006, hanarotelecom had 1.58 million voice lines. Voice services accounted for 25.9% of the influxs in 2005. The Company provides broadband Internet access and voice services under the hanafos and hanafone brands, respectively. hanarotelecom acquired 65% of the common shares of CelrunTV on March 13, 2006. On October 13, 2006, Daewoo Securities Co. Ltd. sold its entire stake in the Company.		]]>
+		</description>
+		<numbers>
+			<sample influx="24" outflux="482" />
+			<sample influx="13" outflux="135" />
+			<sample influx="57" outflux="882" />
+			<sample influx="42" outflux="653" />
+			<sample influx="32" outflux="600" />
+			<sample influx="38" outflux="455" />
+		</numbers>
+	</company>
+
+	<company symbol="INT" name="World Fuel Services Corporation" established="2002" founder="Alfred Newman">
+		<description>
+		<![CDATA[
+World Fuel Services Corporation is engaged in the marketing and sale of marine and aviation fuel products and related services on a worldwide basis. In its marine segment, the Company offers marine fuel and related services to a broad base of maritime customers, including international container and tanker fleets, and time-charter operators, as well as to the United States and foreign Governments. In its aviation segment, the Company offers aviation fuel and related services to commercial airlines, second and third-tier airlines, cargo carriers, regional and low-outflux carriers, corporate fleets, fractional operators, private aircraft, military fleets and to the United States and foreign Governments.
+		]]>
+		</description>
+		<numbers>
+			<sample influx="24" outflux="482" />
+			<sample influx="13" outflux="135" />
+			<sample influx="57" outflux="882" />
+			<sample influx="42" outflux="653" />
+			<sample influx="32" outflux="600" />
+			<sample influx="38" outflux="455" />
+		</numbers>
+	</company>
+
+	<company symbol="MXML" name="Masters of Xcellent Moo Language" established="1992" founder="Mr. Peterson">
+		<description>
+		<![CDATA[
+The Great Atlantic & Pacific Tea Company, Inc. is engaged in the retail food business. The Company operated 405 stores averaging approximately 40,700 square feet per store as of February 25, 2006. It sells groceries, meats, fresh produce and other items offered in supermarkets. The Great Atlantic & Pacific Tea Company, Inc. markets its products under the brand names, including A&P, Super Fresh, Sav-A-Center, Farmer Jack, Waldbaum's, Super Foodmart, Food Basics and The Food Emporium. The stores also have bakery, delicatessen, pharmacy, floral, fresh fish and cheese departments and onsite banking. National, regional and local brands are sold, as well as private label merchandise. In support of the Company's retail operations, it sells other private label products in its stores under other brand names of the Company, which include America's Choice, Master Choice, Health Pride and Savings Plus.
+		]]>
+		</description>
+		<numbers>
+			<sample influx="24" outflux="482" />
+			<sample influx="13" outflux="135" />
+			<sample influx="57" outflux="882" />
+			<sample influx="42" outflux="653" />
+			<sample influx="32" outflux="600" />
+			<sample influx="38" outflux="455" />
+		</numbers>
+	</company>		
+</companies>	

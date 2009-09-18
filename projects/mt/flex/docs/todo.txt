@@ -1,0 +1,32 @@
+
+percent/number properties (width/height)
+
+javascript binding
+DOM api
+getting/setting instances
+generic 'renderedValue' accessor
+inline components
+css integration
+
+literal converters
+implicit tag name?
+literal classname -> IFactory parsing.
+unknown type parsing
+Object tag parsing.
+
+on demand loading of types
+
+server filter (java? ruby?) for prepackaging new types 
+with server generated MXML
+
+xhtml mime type from rails?
+@Embed
+
+
+DONE 
+actionscript binding
+preloading of modules to extend the type system
+javascript API for loading modules
+styles
+Bridge interaction
+setting innerHTML

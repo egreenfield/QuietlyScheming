@@ -1,0 +1,61 @@
+
+
+Application {
+	backgroundColor: #343434;		
+	backgroundImage: "";
+	font-family: Arial;
+}
+
+LinkButton {
+	color: #FFFFFF;	
+	text-decoration: underline;
+	font-size: 14;
+}
+
+Label {
+	color: #FFFFFF;	
+}
+
+.title {
+	font-size: 28;
+	font-weight: bold;
+}
+
+.subTitle {
+	font-size: 18;
+	font-weight: bold;
+}
+
+.instructions {
+	color: #FFFFFF;
+	font-style: italic;		
+}
+
+.detailText {
+	font-size: 14;	
+}
+.constitutionViewer {
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;	
+}
+
+.loading {
+	font-size: 18;	
+	font-weight: bold;
+}
+
+.loadBox {
+	corner-radius: 10;	
+}
+
+.posterBorder {
+	borderColor: #FFFFFF;
+	borderStyle: solid;
+	borderThickness: 3;
+}
+List {
+	color: #FFFFFF;
+	background-color: #646464;
+}

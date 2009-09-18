@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:PivotApp_code xmlns="http://www.adobe.com/2006/mxml" layout="vertical" paddingLeft="20" paddingRight="20" paddingBottom="20" backgroundColor="#FFFFFF" backgroundGradientColors="[#000080, #000040]"
+	creationComplete="dataService.send();" xmlns:local="*" xmlns:data="qs.data.*" color="#ffffff" xmlns:controls="qs.controls.*"
+	horizontalAlign="left">
+
+	<Style source="styles.css" />
+
+	<HTTPService id="dataService" resultFormat="e4x" url="data/sampleData.xml" />
+	<data:LocalMDDataSource id="dataSource" dataProvider="{dataService.lastResult.sample}" >
+		<data:measures>{'@profit,@cost,@sales,@min,@max,@high,@low'.split(",")}</data:measures>
+		<data:dimensions>{'@date,@region,@product,@demo'.split(",")}</data:dimensions>
+	</data:LocalMDDataSource>
+<!--
+
+	<HTTPService id="dataService" resultFormat="e4x" url="data/canonicalData.xml" />
+	<data:LocalMDDataSource id="dataSource" dataProvider="{dataService.lastResult.sample}" >
+		<data:measures>{'@M1,@M2'.split(",")}</data:measures>
+		<data:dimensions>{'@A,@B,@C'.split(",")}</data:dimensions>
+	</data:LocalMDDataSource>
+-->
+
+	<data:PivotFilter id="pivotFilter" dataProvider="{dataSource}"/>
+
+	<data:PivotChartBuilder cubeBuilder="{pivotFilter}" id="chartBuilder" chartContainer="{chartCanvas}" >
+		<data:seriesTemplates>
+			<Component>
+				<ColumnSeries xField="@product" yField="@profit">
+				</ColumnSeries>
+			</Component>
+		</data:seriesTemplates>		
+	</data:PivotChartBuilder>
+	<Script>
+		<![CDATA[
+			import qs.data.DataDimension;
+			import qs.data.DataMeasure;
+			import qs.data.DataField;
+			import mx.events.DragEvent;
+			import mx.charts.CategoryAxis;
+		]]>
+	</Script>
+	
+		<Form width="100%">
+
+			<FormItem label="Horizontal:" height="28" width="100%" backgroundColor="#808080" borderStyle="solid">
+				<controls:DragTile id="horizontalDimension" width="100%" height="28" dataProvider="{[]}" 
+					change="invalidatePivot()" dragEnter="allowType(event,DataDimension);"
+					addItems="addMeasuresToEnd"
+					moveItems="moveMeasuresAtEnd"
+					horizontalGap="4" verticalGap="0" horizontalAlign="left" padding="5">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile 
+								close="outerDocument.removeField(outerDocument.horizontalDimension,data)" 
+								showClose="true" 
+								backgroundColor="#DDDDFF" borderColor="#AAAAFF" color="#000000" 
+								width="152"
+								/>
+						</Component>
+					</controls:itemRenderer>
+				</controls:DragTile>
+			</FormItem>		
+
+			<FormItem label="Vertical:" height="28" width="100%" backgroundColor="#808080" borderStyle="solid">
+				<controls:DragTile id="verticalDimension" change="invalidatePivot()" width="100%" height="28" 
+					dataProvider="{[]}" 
+					dragEnter="allowType( event, DataField);"
+					addItems="addMeasuresToEnd"
+					horizontalGap="4" verticalGap="0" horizontalAlign="left" padding="5">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile backgroundColor="#DDDDFF" borderColor="#AAAAFF" 
+								color="#000000"
+								close="outerDocument.removeField(outerDocument.verticalDimension,data)" showClose="true" 
+								width="152"
+								/>
+						</Component>
+					</controls:itemRenderer>
+				</controls:DragTile>
+			</FormItem>
+
+			<FormItem label="Series:" height="28" width="100%" backgroundColor="#808080" borderStyle="solid">
+				<controls:DragTile id="seriesDimension" change="invalidatePivot()" width="100%" height="28" 
+					dataProvider="{[]}" dragEnter="allowType(event, DataDimension);"
+					horizontalGap="4" verticalGap="0" horizontalAlign="left" padding="5">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile backgroundColor="#DDDDFF" borderColor="#AAAAFF" 
+								color="#000000" 
+								close="outerDocument.removeField(outerDocument.seriesDimension,data)" showClose="true" 
+								width="152"
+								/>
+						</Component>
+					</controls:itemRenderer>
+				</controls:DragTile>
+			</FormItem>
+		</Form>
+		<Label x="10" y="146" text="Available Dimensions:"/>
+		<HBox width="100%" height="100%">
+			
+			<VBox width="152" height="100%">				
+			<controls:DragTile id="dimensionList" tileWidth="152" horizontalAlign="center" 
+				dragEnter="allowType(event,DataDimension)" padding="0" width="152" height="100%" 
+				dataProvider="{unusedDimensions}" backgroundColor="#808080" maxRowLength="1">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile backgroundColor="#DDDDFF" borderColor="#AAAAFF" color="#000000" width="100%"/>
+						</Component>
+					</controls:itemRenderer>						
+			</controls:DragTile>
+			<Label text="Available Measures:"/>
+			<controls:DragTile id="measureList" tileWidth="152" horizontalAlign="center" 
+				dragEnter="allowType(event,DataMeasure)" 
+				padding="0" width="152" height="100%" dataProvider="{unusedMeasures}" backgroundColor="#808080" maxRowLength="1">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile backgroundColor="#DDDDFF" borderColor="#AAAAFF" color="#000000" width="100%"/>
+						</Component>
+					</controls:itemRenderer>						
+			</controls:DragTile>
+
+			<Label text="Filters:"/>
+
+			<controls:DragTile id="filterList" tileWidth="152" horizontalAlign="center" 
+				dragEnter="acceptFilterDrag(event)" 
+				addItems="addFilter"
+				padding="0" width="152" height="100%" dataProvider="{filteredFields}" backgroundColor="#808080" maxRowLength="1">
+					<controls:itemRenderer>					
+						<Component>
+							<local:MeasureTile color="#000000" width="100%" showClose="true" close="outerDocument.removeFilter(event.target.data)"/>
+						</Component>
+					</controls:itemRenderer>						
+			</controls:DragTile>
+			</VBox>
+			<Canvas id="chartCanvas" width="100%" height="100%"  >
+				
+			</Canvas>
+<!--			<ColumnChart id="chart" width="100%" height="100%" dataProvider="{dataService.lastResult.sample}" showDataTips="true" > 
+				<verticalAxis>
+					<LinearAxis displayName="votes" title="Total Votes"/>
+				</verticalAxis>
+			</ColumnChart>
+			<Legend dataProvider="{chart}" height="100%" color="#ffffff"/> -->
+		</HBox>
+	
+</local:PivotApp_code>

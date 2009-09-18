@@ -1,0 +1,14 @@
+/* CSS file */
+
+
+EditButton {
+	up-skin: Embed('img/edit.png');
+	over-skin: Embed('img/edit.png');	
+	down-skin: Embed('img/done.png');
+	disabled-skin: Embed('img/edit.png');
+
+	selected-up-skin: Embed('img/done.png');
+	selected-over-skin: Embed('img/done.png');	
+	selected-down-skin: Embed('img/edit.png');	
+	selected-disabled-skin: Embed('img/done.png');
+}

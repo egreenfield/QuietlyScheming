@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="Face3D,org.papervision3d.core.geom.Face3D,vertices,materialName,uv,uv,screenZ,visible,id,id,transformUV,render" name="keywords">
+<title>org.papervision3d.core.geom.Face3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Face3D - Papervision3D API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/papervision3d/core/geom/Face3D.html&amp;org/papervision3d/core/geom/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Face3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Face3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.core.geom</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Face3D</td>
+</tr>
+</table>
+<p></p>
+The Face3D class lets you render linear textured triangles. It also supports solid colour fill and hairline outlines.
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : Number<div class="summaryTableDescription">
+ The object where the face belongs.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : Number<div class="summaryTableDescription">
+ [read-only] Unique id of this instance.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#materialName">materialName</a> : String<div class="summaryTableDescription">
+ A material id TODO
+ </div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#screenZ">screenZ</a> : Number<div class="summaryTableDescription">
+ [read-only] The average depth (z coordinate) of the transformed triangle.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#uv">uv</a> : Array<div class="summaryTableDescription">
+ A MaterialObject3D object that contains the material properties of the back of a single sided triangle.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#uv">uv</a> : Array<div class="summaryTableDescription">
+ An array of {x,y} objects for the corresponding UV pixel coordinates of each triangle vertex.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#vertices">vertices</a> : Array<div class="summaryTableDescription">
+ An array of Vertex3D objects for the three vertices of the triangle.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#visible">visible</a> : Boolean<div class="summaryTableDescription">
+ [read-only] A Boolean value that indicates that the face is visible, i.e.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#Face3D()">Face3D</a>(vertices:Array, materialName:String = null, uv:Array = null)</div>
+<div class="summaryTableDescription">
+ The Face3D constructor lets you create linear textured or solid colour triangles.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#render()">render</a>(instance:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, container:Sprite):Number</div>
+<div class="summaryTableDescription">
+ Draws the triangle into its MovieClip container.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#transformUV()">transformUV</a>(instance:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a> = null):Object</div>
+<div class="summaryTableDescription">
+ Applies the updated UV texture mapping values to the triangle.</div>
+</td><td class="summaryTableOwnerCol">Face3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:Number</code><p>
+ The object where the face belongs.
+ </p></div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:Number</code><p>
+ [read-only] Unique id of this instance.
+ </p></div>
+<a name="materialName"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">materialName</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var materialName:String</code><p>
+ A material id TODO
+ </p></div>
+<a name="screenZ"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">screenZ</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var screenZ:Number</code><p>
+ [read-only] The average depth (z coordinate) of the transformed triangle. Also known as the distance from the camera. Used internally for z-sorting.
+ </p></div>
+<a name="uv"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">uv</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var uv:Array</code><p>
+ A MaterialObject3D object that contains the material properties of the back of a single sided triangle.
+ </p></div>
+<a name="uv"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">uv</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var uv:Array</code><p>
+ An array of {x,y} objects for the corresponding UV pixel coordinates of each triangle vertex.
+ </p></div>
+<a name="vertices"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">vertices</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var vertices:Array</code><p>
+ An array of Vertex3D objects for the three vertices of the triangle.
+ </p></div>
+<a name="visible"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">visible</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var visible:Boolean</code><p>
+ [read-only] A Boolean value that indicates that the face is visible, i.e. it's vertices are in front of the camera.
+ </p></div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="Face3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">Face3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function Face3D(vertices:Array, materialName:String = null, uv:Array = null)</code><p>
+ The Face3D constructor lets you create linear textured or solid colour triangles.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">vertices</span>:Array</code> &mdash; An array of Vertex3D objects for the three vertices of the triangle.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">materialName</span>:String</code> (default = <code>null</code>)<code></code> &mdash; A MaterialObject3D object that contains the material properties of the triangle.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">uv</span>:Array</code> (default = <code>null</code>)<code></code> &mdash;   An array of {x,y} objects for the corresponding UV pixel coordinates of each triangle vertex.
+ </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="render()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">render</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function render(instance:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a>, container:Sprite):Number</code><p>
+ Draws the triangle into its MovieClip container.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">instance</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> &mdash; The default MovieClip that you draw into when rendering.
+ </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">container</span>:Sprite</code> &mdash;  A Boolean value that indicates whether random coloring is enabled. Typically used for debug purposes. Defaults to false.
+ </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code> &mdash;     The number of triangles drawn. Either one if it is double sided or visible, or zero if it single sided and not visible.
+  </td>
+</tr>
+</table>
+</div>
+<a name="transformUV()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">transformUV</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function transformUV(instance:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a> = null):Object</code><p>
+ Applies the updated UV texture mapping values to the triangle. This is required to speed up rendering.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">instance</span>:<a href="../../objects/DisplayObject3D.html">DisplayObject3D</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

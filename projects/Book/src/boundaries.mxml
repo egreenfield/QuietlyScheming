@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	backgroundGradientColors="[#000000, #282828]" backgroundColor="#282828" xmlns:controls="qs.controls.*"
+	xmlns:filters="flash.filters.*"
+	viewSourceURL="/source/Book.zip"
+	>
+	
+	<Style>
+		Book {			
+			color: #000000;
+			textRollOverColor: 	#000000;			
+			border-style: solid;
+		}
+		
+		Application {
+			color: #F1F1CC;
+			textRollOverColor: 	#FFFFFF;
+		}
+		
+		ComboBox, NumericStepper {
+			color: #000000;
+			textRollOverColor: #000000;	
+		}
+		
+	</Style>
+	<Object>
+		<cover>
+			<l:LetterPage id="frontCover" text="front" backgroundColor="#000000" color="#FFFFFF" />
+		</cover>
+		<backCover>
+			<l:LetterPage id="backCover" text="back" backgroundColor="#000000" color="#FFFFFF" />			
+		</backCover>
+	</Object>
+	
+	<Script>
+		<![CDATA[
+			private function next():void
+			{
+				if(book.currentPageIndex+1 < book.maximumPageIndex)
+					book.turnToPage(book.currentPageIndex + 1);
+					
+			}
+			private function previous():void
+			{
+				if(book.currentPageIndex > 0)
+					book.turnToPage(book.currentPageIndex - 1);
+//					book.currentPageIndex -= 2;
+			}
+			private function timerHandler(e:Event):void
+			{
+				genData();
+			}
+			private function genData():void
+			{
+				var ds:Array = [];
+				for(var i:int = 0;i<40;i++)
+				{
+					ds.push(Math.random() * 100);
+				}
+				dataSet = ds;
+			}
+			
+			private function randomColor():uint
+			{
+				return (Math.floor(Math.random() * 0xAA) << 16) +
+					   (Math.floor(Math.random() * 0xAA) << 8) +
+					   Math.floor(Math.random() * 0xAA);
+			}
+			
+			private function addPage():void
+			{
+				var content:Array = book.content;
+				var newPage:LetterPage = new LetterPage();
+				newPage.text = String.fromCharCode(("A").charCodeAt(0) + content.length);
+				newPage.setStyle("backgroundColor",randomColor());
+				newPage.setStyle("color", 0xFFFFFF);
+				content.push(newPage);
+				book.content = content;				
+				book.turnToPage(book.contentToPageIndex(content.length-1));
+			}
+			
+			[Bindable] public var dataSet:Array;
+		]]>
+	</Script>
+
+	<Binding source="currentPage.value" destination="book.currentPageIndex" />
+	<Binding destination="currentPage.value" source="book.currentPageIndex" />
+	
+	<VBox width="190" left="10" top="10" horizontalScrollPolicy="off">
+		
+		<CheckBox label="Animate During Flip" id="updateDuringFlip" left="10" top="10"/>
+		<CheckBox label="Tease Corner" id="teaseCorner" selected="true"  left="10" top="88"/>
+	
+		<CheckBox label="Add Covers" id="addCovers" selected="false"  left="11" top="36"/>
+		<CheckBox label="Hardback" id="hardBack" selected="true"  left="11" top="36"/>
+		<CheckBox label="Hard Pages" id="hardPages" left="11" top="62"/>
+		<CheckBox label="one item per double page" id="fullPage" left="10" top="390"/>
+		<CheckBox label="show spine slope at rest" id="showPageSlopeAtRest" left="10" top="390" selected="true"/>
+
+	
+		<Label text="Grab:" left="10" top="116"/>
+		<ComboBox id="grabStyle" selectedIndex="1"  left="54" top="114">
+			<dataProvider>
+				<String>page</String>
+				<String>edge</String>
+				<String>corner</String>
+				<String>none</String>
+			</dataProvider>
+		</ComboBox>
+
+		<Label text="Edge and Corner Size:" left="10" top="144"/>
+		<HSlider id="edgeSize" width="150" value="120" minimum="0" snapInterval="1"  maximum="180" left="10" top="170"/>
+
+
+		<Label text="page shadows: " left="10" top="270" />
+		<HSlider liveDragging="true" width="150" id="shadowStrength" minimum="0" maximum="1" value="1" left="10" top="290"/>
+
+		<Label text="curve reflection: " left="10" top="310" />
+		<HSlider liveDragging="true" width="150" id="curveReflection" minimum="0" maximum="1" value="1" left="10" top="330"/>
+
+		<Label text="slope strength: " left="10" top="350" />
+		<HSlider liveDragging="true" width="150" id="slopeStrength" minimum="0" maximum="1" value="1" left="10" top="370"/>
+
+
+		<Label text="padding: " />
+		<HSlider liveDragging="true" width="150" id="padding" minimum="0" maximum="100" value="10" />
+
+		<Label text="spine padding: " />
+		<HSlider liveDragging="true" width="150" id="spinePadding" minimum="0" maximum="100" value="10" />
+
+		<Label text="background color: " />
+		<ColorPicker selectedColor="#F1F1CC" id="bgColor" />
+
+		<Label text="border thickness: " />
+		<HSlider liveDragging="true" width="150" id="borderThickness" minimum="0" maximum="10" value="1" />
+
+		<Label text="border color: " />
+		<ColorPicker selectedColor="#000000" id="borderColor" />
+	</VBox>
+
+		<Canvas left="200" right="0" top="0" bottom="0" backgroundColor="#222222" borderStyle="solid" borderSides="left" borderColor="#444444">
+			
+			<controls:Book id="book" y="47" width="592" height="352" horizontalCenter="0" 
+				animateCurrentPageIndex="true"
+				showCornerTease="{teaseCorner.selected}" animatePagesOnTurn="{updateDuringFlip.selected}" 
+				activeGrabArea="{grabStyle.selectedItem}"
+				edgeAndCornerSize="{edgeSize.value}" 
+				hardbackPages="{hardPages.selected}"
+				hardbackCovers="{hardBack.selected}"
+				pageShadowStrength="{shadowStrength.value}"
+				curveShadowStrength="{curveReflection.value}"
+				pageSlope="{slopeStrength.value}"
+				itemSize="{fullPage.selected? 'page':'halfPage'}"
+				paddingLeft="{padding.value}"
+				paddingRight="{padding.value}"
+				paddingTop="{padding.value}"
+				paddingBottom="{padding.value}"
+				paddingSpine="{spinePadding.value}"
+				backgroundColor="{bgColor.selectedColor}"
+				borderThickness="{borderThickness.value}"
+				borderColor="{borderColor.selectedColor}"
+				cover="{addCovers.selected? frontCover:null}"
+				backCover="{addCovers.selected? backCover:null}"
+				showPageSlopeAtRest="{showPageSlopeAtRest.selected}"
+				>
+			</controls:Book>
+
+			<Button label="Prev" click="previous()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="-266" y="407"/>
+			<Button label="Next" click="next()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="265" y="407"/>
+			<HSlider y="412" width="454" id="currentPage" snapInterval="1" value="0" minimum="{book.minimumPageIndex}" maximum="{book.maximumPageIndex-1}"  horizontalCenter="0"/>
+			<Button label="Add Page" click="addPage()" color="#000000" width="150" y="435" horizontalCenter="0" />
+
+		</Canvas>
+
+	
+</Application>

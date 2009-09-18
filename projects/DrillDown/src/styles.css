@@ -1,0 +1,16 @@
+
+
+@font-face
+{
+   font-family: MyV;
+   src: local("Verdana");
+}
+
+Application {
+	fontFamily: MyV;
+	backgroundColor: #000000;	
+}
+
+ColumnChart {
+	fontFamily: MyV;	
+}

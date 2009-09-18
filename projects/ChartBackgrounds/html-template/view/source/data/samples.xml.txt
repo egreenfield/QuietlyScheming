@@ -1,0 +1,22 @@
+<samples>
+	<sample name="A" value="12" resource="73" />
+	<sample name="B" value="140" resource="45" />
+	<sample name="C" value="156" resource="73" />
+	<sample name="D" value="179" resource="104" />
+	<sample name="E" value="122" resource="158" />
+	<sample name="F" value="142" resource="177" />
+	<sample name="G" value="73" resource="144" />
+	<sample name="H" value="49" resource="102" />
+	<sample name="I" value="52" resource="18" />
+	<sample name="J" value="87" resource="32" />
+	<sample name="K" value="33" resource="55" />
+	<sample name="L" value="38" resource="47" />
+	<sample name="M" value="49" resource="82" />
+	<sample name="N" value="12" resource="63" />
+	<sample name="O" value="42" resource="20" />
+	<sample name="P" value="68" resource="44" />
+	<sample name="Q" value="88" resource="83" />
+	<sample name="R" value="105" resource="111" />
+	<sample name="S" value="130" resource="140" />
+	<sample name="T" value="76" resource="102" />
+</samples>

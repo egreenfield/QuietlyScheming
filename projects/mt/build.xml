@@ -1,0 +1,11 @@
+<project>
+
+	<target name="main">
+        <ant antfile="${basedir}/simple/build.xml" inheritAll="false" target="main"/>
+        <ant antfile="${basedir}/simpleLibs/build.xml" inheritAll="false" target="main"/>
+        <ant antfile="${basedir}/flex/build.xml" inheritAll="false" target="main"/>
+        <ant antfile="${basedir}/flexLibs/build.xml" inheritAll="false" target="main"/>
+    </target>
+	
+
+</project>

@@ -1,0 +1,18 @@
+<HBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="States and Transitions" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	creationComplete="setup()">
+		<Script>
+			<![CDATA[
+				
+				private function setup():void
+				{
+				}
+			]]>
+		</Script>
+		
+		<local:AnimatedUpDownCircle scaleX=".5" scaleY=".5" rollOver="event.currentTarget.currentState = 'over'" rollOut="event.currentTarget.currentState = 'up'" currentState="up" />
+		<local:AnimatedUpDownCircle scaleX=".5" scaleY=".5" rollOver="event.currentTarget.currentState = 'over'" rollOut="event.currentTarget.currentState = 'up'" currentState="up" />
+		<local:AnimatedUpDownCircle scaleX=".5" scaleY=".5" rollOver="event.currentTarget.currentState = 'over'" rollOut="event.currentTarget.currentState = 'up'" currentState="up" />
+		<local:AnimatedUpDownCircle scaleX=".5" scaleY=".5" rollOver="event.currentTarget.currentState = 'over'" rollOut="event.currentTarget.currentState = 'up'" currentState="up" />
+		<local:AnimatedUpDownCircle scaleX=".5" scaleY=".5" rollOver="event.currentTarget.currentState = 'over'" rollOut="event.currentTarget.currentState = 'up'" currentState="up" />
+	
+</HBox>

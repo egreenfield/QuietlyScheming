@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" showFlexChrome="true"
+	creationComplete="loadData()" title="Mosaic" xmlns:views="views.*" width="1000" height="800">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mosaic.Palette;
+			import mosaic.MosaicImage;
+			import mosaic.MosaicCollection;
+			import mosaic.MosaicController;
+			
+			public function loadData():void
+			{
+				MosaicController.instance.loadDB();
+			}
+			
+			
+			
+			
+		]]>
+	</mx:Script>
+
+	<mx:TabNavigator width="100%" height="100%">
+
+		<views:PaletteManagement />
+
+		
+		<views:CollectionMaker />
+		<views:ImageBrowser />
+		<views:ImageMatcher />
+		<views:ImageMaker />
+		<views:ImageBuilder />
+		
+	</mx:TabNavigator>
+	
+</mx:WindowedApplication>

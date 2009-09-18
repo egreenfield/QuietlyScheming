@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+		
+			override public function get descriptions():Array { 
+				return ["a simple pie chart"];
+			}
+			public function genData():void
+			{
+				var newData:Array = [];
+				var A:Number = Math.random()*100 - 50;
+				var B:Number = A - Math.random() * 10;
+				var P:Number = Math.random()*100;
+				for(var i:int = 0;i<dataCount.value;i++)
+				{
+					A = A + Math.random()*10 - 5;
+					B = A - Math.random() * 10;
+					P = Math.random()*100;
+					newData.push( 
+					{
+						A: A,
+						B: B,
+						P: P
+					}
+					);
+				}
+				dataSet = newData;
+			}
+			public function lfunc(...args):String
+			{
+				return "this is value " + Math.floor(args[0].P);
+			}
+			
+			[Bindable] public var dataSet:Array;
+																							
+		]]>
+	</Script>		
+	
+	<ex:controls>
+		<ComboBox id="lpos">
+			<dataProvider>
+				<String>none</String>
+				<String>outside</String>
+				<String>inside</String>
+				<String>insideWithCallout</String>
+				<String>callout</String>
+			</dataProvider>
+	  	</ComboBox>
+		<Label text="data size:" />
+		<HSlider width="100" minimum="0" maximum="50" value="5" snapInterval="1" liveDragging="true" id="dataCount" change="genData()" />
+	</ex:controls>
+		
+	
+	<PieChart id="chart" width="100%" height="100%" dataProvider="{dataSet}" initialize="genData();">
+		<series>
+			<PieSeries field="P" labelPosition="{lpos.value}" labelFunction="lfunc"/>
+		</series>
+	</PieChart>
+
+</ex:ExampleBase>
+

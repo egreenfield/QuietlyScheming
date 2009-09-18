@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple two series column chart"];
+			}
+		[Bindable] public var dataSet:Array;
+		private function MakeDate(a:Object,b:Object,c:Object,d:Object,e:Object,f:Object):Date {
+				return new Date(a,b,c,d,e,f);
+			}
+		private function genData():Array
+		{
+			var d:Array =[];
+
+			var vals:Object = {};
+
+			var startTime:Date = new Date();
+			startTime.setHours(0);
+			startTime.setMinutes(0);
+			startTime.setSeconds(0);
+			startTime.setMilliseconds(0);
+
+			var month:Number = startTime.month;
+
+			var endTime:Date = MakeDate(startTime.getFullYear() + dYears.value,
+								startTime.getMonth() + dMonths.value,
+								startTime.getDate() + dDays.value,
+								startTime.getHours() + dHours.value,
+								startTime.getMinutes() + dMinutes.value,
+								startTime.getSeconds() + dSeconds.value
+								);
+			endTime.setTime(endTime.getTime() + dMilli.value);
+
+
+			var newVals:Object = {};
+			newVals.F0 = 400;
+			newVals.F1 = 400;
+			newVals.F2 = 400;
+			newVals.dt = startTime;
+			d.push(newVals);
+
+			newVals = {};
+			newVals.F0 = 800;
+			newVals.F1 = 800;
+			newVals.F2 = 800;
+			newVals.dt = endTime;
+			d.push(newVals);
+
+			dataSet= d;
+			return d;
+		}
+
+		]]>
+	</Script>
+
+	<ex:controls>
+		<CheckBox id="adjust" label="auto adjust" selected="false" />
+		<CheckBox id="local" label="local time" selected="true" />
+		<Label text="years" />
+		<NumericStepper id="dYears" maximum="1000" change="genData();" />
+		<Label text="months" />
+		<NumericStepper id="dMonths" maximum="1000" change="genData();" />
+		<Label text="days" />
+		<NumericStepper id="dDays" maximum="1000" change="genData();" />
+		<Label text="hours" />
+		<NumericStepper id="dHours" maximum="1000" change="genData();" />
+		<Label text="minutes" />
+		<NumericStepper id="dMinutes" maximum="1000" change="genData();" />
+		<Label text="seconds" />
+		<NumericStepper id="dSeconds" maximum="1000" change="genData();" />
+		<Label text="milli" />
+		<NumericStepper id="dMilli" maximum="1000" change="genData();" />
+		<Label text="dataUnits:" />
+		<ComboBox id="du" dataProvider="{[ '','hours','days','months','years']}" change="dAxis.dataUnits = (du.value == '')? null:String(du.value)" />
+	</ex:controls>
+
+	<CartesianChart id="chart" width="100%" height="100%" >
+
+			<horizontalAxis>
+				<DateTimeAxis id="dAxis" displayName="Time"  autoAdjust="{adjust.selected}" displayLocalTime="{local.selected}"  />
+			</horizontalAxis>
+			<horizontalAxisRenderer>
+				<AxisRenderer minorTickPlacement="outside" minorTickLength="3">
+					<minorTickStroke>
+						<Stroke color="#BBCCDD" weight="1" />
+					</minorTickStroke>
+				</AxisRenderer>
+			</horizontalAxisRenderer>
+			<dataProvider>{dataSet}</dataProvider>
+			<series>
+				<ColumnSeries displayName="Bannana Sales" xField="dt" yField="F0" />
+			</series>
+
+	</CartesianChart>
+
+</ex:ExampleBase>

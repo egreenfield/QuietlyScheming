@@ -1,0 +1,85 @@
+Adobe Flex 2 OEM Kit Readme
+
+This file describes the contents of the Flex OEM Kit and provides information for getting started.
+
+*****************************
+*          Contents         *
+*****************************
+
+The Flex OEM Kit consists of the following files and directories:
+
+/api
+        This directory contains the Javadoc documentation for the classes in the flex2.tools.oem.* package.
+
+/lib
+        This directory contains the Flex OEM Kit JAR file. Copy this JAR file to your lib directory.
+
+OEMKitUserGuide.pdf 
+        Provides usage documentation for the Flex OEM Kit.
+
+*****************************
+*      Getting Started      *
+*****************************
+
+The first step to using the Flex OEM Kit is to write a Java application
+that uses the Flex OEM Kit's API. For example:
+
+  import flex2.tools.oem.Application;
+  import java.io.*;
+
+  public class Example
+  {
+      public static void main(String[] args)
+      {
+          try
+          {
+              Application application = new Application("example", new File("example.mxml"));
+              Configuration c = application.getDefaultConfiguration();
+              c.setLicense("compiler","0000-0000-0000-0000-0000-0000");
+              application.setConfiguration(c);
+              application.setOutput(new File("example.swf"));
+              application.build();
+          }
+          catch (Exception ex)
+          {
+              ex.printStackTrace();
+          }
+      }
+  }
+
+Replace "0000-0000-0000-0000-0000-0000" with the actual serial number for your compiler license.
+
+The next step is compile the Java code. For example:
+
+  javac -classpath ${flex.dir}/lib/mxmlc.jar:${oem.compiler.dir}/lib/flex-compiler-oem.jar Example.java
+
+Replace the ${flex.dir} token with the location of Flex and the
+${oem.compiler.dir} token with the location of the Flex OEM
+Kit's JAR file.
+
+The next step is write an MXML application.  For example:
+
+  <?xml version="1.0"?>
+  <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+      <mx:Label text="Hello World!"/>
+  </mx:Application>
+
+The last step is run the Java code and compile the new MXML application. For example:
+
+  java -classpath ${flex.dir}/lib/mxmlc.jar:${oem.compiler.dir}/lib/flex-compiler-oem.jar:. Example
+
+*****************************
+*  Note on Trial Licenses   *
+*****************************
+
+If you are using a time-limited trial license, activate it for the first time by running:
+
+   java -jar flex-compiler-oem.jar
+
+from within the directory where the Flex OEM Kit's JAR files are installed.
+
+*****************************
+*     More Information      *
+*****************************
+
+For more information please see the Javadoc documentation for the Flex OEM Kit's API and the Flex OEM Kit User Guide.

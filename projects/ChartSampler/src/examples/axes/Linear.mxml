@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml" initialize="genData();">
+
+	<Script>
+		<![CDATA[
+		
+			override public function get descriptions():Array { 
+				return ["a simple two series column chart"];
+			}
+			[Bindable] public var dataSet:Array;
+			public function genData():void
+			{
+				var catSet:String ="ABCDEFGHIJK";
+				var delta:Number = (parse(maxValue.value) - parse(minValue.value))/catSet.length;
+				var d:Array= [];
+				for(var i:int = 0;i<catSet.length;i++)
+				{
+					d.push({v: parse(minValue.value) + delta*i, cat: catSet.charAt(i) });
+				}
+				dataSet = d;
+			}
+			public function formatTip(value:*):String { return parse(value).toString(); }
+			public function parse(value:*):*
+			{
+				return (value < 0)? -Math.pow(10,-value):Math.pow(10,value);
+			}
+		]]>
+	</Script>		
+	
+	<ex:controls>
+		<CheckBox label="base at zero" id="baz" selected="true" click="genData()" />
+		<CheckBox label="auto adjust" id="aaj" selected="true" click="genData()" />
+		<Label text="Data:" />
+		<HBox>
+			<Label text="min" />
+			<VSlider value="0" liveDragging="true" minimum="-5" maximum="5" snapInterval=".01" dataTipFormatFunction="formatTip" id="minValue" change="genData();" />
+			<Label text="max" />
+			<VSlider value="1" liveDragging="true" minimum="-5" maximum="5" snapInterval=".01" id="maxValue" dataTipFormatFunction="formatTip" change="genData();" />
+		</HBox>
+	</ex:controls>
+
+	<ColumnChart id="chart" width="100%" height="100%" dataProvider="{dataSet}" >
+		<series>
+			<ColumnSeries yField="v" />
+
+		</series>
+		<verticalAxis>
+			<LinearAxis baseAtZero="{baz.selected}" autoAdjust="{aaj.selected}" />
+		</verticalAxis>
+		<horizontalAxis>
+			<CategoryAxis categoryField="cat" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</ex:ExampleBase>

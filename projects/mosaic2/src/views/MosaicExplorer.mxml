@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:controls="qs.controls.*" xmlns:views="views.*" xmlns:containers="qs.containers.*" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+	<containers:Landscape width="100%" height="100%" creationComplete="initZoomer()" id="zoomer">
+		<mx:Canvas horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			<views:BitmapDisplay builder="{builder}" id="tileDisplay" mouseMove="mouseMoveHandler(event)" rollOut="rollOutHandler(event)" click="mouseClickHandler(event)"/>
+			<views:MosaicImageRenderer id="imgOverlay" width="100%" height="100%" mouseEnabled="false"
+				source="{builder.selectedMosaic.sourceImage}" fillPolicy="center" alpha="{imageAlpha}"/>
+			<mx:UIComponent id="tileOverlay" width="100%" height="100%" />
+		</mx:Canvas>
+	</containers:Landscape>
+	
+	<mx:Script>
+		<![CDATA[
+			import mosaic.utils.Drawing;
+			import mosaic.Tile;
+			import mosaic.StaticBuilder;
+			[Bindable] public var imageAlpha:Number =  0;
+			private static const UNIT_RC:Rectangle = new Rectangle(0,0,1,1);
+			private var _builder:StaticBuilder;
+
+
+			private function initZoomer():void
+			{
+				zoomer.selection = [tileDisplay];
+			}
+
+			[Bindable] public function set builder(value:StaticBuilder):void
+			{
+				_activeTile = null;
+				_builder = value;
+							
+			}
+			
+			public function get builder():StaticBuilder
+			{
+				return _builder; 
+			}
+
+			private var _activeTile:Tile;
+			private var _focusedTile:Tile;
+			
+			private function findTileAtPoint(p:Point):Tile
+			{
+				if(_builder == null || _builder.selectedMosaic == null)
+					return null;
+				var tiles:Array = _builder.selectedMosaic.tiles;
+				if(tiles == null)
+					return null;
+				var targetRC:Rectangle = UNIT_RC;
+				//for(var i:int = tiles.length-1;i>=0;i--)
+				for(var i:int = 0;i<tiles.length;i++)
+				{
+					var tile:Tile = tiles[i];
+					var m:Matrix = tile.transformFromTileToRC(tileDisplay.width,targetRC);
+					var xformedPoint:Point = m.transformPoint(p);
+					if (targetRC.containsPoint(xformedPoint))
+						return tile;
+				}
+				return null;
+			}
+			
+			private function mouseMoveHandler(e:MouseEvent):void
+			{
+				_activeTile = findTileAtPoint(new Point(e.localX,e.localY));
+				invalidateDisplayList();
+			}
+			
+			private function mouseClickHandler(e:MouseEvent):void
+			{
+				var newFocus:Tile = findTileAtPoint(new Point(e.localX,e.localY));
+				if(newFocus != focusedTile)
+				{
+					focusedTile = newFocus;
+				}
+				else
+				{
+					focusedTile = null;
+				}
+			}
+			public function set focusedTile(value:Tile):void
+			{
+				_focusedTile = value;
+				if (_focusedTile != null)
+				{
+					var rcBounds:Rectangle = _focusedTile.boundsAt(tileDisplay.width);
+					zoomer.selection = [
+						{ context: tileDisplay, bounds: rcBounds }
+					]
+				}
+				else
+				{
+					zoomer.selection = [ tileDisplay ]; 
+				}
+			}
+			public function get focusedTile():Tile
+			{
+				return _focusedTile;
+			}
+
+			private function rollOutHandler(e:MouseEvent):void
+			{
+				_activeTile = null;
+				invalidateDisplayList();
+			}
+
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth,unscaledHeight);
+				tileOverlay.graphics.clear();
+				if(_activeTile != null)
+				{
+					var drawing:Drawing = new Drawing(tileOverlay.graphics);
+					var rc:Rectangle = UNIT_RC;
+					var m:Matrix = _activeTile.transformFromRCToTile(tileDisplay.width,rc);
+					drawing.matrix = m;
+					tileOverlay.graphics.lineStyle(2,0x0000FF);
+					drawing.drawRect(0,0,1,1);
+				}
+			}
+			
+			
+		]]>
+	</mx:Script>	
+</mx:Canvas>

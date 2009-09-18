@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#000040, #000040]" color="#ffffff" xmlns:charts="qs.charts.*">
+	<Label x="10" y="10" text="CrossTab Sample" fontSize="29" fontFamily="Arial"/>
+	
+	
+	<XML id="dataSource">
+		<data xmlns="">
+			<sample product="Electronics" demo="5-15" target="87" actual="72" />
+			<sample product="Electronics" demo="15-25" target="52" actual="42" />
+			<sample product="Electronics" demo="25-35" target="100" actual="67" />
+			<sample product="Electronics" demo="35-60" target="73" actual="42" />
+			<sample product="Electronics" demo="60-80" target="92" actual="69" />
+	
+			<sample product="Consumables" demo="5-15" target="3" actual="2" />
+			<sample product="Consumables" demo="15-25" target="25" actual="14" />
+			<sample product="Consumables" demo="25-35" target="38" actual="30" />
+			<sample product="Consumables" demo="35-60" target="97" actual="88" />
+			<sample product="Consumables" demo="60-80" target="62" actual="45" />
+	
+			<sample product="Apparel" demo="5-15" target="32" actual="17" />
+			<sample product="Apparel" demo="15-25" target="82" actual="80" />
+			<sample product="Apparel" demo="25-35" target="100" actual="71" />
+			<sample product="Apparel" demo="35-60" target="73" actual="65" />
+			<sample product="Apparel" demo="60-80" target="41" actual="26" />
+	
+			<sample product="Home Decor" demo="5-15" target="0" actual="0" />
+			<sample product="Home Decor" demo="15-25" target="92" actual="58" />
+			<sample product="Home Decor" demo="25-35" target="56" actual="43" />
+			<sample product="Home Decor" demo="35-60" target="48" actual="39" />
+			<sample product="Home Decor" demo="60-80" target="12" actual="8" />
+		</data>
+	</XML>
+
+	<Script>
+		<![CDATA[
+			[Bindable] public var products:Array = "Electronics,Consumables,Apparel,Home Decor".split(",");
+			[Bindable] public var demos:Array = "5-15,15-25,25-35,35-60,60-80".split(",");
+		]]>
+	</Script>
+	<charts:TileChart x="56" y="94" id="cartChart" >
+		<charts:horizontalAxis>
+			<CategoryAxis dataProvider="{products}" title="product" />
+		</charts:horizontalAxis>
+		<charts:verticalAxis>
+			<CategoryAxis dataProvider="{demos}" title="demographic" />			
+		</charts:verticalAxis>
+		<charts:series>
+			<charts:TileSeries xField="@product" yField="@demo" sizeField="@target" padding='8' dataProvider="{dataSource..sample}"/>
+			<charts:TileSeries xField="@product" yField="@demo" sizeField="@actual" padding='8' dataProvider="{dataSource..sample}"/>
+		</charts:series>
+	</charts:TileChart>
+	
+</Application>

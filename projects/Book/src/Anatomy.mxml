@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	xmlns:controls="qs.controls.*"
+	creationComplete="initTimer();" xmlns:containers="qs.containers.*"
+	viewSourceURL="/source/Book.zip"
+	>
+	
+	<Style>
+		Book {
+			
+			color: #000000;
+			textRollOverColor: 	#000000;
+			
+			border-thickness: 1;
+			border-style: solid;
+			border-color: #222222;
+			page-slope: .3;
+			active-grab-area: page;
+			page-shadow-strength: 3;
+			curve-shadow-strength: 5;
+			auto-turn-duration: 1500;
+			transparency-depth: 999;
+
+		}
+		
+		Application {
+			color: #F1F1CC;
+			textRollOverColor: 	#FFFFFF;
+			backgroundGradientColors: #000000, #282828;
+			backgroundColor: #282828;
+		}
+		
+		SuperImage {
+			border-thickness: 0;
+			border-style: none;			
+		}		
+	</Style>
+	
+	<Script>
+		<![CDATA[
+		
+			import mx.core.UIComponent;
+			
+			private function next():void
+			{
+				if(book.currentPageIndex+2 < book.pageCount)
+					book.turnToPage(book.currentPageIndex + 2);
+					
+			}
+			private function previous():void
+			{
+				if(book.currentPageIndex > 1)
+					book.turnToPage(book.currentPageIndex - 2);
+			}
+			
+			
+			private function initTimer():void
+			{
+			}
+
+		]]>
+	</Script>
+
+		<Button label="Prev" click="previous()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="-266" bottom="10" />
+		<Button label="Next" click="next()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="265" bottom="10" />
+
+			<controls:Book id="book" y="47" width="748" top="40" height="600" horizontalCenter="0"
+				animateCurrentPageIndex="true"
+				showCornerTease="true"
+				edgeAndCornerSize="150"
+				itemRenderer="qs.controls.SuperImage"
+				itemSize="halfPage"
+				>
+				<controls:cover>
+					<Image source="@Embed('assets/bookCover.PNG')" width="374" height="600" />
+				</controls:cover>
+				
+				<Image source="@Embed('assets/book1.PNG')" width="374" height="600" />
+				<Image source="@Embed('assets/book2.PNG')" width="374" height="600" />
+				<Image source="@Embed('assets/book3.PNG')" width="374" height="600" />
+				<Image source="@Embed('assets/book4.PNG')" width="374" height="600" />
+				<Image source="@Embed('assets/book5.PNG')" width="374" height="600" />
+				<Image source="@Embed('assets/book6.PNG')" width="374" height="600" />
+			</controls:Book>
+		
+		
+</Application>

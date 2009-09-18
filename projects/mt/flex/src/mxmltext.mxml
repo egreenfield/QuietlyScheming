@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="vertical" creationComplete="initMXML();" xmlns:local="*" 
+	backgroundColor="#FFFFFF" backgroundGradientColors="[#ffffff, #ffffff]" >
+
+	<mt:MTBridge id="bridge" initialize="parseInitialMXML()" xmlns:mt="mt.*" mxmlDocument="{this}" />
+	<XML id="mxmlManifest" source="mxmlManifest.xml" />	
+	<Script>
+		<![CDATA[
+			import mt.MTCanonicalNamespace;
+			import mt.MTParser;
+			import mx.modules.ModuleLoader;
+			private var loaderRef:ModuleLoader;
+			
+			public function initMXML():void
+			{
+				parseInitialMXML();
+			}
+			
+			public function parseInitialMXML():void
+			{
+				bridge.parser.registerClassResolver(new MTCanonicalNamespace("http://www.adobe.com/2006/mxml",mxmlManifest));
+			}
+		]]>
+	</Script>
+
+			
+		</Application>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Style>
+		.quadLabel {
+			color: #666666;
+			fontSize: 36;
+			fontWeight: bold;	
+			fontFamily: Verdana;
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.controls.Button;
+
+		import qs.charts.dataShapes.*;
+
+				
+		override public function get descriptions():Array {
+			return ["This example shows how you might use the DataDrawingCanvas to draw a selection in the chart.\n\n" + 
+					"The Data Drawing API allows you to specify both a data value and a pixel offset for any coordinate used" + 
+					"in the drawing commands.  The canvas will convert the data value, add the offset, and use that as the coordinate" + 
+					"in the actual drawing.\n\n" + 
+					"In this case, we're drawing the selection from the top to the bottom of the chart, but offset by 4 pixels. That gives" + 
+					" us a small gap at the top, and hides the rounded corners at the bottom\n\n" + 
+					"" + 
+					"Click on a bar on the chart or a day on the calendar to set the selection. Click and drag on the chart, or shift-click on the calendar, to select a range." + 
+					""];
+		}
+
+
+		[Bindable] public var dataSet:Array;
+		
+		public function updateDateRangeAxis(updateHAxis:Boolean):void
+		{
+			var startDate:Date = new Date(rangeSelector.displayedYear,rangeSelector.displayedMonth);
+			var endDate:Date = new Date(startDate);
+			if(updateHAxis)
+			{
+				endDate.month += 1;
+				endDate.date -= 1;
+				drAxis.minimum = startDate;
+				drAxis.maximum = endDate;
+				var newSet:Array = [];
+				var d:Date = new Date(startDate);
+				while(d < endDate)
+				{
+					newSet.push({ value: Math.floor(Math.random()*18), date: new Date(d) });
+					d.date++;				
+				}
+				dataSet = newSet;
+			}
+			
+		
+			
+			var selection:Object = rangeSelector.selectedRanges[0];
+
+			dateAnnotations.clear();
+						
+			if(selection != null)
+			{
+				dateAnnotations.beginFill(0x9999BB,.5);
+				dateAnnotations.lineStyle(2,0x6666AA);
+				endDate = new Date(selection.rangeEnd);
+				endDate.hours += 12;
+				endDate.milliseconds -= 1;
+				startDate = new Date(selection.rangeStart);
+				startDate.hours -= 12;
+				dateAnnotations.drawRoundedRect(startDate,[Edge.TOP,4],endDate,[Edge.BOTTOM,16],16);
+				dateAnnotations.endFill();
+			}
+		}
+		private var dragStart:Date;
+		private function setSelection(start:Date,end:Date):void
+		{
+			if(start < end)
+				rangeSelector.selectedRanges = [ {rangeStart: start, rangeEnd: end} ];
+			else
+				rangeSelector.selectedRanges = [ {rangeStart: end, rangeEnd: start} ];
+			rangeSelector.validateNow();
+			updateDateRangeAxis(false);
+		}
+
+		public function beginDrag():void
+		{	
+			dragStart = new Date(chart.localToData(new Point(chart.mouseX,chart.mouseY))[0]);
+			dragStart.minutes = dragStart.seconds = dragStart.milliseconds = 0;
+			dragStart.hours = 24 * Math.round(dragStart.hours / 24);
+			var endDate:Date = new Date(dragStart);
+			setSelection(dragStart,endDate);
+		}
+		public function continueDrag():void
+		{
+			if(dragStart == null)
+				return;
+			var newEnd:Date = new Date(chart.localToData(new Point(chart.mouseX,chart.mouseY))[0]);
+			newEnd.minutes = newEnd.seconds = newEnd.milliseconds = 0;
+			var dt:Number= newEnd.date;
+			var hrs:Number=  newEnd.hours;
+			if(newEnd.hours > 12)
+				newEnd.date++;
+			newEnd.hours = 0;
+			setSelection(dragStart,newEnd);
+		}
+		public function completeDrag():void
+		{
+			if(dragStart == null)
+				return;
+			dragStart = null;
+		}
+
+		]]>
+	</Script>
+
+	<s:controls>
+		<DateChooser id="rangeSelector" allowDisjointSelection="false" allowMultipleSelection="true" scroll="updateDateRangeAxis(true)" change="updateDateRangeAxis(false)"/>
+	</s:controls>
+
+	<CartesianChart id="chart" width="100%" height="200" creationComplete="updateDateRangeAxis(true)" 
+		verticalAxisStyleName="linedNumericAxis" mouseDown="beginDrag();" mouseMove="continueDrag()" mouseUp="completeDrag();">
+		<annotationElements>
+			<dataShapes:DataDrawingCanvas id="dateAnnotations" />
+		</annotationElements>
+		<series>
+			<ColumnSeries dataProvider="{dataSet}" xField="date" yField="value" />
+		</series>
+		<horizontalAxis>
+			<DateTimeAxis id="drAxis"  displayLocalTime="true" />
+		</horizontalAxis>
+	</CartesianChart>
+
+</s:ExampleBase>

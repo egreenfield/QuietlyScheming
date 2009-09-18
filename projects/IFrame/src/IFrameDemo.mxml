@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IFrameDemo_code xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*"
+    creationComplete="initCC()">
+
+    <mx:XML id="folders" source="data/folders.xml" />
+	<mx:XML id="emails" source="data/emails.xml" />
+	<mx:Style source="styles.css" />
+	
+    <mx:HBox width="100%" height="100%">
+
+        <mx:Panel title="Tree" width="200" height="100%">
+            <mx:Tree id="tree" dataProvider="{folders}" showRoot="false" width="100%" height="100%"
+                change="folderChanged();" labelField="@label" />
+        </mx:Panel>
+
+        <mx:Panel title="Content" width="100%" height="100%" paddingTop="1" paddingBottom="1"  paddingLeft="1" paddingRight="1">
+			<mx:VDividedBox liveDragging="true" width="100%" height="100%" dividerThickness="10">
+			<mx:DataGrid id="folderContents" change="emailChanged()" width="100%" height="200">
+				<mx:columns>
+					<mx:DataGridColumn dataField="@from" width="200" headerText="sender" />
+					<mx:DataGridColumn dataField="@subject" headerText="subject" />
+				</mx:columns>
+			</mx:DataGrid>
+							
+
+	            <IFrameProxy id="iFrame" width="100%" height="100%" />
+			</mx:VDividedBox>
+            <mx:ControlBar>
+                <mx:CheckBox id="cbVisible" label="show reading pane" selected="true" click="iFrame.visible=cbVisible.selected"/>
+            </mx:ControlBar>
+        </mx:Panel>
+
+    </mx:HBox>
+
+</IFrameDemo_code>

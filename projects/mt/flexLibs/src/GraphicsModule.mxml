@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Graphic;
+			import mx.graphics.*;
+
+			public var linkages:Array = [
+				Graphic, 
+				Group, 
+				Ellipse, 
+				Line, 
+				Path, 
+				Rect, 
+				TextGraphic, 
+				BitmapGraphic, 
+				SolidColor, 
+				LinearGradient, 
+				RadialGradient,
+				Stroke
+			];
+		]]>
+	</mx:Script>	
+</mx:Module>

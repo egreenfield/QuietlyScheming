@@ -1,0 +1,38 @@
+
+		Application {
+			backgroundColor: #343434;
+		}
+
+/*
+		@font-face
+		{
+		   font-family: EmbeddedArial;
+		   src: url("arial.ttf"); 
+		}
+*/
+
+		.frame {
+			padding-left: 30;
+			padding-top: 30;
+			padding-right: 30;
+			padding-bottom: 30;
+		}
+		FormItemLabel, Label, Text, Tree, CheckBox {
+			color: #FFFFFF;
+			rollOverColor: #FFFFFF;
+			textRollOverColor: #FFFFFF;
+			textSelectedColor: #FFFFFF;
+		}
+		VRule
+		{
+			strokeColor: #FFFFFF;
+			strokeWidth: 1;
+		}
+		ColumnChart, CartesianChart, AreaChart, PlotChart {
+			horizontalAxisStyleName: linedNumericAxis;	
+			verticalAxisStyleName: linedNumericAxis;	
+		}
+		
+		Tree {
+			rollOverColor: #555588	
+		}

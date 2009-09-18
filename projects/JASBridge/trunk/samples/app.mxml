@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.macromedia.com/2005/mxml" xmlns="*" height="400">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.gridclasses.DataGridColumn;
+			import mx.controls.Alert;
+			import mx.controls.DataGrid;
+
+			public function testFunc(val1:String = "defaultParam" ):void {
+				Alert.show(val1,"called remotely");
+			}
+
+			// these just force datagrid to be linked into the application
+			public var ref1:DataGrid;
+			public var c1:DataGridColumn;
+
+
+		]]>
+	</mx:Script>
+
+	<bridge:JASBridge xmlns:bridge="bridge.*" id="bridgeInst" />
+
+	<mx:Panel width="100%" height="100%" id="panel" marginLeft="20" marginTop="20" >
+		<mx:Text width="100%" height="16">
+			<mx:text>
+				Refer to the controls below, via javascript, as slider(), check(), and button() respectively
+			</mx:text>
+		</mx:Text>
+		<mx:CheckBox x="49" y="34" label="Checkbox" id="check"/>
+		<mx:HSlider snapInterval=".01" id="slider" liveDragging="true"/>
+		<mx:Button id="button" label="generic button" />
+	</mx:Panel>
+
+</mx:Application>

@@ -1,0 +1,105 @@
+<steps>
+	<step canTurn="false">
+		Start with a new component, extending UIComponent.
+	</step>
+	<step canTurn="false">
+		Draw the open pages on either side.
+	</step>
+	<step canTurn="false">
+		draw gradients on the two open pages to give them a sense of curvature.
+	</step>
+	<step canTurn="false">
+		adjust their alpha so they enhance the underlying page content.
+	</step>
+	<step canTurn="false">
+		Draw the mouse sensitive region in an overlay sprite. This has two effects -- one, it prevents the 
+		content in this region from getting mouse events (which is what we want) -- and two, it makes it easy
+		to do hit detection -- if we get a mouseDown event on the overlay sprite, we know we should start a turn.
+	</step>
+	<step canTurn="false">
+		hide the overlay sprite. If we set it to visible=false, we wouldn't get any mouse events on it.
+		Instead, we draw the mouse sensitive region with an alpha of zero. That makes it invisible to the 
+		user, but visible to the mouse.
+	</step>
+	<step>
+		When the user clicks on the overlay to turn forward:
+		- set the displayed right page to show the page they're turning to.
+		- record where on the edge of the page they clicked down.
+		- track the mouse position.  Remember the line from the mouse down location to the current mouse position.
+		
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+	
+	<step>
+		As the mouse moves, we must identify the 'fold' of the page.
+		- draw the line between the mouse point and the original grab point,
+		- find its midpoint
+		- find the perpendicular line through that midpoint.
+		- that's the page fold.
+		
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+
+	<step>
+		Now we must identify the shape of the turning page. Time to pull out our geometry again.
+		- identify where the fold intersects the top and bottom of the book.
+		- identify where the fold intersects the side of the book
+		- if it intersects the top side before the side, then:
+  			- take the line from the top corner to where the top intersects the fold.
+			- reflect the line over the fold. That is the top edge of the turned page.
+		- otherwise, there is no top edge to the fold, only a point.
+		- repeat with the bottom edge/corner to identify the bottom edge of the turned page.
+		- the line between the top/bottom edges of the turned page represents the leading edge of the turned page.
+		- this is the folded page polygon.
+
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+	<step>
+		Now we'll fill in the turning page.  
+		-First, identify what child represents the back of the turning page.
+		- create a bitmap the size of the page.
+		- copy the back page child into the bitmap.
+		- construct a matrix that places that bitmap aligned with the top or bottom corners
+		  of the turned page.
+
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>		
+	<step>
+		Now we want to clip the turning page to the turning polygon we calculated earlier.
+		- instead of placing the bitmap on screen, we use it as a bitmap fill and draw a polygon.
+		- apply the same matrix transform to the fill to get the bitmap in the right place.
+		- draw the revealed page polygon we computed earlier
+
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+	<step>
+		Now we want to draw the top of the turning page.
+		- identify what child represents the front of the turning page.
+		- as before, create a bitmap the size of the page and copy the child into it.
+		- construct a polygon consisting of the top and bottom of the book's spine and the fold intersection points. 
+		- use our top page bitmap to fill in the top page polygon.
+
+		This one is hard to spot. Notice that when you turn the page, the top of the turning page doesn't dissapear, and the right hand page doesn't 
+		show through. go back and look at the previous step if can't see the difference.
+
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+	<step>
+		Draw a gradient on the bottom of the turned page to create a curved appearance.
+		
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+	<step>
+		Draw that gradient with an alpha to blend it in with the content.
+		
+		Turn the page, either with the buttons to the left, or click and 
+		drag on the corner of the book to see the effect.
+	</step>
+</steps>

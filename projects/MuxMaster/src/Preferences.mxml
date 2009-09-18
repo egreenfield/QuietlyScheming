@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			public var model:MuxModel;
+			public var controller:MuxController;
+			
+		]]>
+	</mx:Script>
+	<mx:Label x="10" y="10" text="Preferences" fontSize="24"/>
+	<mx:Label x="30" y="53" text="Downloads saved to:"/>
+	<mx:TextInput y="51" right="10" left="159" text="{model.directory}" change="model.directory = saveTo.text" id="saveTo" />
+	
+</mx:Canvas>

@@ -1,0 +1,24 @@
+
+
+
+.insetBox {
+	paddingBottom: 30;
+	paddingLeft: 30;
+	paddingRight: 30;
+	paddingTop: 30;	
+}
+.smallBox {
+	paddingBottom: 10;
+	paddingLeft: 15;
+	paddingRight: 15;
+	paddingTop: 10;	
+}
+		
+Application, Text, Form, Label {
+	color: #FFFFFF;
+}
+
+VRule {
+	strokeWidth: 1;
+	strokeColor: #FFFFFF;	
+}

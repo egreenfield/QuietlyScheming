@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HBox xmlns="http://www.adobe.com/2006/mxml"
+	borderColor="#d5ba00" borderStyle="solid" backgroundColor="#ffff9d"
+	paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5" borderSides="top bottom"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	currentState="open"
+	verticalAlign="top">
+
+	<Script>
+		<![CDATA[
+			private var _text:String;
+			public function set text(value:String):void
+			{
+				_text = value;
+				if(textDisplay != null)
+					textDisplay.htmlText = value;
+			}
+			public function get text():String
+			{
+				return _text;
+			}
+			
+			override protected function createChildren():void
+			{
+				super.createChildren();
+				textDisplay.htmlText = _text;
+			}
+			private function toggle():void
+			{
+				currentState = (currentState == 'closed')? 'open':'closed';
+			}
+			[Bindable] public var allowClose:Boolean = true;
+		]]>
+	</Script>	
+	<states>
+		<State name="closed">
+			<SetProperty name="visible" target="{textDisplay}" value="false" />
+			<SetProperty name="includeInLayout" target="{textDisplay}" value="false" />
+			<AddChild position="firstChild" >
+				<Spacer width="100%" id="spacer" />
+			</AddChild>
+			<SetStyle name="borderSides" value="" />
+			<SetProperty target="{toggleButton}" name="label" value="i" />
+			<SetStyle target="{toggleButton}" name="fontStyle" value="italic" />
+		</State>
+		<State name="open" />
+	</states>
+	
+	<transitions>
+		<Transition fromState="closed" toState="open">
+			<Sequence target="{this}">
+				<Resize duration="500" target="{this}" />
+				<RemoveChildAction target="{spacer}"/>
+				<SetPropertyAction target="{textDisplay}" name="visible" />
+				<SetPropertyAction target="{textDisplay}" name="includeInLayout" />
+			
+			</Sequence>
+		</Transition>
+		<Transition fromState="open" toState="closed">
+			<Resize duration="500" target="{this}" />
+		</Transition>
+	</transitions>
+	
+	<Text width="100%" fontSize="10" fontFamily="Verdana" condenseWhite="true" id="textDisplay" />
+	<Button width="22" height="22" id="toggleButton" cornerRadius="2" label="x" fillColors="[#F8CE38, #F98B22]" color="#ffffff" fillAlphas="[1.0, 1.0]" 
+		fontWeight="bold" fontSize="15" textRollOverColor="#FFFFFF"  click="toggle()" 
+		visible="{allowClose}" includeInLayout="{allowClose}" />
+</HBox>

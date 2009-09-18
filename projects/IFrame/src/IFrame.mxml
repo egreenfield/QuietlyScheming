@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*"
+    creationComplete="iFrame.visible=true">
+
+    <mx:XML id="content">
+    	<node label="root">
+			<node label="Search">
+				<node label="Google" path="http://www.google.com"/>
+				<node label="Yahoo" path="http://www.yahoo.com"/>
+			</node>
+			<node label="Software">
+				<node label="Macromedia" path="http://www.macromedia.com"/>
+				<node label="Adobe" path="http://www.adobe.com"/>
+			</node>
+		</node>
+    </mx:XML>
+
+    <mx:HBox width="100%" height="100%">
+
+        <mx:Panel title="Tree" width="200" height="100%">
+            <mx:Tree id="tree" dataProvider="{content}" width="100%" height="100%"
+                change="iFrame.source=tree.selectedItem.@path" labelField="@label"/>
+        </mx:Panel>
+
+        <mx:Panel title="Content" width="100%" height="100%" paddingTop="1" paddingBottom="1"  paddingLeft="1" paddingRight="1">
+            <IFrameProxy id="iFrame" source="http://www.google.com" width="100%" height="100%"/>
+            <mx:ControlBar>
+                <mx:CheckBox id="cbVisible" label="IFrame Visible" selected="true" click="iFrame.visible=cbVisible.selected"/>
+            </mx:ControlBar>
+        </mx:Panel>
+
+    </mx:HBox>
+
+</mx:Application>

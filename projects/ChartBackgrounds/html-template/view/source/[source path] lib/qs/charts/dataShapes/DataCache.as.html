@@ -1,0 +1,95 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DataCache.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="asPackage">package</span> qs.charts.dataShapes
+<span class="asBracket">{</span>
+    <span class="asReserved">import</span> flash.utils.Dictionary;
+    <span class="asReserved">import</span> mx.charts.chartClasses.BoundedValue;
+    
+<span class="asReserved">public</span> <span class="asClass">class</span> DataCache
+<span class="asBracket">{</span>
+    <span class="asReserved">public</span> <span class="asVar">var</span> xCache<span class="asOperator">:</span>Array;
+    <span class="asReserved">public</span> <span class="asVar">var</span> yCache<span class="asOperator">:</span>Array;
+    
+    <span class="asReserved">public</span> <span class="asVar">var</span> xBoundedValues<span class="asOperator">:</span>Dictionary;
+    <span class="asReserved">public</span> <span class="asVar">var</span> yBoundedValues<span class="asOperator">:</span>Dictionary;
+    <span class="asReserved">public</span> <span class="asVar">var</span> xMap<span class="asOperator">:</span>Dictionary;
+    <span class="asReserved">public</span> <span class="asVar">var</span> yMap<span class="asOperator">:</span>Dictionary;
+    
+    <span class="asReserved">public</span> <span class="asFunction">function</span> DataCache<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+    <span class="asBracket">{</span>
+        xMap <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+        yMap <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+        xCache <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+        yCache <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+        xBoundedValues <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+        yBoundedValues <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+    <span class="asBracket">}</span>
+    <span class="asReserved">public</span> <span class="asFunction">function</span> storeX<span class="asBracket">(</span>value<span class="asOperator">:*</span>,leftMargin<span class="asOperator">:</span>Number <span class="asOperator">=</span> 0, rightMargin<span class="asOperator">:</span>Number <span class="asOperator">=</span> 0<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+    <span class="asBracket">{</span>
+        <span class="asVar">var</span> bounds<span class="asOperator">:</span>BoundedValue;
+
+        <span class="asReserved">if</span><span class="asBracket">(</span>value <span class="asReserved">is</span> Edge<span class="asBracket">)</span>
+            <span class="asReserved">return</span>;
+        <span class="asReserved">if</span><span class="asBracket">(</span>leftMargin <span class="asOperator">&lt;</span> 0<span class="asBracket">)</span>
+            leftMargin <span class="asOperator">=</span> 0;
+        <span class="asReserved">if</span><span class="asBracket">(</span>rightMargin <span class="asOperator">&lt;</span> 0<span class="asBracket">)</span>
+            rightMargin <span class="asOperator">=</span> 0;
+            
+        xMap<span class="asBracket">[</span>value<span class="asBracket">]</span> <span class="asOperator">=</span> value;
+        <span class="asReserved">if</span><span class="asBracket">(</span>leftMargin <span class="asOperator">!=</span> 0 <span class="asOperator">||</span> rightMargin <span class="asOperator">!=</span> 0<span class="asBracket">)</span>
+        bounds <span class="asOperator">=</span> xBoundedValues<span class="asBracket">[</span>value<span class="asBracket">]</span>;
+        <span class="asReserved">if</span><span class="asBracket">(</span>leftMargin <span class="asOperator">&gt;</span> 0<span class="asBracket">)</span>
+            leftMargin <span class="asOperator">+=</span> 2;
+        <span class="asReserved">if</span> <span class="asBracket">(</span>rightMargin <span class="asOperator">&gt;</span> 0<span class="asBracket">)</span>
+            rightMargin <span class="asOperator">+=</span> 2;
+            
+        <span class="asReserved">if</span><span class="asBracket">(</span>bounds <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+        <span class="asBracket">{</span>
+            xBoundedValues<span class="asBracket">[</span>value<span class="asBracket">]</span> <span class="asOperator">=</span> bounds <span class="asOperator">=</span> <span class="asReserved">new</span> BoundedValue<span class="asBracket">(</span>0,leftMargin,rightMargin<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">else</span>
+        <span class="asBracket">{</span>
+            bounds.lowerMargin <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>bounds.lowerMargin,leftMargin<span class="asBracket">)</span>;
+            bounds.upperMargin <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>bounds.upperMargin,rightMargin<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+    <span class="asBracket">}</span>
+
+    <span class="asReserved">public</span> <span class="asFunction">function</span> storeY<span class="asBracket">(</span>value<span class="asOperator">:*</span>,topMargin<span class="asOperator">:</span>Number <span class="asOperator">=</span> 0,bottomMargin<span class="asOperator">:</span>Number <span class="asOperator">=</span> 0<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+    <span class="asBracket">{</span>
+        <span class="asVar">var</span> bounds<span class="asOperator">:</span>BoundedValue;
+
+        <span class="asReserved">if</span><span class="asBracket">(</span>value <span class="asReserved">is</span> Edge<span class="asBracket">)</span>
+            <span class="asReserved">return</span>;
+        yMap<span class="asBracket">[</span>value<span class="asBracket">]</span> <span class="asOperator">=</span> value;
+        <span class="asReserved">if</span><span class="asBracket">(</span>topMargin <span class="asOperator">!=</span> 0 <span class="asOperator">||</span> bottomMargin <span class="asOperator">!=</span> 0<span class="asBracket">)</span>
+        <span class="asBracket">{</span>
+            bounds <span class="asOperator">=</span> yBoundedValues<span class="asBracket">[</span>value<span class="asBracket">]</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>bounds <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                yBoundedValues<span class="asBracket">[</span>value<span class="asBracket">]</span> <span class="asOperator">=</span> bounds <span class="asOperator">=</span> <span class="asReserved">new</span> BoundedValue<span class="asBracket">(</span>0,bottomMargin,topMargin<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            <span class="asReserved">else</span>
+            <span class="asBracket">{</span>
+                bounds.lowerMargin <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>bounds.lowerMargin,bottomMargin<span class="asBracket">)</span>;
+                bounds.upperMargin <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>bounds.upperMargin,topMargin<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+    <span class="asBracket">}</span>
+    <span class="asReserved">public</span> <span class="asFunction">function</span> x<span class="asBracket">(</span>value<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span>Number
+    <span class="asBracket">{</span>
+        <span class="asReserved">return</span> Number<span class="asBracket">(</span>xMap<span class="asBracket">[</span>value<span class="asBracket">])</span>;
+    <span class="asBracket">}</span>
+    <span class="asReserved">public</span> <span class="asFunction">function</span> y<span class="asBracket">(</span>value<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span>Number
+    <span class="asBracket">{</span>
+        <span class="asReserved">return</span> Number<span class="asBracket">(</span>yMap<span class="asBracket">[</span>value<span class="asBracket">])</span>;
+    <span class="asBracket">}</span>
+<span class="asBracket">}</span>
+<span class="asBracket">}</span></pre></body>
+</html>

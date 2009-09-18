@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Demo xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" height="100%">
+
+	<Script>
+		<![CDATA[
+			private var steps:Array = [
+				"start with an empty component",
+				"add an Image component as a child.",
+				"use a matrix to distort the image with a vertical shear.",
+				"draw a Trapezoid into a Shape instance to mimic perspective",
+				"Set the Shape instance as the Image's mask",
+				"re-draw the Trapezoid into another Shape for the border",
+				"create a Bitmap, and blit the Image into it for the reflection",
+				"use a matrix to distort the reflection with a vertical shear",
+				"use a scaleY of -1 to invert the reflection",
+				"apply alpha gradient to fade reflection"
+			]
+			
+			private var stepIndex:Number = -1;			
+			
+			private function setStepIndex(value:Number):void
+			{
+				stepIndex = Math.max(0,Math.min(steps.length-1,value));
+				
+				maskTilter.visible = true;
+				maskTilter.includeInLayout = true;
+				
+				switch(stepIndex)
+				{
+					case 0:
+						maskTilter.showContent = false;
+						maskTilter.distort = false;
+						maskTilter.drawFrame = false;
+						maskTilter.showContentMasking = false;
+						maskTilter.drawMask = false;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 1:
+						maskTilter.showContent = true;
+						maskTilter.distort = false;
+						maskTilter.drawFrame = false;
+						maskTilter.showContentMasking = false;
+						maskTilter.drawMask = false;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 2:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawFrame = false;
+						maskTilter.showContentMasking = false;
+						maskTilter.drawMask = false;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 3:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = true;
+						maskTilter.showContentMasking = false;
+						maskTilter.drawFrame = false;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 4:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = true;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = false;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 5:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = false;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = true;
+						maskTilter.drawReflection = false;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 6:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = false;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = true;
+						maskTilter.drawReflection = true;
+						maskTilter.drawGradient = false;
+						maskTilter.shearReflection = false;
+						maskTilter.invertReflection = false;
+						break;
+					case 7:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = false;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = true;
+						maskTilter.drawReflection = true;
+						maskTilter.shearReflection = true;
+						maskTilter.invertReflection = false;
+						maskTilter.drawGradient = false;
+						break;
+					case 8:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = false;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = true;
+						maskTilter.drawReflection = true;
+						maskTilter.shearReflection = true;
+						maskTilter.invertReflection = true;
+						maskTilter.drawGradient = false;
+						break;
+					case 9:
+						maskTilter.showContent = true;
+						maskTilter.distort = true;
+						maskTilter.drawMask = false;
+						maskTilter.showContentMasking = true;
+						maskTilter.drawFrame = true;
+						maskTilter.drawReflection = true;
+						maskTilter.shearReflection = true;
+						maskTilter.invertReflection = true;
+						maskTilter.drawGradient = true;
+						break;
+				}
+				description.text = steps[stepIndex];
+			}
+			private function nextStep():void
+			{
+				setStepIndex(stepIndex+1);
+			}
+
+			private function prevStep():void
+			{
+				setStepIndex(stepIndex-1);
+			}
+
+		]]>
+	</Script>
+	<VBox horizontalAlign="center" horizontalCenter="0" verticalCenter="0" verticalGap="30">
+			<Label id="description" fontSize="18" text=" " />		
+
+			<HBox>
+				<local:TiltingPane01 angle="{angle.value}" width="400" height="400"
+					source="img/photos400/photo06.jpg" scaleX=".5" scaleY=".5" />
+				<local:TiltingPane01_Options angle="{angle.value}" id="maskTilter" includeInLayout="false" visible="false" width="400" height="400"  
+					source="img/photos400/photo06.jpg" scaleX=".5" scaleY=".5" />
+			</HBox>
+	</VBox>
+
+	<VBox bottom="10" horizontalCenter="0">
+		<HSlider liveDragging="true" id="angle" minimum="-90" value="0" maximum="90" snapInterval=".01" width="600" />
+		<HBox>
+			<Button label="&lt;" click="prevStep();" />
+			<Button label="&gt;" click="nextStep();" />
+		</HBox>
+	</VBox>
+</local:Demo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" horizontalGap="0" xmlns:qs="qs.containers.*" horizontalAlign="left" paddingLeft="20" paddingTop="20" paddingBottom="20" paddingRight="20" layout="horizontal" 
+	backgroundColor="#343434"  initialize="initApp()" fillColors=""
+viewSourceURL="srcview/index.html" xmlns:f="flash.filters.*" xmlns:local="*" >	
+
+		<Style>
+		
+		.insetBox {
+			paddingBottom: 30;
+			paddingLeft: 30;
+			paddingRight: 30;
+			paddingTop: 30;	
+		}
+		
+		Application {
+			color: #FFFFFF;
+		}
+		
+		
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.managers.DragManager;
+			import mx.core.UIComponent;
+			import mx.events.DragEvent;
+
+			
+			
+			private function initApp():void
+			{
+			}
+			private function allowDrag(event:DragEvent):void
+			{
+				DragManager.acceptDragDrop(UIComponent(event.target));
+			}
+			private function acceptDrag(event:DragEvent):void
+			{
+				var src:UIComponent = UIComponent(event.dragInitiator);
+				src.parent.removeChild(src);
+				event.target.addChild(src);
+			}
+		]]>
+		</Script>			
+		
+		<qs:AnimatedBox direction="horizontal" borderColor="#FFFFFF" borderStyle="solid" width="100%" height="100%">
+			
+			<qs:AnimatedBox direction="horizontal" borderColor="#FFFFFF" borderStyle="solid" 
+				borderThickness="5" verticalGap="30" styleName="insetBox"
+				dragEnter="allowDrag(event)" dragDrop="acceptDrag(event)">
+					<local:DraggableBox backgroundColor="#FFAAAA" />
+					<local:DraggableBox backgroundColor="#AAFFAA" />
+					<local:DraggableBox backgroundColor="#AAAAFF" />
+			</qs:AnimatedBox>
+			<qs:AnimatedBox direction="vertical" borderColor="#FFFFFF" borderStyle="solid" 
+				borderThickness="5" verticalGap="30" styleName="insetBox"
+				dragEnter="allowDrag(event)" dragDrop="acceptDrag(event)">
+					<local:DraggableBox backgroundColor="#FFAAAA" />
+					<local:DraggableBox backgroundColor="#AAFFAA" />
+					<local:DraggableBox backgroundColor="#AAAAFF" />
+			</qs:AnimatedBox>
+		</qs:AnimatedBox>
+								
+</Application>

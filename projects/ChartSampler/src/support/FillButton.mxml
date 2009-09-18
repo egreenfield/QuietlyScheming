@@ -1,0 +1,33 @@
+<PopUpButton label="fill" xmlns="http://www.adobe.com/2006/mxml" >
+  <Script>
+	<![CDATA[
+		import mx.graphics.*;
+		import flash.events.*;
+
+		[Bindable("fillChange")]
+		public function set value(v:SolidColor):void
+		{
+			_fill = v;
+			color.selectedColor = v.color;
+			alphaV.value = v.alpha;
+			dispatchEvent(new Event("fillChange"));
+		}
+		public function get value():SolidColor {return _fill;}
+		private var _fill:SolidColor;
+
+		private function update():void
+		{
+			_fill = new SolidColor(color.selectedColor,alphaV.value);
+			dispatchEvent(new Event("fillChange"));
+		}
+	]]>
+  </Script>
+	<popUp>
+		<VBox  borderStyle="solid" borderColor="#888888" backgroundColor="#FFFFFF">
+			<Label text="alpha" />
+			<HSlider id="alphaV" minimum="0" liveDragging="true" maximum="1" snapInterval=".1" value="1" change="update();" width="100" />
+			<ColorPicker width="100" height="100" change="update()" id="color" />
+		</VBox>
+	</popUp>
+
+</PopUpButton>

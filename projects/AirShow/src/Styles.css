@@ -1,0 +1,26 @@
+/* CSS file */
+
+.dark
+{
+	backgroundColor: #3A3A3A;
+	color: #FFFFFF;
+	textRollOverColor: #FFFFFF;
+}
+
+@font-face {
+	src: local("Helvetica");
+	fontFamily: "TimelineFont";
+		
+}
+.f 
+{
+	fontSize: 82;
+}
+
+TimelineEventRenderer {
+	instantColor: #AAAAAA;
+	durationColor: #222222;
+	fontFamily: "TimelineFont";
+	font-weight: normal;
+	font-size: 48;	
+}

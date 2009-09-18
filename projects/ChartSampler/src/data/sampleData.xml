@@ -1,0 +1,15 @@
+<YearlyData>
+	<Sample month="January" revenue="120" costs="45" overhead="102" oneTime="23" />
+	<Sample month="February" revenue="108" costs="42" overhead="87" oneTime="47" />
+	<Sample month="March" revenue="150" costs="82" overhead="32" oneTime="21" />
+	<Sample month="April" revenue="170" costs="44"  overhead="68" />
+	<Sample month="May" revenue="250" costs="57" overhead="77" oneTime="17" />
+	<Sample month="June" revenue="200" costs="33" overhead="51" oneTime="30" />
+	<Sample month="July" revenue="145" costs="80" overhead="62" oneTime="18"/>
+	<Sample month="August" revenue="166" costs="87" overhead="48" />
+	<Sample month="September" revenue="103" costs="56" overhead="42" />
+	<Sample month="October" revenue="140" costs="91" overhead="45" oneTime="60" />
+	<Sample month="November" revenue="100" costs="42" overhead="33" oneTime="67" />
+	<Sample month="December" revenue="182" costs="56" overhead="25" oneTime="48" />
+	<Sample month="May" revenue="120" costs="57" overhead="30" />
+</YearlyData>

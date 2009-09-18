@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Explorer xmlns:s="qs.samples.*" xmlns="http://www.adobe.com/2006/mxml" viewSourceURL="view/index.html">
+	
+	<Style source="styles.css" />
+	<s:exampleSet>
+		<s:Example label="Drawing with Data">
+			<s:Example label="Basic Drawing API" classRef="samples.Drawing" />
+			<s:Example label="Quadrants" classRef="samples.Quadrants" />
+			<s:Example label="Dynamic Labels" classRef="samples.Labels" />
+			<s:Example label="Labeled Quadrants" classRef="samples.LabeledQuadrants" />
+			<s:Example label="Date Selection" classRef="samples.DateSelection" />
+			<s:Example label="DropLines" classRef="samples.DropLines" />
+			<s:Example label="Comments" classRef="samples.Comments" />
+		</s:Example>
+	</s:exampleSet>
+
+</s:Explorer>

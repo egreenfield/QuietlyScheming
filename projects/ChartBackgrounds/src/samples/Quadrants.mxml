@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Script>
+		<![CDATA[
+			import mx.controls.Button;
+
+		import qs.charts.dataShapes.*;
+
+		[Embed(source="/assets/dotFinal.png")]
+		public var dot:Class;
+		
+		override public function get descriptions():Array {
+		return ["An example of using the edges of the chart in data drawing.  For many types of chart " + 
+				"Annotations, you want to draw not to a particular datapoint, but instead just to the edge" + 
+				"of the chart. The DataDrawing code defines special constants, the Edge.Top/Left/Right/Bottom " + 
+				"constants, to allow this. Pass these as the data value to any of the data drawing routines," + 
+				" and it will substitute the pixel coordinate of the appropriate edge instead.\n\n " + 
+				"In this example, we draw four quadrants in the background of the chart.  Each quadrant" + 
+				" draws from the vertical and horizontal lines defined by the data point (50,50), out to the" + 
+				" edges of the chart data area."];
+		}
+
+
+		public function drawData():void
+		{
+			canvas.clear();
+
+			canvas.lineStyle(0,0,0);
+
+			canvas.beginFill(0xFFDDDD);
+			canvas.drawRect(quadBoundary.value,Edge.TOP,Edge.RIGHT,quadBoundary.value);
+			canvas.endFill();
+
+			canvas.beginFill(0xDDBBBB);
+			canvas.drawRect(Edge.LEFT,Edge.TOP,quadBoundary.value,quadBoundary.value);
+			canvas.endFill();
+
+			canvas.beginFill(0xBB9999);
+			canvas.drawRect(quadBoundary.value,quadBoundary.value,Edge.RIGHT,Edge.BOTTOM);
+			canvas.endFill();
+
+			canvas.beginFill(0x997777);
+			canvas.drawRect(Edge.LEFT,quadBoundary.value,quadBoundary.value,Edge.BOTTOM);
+			canvas.endFill();
+
+			
+
+		}
+
+		]]>
+	</Script>
+
+	<s:controls>
+		<Label text="Quadrant boundary value:" />
+		<HSlider change="drawData()" liveDragging="true" value="50" id="quadBoundary" minimum="-200" maximum="200" width="100%" />		
+	</s:controls>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<PlotChart width="100%" height="100%" creationComplete="drawData();" horizontalAxisStyleName="linedNumericAxis"
+		verticalAxisStyleName="linedNumericAxis">
+		<backgroundElements>
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="false" />			
+		</backgroundElements>
+		<series>
+			<PlotSeries dataProvider="{dataSamples.sample}" filterData="false" 
+				xField="@value" yField="@resource" itemRenderer="mx.charts.renderers.CircleItemRenderer">
+				<fill>
+					<SolidColor color="#000099" />
+				</fill>
+			</PlotSeries>
+		</series>
+	</PlotChart>
+
+</s:ExampleBase>

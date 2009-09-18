@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Style>
+		.columnLabel {
+			color: #000000;
+			fontSize: 12;
+			fontFamily: Verdana;
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+
+		import mx.controls.Label;
+		import qs.charts.dataShapes.*;
+
+		override public function get descriptions():Array {
+			return ["An example of how you can use standard flex components inside a chart with" + 
+					"the DataDrawingCanvas. Labels on Columns is a fairly common request in flex.  Here we programmatically create" + 
+					"one label for every point in our data series.  \n\n" + 
+					"We use the DataDrawingCanvas to pin the bottom center of the label" + 
+					"to the data point, with a 5 pixel offset to place it just above the column.\n\n" + 
+					"Note how the labels are being clipped off by the top of the chart.  If we don't tell the chart to " + 
+					"include the contents of the DataDrawingCanvas in its min/max calculations, there's no guarantee the " + 
+					"labels (or any drawing) will show up inside the chart bounds. "];
+		}
+		
+		public function updateIncludeInRange():void
+		{
+			if(fix.selected == true)
+				return;
+				
+			canvas.includeInRanges = includeInRange.selected;
+
+			// this is a bit of a hack.  There's a bug in the LinearAxis where it sometimes will not account for margins 
+			// correctly if the min/max _without_ accounting for the margins is the same as it was on the last update.
+			// this hack forces it to recalculate correctly.
+			vAxis.maximum=1;
+			vAxis.maximum = undefined;
+		}
+		
+		public function renderLabels():void
+		{
+			// this is a bit of a hack.  There's a bug in the LinearAxis where it sometimes will not account for margins 
+			// correctly if the min/max _without_ accounting for the margins is the same as it was on the last update.
+			// this hack forces it to recalculate correctly.
+			vAxis.maximum=1;
+			vAxis.maximum = undefined;
+			
+			while(canvas.numChildren > 0)
+				canvas.removeChildAt(0);
+			var dp:XMLList = dataSamples.sample.@value;
+			for(var i:int = 0;i<dp.length();i++)
+			{
+				var value:String = dp[i].toString();
+				var l:Label = new Label();
+				l.text = value;
+				l.styleName = "columnLabel";
+				canvas.addChild(l);
+				canvas.updateDataChild(l,{horizontalCenter: i, bottom: Number(value)});
+			}
+		}
+
+		]]>
+	</Script>
+	<s:controls>
+		<CheckBox selected="true" label="include labels in min/max calculations" id="includeInRange" change="updateIncludeInRange()" />
+		<CheckBox label="fix vertical axis" id="fix" /> <HSlider change="fix.selected = true" liveDragging="true" thumbCount="2" values="{[0,100]}" id="axisValues" minimum="-500" maximum="500" width="100%" />		
+	</s:controls>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<ColumnChart width="100%" height="100%" creationComplete="renderLabels();">
+		<annotationElements>
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="true" />			
+		</annotationElements>
+		<series>
+			<ColumnSeries dataProvider="{dataSamples.sample.@value}" filterData="false" />
+		</series>
+		<verticalAxis>
+			<LinearAxis id="vAxis" minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+		</verticalAxis>
+		<horizontalAxis>
+			<CategoryAxis dataProvider="{categories.category.@name}" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</s:ExampleBase>

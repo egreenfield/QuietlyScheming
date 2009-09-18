@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*" xmlns:samples="samples.*">
+
+	<Style>
+		.columnLabel {
+			color: #000000;
+			fontSize: 12;
+			fontFamily: Verdana;
+		}
+		
+		.noteButton {
+			upSkin: Embed("/assets/Q.png");
+			overSkin: Embed("/assets/QOver.png");
+			downSkin: Embed("/assets/QDown.png");
+
+			selectedUpSkin: Embed("/assets/X.png");
+			selectedOverSkin: Embed("/assets/XOver.png");
+			selectedDownSkin: Embed("/assets/XDown.png");
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.controls.Button;
+			import mx.events.FlexEvent;
+			import mx.charts.series.items.ColumnSeriesItem;
+			import mx.charts.HitData;
+			import mx.events.MenuEvent;
+			import mx.controls.Menu;
+			import mx.charts.events.ChartItemEvent;
+			import mx.core.Application;
+			import mx.managers.PopUpManager;
+
+		import mx.controls.Label;
+		import qs.charts.dataShapes.*;
+
+		override public function get descriptions():Array {
+			return ["This example uses data-positioned children in the DataDrawingCanvas to attach comments to individual data points. " + 
+					" Click on a column to add a comment to it.  When the actual comment box is shown, it lives in the popup layer, not" + 
+					" In the chart itself. So we position it by listening to the move event of the comment marker, and place the comment box" + 
+					" Relative to it.\n\n" + 
+					" Click a column to add a comment and comment marker.  Once the marker is visible, click the marker to show and hide" + 
+					" the comment itself."];
+		}
+			
+		private var _notes:Dictionary = new Dictionary(true);
+		
+		public function toggleNote(item:Object,toggled:Boolean):void
+		{
+			var noteData:Object = _notes[item.toString()];
+			var _note:Note;
+			if (noteData.note == null)
+			{
+				noteData.note = _note = new Note();
+				_note.text = "<FONT color='#0000FF'><B>Ely Said:</B></FONT><BR/>You've just added a new comment to this chart." + 
+						"The comment is tied to this particular data point; resize the chart, and the comment will stay with it. " + 
+						"In a real application, this would be something stored in a database. " + 
+						" Type in here to add more comments.  Click the annotation marker again to make this comment go away.";
+			}
+			_note = noteData.note;
+			var b:Button = noteData.button;
+
+			if(toggled)
+			{
+				PopUpManager.addPopUp(_note,this,false);				
+				_note.isPopUp = false;
+				updateNote(item);
+			}
+			else
+			{
+				PopUpManager.removePopUp(_note);
+			}
+			
+			b.selected = toggled;
+			
+			if(toggled)
+			{
+				for(var anItem:* in _notes)
+				{
+					noteData = _notes[anItem];
+					if(noteData.button != b)
+						toggleNote(noteData.item,false);
+				}
+			}
+		}
+		public function updateNote(item:Object):void
+		{
+			var border:Number= 20;
+
+
+			var noteData:Object= _notes[item.toString()];
+			
+			if(noteData == null || noteData.note == null)
+				return;
+
+			var _note:Note = noteData.note;
+			var b:Button = noteData.button;
+			
+			var topLeft:Point;
+			var bottomRight:Point
+			var p:Point;
+			var hOverlap:Boolean = true;
+			topLeft = b.parent.localToGlobal(new Point(b.x,b.y));
+			bottomRight = b.parent.localToGlobal(new Point(b.x + b.width,b.y + b.height));
+			p = new Point(topLeft.x,bottomRight.y);
+			if(p.y > Application.application.height - _note.height - border)
+			{
+				p.y = topLeft.y - _note.height;
+				if(p.y < border)
+				{
+					p.y = border;
+					hOverlap = false;	
+				}
+			}
+			if(hOverlap == false)
+			{
+				p.x = bottomRight.x;
+			}
+			if(p.x > Application.application.width - _note.width - border)
+			{
+				p.x = Math.max(border,((hOverlap)? bottomRight.x : topLeft.x) - _note.width);
+				
+			}
+
+			_note.move(p.x,p.y);
+		}
+
+
+		
+		private function addCommentFor(hd:HitData):void
+		{
+			var b:Button = new Button();
+			b.toggle = true;
+			b.width = 16;
+			b.height = 16;
+			b.styleName = "noteButton";
+			b.addEventListener("move",function(e:Event):void {
+				updateNote(hd.item);
+			});
+			b.addEventListener(MouseEvent.CLICK,function(e:Event):void {
+				toggleNote(hd.item,b.selected);
+				e.stopImmediatePropagation();						
+			});
+			canvas.addChild(b);
+			_notes[hd.item.toString()] = { button: b, item: hd.item };
+			canvas.updateDataChild(b,{horizontalCenter: ColumnSeriesItem(hd.chartItem).xValue, top: [ColumnSeriesItem(hd.chartItem).yValue,4] });
+			toggleNote(hd.item,true);
+		}
+		
+		public function showCommentMenu(e:ChartItemEvent):void
+		{
+			var m:Menu = new Menu();
+			m.labelField = "@label";
+			var mdp:XML = <item label="add a comment..." />;
+			Menu.popUpMenu(m,null,mdp);		
+			m.show(Application.application.mouseX,Application.application.mouseY);
+			m.addEventListener(MenuEvent.ITEM_CLICK,function(menuEvent:Event):void {					
+				addCommentFor(e.hitData);
+			}
+			);
+		}
+		]]>
+	</Script>
+
+	<s:controls>
+		<CheckBox label="fix vertical axis" id="fix" /> <HSlider change="fix.selected = true" liveDragging="true" thumbCount="2" values="{[0,180]}" id="axisValues" minimum="-500" maximum="500" width="100%" />		
+		<CheckBox label="fix horizontal axis" id="hFix" /> <HSlider change="hFix.selected = true" liveDragging="true" id="hAxisValue" minimum="0" value="20" maximum="100" width="100%" />		
+	</s:controls>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<ColumnChart width="100%" height="100%" itemClick="showCommentMenu(event)">
+		<annotationElements>
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="false" />
+		</annotationElements>
+		<series>
+			<ColumnSeries dataProvider="{dataSamples.sample.@value}" filterData="false" />
+		</series>
+		<verticalAxis>
+			<LinearAxis minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+		</verticalAxis>
+		<horizontalAxis>
+			<LinearAxis maximum="{hFix.selected? hAxisValue.value:undefined}" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</s:ExampleBase>

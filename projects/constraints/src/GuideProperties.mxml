@@ -1,0 +1,69 @@
+<TitleWindow title="Guide Properties" initialize="initWindow()" xmlns="http://www.macromedia.com/2003/mxml" xmlns:local="*">
+
+	<Form>
+		<FormItem label="binding type">
+			<ComboBox id="binding" change="updateBind();">
+			</ComboBox>
+		</FormItem>
+		<FormItem label="width:">
+			<TextInput id="guideWidth" change="updateSize();" width="40" text="{2*_guide.size}" />
+		</FormItem>
+	</Form>
+	<Button label="OK" click="close()" />
+
+	<Script>
+	<![CDATA[
+
+		import mx.util.*;
+		import mx.managers.*;
+
+		function set guide(v:Guide)
+		{
+			_guide = v;
+			updateBindings();
+		}
+		function get guide():Guide
+		{return _guide;}
+
+		var _guide:Guide;
+
+		function updateSize()
+		{
+			var n = Number(guideWidth.text);
+			if(n*0 == 0)
+			{
+				_guide.size = n/2;
+			}
+		}
+
+		function updateBindings()
+		{
+			if(_guide.direction == "horizontal")
+			{
+				binding.dataProvider = ["top","bottom","percent"];
+			}
+			else
+			{
+				binding.dataProvider = ["left","right","percent"];
+			}
+			binding.value = _guide.bind;
+		}
+		function close()
+		{
+			_guide.transient = false;
+			Object(this).deletePopUp();
+		}
+
+		function updateBind()
+		{
+			_guide.transient = false;
+			_guide.bind = String(binding.value);
+		}
+		function initWindow()
+		{
+		}
+	]]>
+	</Script>
+
+
+</TitleWindow>

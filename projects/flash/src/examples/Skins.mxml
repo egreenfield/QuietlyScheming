@@ -1,0 +1,14 @@
+<HBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="Skins" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	creationComplete="setup()">
+		<Script>
+			<![CDATA[
+				
+				private function setup():void
+				{
+				}
+			]]>
+		</Script>
+		
+		<Button skin="AnimatedUpDownCircle" label="Click Me!" fontSize="30" color="#FFFFFF" />
+		
+</HBox>

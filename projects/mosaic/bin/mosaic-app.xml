@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application appId="com.quietlyscheming.mosaic" version=".4" xmlns="http://ns.adobe.com/apollo/application/1.0.M3">
+
+
+
+      <!-- Apollo Application Descriptor File
+
+      The Apollo application descriptor file specifies parameters
+      for identifying, installing, and launching Apollo applications.
+
+      The root element of the descriptor file is "application" and has the following attributes:
+
+          appID — A string identifying this application. Every Apollo application must
+                 have a unique appID. The recommended form of an appID is a dot-delimited,
+                 reverse-DNS-style string, such as: "com.adobe.apollo.ApplicationName"
+                 The appID string must be between 17-255 characters long
+                 and may include the following characters:
+
+                      0-9 
+                      a-z 
+                      A-Z 
+                      . (dot)
+                      - (hyphen)
+
+          version - An application-defined version designator of the standard form: 
+                   "MajorVersion.MinorVersion", where MajorVersion and MinorVersion
+                   are numbers. Additional point designators are allowed after the minor
+                   version, and may include letters. Examples: "1.0", ".4", "0.5", "4.9", "1.3.4a"
+
+          xmlns — The Apollo namespace ("http://ns.adobe.com/apollo/application/1.0.M3").
+      -->
+
+      
+
+      <properties>
+
+            <!--
+            The application name displayed by the operating system 
+            when the appication is running. The name is also used in
+            the application installation path and must conform to 
+            Windows and Mac OS X folder naming restrictions.
+            -->
+
+            <name>Mosaic</name>
+
+            <!--
+            The description displayed in the Apollo application installer.
+            -->
+
+            <description/>
+
+            <!--
+            The publisher string displayed in the Apollo application installer. On
+            Windows, the publisher string is also used the application installation 
+            path and must conform to Windows folder naming restrictions. 
+            -->
+
+            <publisher>QuietlyScheming</publisher>
+
+            <!--
+            The application copyright information. (Optional)
+            -->
+
+            <copyright/>
+
+      </properties>
+
+
+
+      <!--
+      The rootContent element identifies the main content file of the application,
+      which must be a SWF or HTML file. rootContent has the following attributes:
+
+      systemChrome — "standard" or "none". If "standard", the application window is opened  
+                    with operating system-specific window elements such as a title bar, 
+                    minimize, and close buttons. If "none", the application must provide
+                    its own window controls. (Note, that the ApolloApplication class supplies
+                    a set of window controls, which are only shown when systemChrome="none".)
+
+      transparent — "true" or "false". If "true", the application has support for full 
+                   transparency. (For the Apollo M3 release, setting transparent="true" has no 
+                   effect if systemChrome="standard").
+
+      visible — "true" or "false". If "false", the main window will not be displayed 
+               until the application changes the visible property.
+
+      The SWF reference required within this tag will be set automatically by Flex Builder
+      when you launch or export this application. There is no need to set it here.
+      -->
+
+      <rootContent systemChrome="standard" transparent="false" visible="true">mosaic.swf</rootContent>
+
+
+
+      <!--
+      Specifies one or more graphics files to be used as application icons. The path specified
+      is relative to the application root directory. For M3, PNG, GIF, and JPEG formats 
+      are supported. If you do not specify an icon, the default Apollo icon is used. To avoid 
+      scaling, you can specify all of the following icon sizes:
+
+      <icon>
+          <image16x16>...</image16x16>
+          <image32x32>...</image32x32>
+          <image48x48>...</image48x48>
+          <image128x128>...</image128x128> 
+      </icon>
+
+      If an image is provided, it must be the size specified or application installation will fail. 
+      If all sizes are not provided, the closest size will be scaled to fit for a given use of the 
+      icon by the operating system.
+      (Optional)
+      -->
+
+      <icon/>
+
+</application>

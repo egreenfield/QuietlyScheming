@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute">
+
+	<Script>
+		<![CDATA[
+
+		]]>
+	</Script>
+
+	<Style>
+		.styledColumnChart {
+			chartSeriesStyles: "column1", "column2", "column3", "column4";
+		}
+		.column1 {
+			fill: #DDDDFF;
+		}
+		.column2 {
+			fill: #BBBBFF;
+		}
+		.column3 {
+			fill: #AAAAFF;
+		}
+		.column4 {
+			fill: #8888FF;
+		}
+	</Style>
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<ColumnChart styleName="styledColumnChart" id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<ColumnSeries yField="revenue" />
+			<ColumnSeries yField="costs" />
+			<ColumnSeries yField="overhead" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+</Application>

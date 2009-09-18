@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+			import mx.charts.series.PlotSeries;
+
+			import mx.charts.renderers.*;
+
+			override public function get descriptions():Array {
+				return ["a simple one series bubble chart chart"];
+			}
+
+			[Bindable] public var rvalues:Array = [
+				{label:"diamond", value: new ClassFactory(DiamondItemRenderer)},
+				{label:"circle", value: new ClassFactory(CircleItemRenderer)},
+				{label:"box", value: new ClassFactory(BoxItemRenderer)},
+				{label:"triangle", value: new ClassFactory(TriangleItemRenderer)},
+
+			];
+			public function replaceSeries():void
+			{
+				var ps:PlotSeries = new PlotSeries();
+				ps.yField="revenue";
+				ps.xField="costs";
+				ps.setStyle("radius",8);
+				ps.setStyle("itemRenderer",rui.selectedItem.value);
+				chart.series = [ps];
+			}
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<ex:controls>
+		<Label text="renderer:" />
+		<ComboBox dataProvider="{rvalues}" id="rui" change="replaceSeries()"/>
+	</ex:controls>
+	<PlotChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<PlotSeries yField="revenue" xField="costs" radius="8" itemRenderer="{rui.selectedItem.value}" />
+		</series>
+	</PlotChart>
+
+</ex:ExampleBase>
+

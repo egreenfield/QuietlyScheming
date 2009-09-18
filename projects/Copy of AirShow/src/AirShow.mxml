@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowedApplication xmlns="http://www.adobe.com/2006/mxml" width="800" height="800" layout="absolute" backgroundColor="#FFFFFF" xmlns:local="*" styleName="dark" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#3A3A3A, #3A3A3A]">
+	<Style source="Styles.css"/>
+
+	<local:MotorTest width="100%" height="100%" />
+<!--
+
+	<local:Controls id="controls" right="10" left="10" top="10" />
+
+	<local:AlbumSummary y="76" left="0" right="0" id="album1" >
+	</local:AlbumSummary>
+	
+	<local:Binder left="{controls}" right="{album1.crawler}">
+		<local:Property name="scrollPosition" />
+		<local:Property name="autoScroll" field="selected" />
+		<local:Property name="wrapAround" field="selected" />
+	</local:Binder>
+
+	<local:AlbumSummary y="211" left="0" right="0">
+	</local:AlbumSummary>
+	<local:AlbumSummary y="370" left="0" right="0">
+	</local:AlbumSummary>
+-->
+</WindowedApplication>

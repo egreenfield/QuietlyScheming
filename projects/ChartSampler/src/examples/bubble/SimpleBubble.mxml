@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple one series bubble chart chart"];
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<BubbleChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<BubbleSeries yField="revenue" xField="costs" radiusField="overhead"/>
+			<BubbleSeries xField="revenue" yField="costs" radiusField="overhead" itemRenderer="mx.charts.renderers.DiamondItemRenderer"/>
+		</series>
+	</BubbleChart>
+
+</ex:ExampleBase>
+

@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" 
+	layout="absolute" 
+	backgroundGradientColors="[#ffffff, #ffffff]" backgroundColor="#ffffff" 
+	xmlns:filters="flash.filters.*" xmlns:controls="qs.controls.*"
+	verticalScrollPolicy="on"
+	viewSourceURL="/source/SuperImage.zip"
+	>
+
+	<Style>
+		SuperImage {
+			border-style: none;
+			border-thickness: 0;	
+		}
+		
+		ScrollBar {
+			trackColors: #EEEEEE, #FFFFFF;
+		}
+		
+		VScrollBar {
+			thumbUpSkin: Embed("assets/scrollThumbUp.png",  scaleGridTop="3", scaleGridBottom="5", scaleGridLeft="4", scaleGridRight="11");	
+			thumbOverSkin: Embed("assets/scrollThumbOver.png",  scaleGridTop="3", scaleGridBottom="6", scaleGridLeft="4", scaleGridRight="11");	
+			thumbDownSkin: Embed("assets/scrollThumbDown.png",  scaleGridTop="3", scaleGridBottom="6", scaleGridLeft="4", scaleGridRight="11");	
+		}
+		
+		List {
+			selection-color: #FFFD71;
+			roll-over-color: #FFFE9F;
+		}
+	</Style>
+
+	<Script>
+		<![CDATA[
+				[Bindable] public var localThumbs:XML = 
+				<photos>
+					<photo url="/images/photos/109337272_87f2f1e002_m.jpg" title="Two Tophats" />
+					<photo url="/images/photos/109342291_f322ca6783_m.jpg" title="Sunset" />
+					<photo url="/images/photos/109345732_d4cc7d2df8_m.jpg" title="Cat on Phone" />
+					<photo url="/images/photos/109349738_eba5615fe9_m.jpg" title="Jack o' Lanterns" />
+					<photo url="/images/photos/109351984_9199f75c6d_m.jpg" title="trippy shell thing" />
+					<photo url="/images/photos/109352459_369720faf9_m.jpg" title="lots of fruit"  />
+					<photo url="/images/photos/109354497_80e4a9792a_m.jpg" title="orange pumpkin" />
+					<photo url="/images/photos/109354704_c9fc6d73bf_m.jpg" title="climbing wall" />
+					<photo url="/images/photos/109354705_3c610dd550_m.jpg" title="climbing wall 2" />
+					<photo url="/images/photos/109355059_0af22a67a0_m.jpg" title="Cat, up close"  />
+					<photo url="/images/photos/109356478_1161e43949_m.jpg" title="Second Sunset" />
+					<photo url="/images/photos/109359306_45fd9c5ec2_m.jpg" title="flower, intimate" />
+					<photo url="/images/photos/109359310_cac293980c_m.jpg" title="flower, petals" />
+					<photo url="/images/photos/109359452_07d2cd31c2_m.jpg" title="shoes?" />
+					<photo url="/images/photos/109360783_64e48aec35_m.jpg" title="kittens, multiple"  />
+				</photos>
+			
+		]]>
+	</Script>
+	<Image x="0" y="0" left="0" top="0" right="0" source="@Embed('assets/header.png')" maintainAspectRatio="false" />
+	<Label x="10" y="10" text="SuperImage TESTBED" fontSize="27" color="#ffffff" fontFamily="Arial" fontWeight="bold"/>
+
+	<VBox bottom="25" left="0" right="0" top="84">
+
+		<l:MsgBox x="0" y="84" width="100%" id="msgBox" allowClose="false" >			
+			<l:text>
+			<![CDATA[
+				A Series of tests to compare THe Default Image class' handling of measured, explicit, and percentage sizing with maintainAspectRatio turned on, vs. that of SuperImage.
+				In each of the tests that follow, The red squares bump up against the right and bottom edges of the rectangle assigned to the Image/SuperImage components.  
+				If there is a gap, between them, it denotes area the component has chosen not to fill).<br/><br/>
+				
+				My goal here was to have the SuperImage behave 'correctly' whenever one dimension of the component was specified, with the other dimension left blank.  In those cases, 
+				you should see no gaps between the SuperImage and the red squares.
+			]]>
+		</l:text>
+		</l:MsgBox>
+			
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				This first test is a sanity control.  Both components are loaded with no width or height assigned.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<Image   source="{localThumbs..photo[1].@url}" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<controls:SuperImage   source="{localThumbs..photo[1].@url}" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+		</HBox>
+
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				In this test, the Image/SuperImage has an explicit pixel width assigned (larger than its natural width), but no height assigned.  
+				Note how the Image doesn't fill the space assigned. Since its measured size is that of its original height, its parent container assigns it the measured size.
+				But to maintain its aspect ratio, that means its width must be its measured width as well. Which means it leaves the extra space blank.				
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<Image   source="{localThumbs..photo[1].@url}" width="300" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<controls:SuperImage   source="{localThumbs..photo[1].@url}" width="300" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				This test is the same as the previous, but with an assigned with <i>smaller</i> than the measured width. In this case, the effect for Image is reversed...it matches
+				its asigned width correctly, but doesn't inform its parent that its measured height should be smaller as a result of its assigned width + aspect ratio.				
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<Image   source="{localThumbs..photo[1].@url}" width="100" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<controls:SuperImage   source="{localThumbs..photo[1].@url}" width="100" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased assigned pixel height, but no assigned width. The effect on both sides should be similar to the opposite test, with an assigned width, above.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<Image   source="{localThumbs..photo[1].@url}" height="300" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<controls:SuperImage   source="{localThumbs..photo[1].@url}" height="300" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased assigned pixel height, but no assigned width. The effect on both sides should be similar to the opposite test, with an assigned width, above.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<Image   source="{localThumbs..photo[1].@url}" height="100" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<controls:SuperImage   source="{localThumbs..photo[1].@url}" height="100" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+		
+		
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased width assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="350">
+					<Image  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="350">
+					<controls:SuperImage  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased width assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="150">
+					<Image  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="150">
+					<controls:SuperImage  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased height assigned to the parent container, with a height of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="350">
+					<Image  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="350">
+					<controls:SuperImage  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased height assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="150">
+					<Image  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="150">
+					<controls:SuperImage  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+
+<!-- ////////////////////////////////// -->
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				The following Tests are the same as were run above, but with maintainAspectRatio turned off.
+				]]>
+			</l:text>
+		</l:MsgBox>
+
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				In this test, Explicit increased assigned width, no assigned hight.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<Image maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" width="300" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<controls:SuperImage maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" width="300" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				This test is the same as the previous, but with an assigned with <i>smaller</i> than the measured width. In this case, the effect for Image is reversed...it matches
+				its asigned width correctly, but doesn't inform its parent that its measured height should be smaller as a result of its assigned width + aspect ratio.				
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<Image maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" width="100" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+				<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+					<HBox horizontalGap="0" >
+						<controls:SuperImage maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" width="100" />
+						<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+					</HBox>
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased assigned pixel height, but no assigned width. The effect on both sides should be similar to the opposite test, with an assigned width, above.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<Image maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" height="300" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<controls:SuperImage maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" height="300" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased assigned pixel height, but no assigned width. The effect on both sides should be similar to the opposite test, with an assigned width, above.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<Image maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" height="100" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" >
+					<controls:SuperImage maintainAspectRatio="false"   source="{localThumbs..photo[1].@url}" height="100" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+		
+		
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased width assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="350">
+					<Image maintainAspectRatio="false" source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="350">
+					<controls:SuperImage maintainAspectRatio="false"  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased width assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="150">
+					<Image maintainAspectRatio="false" source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" width="150">
+					<controls:SuperImage maintainAspectRatio="false"  source="{localThumbs..photo[1].@url.toString()}" width="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit increased height assigned to the parent container, with a height of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="350">
+					<Image maintainAspectRatio="false" source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="350">
+					<controls:SuperImage maintainAspectRatio="false"  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+		<l:MsgBox width="100%" allowClose="false" backgroundColor="#DDDDFF" >			
+			<l:text>
+				<![CDATA[
+				Test: Explicit decreased height assigned to the parent container, with a width of 100% on the image/superImage, with no assigned height.
+				]]>
+			</l:text>
+		</l:MsgBox>
+		<HBox width="100%" horizontalAlign="center">
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="150">
+					<Image maintainAspectRatio="false" source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		
+			<VBox borderColor="#000000" borderStyle="solid" borderThickness="3"  verticalGap="0">
+				<HBox horizontalGap="0" height="150">
+					<controls:SuperImage maintainAspectRatio="false"  source="{localThumbs..photo[1].@url.toString()}" height="100%" />
+					<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+				</HBox>
+				<HBox width="50" height="50" backgroundColor="#FFCCCC" />
+			</VBox>
+		</HBox>
+
+	</VBox>
+	
+	
+</Application>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="1" mainApplicationPath="app.mxml">
+  <compiler additionalCompilerArguments="-services &quot;C:\dev\qs\web\config\WEB-INF\flex\services-config.xml&quot; -locale en_US" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" outputFolderLocation="C:\dev\qs\web\public\regExExplorer" rootURL="http://localhost:3000/regExExplorer" sourceFolderPath="src">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" path="C:\dev\qs\lib"/>
+    </compilerSourcePath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="1" path="${FRAMEWORKS}/locale/{locale}" linkType="1"/>
+    </libraryPath>
+    <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" sourcepath="${FRAMEWORKS}/source"/>
+    </sourceAttachmentPath>
+  </compiler>
+  <applications>
+    <application path="app.mxml"/>
+  </applications>
+</actionScriptProperties>

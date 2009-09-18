@@ -1,0 +1,191 @@
+<link href="/stylesheets/flickr_swf.css" rel="stylesheet" type="text/css">
+<script src="/bridge/AC_OETags.js" language="javascript"></script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+// -----------------------------------------------------------------------------
+// Globals
+// Major version of Flash required
+var requiredMajorVersion = 9;
+// Minor version of Flash required
+var requiredMinorVersion = 0;
+// Minor version of Flash required
+var requiredRevision = 0;
+// -----------------------------------------------------------------------------
+// -->
+</script>
+<%= javascript_include_tag :defaults %>
+
+<div align="center" style="position:relative;top:300px;margin-left:auto;margin-right:auto">
+	<image src="/bridge/load.gif" width="50" height="50" id="spinner" style="position:absolute;display:none;border:none" />
+</div>
+<div style="margin-top:30px;z-index:5;width:100%">
+<div align="left" style="margin-left:30px; font-size: 1.2em;font-weight: bold;">
+
+
+
+
+
+
+
+
+
+<%= form_remote_tag :url => { :controller => "flickr", :action => "swf_thumbnails_rest", :local => params[:local]}, :complete => evaluate_remote_response,
+						:loading => "new Effect.Fade($('ContentHolder'), { duration: .5 });showBusy()",
+						:loaded => "hideBusy()"
+						%>
+  <label class="prompt">Enter a Tag:
+  <br/>
+  <br/>
+  <%= text_field_tag('search',@searchTerm) %>
+  </label>
+
+  <input type="submit" name="submit" value="Search" />
+</form>
+
+
+
+
+</div>
+
+
+<!--<h1 align="left" id="title"></h1>-->
+<!-- yeah, I know, I'm using a table. If this were production, it would be css layout only, xhtml compliant, etc. etc.  -->
+<table id="ContentHolder" width="80%" style="margin-top:50px;">
+<tr>
+<td id="imageHolder" align="right" width="65%">
+</td>
+<td width="35%">
+<div id="title" align="left" style="font-size: 1.6em;font-weight:bold">
+</div>
+<div align="left" id="description" style="font-size: 1.1em;font-weight:bold">
+</div>
+<div align="left" id="owner" style="font-size: 1.1em;font-weight:bold">
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div style="position:absolute;left:0;height:200px;bottom:20px;width:100%;">
+<script language="JavaScript" type="text/javascript">
+<!--
+// Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
+var hasProductInstall = DetectFlashVer(6, 0, 65);
+
+// Version check based upon the values defined in globals
+var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
+
+
+// Check to see if a player with Flash Product Install is available and the version does not meet the requirements for playback
+if ( hasProductInstall && !hasRequestedVersion && 0) {
+	// MMdoctitle is the stored document.title value used by the installation process to close the window that started the process
+	// This is necessary in order to close browser windows that are still utilizing the older version of the player after installation has completed
+	// DO NOT MODIFY THE FOLLOWING FOUR LINES
+	// Location visited after installation is complete if installation is required
+	var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
+	var MMredirectURL = window.location;
+    document.title = document.title.slice(0, 47) + " - Flash Player Installation";
+    var MMdoctitle = document.title;
+	AC_FL_RunContent(
+		"src", "/bridge/playerProductInstall",
+		"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
+		"width", "100%",
+		"height", "100%",
+		"align", "middle",
+		"id", "etech",
+		"quality", "high",
+		"bgcolor", "#000000",
+		"name", "etech",
+		"allowScriptAccess","sameDomain",
+		"type", "application/x-shockwave-flash",
+		"pluginspage", "http://www.macromedia.com/go/getflashplayer"
+	);
+} else if (hasRequestedVersion) {
+	// if we've detected an acceptable version
+	// embed the Flash Content SWF when all tests are passed
+	AC_FL_RunContent(
+			"src", "/bridge/spinner",
+			"width", "100%",
+			"height", "100%",
+			"align", "middle",
+			"id", "etech",
+			"quality", "high",
+			"bgcolor", "#000000",
+			"name", "etech",
+			"flashvars",'historyUrl=history.htm?&amp;lconid=feed&amp;',
+			"allowScriptAccess","sameDomain",
+			"type", "application/x-shockwave-flash",
+			"pluginspage", "http://www.macromedia.com/go/getflashplayer"
+	);
+  } else {  // flash is too old or we can't detect the plugin
+    var alternateContent = '<span style="color:#FFFFFF;">This demo requires Flash Player 9, Beta 3.  <br/>'
+    						+ 'You\'ll need to update your player to view the image carousel.<br/>' 
+    						+ 'Normally, your flash player would ask if you would like to automatically upgrade. '
+							+ '<br/>For now, while it\'s still in beta, you can upgrade your player by visiting '
+    						+ ' <a style="color:#FFFFFF" href="http://labs.adobe.com/">http://labs.adobe.com.</a></span>';
+    document.write(alternateContent);  // insert non-flash content
+  }
+// -->
+</script>
+
+</div>
+
+
+<script src="/bridge/FABridge.js" ></script>
+<script src="/bridge/flickr.js" ></script>
+<script>
+
+
+function showBusy() {
+	new Effect.Appear($('spinner'), { queue: 'end', duration: .5});
+}
+
+function hideBusy() {
+	new Effect.Fade($('spinner'), { queue: 'end', duration: .5});
+}
+FABridge.addInitializationCallback("flash",function() {
+
+	/* grab a reference to the flex application on the page */
+	var flexApp = FABridge.flash.root();
+
+	/* Tweak some of the settings of the carousel component inside
+	/  to get the spinning effect just right
+	*/
+
+	var carousel = flexApp.carousel();
+	carousel.setDecceleration(.01);
+	carousel.setMaxScaleFactor(1.2);
+	carousel.setTileDisplayMode("skew");
+
+	<% if params[:displayMode] != nil %>
+		carousel.setTileDisplayMode( "<%= params[:displayMode] %>" );
+	<% end %>
+
+	/* set up a javascript callback for when the carousel's selection changes */
+	var loadDetailsCallback = function(event) {
+
+		var item = event.item();
+
+		/* fade out any previous image and details with script.aculo.us */
+		new Effect.Fade($('ContentHolder'), { duration: .5 });
+
+		/* request the image url and details */
+		new Ajax.Request('/flickr/load_details?item='+item.id + '&local=<%= params[:local] %>',
+			{
+				asynchronous:true,
+				evalScripts:true,
+				onComplete:function(request){eval(request.responseText)},
+				onLoading:showBusy,
+				onLoaded: function() {hideBusy(); new Effect.Appear($('ContentHolder'),{ queue: 'end', duration: .5 }); }
+			}
+		);
+
+	}
+
+	/* now add the callback as a listener to the flex carousel component */
+	carousel.addEventListener("changing",loadDetailsCallback);
+}
+);
+
+</script>

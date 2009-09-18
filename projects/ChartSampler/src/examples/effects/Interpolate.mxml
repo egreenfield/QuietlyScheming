@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+		
+			override public function get descriptions():Array { 
+				return ["a simple two series column chart"];
+			}
+			
+			public function genData():void
+			{
+				var newData:Array = [];
+				var A:Number = Math.random()*100 - 50;
+				var B:Number = A - Math.random() * 10;
+				var P:Number = Math.random()*100;
+				for(var i:int = 0;i<dataCount.value;i++)
+				{
+					A = A + Math.random()*10 - 5;
+					B = A - Math.random() * 10;
+					P = Math.random()*100;
+					newData.push( 
+					{
+						A: A,
+						B: B,
+						P: P
+					}
+					);
+				}
+				dataSet = newData;
+			}
+			[Bindable] public var dataSet:Array;
+			
+			private function update():void
+			{
+				genData();
+			}
+												
+		]]>
+	</Script>		
+	
+	<ex:controls>
+		<Button label="change data" click="genData();" />
+		<Label text="data size:" />
+		<HSlider width="100" minimum="0" maximum="200" value="20" snapInterval="1" liveDragging="true" id="dataCount" change="update()" />
+		<Label text="duration:" />
+		<HSlider width="100" minimum="0" maximum="5000" value="1000"  liveDragging="true" id="dur" change="update()" />
+		<Label text="minimum element duration:" />
+		<HSlider width="100" minimum="0" maximum="500"  value="200" liveDragging="true" id="med" change="update()" />
+		<Label text="element offset:" />
+		<HSlider width="100" minimum="-500" maximum="500"  value="30" liveDragging="true" id="eo" change="update()" />
+	</ex:controls>
+	
+	<SeriesInterpolate id="eff" elementOffset="{eo.value}" minimumElementDuration="{med.value}" duration="{dur.value}"/>
+
+	<Accordion width="100%" height="100%">
+	<VBox width="100%" height="100%" label="Column">		
+		<ColumnChart width="100%" height="100%" dataProvider="{dataSet}">
+			<series>
+				<ColumnSeries showDataEffect="{eff}" yField="A"/>
+			</series>
+		</ColumnChart>
+	</VBox>				
+	<VBox width="100%" height="100%" label="Pie">		
+		<PieChart width="100%" height="100%" dataProvider="{dataSet}">
+			<series>
+				<PieSeries showDataEffect="{eff}" field="P"/>
+			</series>
+		</PieChart>
+	</VBox>				
+	<VBox width="100%" height="100%" label="Line">		
+		<LineChart width="100%" height="100%" dataProvider="{dataSet}">
+			<series>
+				<LineSeries showDataEffect="{eff}" yField="A"/>
+			</series>
+		</LineChart>
+	</VBox>				
+	<VBox width="100%" height="100%" label="Bubble">		
+		<BubbleChart width="100%" height="100%" dataProvider="{dataSet}">
+			<series>
+				<BubbleSeries showDataEffect="{eff}" xField="A" yField="B" radiusField="P"/>
+			</series>
+		</BubbleChart>
+	</VBox>				
+
+	</Accordion>
+
+</ex:ExampleBase>
+

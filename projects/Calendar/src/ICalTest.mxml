@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" backgroundColor="#FFFFFF" initialize="load();">
+
+<Script>
+	<![CDATA[
+		import qs.calendar.iParser;
+
+		private function load():void
+		{
+			calLoader.url = calUrl.text;
+			calLoader.send();
+		}
+		private function process():void
+		{
+			var calData:String = (calLoader.lastResult as String);
+			var p:iParser = new iParser();
+			var cals:Array = p.parse(calData);
+			output.text = cals[0].dump();
+		}
+	]]>
+</Script>
+	<HTTPService id="calLoader" resultFormat="text" result="process();"/>
+	<Panel width="100%" height="100%"	title="test">
+		<HBox width="100%" >
+			
+			<Label text="url:" />
+			<TextInput id="calUrl" width="100%" text="data/sox.ics" />
+			<Button label="load" click="load()" />		
+		</HBox>
+		<TextArea width="100%" height="100%" id="output" />
+	</Panel>
+</Application>

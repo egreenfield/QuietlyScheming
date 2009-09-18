@@ -1,0 +1,27 @@
+<Application xmlns="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%" xmlns:cc="constraintClasses.*"
+    verticalGap="0" >
+
+	<Style>
+		ConstraintCanvas {
+			backgroundColor:#FFCCCC;
+		}
+	</Style>
+	<Panel id="p" width="100%" height="100%">
+		<cc:ConstraintCanvas id="canvas"  width="100%" height="100%">
+
+			<Button label="World" id="testChild" x="200" y="200" width="200" minWidth="100"/>
+			<Button label="World" id="testChild2" x="200" y="200" width="200" minWidth="100"/>
+
+			<cc:constraints>
+				<Array>
+
+					<cc:SimpleConstraint targetID="testChild" targetProperty="right" sourceProperty="right" offset="-20" />
+					<cc:SimpleConstraint targetID="testChild2" targetProperty="right" sourceProperty="left" sourceID="testChild" offset="-20" />
+
+				</Array>
+			</cc:constraints>
+		</cc:ConstraintCanvas>
+	</Panel>
+
+</Application>

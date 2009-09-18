@@ -1,0 +1,17 @@
+<data>
+
+	<sample state="CA" party="D" votes="82" demo="18-40" />
+	<sample state="CA" party="R" votes="41" demo="18-40" />
+	<sample state="MA" party="D" votes="53" demo="18-40" />
+	<sample state="MA" party="R" votes="22" demo="18-40" />
+	<sample state="AK" party="D" votes="14" demo="18-40" />
+	<sample state="AK" party="R" votes="37" demo="18-40" />
+
+	<sample state="CA" party="D" votes="8" demo="41-80" />
+	<sample state="CA" party="R" votes="19" demo="41-80" />
+	<sample state="MA" party="D" votes="27" demo="41-80" />
+	<sample state="MA" party="R" votes="38" demo="41-80" />
+	<sample state="AK" party="D" votes="26" demo="41-80" />
+	<sample state="AK" party="R" votes="3" demo="41-80" />
+
+</data>

@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MText debug</title>
+<script type="text/javascript" src="/mt/mxml.js"></script>
+<script type="text/javascript" src="/mt/sampleFiles/pageScript.js"></script>
+<style type="text/css">@import "/mt/styles.css";</style>
+</head>
+
+<body>
+
+
+	<div id="embeddedSource">
+	</div>
+
+	<script type="text/javascript">
+		bridge = new MTBridge("embeddedSource","/mt/mxmltext-debug.swf","flash","500","750");
+		bridge.setSource("/mt/sampleFiles/linkedSource.xml");
+		bridge.write();
+	</script>
+
+</body>
+</html>

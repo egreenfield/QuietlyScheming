@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>MXMLSimpleLibs</name>
+	<comment></comment>
+	<projects>
+		<project>MXMLSimple</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] src</name>
+			<type>2</type>
+			<location>C:/dev/qs/projects/mt/src</location>
+		</link>
+		<link>
+			<name>bin</name>
+			<type>2</type>
+			<location>C:/dev/qs/web/public/mt/simple/libraries</location>
+		</link>
+		<link>
+			<name>[source path] graphicsSrc</name>
+			<type>2</type>
+			<location>C:/dev/qs/projects/mt/graphicsSrc</location>
+		</link>
+	</linkedResources>
+</projectDescription>

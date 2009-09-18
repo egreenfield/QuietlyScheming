@@ -1,0 +1,20 @@
+
+
+
+var urls = [
+	null
+<% @photos.each do |photo|
+	url = photo.source('Medium')
+	url =~ /(.*)\.jpg/
+	thumb = "#{$1}_s.jpg"
+	full = "#{$1}_m.jpg"
+%>
+	,{ thumb: '<%= "/flickr/relay?remote=#{thumb}" %>',
+	   full: '<%= "/flickr/relay?remote=#{full}" %>',
+	   id: <%= photo.id %>
+	}
+<% end %>
+]
+
+JASBridge.root.root().rt().setUrlField("thumb");
+JASBridge.root.root().rt().setDataProvider(urls.slice(1,urls.length));

@@ -1,0 +1,46 @@
+<HBox xmlns:local="*" xmlns="http://www.adobe.com/2006/mxml"
+	horizontalAlign="left" styleName="calendarsContainer" height="0" visible="false" currentState="free" xmlns:filters="flash.filters.*">			
+	
+	<states>
+		<State name="free">
+		</State>
+		<State name="busy">
+			<SetProperty name="height" />		
+			<SetProperty name="visible" value="true" />		
+		</State>
+	</states>
+	
+	<transitions>
+		<Transition fromState="free" toState="busy">
+			<Sequence>
+				<SetPropertyAction target="{this}" name="visible" value="{true}" />
+				<SetPropertyAction target="{this}" name="alpha" value="0" />
+				<Parallel>
+					<Fade target="{this}" duration="1000" alphaTo="1"/>
+					<Resize target="{this}" />
+				</Parallel>
+			</Sequence>
+		</Transition>
+		<Transition toState="free" fromState="busy">
+			<Sequence>
+				<Parallel>
+					<Fade target="{this}" duration="1000" alphaTo="0"/>
+					<Resize target="{this}" duration="1000"/>
+				</Parallel>
+				<SetPropertyAction target="{this}" name="visible" value="{false}" />
+				<SetPropertyAction target="{this}" name="alpha" value="1" />
+			</Sequence>
+		</Transition>
+	</transitions>
+	
+	<Image source="@Embed('assets/progressCircle.swf#progressCircle')">
+		<filters>
+			<filters:ColorMatrixFilter>
+				<filters:matrix>
+				{[1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,1,0]}
+				</filters:matrix>
+			</filters:ColorMatrixFilter>
+		</filters>
+	</Image>
+	<Label text="Loading..." />
+</HBox>

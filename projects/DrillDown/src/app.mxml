@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="vertical" xmlns:effects="qs.charts.effects.*"
+	creationComplete="changeChartType();" xmlns:local="*"  viewSourceURL="source/index.html">
+	
+	<Style source="styles.css" />
+	
+	<Script>
+		<![CDATA[
+			import mx.charts.chartClasses.Series;
+			import mx.charts.chartClasses.ChartBase;
+			import mx.charts.events.ChartItemEvent;
+			import mx.charts.ChartItem;
+			
+			private var min:Number = 0;
+			private var max:Number = 100;
+			private var chart:ChartBase;
+			private var series:Series;
+			
+			private var rootNode:XML = <root value='' name="root" />;
+			
+			public function catLabel(value:XML,field:String,index:Number,percent:Number):String
+			{
+				return value.@label;
+			}
+
+			public function genDataFrom(node:XML):XMLList
+			{
+				var count:Number = Math.round(Math.random()*26 +2);
+				var aCharCode:Number = ("A").charCodeAt(0);
+				var children:XMLList = rootNode.children();
+				if(children.length() == 0)
+				{
+					var rootLabel:String = node.@label;
+					for(var i:int = 0;i < count;i++)
+					{
+						rootNode.appendChild( <node label={rootLabel + "." +  String.fromCharCode(aCharCode+i)}
+							name={rootLabel + "." + String.fromCharCode(aCharCode+i)} value={Math.random()*100} /> );
+					}
+				}
+				return node.children();
+			}
+
+			public function changeChartType():void
+			{
+				switch(chartType.selectedIndex)
+				{
+					case 0:
+						chart = columnChart;
+						series = columnSeries;
+						break;
+					case 1:
+						chart = pieChart;
+						series = pieSeries;
+						break;	
+				}
+				chartStack.selectedIndex = chartType.selectedIndex;
+				chart.setStyle("showDataEffect",null);
+				chart.dataProvider = genDataFrom(rootNode);					
+				crumbs.leaf = rootNode;
+			}
+			
+			public function drillDown(e:ChartItemEvent):void
+			{
+				chart.mouseChildren = false;
+				effD.drillFromIndex = e.hitData.chartItem.index;
+				series.setStyle("showDataEffect",effD);		
+				rootNode = XML(e.hitData.chartItem.item);
+				chart.dataProvider = genDataFrom(rootNode);					
+				crumbs.leaf = rootNode;
+			}
+			public function drillUp():void
+			{
+				if (rootNode.parent() == null)
+					return;
+					
+				drillUpTo(rootNode.parent());
+			}
+			public function drillUpTo(node:XML):void
+			{
+				if(rootNode == node)
+					return;
+					
+				while(rootNode.parent() != node)
+					rootNode = rootNode.parent();
+					
+				chart.mouseChildren = false;
+				series.setStyle("showDataEffect",effU);
+				effU.drillToIndex = rootNode.childIndex();		
+				rootNode = rootNode.parent();
+				chart.dataProvider = genDataFrom(rootNode);					
+				crumbs.leaf = rootNode;
+			}
+		]]>
+	</Script>
+	
+	<effects:DrillDownEffect id="effD" duration="1500"  effectEnd="chart.mouseChildren = true;" />
+	<effects:DrillUpEffect id="effU" duration="1500" effectEnd="chart.mouseChildren = true;" />
+	
+	<HBox width="100%">
+		<Label text="viewing:" color="#FFFFFF" />
+		<local:BreadCrumb id="crumbs" width="100%" labelField="@name"  disabledColor="#FFFFFF" color="#FFFFFF" itemClick="drillUpTo(XML(event.data))"/>
+	</HBox>
+	<HBox width="100%" >		
+		<LinkButton label="&lt;&lt; Up One" color="#FFFFFF" click="drillUp()" />
+	</HBox>		
+	<HRule strokeWidth="1" strokeColor="#FFFFFF" width="100%" />
+	<HBox width="100%">		
+		<ViewStack width="400" height="400" id="chartStack" creationPolicy="all">
+			<VBox width="100%" height="100%">			
+				<ColumnChart width="100%" height="100%" id = "columnChart"
+					color="#FFFFFF"
+					itemClick="drillDown(event);" gutterLeft="40" gutterBottom="40" gutterRight="40">
+					<fill>
+						<SolidColor color="#000000" />
+					</fill>
+					<seriesFilters>	
+						<Array />			
+					</seriesFilters>
+					<horizontalAxisRenderer>
+						<AxisRenderer tickLength="2">
+							<axisStroke>
+								<Stroke weight="1" color="#FFFFFF" />
+							</axisStroke>			
+							<tickStroke>
+								<Stroke weight="1" color="#FFFFFF" />						
+							</tickStroke>		
+						</AxisRenderer>
+					</horizontalAxisRenderer>
+					<verticalAxisRenderer>
+						<AxisRenderer tickLength="2">
+							<axisStroke>
+								<Stroke weight="1" color="#FFFFFF" />
+							</axisStroke>			
+							<tickStroke>
+								<Stroke weight="1" color="#FFFFFF" />						
+							</tickStroke>		
+						</AxisRenderer>				
+					</verticalAxisRenderer>
+					<horizontalAxis>
+						<CategoryAxis id="hAxis" categoryField="@label" />
+					</horizontalAxis>
+					<series>
+						<ColumnSeries id="columnSeries" yField="@value">
+							<itemRenderer>
+								<Component>
+									<local:RollOverBoxItemRenderer color="#FFFFFF" overColor="#BBBBBB" downColor="#888888" />
+								</Component>
+							</itemRenderer>
+						</ColumnSeries>
+					</series>
+				</ColumnChart>
+			</VBox>
+			<VBox width="100%" height="100%">
+				<PieChart id="pieChart" width="100%" height="100%"
+					itemClick="drillDown(event);">
+					<series>
+						<PieSeries field="@value" id="pieSeries" labelFunction="catLabel" labelPosition="inside">
+							<fills>
+								<Array>
+									<Number>#FFFFFF</Number>
+									<Number>#DDDDDD</Number>
+									<Number>#BBBBBB</Number>
+									<Number>#999999</Number>
+								</Array>
+							</fills>
+<!--
+							<radialStroke>
+								<Stroke color="#000000" weight=".5" />
+							</radialStroke>
+							<stroke>
+								<Stroke color="#000000" weight=".5" />							
+							</stroke>
+-->
+							<itemRenderer>
+								<Component>
+									<local:RollOverWedgeItemRenderer overColor="#8888E0" downColor="#4444AA" />
+								</Component>
+							</itemRenderer>
+						</PieSeries>
+					</series>
+				</PieChart>
+			</VBox>
+		</ViewStack>
+		<Text width="100%" condenseWhite="true" color="#FFFFFF">
+			<htmlText>
+			<![CDATA[			
+				<B>Animation to denote relationships in Data Visualization</B><BR/><BR/>
+				1. Try clicking on an item in the chart to 'drill down' into that item.  In typical scenarios,
+				The item you click on would represent a summary value (say, sales for the month of October).  
+				Clicking on an item 'drills down' into it, resulting in a chart that shows the individual parts (say,
+				sales for each day in October).<br/><br/>
+				2. The Breadcrumb trail at the top of the app shows the path you've drilled down through the data.
+				Click on an item in the path to drill back up (i.e., summarize) to that point.<BR/><BR/>
+				3. You can also click the '&lt;&lt;' button to drill back up one level.<BR/><BR/>
+				4. Use the buttonbar at the bottom to choose between column and pie charts.<br/><br/>
+				5. Yeah, I know, there's still some bugs.
+			]]>
+			</htmlText>
+		</Text>
+	</HBox>
+	<HRule strokeWidth="1" strokeColor="#FFFFFF" width="100%"/>
+	<HBox width="100%">
+		<ToggleButtonBar id="chartType"  itemClick="changeChartType()" selectedIndex="0">
+			<String>Column</String>
+			<String>Pie</String>
+		</ToggleButtonBar>
+	</HBox>
+</Application>

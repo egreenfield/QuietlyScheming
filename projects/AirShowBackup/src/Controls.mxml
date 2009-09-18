@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" styleName="dark" >
+	<mx:CheckBox x="10" y="36" label="autoScroll" id="autoScroll" selected="true" />
+	<mx:CheckBox x="97" y="36" label="wrap around" id="wrapAround" selected="true" />
+	<mx:ComboBox x="196" y="36" id="direction" dataProvider="{['horizontal','vertical']}" />
+	<mx:Label x="10" y="10" text="position:"/>
+	
+</mx:Canvas>

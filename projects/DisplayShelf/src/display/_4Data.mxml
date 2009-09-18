@@ -1,0 +1,37 @@
+<mx:?xml version="1.0" encoding="utf-8"?>
+<mx:mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:local="*" height="100%">
+	
+<mx:VBox horizontalCenter="0" verticalCenter="0" horizontalAlign="center">
+		
+	<local:DisplayShelf id="shelf" selectedIndex="{sel.value}" 
+		itemRenderer="mx.controls.Image">
+		<local:dataProvider>
+			<mx:String>img/photos400/photo01.jpg</mx:String>			
+			<mx:String>img/photos400/photo02.jpg</mx:String>			
+			<mx:String>img/photos400/photo03.jpg</mx:String>			
+			<mx:String>img/photos400/photo04.jpg</mx:String>			
+			<mx:String>img/photos400/photo05.jpg</mx:String>			
+			<mx:String>img/photos400/photo06.jpg</mx:String>			
+			<mx:String>img/photos400/photo07.jpg</mx:String>			
+			<mx:String>img/photos400/photo08.jpg</mx:String>			
+			<mx:String>img/photos400/photo09.jpg</mx:String>			
+			<mx:String>img/photos400/photo10.jpg</mx:String>			
+			<mx:String>img/photos400/photo11.jpg</mx:String>			
+			<mx:String>img/photos400/photo12.jpg</mx:String>			
+			<mx:String>img/photos400/photo13.jpg</mx:String>			
+			<mx:String>img/photos400/photo14.jpg</mx:String>			
+			<mx:String>img/photos400/photo15.jpg</mx:String>			
+			<mx:String>img/photos400/photo16.jpg</mx:String>			
+			<mx:String>img/photos400/photo17.jpg</mx:String>			
+			<mx:String>img/photos400/photo18.jpg</mx:String>			
+			<mx:String>img/photos400/photo19.jpg</mx:String>			
+		</mx:local:dataProvider>
+	</mx:local:DisplayShelf>
+
+	<mx:HBox>
+		<mx:Label text="Selection:" />
+		<mx:HSlider liveDragging="true" id="sel" minimum="0" value="0" maximum="{shelf.dataProvider.length}" snapInterval="1" width="400" />
+	</mx:HBox>
+</mx:VBox>
+
+</mx:mx:Application>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array
+			{
+				return [
+					"Different versions of the same chart, some explicitly specifying fields, some using the default and index field properties"
+				];
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/fieldTypeData.xml" />
+
+	<Label text="Both xField and yField specified" />
+	<ColumnChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<ColumnSeries id="cs" yField="revenue" xField="month" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+	<Label text="yField specified, xField is left unset. X values are defined by index" />
+	<ColumnChart width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<ColumnSeries yField="revenue" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+	<Label text="neither xField or yField are set.Dataprovider is a series of values. X values are defined by index" />
+	<ColumnChart width="100%" height="100%" dataProvider="{[120,108,150]}">
+		<series>
+			<ColumnSeries />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</ex:ExampleBase>

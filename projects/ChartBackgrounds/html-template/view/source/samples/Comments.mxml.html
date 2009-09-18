@@ -1,0 +1,202 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Comments.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;s:ExampleBase</span>  
+    xmlns:s=&quot;<span class="mxmlString">qs.samples.*</span>&quot; 
+    xmlns=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot;
+    xmlns:charts=&quot;<span class="mxmlString">qs.charts.*</span>&quot;  xmlns:local=&quot;<span class="mxmlString">*</span>&quot;
+    xmlns:dataShapes=&quot;<span class="mxmlString">qs.charts.dataShapes.*</span>&quot; 
+    xmlns:graphics=&quot;<span class="mxmlString">qs.graphics.*</span>&quot; xmlns:samples=&quot;<span class="mxmlString">samples.*</span>&quot;<span class="mxmlComponent">&gt;</span>
+
+    <span class="mxmlTag">&lt;Style&gt;</span>
+        <span class="cssSelector">.columnLabel </span><span class="cssSymbol">{</span>
+            <span class="cssPropName">color</span><span class="cssSymbol">:</span> <span class="cssPropValue">#000000</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontSize</span><span class="cssSymbol">:</span> <span class="cssPropValue">12</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontFamily</span><span class="cssSymbol">:</span> <span class="cssPropValue">Verdana</span><span class="cssSymbol">;</span>
+        <span class="cssSymbol">}</span>
+        
+        <span class="cssSelector">.noteButton </span><span class="cssSymbol">{</span>
+            <span class="cssPropName">upSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/Q.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">overSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/QOver.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">downSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/QDown.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+
+            <span class="cssPropName">selectedUpSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/X.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">selectedOverSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/XOver.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">selectedDownSkin</span><span class="cssSymbol">:</span> <span class="cssPropValue">Embed(</span><span class="cssComment">&quot;/assets/XDown.png&quot;</span><span class="cssPropValue">)</span><span class="cssSymbol">;</span>
+        <span class="cssSymbol">}</span>
+    <span class="mxmlTag">&lt;/Style&gt;</span>
+    <span class="mxmlTag">&lt;Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asReserved">import</span> mx.controls.Button;
+            <span class="asReserved">import</span> mx.events.FlexEvent;
+            <span class="asReserved">import</span> mx.charts.series.items.ColumnSeriesItem;
+            <span class="asReserved">import</span> mx.charts.HitData;
+            <span class="asReserved">import</span> mx.events.MenuEvent;
+            <span class="asReserved">import</span> mx.controls.Menu;
+            <span class="asReserved">import</span> mx.charts.events.ChartItemEvent;
+            <span class="asReserved">import</span> mx.core.Application;
+            <span class="asReserved">import</span> mx.managers.PopUpManager;
+
+        <span class="asReserved">import</span> mx.controls.Label;
+        <span class="asReserved">import</span> qs.charts.dataShapes.<span class="asOperator">*</span>;
+
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> descriptions<span class="asBracket">()</span><span class="asOperator">:</span>Array <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asBracket">[</span><span class="asString">&quot;This example uses data-positioned children in the DataDrawingCanvas to attach comments to individual data points. &quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; Click on a column to add a comment to it.  When the actual comment box is shown, it lives in the popup layer, not&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; In the chart itself. So we position it by listening to the move event of the comment marker, and place the comment box&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; Relative to it.\n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; Click a column to add a comment and comment marker.  Once the marker is visible, click the marker to show and hide&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; the comment itself.&quot;</span><span class="asBracket">]</span>;
+        <span class="asBracket">}</span>
+            
+        <span class="asReserved">private</span> <span class="asVar">var</span> _notes<span class="asOperator">:</span>Dictionary <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> toggleNote<span class="asBracket">(</span>item<span class="asOperator">:</span>Object,toggled<span class="asOperator">:</span>Boolean<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> noteData<span class="asOperator">:</span>Object <span class="asOperator">=</span> _notes<span class="asBracket">[</span>item.toString<span class="asBracket">()]</span>;
+            <span class="asVar">var</span> _note<span class="asOperator">:</span>Note;
+            <span class="asReserved">if</span> <span class="asBracket">(</span>noteData.note <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                noteData.note <span class="asOperator">=</span> _note <span class="asOperator">=</span> <span class="asReserved">new</span> Note<span class="asBracket">()</span>;
+                _note.text <span class="asOperator">=</span> <span class="asString">&quot;&lt;FONT color=&apos;#0000FF&apos;&gt;&lt;B&gt;Ely Said:&lt;/B&gt;&lt;/FONT&gt;&lt;BR/&gt;You&apos;ve just added a new comment to this chart.&quot;</span> <span class="asOperator">+</span> 
+                        <span class="asString">&quot;The comment is tied to this particular data point; resize the chart, and the comment will stay with it. &quot;</span> <span class="asOperator">+</span> 
+                        <span class="asString">&quot;In a real application, this would be something stored in a database. &quot;</span> <span class="asOperator">+</span> 
+                        <span class="asString">&quot; Type in here to add more comments.  Click the annotation marker again to make this comment go away.&quot;</span>;
+            <span class="asBracket">}</span>
+            _note <span class="asOperator">=</span> noteData.note;
+            <span class="asVar">var</span> b<span class="asOperator">:</span>Button <span class="asOperator">=</span> noteData.button;
+
+            <span class="asReserved">if</span><span class="asBracket">(</span>toggled<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                PopUpManager.addPopUp<span class="asBracket">(</span>_note,<span class="asReserved">this</span>,<span class="asReserved">false</span><span class="asBracket">)</span>;                
+                _note.isPopUp <span class="asOperator">=</span> <span class="asReserved">false</span>;
+                updateNote<span class="asBracket">(</span>item<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            <span class="asReserved">else</span>
+            <span class="asBracket">{</span>
+                PopUpManager.removePopUp<span class="asBracket">(</span>_note<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            
+            b.selected <span class="asOperator">=</span> toggled;
+            
+            <span class="asReserved">if</span><span class="asBracket">(</span>toggled<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> anItem<span class="asOperator">:*</span> <span class="asReserved">in</span> _notes<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    noteData <span class="asOperator">=</span> _notes<span class="asBracket">[</span>anItem<span class="asBracket">]</span>;
+                    <span class="asReserved">if</span><span class="asBracket">(</span>noteData.button <span class="asOperator">!=</span> b<span class="asBracket">)</span>
+                        toggleNote<span class="asBracket">(</span>noteData.item,<span class="asReserved">false</span><span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> updateNote<span class="asBracket">(</span>item<span class="asOperator">:</span>Object<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> border<span class="asOperator">:</span>Number<span class="asOperator">=</span> 20;
+
+
+            <span class="asVar">var</span> noteData<span class="asOperator">:</span>Object<span class="asOperator">=</span> _notes<span class="asBracket">[</span>item.toString<span class="asBracket">()]</span>;
+            
+            <span class="asReserved">if</span><span class="asBracket">(</span>noteData <span class="asOperator">==</span> <span class="asReserved">null</span> <span class="asOperator">||</span> noteData.note <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                <span class="asReserved">return</span>;
+
+            <span class="asVar">var</span> _note<span class="asOperator">:</span>Note <span class="asOperator">=</span> noteData.note;
+            <span class="asVar">var</span> b<span class="asOperator">:</span>Button <span class="asOperator">=</span> noteData.button;
+            
+            <span class="asVar">var</span> topLeft<span class="asOperator">:</span>Point;
+            <span class="asVar">var</span> bottomRight<span class="asOperator">:</span>Point
+            <span class="asVar">var</span> p<span class="asOperator">:</span>Point;
+            <span class="asVar">var</span> hOverlap<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">true</span>;
+            topLeft <span class="asOperator">=</span> b.parent.localToGlobal<span class="asBracket">(</span><span class="asReserved">new</span> Point<span class="asBracket">(</span>b.x,b.y<span class="asBracket">))</span>;
+            bottomRight <span class="asOperator">=</span> b.parent.localToGlobal<span class="asBracket">(</span><span class="asReserved">new</span> Point<span class="asBracket">(</span>b.x <span class="asOperator">+</span> b.width,b.y <span class="asOperator">+</span> b.height<span class="asBracket">))</span>;
+            p <span class="asOperator">=</span> <span class="asReserved">new</span> Point<span class="asBracket">(</span>topLeft.x,bottomRight.y<span class="asBracket">)</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>p.y <span class="asOperator">&gt;</span> Application.application.height <span class="asOperator">-</span> _note.height <span class="asOperator">-</span> border<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                p.y <span class="asOperator">=</span> topLeft.y <span class="asOperator">-</span> _note.height;
+                <span class="asReserved">if</span><span class="asBracket">(</span>p.y <span class="asOperator">&lt;</span> border<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    p.y <span class="asOperator">=</span> border;
+                    hOverlap <span class="asOperator">=</span> <span class="asReserved">false</span>;    
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>hOverlap <span class="asOperator">==</span> <span class="asReserved">false</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                p.x <span class="asOperator">=</span> bottomRight.x;
+            <span class="asBracket">}</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>p.x <span class="asOperator">&gt;</span> Application.application.width <span class="asOperator">-</span> _note.width <span class="asOperator">-</span> border<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                p.x <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>border,<span class="asBracket">((</span>hOverlap<span class="asBracket">)</span><span class="asOperator">?</span> bottomRight.x <span class="asOperator">:</span> topLeft.x<span class="asBracket">)</span> <span class="asOperator">-</span> _note.width<span class="asBracket">)</span>;
+                
+            <span class="asBracket">}</span>
+
+            _note.move<span class="asBracket">(</span>p.x,p.y<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+
+
+        
+        <span class="asReserved">private</span> <span class="asFunction">function</span> addCommentFor<span class="asBracket">(</span>hd<span class="asOperator">:</span>HitData<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> b<span class="asOperator">:</span>Button <span class="asOperator">=</span> <span class="asReserved">new</span> Button<span class="asBracket">()</span>;
+            b.toggle <span class="asOperator">=</span> <span class="asReserved">true</span>;
+            b.width <span class="asOperator">=</span> 16;
+            b.height <span class="asOperator">=</span> 16;
+            b.styleName <span class="asOperator">=</span> <span class="asString">&quot;noteButton&quot;</span>;
+            b.addEventListener<span class="asBracket">(</span><span class="asString">&quot;move&quot;</span>,<span class="asFunction">function</span><span class="asBracket">(</span>e<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                updateNote<span class="asBracket">(</span>hd.item<span class="asBracket">)</span>;
+            <span class="asBracket">})</span>;
+            b.addEventListener<span class="asBracket">(</span>MouseEvent.CLICK,<span class="asFunction">function</span><span class="asBracket">(</span>e<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                toggleNote<span class="asBracket">(</span>hd.item,b.selected<span class="asBracket">)</span>;
+                e.stopImmediatePropagation<span class="asBracket">()</span>;                        
+            <span class="asBracket">})</span>;
+            canvas.addChild<span class="asBracket">(</span>b<span class="asBracket">)</span>;
+            _notes<span class="asBracket">[</span>hd.item.toString<span class="asBracket">()]</span> <span class="asOperator">=</span> <span class="asBracket">{</span> button<span class="asOperator">:</span> b, item<span class="asOperator">:</span> hd.item <span class="asBracket">}</span>;
+            canvas.updateDataChild<span class="asBracket">(</span>b,<span class="asBracket">{</span>horizontalCenter<span class="asOperator">:</span> ColumnSeriesItem<span class="asBracket">(</span>hd.chartItem<span class="asBracket">)</span>.xValue, top<span class="asOperator">:</span> <span class="asBracket">[</span>ColumnSeriesItem<span class="asBracket">(</span>hd.chartItem<span class="asBracket">)</span>.yValue,4<span class="asBracket">]</span> <span class="asBracket">})</span>;
+            toggleNote<span class="asBracket">(</span>hd.item,<span class="asReserved">true</span><span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> showCommentMenu<span class="asBracket">(</span>e<span class="asOperator">:</span>ChartItemEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> m<span class="asOperator">:</span>Menu <span class="asOperator">=</span> <span class="asReserved">new</span> Menu<span class="asBracket">()</span>;
+            m.labelField <span class="asOperator">=</span> <span class="asString">&quot;@label&quot;</span>;
+            <span class="asVar">var</span> mdp<span class="asOperator">:</span>XML <span class="asOperator">=</span> <span class="asOperator">&lt;</span>item label<span class="asOperator">=</span><span class="asString">&quot;add a comment...&quot;</span> <span class="asOperator">/&gt;</span>;
+            Menu.popUpMenu<span class="asBracket">(</span>m,<span class="asReserved">null</span>,mdp<span class="asBracket">)</span>;        
+            m.show<span class="asBracket">(</span>Application.application.mouseX,Application.application.mouseY<span class="asBracket">)</span>;
+            m.addEventListener<span class="asBracket">(</span>MenuEvent.ITEM_CLICK,<span class="asFunction">function</span><span class="asBracket">(</span>menuEvent<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>                    
+                addCommentFor<span class="asBracket">(</span>e.hitData<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            <span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/Script&gt;</span>
+
+    <span class="mxmlComponent">&lt;s:controls&gt;</span>
+        <span class="mxmlComponent">&lt;CheckBox</span> label=&quot;<span class="mxmlString">fix vertical axis</span>&quot; id=&quot;<span class="mxmlString">fix</span>&quot; <span class="mxmlComponent">/&gt;</span> <span class="mxmlComponent">&lt;HSlider</span> change=&quot;fix.selected <span class="asOperator">=</span> <span class="asReserved">true</span>&quot; liveDragging=&quot;<span class="mxmlString">true</span>&quot; thumbCount=&quot;<span class="mxmlString">2</span>&quot; values=&quot;<span class="mxmlString">{</span><span class="asBracket">[</span>0,180<span class="asBracket">]</span><span class="mxmlString">}</span>&quot; id=&quot;<span class="mxmlString">axisValues</span>&quot; minimum=&quot;<span class="mxmlString">-500</span>&quot; maximum=&quot;<span class="mxmlString">500</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; <span class="mxmlComponent">/&gt;</span>        
+        <span class="mxmlComponent">&lt;CheckBox</span> label=&quot;<span class="mxmlString">fix horizontal axis</span>&quot; id=&quot;<span class="mxmlString">hFix</span>&quot; <span class="mxmlComponent">/&gt;</span> <span class="mxmlComponent">&lt;HSlider</span> change=&quot;hFix.selected <span class="asOperator">=</span> <span class="asReserved">true</span>&quot; liveDragging=&quot;<span class="mxmlString">true</span>&quot; id=&quot;<span class="mxmlString">hAxisValue</span>&quot; minimum=&quot;<span class="mxmlString">0</span>&quot; value=&quot;<span class="mxmlString">20</span>&quot; maximum=&quot;<span class="mxmlString">100</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; <span class="mxmlComponent">/&gt;</span>        
+    <span class="mxmlComponent">&lt;/s:controls&gt;</span>
+
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/categories.xml</span>&quot; id=&quot;<span class="mxmlString">categories</span>&quot; <span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/samples.xml</span>&quot; id=&quot;<span class="mxmlString">dataSamples</span>&quot; <span class="mxmlTag">/&gt;</span>
+
+    <span class="mxmlComponent">&lt;ColumnChart</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; itemClick=&quot;showCommentMenu<span class="asBracket">(</span>event<span class="asBracket">)</span>&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;annotationElements&gt;</span>
+            <span class="mxmlComponent">&lt;dataShapes:DataDrawingCanvas</span> id=&quot;<span class="mxmlString">canvas</span>&quot; includeInRanges=&quot;<span class="mxmlString">false</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/annotationElements&gt;</span>
+        <span class="mxmlComponent">&lt;series&gt;</span>
+            <span class="mxmlComponent">&lt;ColumnSeries</span> dataProvider=&quot;<span class="mxmlString">{</span>dataSamples.sample.@value<span class="mxmlString">}</span>&quot; filterData=&quot;<span class="mxmlString">false</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/series&gt;</span>
+        <span class="mxmlComponent">&lt;verticalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;LinearAxis</span> minimum=&quot;<span class="mxmlString">{</span>fix.selected<span class="asOperator">?</span> axisValues.values<span class="asBracket">[</span>0<span class="asBracket">]</span><span class="asOperator">:</span><span class="asReserved">undefined</span><span class="mxmlString">}</span>&quot; maximum=&quot;<span class="mxmlString">{</span>fix.selected<span class="asOperator">?</span> axisValues.values<span class="asBracket">[</span>1<span class="asBracket">]</span><span class="asOperator">:</span><span class="asReserved">undefined</span><span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/verticalAxis&gt;</span>
+        <span class="mxmlComponent">&lt;horizontalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;LinearAxis</span> maximum=&quot;<span class="mxmlString">{</span>hFix.selected<span class="asOperator">?</span> hAxisValue.value<span class="asOperator">:</span><span class="asReserved">undefined</span><span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/horizontalAxis&gt;</span>
+    <span class="mxmlComponent">&lt;/ColumnChart&gt;</span>
+
+<span class="mxmlComponent">&lt;/s:ExampleBase&gt;</span></pre></body>
+</html>

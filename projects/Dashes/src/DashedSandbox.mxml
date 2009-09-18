@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" 
+	backgroundColor="#FFFFFF" creationComplete="genData();drawLine(pts);" xmlns:qsc="qs.charts.*" 
+	viewSourceURL="srcView/index.html">
+
+	<Script>
+		<![CDATA[
+			[Bindable] private var dataSet:Array = [];
+			
+			private function genData():void
+			{
+				var newData:Array = [];
+				var value:Number = Math.random() * 100;
+				for(var i:int = 0;i<150;i++)
+				{
+					value = value + Math.random()*14 - 7;
+					newData.push(value);
+				}
+				dataSet = newData;
+			}
+			import mx.graphics.Stroke;
+			import qs.utils.GraphicsUtils;
+			
+			private var pts:Array = [
+			];
+			
+			[Bindable] public var pattern:Array = [20,5,5,5];
+			
+			public function addPoint():void
+			{
+				pts.push({x: canvas.mouseX,y: canvas.mouseY});
+				drawLine(pts);
+			}
+			public function rubberBand():void
+			{
+				var tmp:Array = pts.concat();
+				tmp.push({x: canvas.mouseX,y: canvas.mouseY});
+				drawLine(tmp);
+			}
+			public function drawLine(points:Array):void
+			{
+				canvas.graphics.clear();
+				canvas.graphics.beginFill(0xFFFFFF);
+				canvas.graphics.drawRect(0,0,canvas.width,canvas.height);
+				canvas.graphics.endFill();
+				
+				GraphicsUtils.drawDashedPolyLine(canvas.graphics,new Stroke(0xFF0000,3,1,false,"normal",CapsStyle.NONE),pattern,points);
+			}
+			public function updatePattern():void
+			{
+				var parsedPattern:Array = patternUI.text.split(",");
+				for(var i:int = 0;i<parsedPattern.length;i++)
+				{
+					var value:Number = parseFloat(parsedPattern[i]);
+					if(isNaN(value))
+						return;
+					parsedPattern[i]  = value;
+				}
+				if(parsedPattern.length == 0)
+					return;
+				pattern = parsedPattern;
+				drawLine(pts);
+				
+			}
+		]]>
+	</Script>
+	
+	<HBox borderColor="#000000" borderStyle="solid" borderThickness="3" width="100%" height="100%" label="sandbox">
+		<Form>
+			<Text width="250">
+				<text>enter a comma separated list of numbers to define the dash pattern. The first number is the length of the first dash, the second number is the length of the first gap, etc.</text>
+			</Text>
+			<FormItem label="pattern">
+				<HBox>
+					<TextInput id="patternUI" text="20,5,5,5" change="updatePattern();" />
+				</HBox>
+			</FormItem>
+			<FormItem label="points">
+				<Button label="reset" click="pts = [];drawLine(pts);genData();" />
+			</FormItem>
+			<Text width="250">
+				<text>for the sandbox, click in the area to the right to add a line segment to the dashed line.</text>
+			</Text>
+			<ToggleButtonBar dataProvider="{demos}" />
+		</Form>
+		<VRule height="100%" />
+		<ViewStack width="100%" height="100%" id="demos">
+			
+			<VBox width="100%" height="100%" label="Sandbox">
+				<UIComponent width="100%" height="100%" id="canvas" mouseDown="addPoint()" mouseMove="rubberBand()" rollOut="drawLine(pts);"/>
+			</VBox>
+			<VBox width="100%" height="100%" label="Chart">
+				<CartesianChart width="100%" height="100%" paddingBottom="15" paddingLeft="15" paddingRight="15" paddingTop="15" >
+					<series>
+						<LineSeries dataProvider="{dataSet}">
+							<lineSegmentRenderer>
+								<Component>
+									<qsc:DashedLineRenderer pattern="{outerDocument.pattern}" />
+								</Component>
+							</lineSegmentRenderer>
+							<lineStroke>
+								<Stroke color="#E48701" weight="4" caps="none" />
+							</lineStroke>
+							<showDataEffect>
+								<SeriesInterpolate elementOffset="0"/>
+							</showDataEffect>
+						</LineSeries>				
+					</series>
+					<horizontalAxis>
+						<LinearAxis autoAdjust="false" />
+					</horizontalAxis>
+				</CartesianChart>
+			</VBox>			
+		</ViewStack>
+	</HBox>
+</Application>

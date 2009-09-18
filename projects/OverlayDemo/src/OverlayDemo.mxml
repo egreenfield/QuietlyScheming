@@ -1,0 +1,82 @@
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+    width="100%" height="100%"
+    verticalGap="0"
+    initialize="generateRandomData()" viewSourceURL="srcview/index.html" xmlns:qsc="qs.charts.*">
+
+	<Style>
+		.anno {
+			font-size: 24;
+			font-color: #995522;
+			color: #995522;
+			font-weight: bold;
+		}
+	</Style>
+	<Script>
+	<![CDATA[
+
+		import flash.geom.*;
+
+		[Bindable] public var dataSet:Array;
+
+		/* routine to generate random data */
+		private function generateRandomData():void
+		{
+			var newDataSet:Array = [];
+
+			for(var i:int=0;i<300;i++)
+				newDataSet.push({ h:Math.random()*1000, v:Math.random()*1000 });
+
+			dataSet = newDataSet;
+		}
+
+		private function updateDetails(e:MouseEvent):void
+		{
+			/* first show the coordiantes represented where the event happened, relative to the target of the event */
+			epos.text = "(" + e.localX + "," + e.localY + ")";
+
+			/* now show the coordiantes of the mouse relative to the chart */
+			var p:Point = new Point(chart.mouseX,chart.mouseY);
+			mpos.text = "(" + p.x + "," + p.y + ")";
+			/* now ask the chart what data values that represents */
+			var d:Array = chart.localToData(p);
+			dpos.text = "(" + Math.floor(d[0]) + "," + Math.floor(d[1]) + ")";
+			/* now ask the chart to convert those data values back into screen coordinates */
+			p = chart.dataToLocal(d[0],d[1]);
+			spos.text ="(" + Math.floor(p.x) + "," + Math.floor(p.y) + ")";
+		}
+
+	]]>
+	</Script>
+	<Panel width="100%" height="100%" title="Chart mouse detection and custom overlay sample">
+		<HBox width="100%" height="100%" >
+			<VBox width="200">
+				<Label text="mousePos:" />
+				<Label id="mpos" />
+				<Label text="dataSet:" />
+				<Label id="dpos" />
+				<Label text="screenPos:" />
+				<Label id="spos" />
+				<Label text="eventPos:" />
+				<Label id="epos" />
+				<HRule width="100%" />
+				<Text width="200" text="This chart has a custom annotation element that allows you to select data regions.  Click and drag on the chart to try it out." />
+				<HRule width="100%" />
+				<Text width="200" text="Right Click and choose 'View Source...' to download the source" />
+				<Button label="hello" />
+			</VBox>
+			<Canvas width="100%" height="100%">
+				<PlotChart id="chart" width="100%" dataProvider="{dataSet}"  height="100%" mouseMove="updateDetails(event)">
+					<series>
+						<PlotSeries xField="h" yField="v" itemRenderer="mx.charts.renderers.CircleItemRenderer" radius="1.5"/>
+					</series>
+					<annotationElements>
+						<qsc:RangeSelector styleName="anno" 	/>
+					</annotationElements>
+
+				</PlotChart>
+			</Canvas>
+		</HBox>
+		<ControlBar>
+		</ControlBar>
+	</Panel>
+</Application>

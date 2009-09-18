@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:RE_App xmlns:local="*" xmlns="http://www.adobe.com/2006/mxml" layout="absolute">
+	<Label x="10" y="195" text="Expression:" fontSize="19"/>
+	<Label x="10" y="10" text="Sample Text:" fontSize="19"/>
+	<Label x="10" y="370" text="Results:" fontSize="19"/>
+	<TextArea y="232" height="103" id="expr" right="10" left="10"/>
+	<TextArea y="47" height="137" id="sample" right="10" left="10"/>
+	<Button y="340" label="Match" right="15" click="match()"/>
+	<CheckBox y="342" tabEnabled="false" label="Global" right="103" id="glob"/>
+	<CheckBox tabEnabled="false" y="342" label="Ignore Case"  right="274" id="ignoreCase" selected="true" />
+	<CheckBox y="342" label="Extended"  tabEnabled="false" right="180" id="extended" selected="false" />
+	<List id="results" right="15" left="10" top="407" bottom="10"></List>
+
+
+</local:RE_App>

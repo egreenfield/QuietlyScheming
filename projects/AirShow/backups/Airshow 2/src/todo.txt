@@ -1,0 +1,17 @@
+
+
+always have friction force applied.
+deal with scrollTo() when there are edges and item can't be scrolled into center
+add option to restrict to center rather than edges when no wraparound
+horizontal/vertical
+switch to abstract columns instead off renderer/size base class.
+2D
+clean up for single column use case.
+samples
+auto-snap
+add turnaround acceleration
+
+DONE bounce of edges when coasting
+DONE add spring when extending off edges.
+DONE blur effect
+DONE update list so it never resets the force value's value.

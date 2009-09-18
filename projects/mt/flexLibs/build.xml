@@ -1,0 +1,44 @@
+<project>
+
+	<taskdef resource="flexTasks.tasks" classpath="C:/dev/flex_ant_tasks/lib/flexTasks.jar" />
+	<property name="FLEX_ROOT" value="C:/dev/f2/sdk"/>
+	<property name="SOURCE_ROOT" value="${basedir}/src"/>  
+	<property name="OUTPUT_ROOT" value="${basedir}/../../../web/public/mt/libraries"/>  
+    <property name="FLEX_HOME" value="C:/dev/f2/sdk"/>        		
+
+	<target name="main">
+	    <antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="CommonControlsModule" />
+    	</antcall>
+	    <antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="CommonContainersModule" />
+    	</antcall>
+
+		<antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="GraphicsModule" />
+    	</antcall>
+
+		<antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="DataControlsModule" />
+    	</antcall>
+	    <antcall target="buildLibrary">     
+    		<param name="LIB_NAME" value="AnimationModule" />
+    	</antcall>
+    </target>
+	
+
+
+
+
+     <target name="buildLibrary">
+
+         <mxmlc file="${SOURCE_ROOT}/${LIB_NAME}.mxml" output="${OUTPUT_ROOT}/${LIB_NAME}.swf" 
+         	load-externs="${basedir}/../flex/app-link-report.xml" >
+             <load-config filename="${FLEX_ROOT}/frameworks/flex-config.xml"/>
+             <load-config filename="${SOURCE_ROOT}/lib-config.xml"/>
+             <source-path path-element="${FLEX_ROOT}/frameworks"/>
+             <source-path path-element="${SOURCE_ROOT}/../src"/>
+         </mxmlc>
+     </target>  
+
+</project>

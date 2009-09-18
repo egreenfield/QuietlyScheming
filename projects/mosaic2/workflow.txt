@@ -1,0 +1,19 @@
+
+
+- make collections
+- choose a database
+	- assign a collection
+	- choose an aspect ratio
+	- choose a resolution
+	- build the database
+- configure a mosaic
+	- choose a source image
+	- choose row/col count
+	- analyze the image tiles
+- build a mosaic
+	- match database images to the tiles
+- render
+	- blit individual images into a canvas
+	
+	
+ 

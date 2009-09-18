@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of MetadataExample</title>
+	<nodes>
+		<node label="ASBinder.as" icon="actionScriptIcon" url="source/ASBinder.as.html"/>
+		<node label="MetadataExample-config.xml" url="source/MetadataExample-config.xml.txt"/>
+		<node selected="true" label="MetadataExample.mxml" icon="mxmlAppIcon" url="source/MetadataExample.mxml.html"/>
+		<node label="UI_Code.as" icon="actionScriptIcon" url="source/UI_Code.as.html"/>
+		<node label="UIExample.mxml" icon="mxmlIcon" url="source/UIExample.mxml.html"/>
+	</nodes>
+</index>

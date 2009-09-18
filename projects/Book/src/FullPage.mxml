@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	xmlns:controls="qs.controls.*"
+	creationComplete="initApp();" xmlns:containers="qs.containers.*" xmlns:effects="qs.effects.*"
+	viewSourceURL="/source/Book.zip"
+	>
+	
+	
+	<Style>
+		Book {
+			
+			color: #000000;
+			textRollOverColor: 	#000000;
+			
+			border-thickness: 0;
+			border-style: none;
+			page-slope: .6;
+			active-grab-area: page;
+			page-shadow-strength: 1;
+			curve-shadow-strength: 1;
+			auto-turn-duration: 1500;
+		}
+		
+		Application {
+			color: #F1F1CC;
+			textRollOverColor: 	#FFFFFF;
+			backgroundGradientColors: #000000, #282828;
+			backgroundColor: #282828;
+		}
+		
+		SuperImage {
+			border-thickness: 0;
+			border-style: none;			
+		}		
+	</Style>
+	
+	<Script>
+		<![CDATA[
+			import qs.caching.ContentCache;
+			import qs.controls.bookClasses.BookEvent;
+		
+			import mx.core.UIComponent;
+			
+			private function next():void
+			{
+				if(book.currentPageIndex+1 < book.pageCount)
+					book.turnToPage(book.currentPageIndex + 1);
+					
+			}
+			private function previous():void
+			{
+				if(book.currentPageIndex > 0)
+					book.turnToPage(book.currentPageIndex -12);
+			}
+			
+			
+			private function initApp():void
+			{
+				var thumbs:XMLList = dataSet..image.@thumb;
+				for(var i:int =0;i<thumbs.length();i++)
+				{
+					ContentCache.getCache().preloadContent(thumbs[i]);
+				}
+			}
+			
+			private var instructionsVisible:Boolean= true;
+			private function hideInstructions():void
+			{
+				if(instructionsVisible)
+					hideInstructionsEffect.play();
+				instructionsVisible = false;
+			}
+			private function loadContent(event:BookEvent):void
+			{
+				var page:ImagePage = ImagePage(event.renderer);
+				page.load();
+			}
+
+		]]>
+	</Script>
+		
+		<effects:AnimateColorProperty id="hideInstructionsEffect" target="{instructions}" startDelay="2000" isStyle="true" 
+			property="color" toValue="#282828" fromValue="#dddddd" duration="7000" />
+		<XML id="dataSet" source="data/images.xml" />
+
+			<controls:Book id="book" y="47" width="600" top="40" height="400" horizontalCenter="0"
+				animateCurrentPageIndex="true"
+				mouseDown="hideInstructions()"
+				showCornerTease="true"
+				edgeAndCornerSize="150"
+				itemRenderer="ImagePage"
+				content="{dataSet..image}"
+				turnStart="loadContent(event)"
+				animatePagesOnTurn="true"
+				turnEnd="loadContent(event)"
+				/>
+			<Text id="instructions" horizontalCenter="9" condenseWhite="true" textAlign="center" fontSize="14" top="468" fontFamily="Verdana" color="#dddddd">
+				<htmlText>
+					<![CDATA[
+						Drag the image from the right and pull it across the screen to turn the page.<br/><br/>
+						Don't forget to pull <i><b>all the way across</i></b> the screen or the image will fall back to where it was!<br/><br/>
+						Or just click and release to turn the image automatically.
+					]]>
+				</htmlText>
+			</Text>
+		
+		
+</Application>

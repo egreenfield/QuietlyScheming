@@ -1,0 +1,18 @@
+<HBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="components" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	creationComplete="setup()"
+	xmlns:adobe="http://www.adobe.com/2006/fla"
+	>
+		<Script>
+			<![CDATA[
+				
+				private function setup():void
+				{
+				}
+
+			]]>
+		</Script>		
+
+		<adobe:RotatingSquare />
+
+</HBox>
+

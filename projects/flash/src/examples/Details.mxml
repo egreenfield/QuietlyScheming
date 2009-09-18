@@ -1,0 +1,25 @@
+<VBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="templating" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	creationComplete="setup()">
+		<Script>
+			<![CDATA[
+				
+				private function setup():void
+				{
+				}
+			]]>
+		</Script>
+		
+		<local:DetailPanel>
+			<List dataProvider="{'now is the time for all good men to come aid aid our communist party'.split(' ')}" />
+		</local:DetailPanel>		
+		<Button label="Hello, world" />
+		<local:DetailPanel>
+			<ColumnChart>
+				<series>
+					<ColumnSeries dataProvider="{[12,6,34,12,76,59]}" />
+				</series>
+			</ColumnChart> 
+		</local:DetailPanel>
+		<Button label="Hello, world" />
+		
+</VBox>

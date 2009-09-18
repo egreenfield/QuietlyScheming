@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#444444" xmlns:filters="flash.filters.*">
+	<Style>
+		@font-face
+		{
+		   font-family: MyArial;
+		   src: local("Arial");
+		}
+		Application {
+			font-size: 14;
+			font-family: MyArial;
+			backgroundColor: #343434;
+			color: #FFFFFF;
+		}		
+	</Style>
+	
+	<Script>
+		<![CDATA[
+			import mx.controls.Label;
+			import mx.rpc.events.ResultEvent;
+			import mx.controls.Alert;
+			import mx.rpc.AsyncToken;
+			import mx.rpc.Responder;
+			private function fetchTags( displayTarget:DisplayShelf07 ):void
+			{
+				displayTarget.dataProvider = [];
+				var newThumbs:Array = [];
+				var busy:Label = new Label();
+				busy.text = "{loading " + searchTag.text + "...}";
+				status.addChild(busy);
+
+				var token:AsyncToken = flickrService.send({ api_key:"a7c643c2f86d8baf1b511868f24e58d0",per_page: 20, tags: searchTag.text});
+				token.addResponder(new mx.rpc.Responder(
+				function (resultEvent:ResultEvent):void {
+					
+					
+					var photos:XMLList = resultEvent.result..photo;
+					for(var i:int = 0;i<photos.length();i++)
+					{
+						var photoNode:XML = photos[i];
+						var thumb:String = "http://static.flickr.com/" + photoNode.@server + "/" + photoNode.@id + "_" + photoNode.@secret + "_m.jpg";
+						newThumbs.push(thumb);						
+					}
+					displayTarget.dataProvider = newThumbs;
+					status.removeChild(busy);
+				}
+				,
+				function(param:*):void {
+					Alert.show("load failed");
+				}
+				));
+			}
+		]]>
+	</Script>
+
+	<Binding source="sel.value" destination="shelf.selectedIndex" />
+	<Binding destination="sel.value" source="shelf.selectedIndex" />
+
+	<HTTPService id="flickrService" url="http://api.flickr.com/services/rest/?method=flickr.photos.search" resultFormat="e4x"/>
+
+	<VBox top="10" left="10" >
+		<HBox>
+			<Label text="Search Tag:" />
+			<TextInput width="200" id="searchTag" color="#000000"/>
+			<Button label="Go" color="#000000" click="fetchTags(shelf)" />
+		</HBox>
+		<HBox id="status">			
+		</HBox>
+	</VBox>
+	
+	<VBox borderColor="#000000" borderStyle="solid" horizontalCenter="0" verticalCenter="0" width="100%" height="100%"
+		horizontalAlign="center" verticalAlign="middle">	 	
+		
+		<local:DisplayShelf07 id="shelf" enableHistory="true" />
+			
+
+	</VBox>
+		<HBox bottom="10" horizontalCenter="0">
+			<Label text="Selection:" />
+			<HSlider liveDragging="false" id="sel" minimum="0" value="0" maximum="{shelf.dataProvider.length}" snapInterval="1" width="400" />
+		</HBox>
+</Application>

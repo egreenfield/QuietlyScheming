@@ -1,0 +1,11 @@
+<node label="root">
+	<node label="Inbox">
+		<node label="Personal" path="data/content/account.html" />
+		<node label="High Priority" />
+		<node label="Waiting" />
+		<node label="Receipts" />
+	</node>
+	<node label="Sent" />
+	<node label="Drafts" />
+	<node label="Trash" />
+</node>

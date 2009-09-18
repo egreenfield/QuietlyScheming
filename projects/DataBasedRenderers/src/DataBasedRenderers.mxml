@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" viewSourceURL="srcview/index.html">
+	
+	<XML id="dataSet" source="data/sampleData.xml" />
+	<Panel width="100%" height="100%" title="data based renderers"  layout="horizontal">
+		<Text width="300">
+			<htmlText>
+		<![CDATA[This Pie Chart uses a custom renderer to render its wedges with 'threshold' colors. Meaning values greater than
+80 are red, greater than 50 are yellow, and all others are green. The demo isn't that exciting, but it's a good example
+of how to write a custom renderer that does something quantitative with the data it's representing. WHile this demo only
+includes a Wedge Renderer for pie charts, the code is written to be reusable, meaning the colors and threshold values
+can be specified when using the renderer, and the source can be easily used to write threshold renderers for other 
+chart types.<br/>
+<font color="#0000AA"><a href="srcview/index.html" target="_blank">View the source</a></font> to see how it is done.
+		]]>
+		</htmlText>
+		</Text>
+		<PieChart width="100%" height="100%" dataProvider="{dataSet.Sample}" >
+			<series>
+				<PieSeries field="@costs" labelPosition="callout">
+					<itemRenderer>
+						<Component>
+							<qc:StoplightWedgeRenderer xmlns:qc="qs.charts.dataRenderers.*">
+								<qc:thresholds>
+									<qc:StoplightThreshold value="0">
+										<qc:fill>
+											<SolidColor color="#00AA00" />
+										</qc:fill>
+									</qc:StoplightThreshold>
+									<qc:StoplightThreshold value="50">
+										<qc:fill>
+											<SolidColor color="#AAAA00" />
+										</qc:fill>
+									</qc:StoplightThreshold>
+									<qc:StoplightThreshold value="80">
+										<qc:fill>
+											<SolidColor color="#AA0000" />
+										</qc:fill>
+									</qc:StoplightThreshold>									
+								</qc:thresholds>
+
+							</qc:StoplightWedgeRenderer>
+						</Component>
+					</itemRenderer>
+				</PieSeries>
+			</series>
+		</PieChart>
+	</Panel>
+</Application>

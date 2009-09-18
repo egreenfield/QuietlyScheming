@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://www.adobe.com/2006/mxml" xmlns:ns1="*" styleName="dark">
+	
+	<Label x="10" y="10" text="AlbumName" color="#FFFFFF" fontSize="24"/>
+	<ns1:ImageCrawler id="crawler" right="10" y="42" left="10" height="120">
+		<ns1:itemRenderer>
+			<Component>
+				<ns1:Tile text="{'' + data.value}" backgroundColor="{data.color}" width="{data.width}"/>
+			</Component>
+		</ns1:itemRenderer>
+	</ns1:ImageCrawler>
+	
+</Canvas>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300" backgroundAlpha="0.0" alpha=".8" xmlns:filters="flash.filters.*" cornerRadius="9" borderStyle="solid" borderThickness="2" borderColor="#444444" xmlns:utils="qs.utils.*">
+	<mx:Style>
+		.labelHeader {
+			color: #FFFFFF;
+			fontWeight: bold;
+			fontFamily: Verdana;	
+		}
+
+		.labelValue {
+			color: #FFFFFF;
+			fontFamily: Verdana;
+			fontWeight: normal;	
+		}
+		.lb {
+			color: #FFFFFF;
+			fontFamily: Verdana;
+			fontWeight: normal;				
+			rollOverColor: #3A3F45;
+			textRollOverColor: #F3F12F;
+			paddingLeft: -4;
+			paddingRight: -4;
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Label;
+			import mx.controls.LinkButton;
+			private var _targetData:Array = [];
+			
+			public function set targetData(value:Array):void
+			{
+				_targetData = value;
+				var uiItems:Array = [];
+				for(var i:int = 0;i<_targetData.length;i++)
+				{
+					var lb:LinkButton = new LinkButton();
+					var td:Object= _targetData[i];
+					lb.label = (td.id != "")? (td.name + "#" + td.id) : td.name;
+					lb.styleName = "lb";					
+					uiItems.push(lb);
+					if(i < _targetData.length-1)	
+					{
+						var l:Label = new Label();
+						l.text = ">";
+						l.styleName = "lb";
+						uiItems.push(l);
+					}
+				}
+				stackHolder.content = uiItems;
+			}
+		]]>
+	</mx:Script>
+	<mx:Canvas left="0" right="0" top="0" height="25" backgroundColor="#63696E">
+		<mx:Label text="FLEXRAY" horizontalCenter="-1" color="#FFFFFF" verticalCenter="0" fontWeight="bold" fontFamily="Verdana"/>
+	</mx:Canvas>
+	<mx:Canvas right="0" left="0" top="23" bottom="0" backgroundColor="#3A3F45">
+		<mx:Label x="24" y="10" text="element:" styleName="labelHeader" />
+		<mx:Label x="61" y="25" text="id:" styleName="labelHeader"/>
+		<mx:Label x="10" y="41" text="styleName:" styleName="labelHeader"/>
+
+		<mx:Label styleName="labelValue" y="10"  right="5" left="88" text="{data.name}" />
+		<mx:Label styleName="labelValue" y="25"  right="5" left="88" text="{data.id}" />
+		<mx:Label styleName="labelValue" y="41"  right="5" left="88" text="{data.styleName}" />
+		<mx:HRule y="60" right="0" left="0" strokeWidth="1" strokeColor="#D7D4D4"/>
+		<utils:ViewHelperFlow y="67" right="0" left="0" id="stackHolder" />
+	</mx:Canvas>
+</mx:Canvas>

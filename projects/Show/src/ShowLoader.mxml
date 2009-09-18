@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:ShowLoader_Base xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" verticalAlign="middle" horizontalAlign="center">
+	<Label styleName="loadingStatus" id="status" text="This is the loading status" />
+</local:ShowLoader_Base>

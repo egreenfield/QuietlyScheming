@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.*;
+			
+			public var linkages:Array = [
+				Button,
+				ButtonBar,
+				CheckBox,
+				RadioButton,
+				RadioButtonGroup,
+				ComboBox,
+				LinkButton,
+				LinkBar,
+				HRule,
+				VRule,
+				HScrollBar,
+				VScrollBar,
+				
+				Label,
+				Text,
+				TextInput,
+				TextArea,
+				
+				NumericStepper
+				
+			];
+		]]>
+	</mx:Script>	
+</mx:Module>

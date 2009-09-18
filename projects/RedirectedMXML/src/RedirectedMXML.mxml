@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" viewSourceURL="srcview/index.html">
+	<!-- this example assigns an array of buttons to the innerChildren property
+	of the component -->
+	<local:RedirectedChildren y="0" >
+		<local:innerChildren>
+			<mx:Button label="first additional child" />
+			<mx:Button label="second additional child" />				
+		</local:innerChildren>
+	</local:RedirectedChildren>
+
+	<!-- this is equivalent to the example above...even though you didn't specify
+	what property the buttons belong to, the compiler knows they go to the innerChildren
+	property because the RedirectedChildren declares innerChildren as its default property -->
+	<local:RedirectedChildren y="200" >
+		<mx:Button label="first additional child" />
+		<mx:Button label="second additional child" />				
+	</local:RedirectedChildren>
+	
+</mx:Application>

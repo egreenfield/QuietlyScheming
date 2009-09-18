@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CartesianChart xmlns="http://www.adobe.com/2006/mxml" 
+	verticalAxisStyleName="tileAxisStyle" secondVerticalAxisStyleName="tileAxisStyle"
+	horizontalAxisStyleName="tileAxisStyle" secondHorizontalAxisStyleName="tileAxisStyle"
+	paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20" xmlns:s="qs.styles.*" initialize="initAxes()">
+
+
+	<Script>
+		import mx.charts.LinearAxis;
+		import mx.charts.chartClasses.IAxis;
+		public function get sizeAxis():IAxis
+		{
+			return transforms[0].getAxis(TileSeries.SIZE_AXIS);
+		}
+	
+		/**
+		 *  @private
+		 */
+		public function set sizeAxis(value:IAxis):void
+		{
+			transforms[0].setAxis(TileSeries.SIZE_AXIS, value);			
+			invalidateData();
+		}
+		
+		private function initAxes():void
+		{
+			secondHorizontalAxis = new LinearAxis();
+			secondVerticalAxis = new LinearAxis();
+		}
+	</Script>
+
+	<s:Selector name=".tileAxisStyle">
+		<s:StyleValue name="axisStroke">
+			<Stroke color="#FFFFFF" weight="2" caps="none"/>
+		</s:StyleValue>		
+		<s:StyleValue name="minorTickPlacement" value="none" />
+		<s:StyleValue name="tickPlacement" value="none" />		
+	</s:Selector>
+	
+	<backgroundElements>
+		<GridLines styleName="bothGridLines" horizontalShowOrigin="false" verticalShowOrigin="false" />
+	</backgroundElements>
+	<horizontalAxisRenderer>
+		<AxisRenderer placement="top" />
+	</horizontalAxisRenderer>	
+	<secondHorizontalAxisRenderer>
+		<AxisRenderer showLabels="false"/>		
+	</secondHorizontalAxisRenderer>
+	<secondVerticalAxisRenderer>
+		<AxisRenderer showLabels="false"/>				
+	</secondVerticalAxisRenderer>
+	
+</CartesianChart>

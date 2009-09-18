@@ -1,0 +1,3 @@
+<Panel xmlns="http://www.macromedia.com/2003/mxml" xmlns:local="*">
+	<local:GuidedCanvas width="100%" height="100%" />
+</Panel>

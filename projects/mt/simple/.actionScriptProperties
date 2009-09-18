@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="1" mainApplicationPath="MXMLSimple.as">
+  <compiler additionalCompilerArguments="" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="false" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" outputFolderLocation="C:\dev\qs\web\public\mt\" rootURL="http://localhost:8080/mt/" sourceFolderPath="src">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" path="C:\dev\qs\projects\mt\src" linkType="1"/>
+    </compilerSourcePath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+    </libraryPath>
+    <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+    </sourceAttachmentPath>
+  </compiler>
+  <applications>
+    <application path="MXMLSimple.as"/>
+  </applications>
+  <buildCSSFiles/>
+</actionScriptProperties>

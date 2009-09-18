@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.HistoryManager;
+			import mx.collections.ArrayCollection;
+			[Bindable] public var tapeList:ArrayCollection;
+			public var model:MuxModel;
+			public var controller:MuxController;
+			public var activeTape:MuxTape;
+			[Bindable] public var activeSong:MuxSong;
+			
+			public var sound:Sound;
+			public var channel:SoundChannel;
+			public static var updateT:Timer;
+			public var addToHistory:Boolean = true;
+			
+			private var seeking:Boolean = false;
+			public function beginSeek():void
+			{
+				seeking = true;
+			}
+			public function seek():void
+			{
+				if(channel == null || sound == null || activeSong == null)
+					return;
+					
+				seeking = false;
+				if(channel != null)
+					try { channel.stop();  } catch(e:Error) {}
+				playFrom(sound,activeSong,playHead.value*1000);
+			}
+			
+			public function playFrom(sound:Sound,song:MuxSong,startAt:Number):void			
+			{
+				channel = sound.play(startAt);
+				channel.addEventListener(Event.SOUND_COMPLETE,doneHandler);				
+			}
+			public function playSong(song:MuxSong):void
+			{
+				activeSong = song;
+				if(sound != null)
+					try { sound.close(); } catch(e:Error) {}
+				if(channel != null)
+					try { channel.stop();  } catch(e:Error) {}
+				
+				sound = null;
+				channel = null;
+
+				sound = new Sound();
+				sound.load(new URLRequest(song.url));
+				playFrom(sound,song,0);
+				playHead.maximum = song.length;
+				stopSong.enabled = true;
+				
+				if(updateT == null)
+				{
+					updateT = new Timer(10);
+					updateT.start();
+				}
+				updateT.addEventListener(TimerEvent.TIMER,timerHandler);				
+			}
+			
+			public function timerHandler(e:Event):void
+			{
+				if(channel == null || sound == null || activeSong == null)
+					return;
+				var value:Number = channel.position / 1000; 
+				
+				if(seeking == false )
+				{
+					playHead.value = value;
+				}
+				playTime.text = timeFormat(value);
+			}
+			
+			public function stopPlaying():void
+			{
+				if(sound != null)
+					try { sound.close(); } catch(e:Error) {}
+				if(channel != null)
+					try { channel.stop();  } catch(e:Error) {}
+				
+				sound = null;
+				channel = null;
+				activeSong = null;
+
+				stopSong.enabled = false;
+			}
+			
+			public function doneHandler(e:Event):void
+			{
+				stopSong.enabled = false;
+			}
+			
+			public function setAllActive(active:Boolean):void
+			{
+				for(var i:int = 0;i<activeTape.songs.length;i++)
+				{
+					activeTape.songs[i].active = active;
+				}
+			}
+			public function selectedTapeChanged():void
+			{
+				activeTape = tapeListUI.selectedItem as MuxTape;
+				controller.loadMix(tapeListUI.selectedItem as MuxTape)
+				if(addToHistory)
+					controller.addToHistory(activeTape);
+			}
+			public function timeFormat(v:Number):String
+			{
+				v = Math.floor(v);
+				var secs:* = (v % 60);
+				secs = (secs == 0)? "00":
+					   (secs < 10)? ("0"+secs):secs;
+				
+				return Math.floor(v/60) + ":" + secs;
+			}
+		]]>
+	</mx:Script>
+	<mx:List x="10" width="293" top="10" bottom="10" dataProvider="{tapeList}" labelField="name"  id="tapeListUI" change="selectedTapeChanged()"/>
+	<mx:DataGrid id="songList" top="13" bottom="138" left="311" right="10" dataProvider="{tapeListUI.selectedItem.songs}" change="playSong(songList.selectedItem as MuxSong)">
+		<mx:columns>
+			<mx:DataGridColumn headerText="?" dataField="active" width="20">
+				<mx:itemRenderer>
+					<mx:Component>
+						<mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
+							<mx:CheckBox selected="{data.active}" click="data.active = sel.selected" id="sel" />
+						</mx:HBox>
+					</mx:Component>
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="artist" dataField="artist" width="150" />
+			<mx:DataGridColumn headerText="song" dataField="name"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button id="stopSong" label="Stop" left="311" bottom="40" click="stopPlaying()" />
+	<mx:HSlider id="playHead" dataTipFormatFunction="timeFormat" mouseDown="beginSeek()" change="seek()" minimum="0" bottom="44" right="10" left="412"/>
+	<mx:Button label="All" bottom="10" left="363" id="all" click="setAllActive(true)"/>
+	<mx:Button label="None" bottom="10" left="412" id="none" click="setAllActive(false)"/>
+	<mx:Label text="Check:" bottom="12" left="311"/>
+	<mx:Label text="Download:" bottom="12" right="166"/>
+	<mx:Button label="Selected" bottom="10" right="10" id="downloadSelected" click="controller.downloadSingle(activeSong);"/>
+	<mx:Button label="Checked" bottom="10" right="89" id="downloadChecked" click="controller.downloadTape(activeTape);" />
+	<mx:Text text="Now Playing: {activeSong.name}" fontSize="18" height="60" id="nowPlaying" bottom="70" left="311" right="10"/>
+	<mx:Label id="playTime" bottom="42" left="369"/>
+</mx:Canvas>

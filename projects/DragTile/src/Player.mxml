@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://www.adobe.com/2006/mxml" width="239" height="110" backgroundImage="@Embed('img/player.png')"
+	creationCompleteEffect="{cce}" color="#FFFFFF"  backgroundAttachment="topLeft" borderStyle="none" >
+		<Fade id="cce" alphaFrom="0" alphaTo="1" />
+		
+		<Label left="42" top="12" right="105" text="name: {data.@firstName.toString()} {data.@lastName.toString()}" />
+		<Label left="42" top="32" right="105" text="NickName: {data.@nickname}" />
+		<Label left="42" top="52" right="105" text="ranking: {data.@ranking}" />
+								
+</Canvas>

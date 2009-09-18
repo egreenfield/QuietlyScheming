@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["Area series, like columns and bars, can acept a minValue to render a range."];
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<AreaChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<AreaSeries yField="revenue" minField="costs" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</AreaChart>
+
+</ex:ExampleBase>

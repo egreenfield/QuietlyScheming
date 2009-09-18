@@ -1,0 +1,49 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DataChild.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="asPackage">package</span> qs.charts.dataShapes
+<span class="asBracket">{</span>
+    <span class="asReserved">import</span> mx.core.UIComponent;
+    <span class="asReserved">import</span> flash.display.DisplayObject;
+    <span class="asReserved">import</span> flash.events.EventDispatcher;
+    <span class="asReserved">import</span> flash.events.Event;
+    
+    <span class="asBracket">[</span><span class="asMetadata">DefaultProperty</span><span class="asBracket">(</span><span class="asString">&quot;content&quot;</span><span class="asBracket">)]</span>
+    <span class="asBracket">[</span><span class="asMetadata">Event</span><span class="asBracket">(</span><span class="asString">&quot;change&quot;</span><span class="asBracket">)]</span>
+    <span class="asReserved">public</span> <span class="asClass">class</span> DataChild <span class="asReserved">extends</span> EventDispatcher
+    <span class="asBracket">{</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> DataChild<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject <span class="asOperator">=</span> <span class="asReserved">null</span>,left<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, top<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, right<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, bottom<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>,
+        horizontalCenter<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, verticalCenter<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">this</span>.child <span class="asOperator">=</span> child;
+            <span class="asReserved">this</span>.left <span class="asOperator">=</span> left;
+            <span class="asReserved">this</span>.top <span class="asOperator">=</span> top;
+            <span class="asReserved">this</span>.bottom <span class="asOperator">=</span> bottom;
+            <span class="asReserved">this</span>.right <span class="asOperator">=</span> right;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asVar">var</span> child<span class="asOperator">:</span>DisplayObject;
+        <span class="asReserved">public</span> <span class="asVar">var</span> left<span class="asOperator">:*</span>;
+        <span class="asReserved">public</span> <span class="asVar">var</span> right<span class="asOperator">:*</span>;
+        <span class="asReserved">public</span> <span class="asVar">var</span> top<span class="asOperator">:*</span>;
+        <span class="asReserved">public</span> <span class="asVar">var</span> bottom<span class="asOperator">:*</span>;        
+        <span class="asReserved">public</span> <span class="asVar">var</span> horizontalCenter<span class="asOperator">:*</span>;
+        <span class="asReserved">public</span> <span class="asVar">var</span> verticalCenter<span class="asOperator">:*</span>;
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> content<span class="asBracket">(</span>value<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>value <span class="asReserved">is</span> DisplayObject<span class="asBracket">)</span>
+                child <span class="asOperator">=</span> value;
+            <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>value <span class="asReserved">is</span> Class<span class="asBracket">)</span>
+                child <span class="asOperator">=</span> <span class="asReserved">new</span> value<span class="asBracket">()</span>;
+            dispatchEvent<span class="asBracket">(</span><span class="asReserved">new</span> Event<span class="asBracket">(</span><span class="asString">&quot;change&quot;</span><span class="asBracket">))</span>;
+        <span class="asBracket">}</span>        
+    <span class="asBracket">}</span>
+<span class="asBracket">}</span></pre></body>
+</html>

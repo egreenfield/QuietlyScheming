@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#FFFFEE, #FFFFBB]">
+
+	<Script>
+		<![CDATA[
+			import qs.utils.Eval;
+			
+			public function runEval():void
+			{
+				Eval.parseToTokens(input.text);
+			}
+		]]>
+	</Script>
+	<Label x="10" y="12" text="Expression:"/>
+	<TextInput x="88" y="10" width="433" id="input" />
+	<Button x="529" y="10" label="Go" click="runEval()"/>
+	<Tree x="10" y="38" width="273" height="326"></Tree>
+	
+</Application>

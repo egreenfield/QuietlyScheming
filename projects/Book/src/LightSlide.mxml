@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:LightSlide_code xmlns="http://www.adobe.com/2006/mxml" 
+	xmlns:local="*"
+	xmlns:qcon="qs.controls.*" 
+	xmlns:qg="qs.graphics.*"> 
+	<local:creationCompleteEffect>
+		<Fade />
+	</local:creationCompleteEffect>
+	
+	<qg:RoundedBox id="box" cornerRadius="8" width="100%" height="66%" horizontalCenter="0" verticalCenter="0">
+		<qg:fill>
+			<SolidColor color="#525252" />
+		</qg:fill>
+	</qg:RoundedBox>
+	<local:states>
+		<State name="loading_thumbnail">
+			<AddChild>
+				<qcon:BitmapTile id="thumbnail" left="0" right="0" top="0" bottom="0"
+					loaded="thumbnailLoaded()" visible="false"
+					data="/images/photos400/{data}" />							
+			</AddChild>
+		</State>
+		<State name="thumbnail" basedOn="loading_thumbnail">
+			<RemoveChild target="{box}" />
+			<SetProperty target="{thumbnail}" name="visible" value="true" />
+		</State>
+		<State name="full" basedOn="thumbnail">
+			<AddChild>
+				<qcon:BitmapTile id="fullImage" left="0" right="0" top="0" bottom="0"
+					loaded="imageLoaded()"
+					data="/images/photos/{data}" />							
+			</AddChild>
+		</State>
+		<State name="loading_full" basedOn="full">
+			<AddChild>
+				<local:Busy id="busy" width="25" height="25" progress="{fullImage.progress}" horizontalCenter="0" verticalCenter="0"/>
+			</AddChild>
+		</State>
+		<State name="loaded" basedOn="full">
+			<RemoveChild target="{thumbnail}" />
+		</State>
+	</local:states>
+	
+	<local:transitions>
+		<Transition toState="thumbnail">
+			<Sequence>				
+				<AnimateProperty target="{box}" property="alpha" toValue="0" />
+				<RemoveChildAction target="{box}" />
+				<Parallel>
+					<SetPropertyAction target="{thumbnail}" name="visible" value="true" />
+					<AnimateProperty target="{thumbnail}" property="alpha" fromValue="0" toValue="1" />
+				</Parallel>
+			</Sequence>
+		</Transition>
+		<Transition toState="loading_full">
+			<Sequence>				
+				<AddChildAction target="{busy}" />
+				<Fade target="{busy}" alphaFrom="0" duration="1500"/>
+			</Sequence>
+		</Transition>
+		<Transition toState="loaded">
+			<Sequence>				
+				<Fade target="{busy}" alphaTo="0" duration="1000"/>
+				<RemoveChildAction target="{busy}" />
+			</Sequence>
+		</Transition>
+	</local:transitions>
+	
+</local:LightSlide_code>

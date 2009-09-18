@@ -1,0 +1,82 @@
+
+@font-face
+{
+   font-family: MyArial;
+   src: local("Arial");
+}
+Application {
+	font-size: 14;
+	font-family: MyArial;
+	backgroundColor: #343434;
+	color: #FFFFFF;
+}
+CalendarHeader {
+	text-align: right;
+	font-family: "Tahoma";
+	font-size: 10;
+	font-weight: bold;	
+	color: #000000;
+}
+
+.predefinedCalList {
+	color: #000000;	
+}
+CalendarDisplay {
+	hourDividerThickness: 2;
+	hourDividerColor: #AAAAFF;	
+	hourBackgroundColor: #DDDDFF;
+	allDayDividerThickness: 2;
+	allDayDividerColor: #AAAAFF;	
+	allDayBackgroundColor: #DDDDFF;
+	hourThickness: 1;
+	hourColor: #AAAAFF;
+	hourStyleName: bigHours;
+}
+
+.bigHours {
+	font-size: 12;	
+}
+FormItemLabel {
+	color: #FFFFFF;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFFF;
+}
+CreateCalendarDialog {
+	font-weight: bold;
+	font-family: "Arial";
+	font-size: 10;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFFF;
+	color: #FFFFFF;
+}
+
+CalendarEventRenderer {
+	font-size: 10;	
+}
+.CreateCalendarDialogHeader {
+	font-weight: bold;
+	font-family: "Arial";
+	font-size: 14;
+	color: #FFFFFF;
+}
+
+.calendarsContainer {
+	color: #000000;
+	border-style: solid;
+	corner-radius: 10;
+	border-color: #888888;
+	border-thickness: 3;	
+	background-color: #FFFFFF; 
+	padding-right: 10;
+	padding-left: 10;
+	padding-top: 10;
+	padding-bottom: 10;
+	
+}
+
+.smallCalButton {
+	font-size: 10;	
+}
+.headerLabel {
+	color: #000000;	
+}

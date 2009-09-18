@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Declaration_code xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" layout="absolute"
+	xmlns:qc="qs.containers.*"
+	xmlns:qg="qs.graphics.*" 
+	 currentState="loading"
+	viewSourceURL="srcview/Declaration.html"> 
+	
+
+	<Style source="styles.css" />
+
+	<local:states>
+		<State name="loaded">
+			<AddChild position="lastChild">
+				<Label styleName="subTitle" x="10" y="58" text="Points of Interest (click to view):"/>
+			</AddChild>
+			<AddChild position="lastChild">
+				<HBox left="10" bottom="10" top="84" right="10">					
+					<VBox height="100%">
+						<LinkButton label="Whole Document" click="view(constitution)" />
+						<LinkButton label="first use of 'United States..." click="view(USA)" />
+						<LinkButton label="duty to revolt" click="view(duty,duty2)" />
+						<LinkButton label="assertion of right to a jury trial" click="view(jury)" />
+						<LinkButton label="reason for separation of powers" click="view(separation1,separation2)" />
+						<LinkButton label="the resulting declaration" click="view(declaration)" />
+						<LinkButton label="John Hancock's Signature..." click="view(signature)" />
+						<LinkButton label="First American PostMistress" click="view(postmistress)" />
+						<Spacer height="100%" />
+						<HRule width="100%"/>
+						<Spacer height="100%" />										
+						<Text  styleName="instructions" width="100%" condenseWhite="true">
+							<text>
+							This application shows a more general use of the Landscape component. 
+							In this Application, the Landscape component contains one very large high resolution bitmap 
+							of the Declaration of Independence, and a number of small custom 'Hilight' components each one 
+							overlaid on top of an interesting part of the Declaration. 
+							Initially, the hilight components are not visible. 
+							When you choose a link from the left, The Landscape is told to focus in on the matching hilight, 
+							and the hilight is put into a 'selected' state.
+							To view the whole document, the Landscape is told to focus on the entire document.
+							</text>
+						</Text>
+						<Spacer height="100%" />										
+					</VBox>
+					<VRule height="100%"/>
+
+					<qc:Landscape  id="viewer" styleName="constitutionViewer" width="100%" height="100%"  animationSpeed=".15"
+						initialize="viewer.jumpToSelection([constitution])">
+						
+						<Image id="constitution" source="@Embed('img/constitution.jpg')" />
+						<local:Hilight id="duty" x="521" y="982" width="1275" height="221" />
+						<local:Hilight id="duty2" x="524" y="1569" width="1249" height="164" />
+						<local:Hilight id="separation1" x="524" y="2259" width="1262" height="119" />
+						<local:Hilight id="separation2" x="520" y="2626" width="1247" height="122" />
+						<local:Hilight id="USA" x="1867" y="2479" width="1249" height="83" />
+						<local:Hilight id="signature" x="1340" y="4018" width="760" height="223" />
+						<local:Hilight id="jury" x="1915" y="1207" width="972" height="56" />
+						<local:Hilight id="declaration" x="1870" y="2577" width="1273" height="344" />
+						<local:Hilight id="postmistress" x="1741" y="4252" width="608" height="74" />
+					</qc:Landscape>				
+				</HBox>
+			</AddChild>
+		</State>
+		<State name="loading">
+			<AddChild position="lastChild">
+				<Label text="...Loading..." styleName="loading" horizontalCenter="0" verticalCenter="0"/>
+			</AddChild>
+			<AddChild position="lastChild">
+				<qg:RoundedBox styleName="loadBox" width="160" height="50" horizontalCenter="0" verticalCenter="0">
+					<qg:fill>
+						<SolidColor color="#878787" alpha=".4" />
+					</qg:fill>
+				</qg:RoundedBox>
+			</AddChild>
+		</State>
+	</local:states>
+	<Label text="The Declaration of Independence" styleName="title" top="10" left="10" right="10"/>
+</local:Declaration_code>

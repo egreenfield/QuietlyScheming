@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Demo xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" >
+	
+	<Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			private function toggle(t:UIComponent):void
+			{
+				if (TiltingPane02(t).angle == 45)
+					showIt.play([t]);
+				else
+					hideIt.play([t]);
+			}
+		]]>
+	</Script>
+	<AnimateProperty property="angle" fromValue="45" toValue="0" id="showIt" />
+	<AnimateProperty property="angle" fromValue="0" toValue="45" id="hideIt" />
+	
+	<HBox horizontalCenter="0" verticalCenter="0" >
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo01.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo02.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo03.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo04.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo05.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo06.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo07.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo08.jpg" />									
+		<local:TiltingPane02 angle="45"  scaleX=".5" scaleY=".5" click="toggle(UIComponent(event.currentTarget))"
+			source="img/photos400/photo09.jpg" />									
+	</HBox>
+
+</local:Demo>

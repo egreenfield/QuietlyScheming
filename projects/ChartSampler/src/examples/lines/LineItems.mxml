@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml" xmlns:s="support.*">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple two series line chart"];
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<ex:controls>
+		<NumericStepper id="rad" value="5" minimum="0" maximum="20" />
+		<s:StrokeButton id="itemStrokeUI" />
+		<s:FillButton id="fillUI" />
+	</ex:controls>
+
+	<LineChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<LineSeries yField="revenue" radius="{rad.value}" fill="{fillUI.value}" stroke="{itemStrokeUI.value}" itemRenderer="mx.charts.renderers.CircleItemRenderer"/>
+			<LineSeries yField="costs" radius="{rad.value}" fill="{fillUI.value}" stroke="{itemStrokeUI.value}" itemRenderer="mx.charts.renderers.DiamondItemRenderer"/>
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</LineChart>
+
+</ex:ExampleBase>

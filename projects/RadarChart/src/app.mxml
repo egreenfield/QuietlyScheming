@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" backgroundColor="#FFFFFF" xmlns:charts="qs.charts.*" xmlns:local="*">
+	
+	<Script>
+		<![CDATA[
+			[Bindable] public var dataSet:Array = [];
+			public function genData():void
+			{
+				if(size.value > dataSet.length)
+				{
+					for(var i:int = dataSet.length;i<size.value;i++)
+						dataSet.push(Math.floor(Math.random()*100));						
+				}
+				else
+					dataSet.splice(size.value,dataSet.length - size.value);					
+					
+				dataSet = dataSet.concat();
+			}
+		]]>
+	</Script>
+	<HSlider id="size" width="100%" minimum="0" maximum="1000" snapInterval="1" liveDragging="true" change="genData()" />
+	<PolarChart width="100%" height="100%" showDataTips="true" dataProvider="{dataSet}">
+		<series>
+			<charts:RadarSeries   form="curve" />
+		</series>
+		<backgroundElements>
+			<charts:PolarGridLines />
+		</backgroundElements>
+		<radialAxis>
+			<LinearAxis baseAtZero="true" displayName="accuracy" />
+		</radialAxis>
+	</PolarChart>
+</Application>

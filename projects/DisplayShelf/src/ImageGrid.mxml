@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HBox xmlns="http://www.adobe.com/2006/mxml" cacheAsBitmap="true" verticalGap="0" horizontalGap="10"
+	paddingLeft="10" paddingRight="10" backgroundColor="#FFFFFF"
+	verticalAlign="middle">
+	<Script>
+		<![CDATA[
+			[Bindable] public var src1:String;
+			[Bindable] public var src2:String;
+			[Bindable] public var src3:String;
+		]]>
+	</Script>
+	<Image source="{src1}" scaleX=".5" scaleY=".5" />
+	<VBox verticalGap="10" horizontalGap="0">
+		<Image source="{src2}" scaleX=".25" scaleY=".25" maintainAspectRatio="false" />		
+		<Image source="{src3}" scaleX=".25" scaleY=".25" maintainAspectRatio="false" />		
+	</VBox>
+
+</HBox>

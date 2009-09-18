@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get numSteps():int { return 3;}
+			override protected function setupStep(index:int):void
+			{
+				switch(index)
+				{
+					case 0:
+						chart.type = "clustered";
+						break;
+					case 1:
+						chart.type = "stacked";
+						break;
+
+					case 2:
+						chart.type = "100%";
+						break;
+				}
+			}
+
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<BarChart id="chart" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<BarSeries xField="revenue" />
+			<BarSeries xField="costs" />
+		</series>
+	<verticalAxis>
+		<CategoryAxis categoryField="month" />
+	</verticalAxis>
+	</BarChart>
+</ex:ExampleBase>

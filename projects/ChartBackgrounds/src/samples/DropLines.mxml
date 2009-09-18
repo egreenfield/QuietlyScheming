@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ExampleBase  
+	xmlns:s="qs.samples.*" 
+	xmlns="http://www.adobe.com/2006/mxml"
+	xmlns:charts="qs.charts.*"  xmlns:local="*"
+	xmlns:dataShapes="qs.charts.dataShapes.*" 
+	xmlns:graphics="qs.graphics.*">
+
+	<Script>
+		<![CDATA[
+			import mx.graphics.IStroke;
+			import mx.graphics.Stroke;
+
+		import qs.charts.dataShapes.*;
+
+		override public function get descriptions():Array {
+			return ["A very simple example that uses the DataDrawingCanvas to " + 
+					" enhance the default appearance of the area series. This probably" + 
+					" should be done as a custom renderer, but for simple scenarios the" + 
+					" DataDrawingCanvas makes it much simpler. "];
+		}
+
+		public function drawData():void
+		{
+			canvas.clear();
+
+			canvas.lineStyle(5,0xFF0000);
+			var points:XMLList = dataSamples.sample;
+			var stroke:IStroke = new Stroke(0xFFFFFF,4,1,false,LineScaleMode.NORMAL,CapsStyle.NONE);
+			for(var i:int =1;i<points.length()-1;i++)
+			{
+				var point:XML = points[i];
+				canvas.dashedLine(point.@name,point.@value,point.@name,Edge.BOTTOM,
+						stroke,[15,15]);
+			}
+
+		}
+
+		]]>
+	</Script>
+
+	<XML source="/data/categories.xml" id="categories" />
+	<XML source="/data/samples.xml" id="dataSamples" />
+
+	<AreaChart width="100%" height="100%" creationComplete="drawData();">
+		<series>
+			<AreaSeries dataProvider="{dataSamples.sample.@value}" form="curve" 
+				itemRenderer="mx.charts.renderers.CircleItemRenderer" radius="8">
+				<stroke>
+					<Stroke color="#E48701" weight="3" alpha=".5" />						
+				</stroke>
+				<fill>
+					<SolidColor color="#FFFFFF" />
+				</fill>
+			</AreaSeries>
+			<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="false" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis dataProvider="{categories.category.@name}" />
+		</horizontalAxis>
+	</AreaChart>
+
+</s:ExampleBase>

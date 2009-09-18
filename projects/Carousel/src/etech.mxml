@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application layout="vertical" width="100%" height="100%" xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" 
+	backgroundColor="#000000" paddingTop="40" paddingLeft="40" paddingBottom="40" creationComplete="initData();">
+
+	<mx:Style>
+		Application {
+			color: #FFFFFF;
+
+		}
+		CheckBox {
+			textRollOverColor: #FFFFFF;
+			textSelectedColor: #FFFFFF;
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			private function initData():void
+			{
+				var urls:Array = [
+						"img/img1.jpg",
+						"img/img2.jpg",
+						"img/img3.jpg",
+						"img/img4.jpg",
+						"img/img5.jpg",
+						"img/img6.jpg",
+						"img/img7.jpg",
+						"img/img8.jpg",
+						"img/img9.jpg",
+						"img/img10.jpg",
+						"img/img11.jpg",
+						"img/img12.jpg",
+						"img/img13.jpg",
+					];
+//				urls = urls.concat(urls);
+//				urls = urls.concat(urls);
+//				urls = urls.concat(urls);
+				spinner.dataProvider = urls;
+			}
+
+			private function toggleTilt():void
+			{
+				if(setTilt.selected)
+				{
+					spinner.tiltAngle = tiltAngle.value;
+				}
+				else
+				{
+					spinner.tiltAngle = NaN;
+				}
+			}
+		]]>
+	</mx:Script>
+		<mx:HBox width="100%">
+			<mx:Button label="up" click="spinner.up()" />
+			<mx:Button label="down" click="spinner.down()" />
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:CheckBox label="set tilt" id="setTilt" click="toggleTilt()" />
+			<mx:HSlider id="tiltAngle" liveDragging="true" minimum="0" snapInterval="0" maximum="1.5707" value="0"
+				change="if(setTilt.selected) {spinner.tiltAngle = tiltAngle.value}" />
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:Label text="max arc:" />
+			<mx:HSlider id="maxArc" liveDragging="true" minimum="0" snapInterval="0" maximum="6.28318" value="0"
+				change="spinner.maxArc = maxArc.value" />
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:Label text="arc:" />
+			<mx:HSlider id="arc" liveDragging="true" minimum="0" snapInterval="0" maximum="6.28318" value="3.14159"
+				change="spinner.arc = arc.value" />
+		</mx:HBox>
+<!--		<mx:Spacer height="100%" /> -->
+		<Carousel id="spinner" width="100%" height="100%" />
+
+</mx:Application>

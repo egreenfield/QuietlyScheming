@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	backgroundGradientColors="[#000000, #282828]" backgroundColor="#282828" xmlns:controls="qs.controls.*"
+	creationComplete="initTimer();" xmlns:filters="flash.filters.*">
+	
+	<Style>
+		Book {
+			padding-left: 17;
+			padding-right: 17;	
+			padding-top: 17;
+			padding-bottom: 17;
+			padding-spine: 17;
+			
+			color: #000000;
+			textRollOverColor: 	#000000;
+			
+			border-color: #222222;
+			border-thickness: 1;
+			border-style: solid;
+			background-color: #F1F1CC;
+
+		}
+		
+		Application {
+			color: #F1F1CC;
+			textRollOverColor: 	#FFFFFF;
+		}
+		
+		ComboBox, NumericStepper {
+			color: #000000;
+			textRollOverColor: #000000;	
+		}
+		
+	</Style>
+	
+	<Script>
+		<![CDATA[
+			private function next():void
+			{
+				if(book.currentPageIndex+2 < book.pageCount)
+					book.turnToPage(book.currentPageIndex + 2);
+					
+			}
+			private function previous():void
+			{
+				if(book.currentPageIndex > 1)
+					book.turnToPage(book.currentPageIndex - 2);
+//					book.currentPageIndex -= 2;
+			}
+			
+			private function updateGradientValues():void
+			{
+				book.gradientValues = 
+				{
+					ratios: [0, r1.value],
+					colors: [c0.selectedColor, c1.selectedColor],
+					alphas: [a0.value, a1.value]
+				}
+				dumpValues();
+			}
+			public function dumpValues():void
+			{
+				trace("****");
+				trace("ratio:" + r1.value + "\n");
+				trace("alpha: " + a0.value + "\n");
+			}
+			
+			private var _timer:Timer;
+			private function initTimer():void
+			{
+				_timer = new Timer(1000);
+				_timer.addEventListener(TimerEvent.TIMER,timerHandler);
+				_timer.start();
+				genData();
+			}
+			[Bindable] public var v1:Number = 50;
+			[Bindable] public var v2:Number = 50;
+			[Bindable] public var v0:Number = 50;
+			
+			private function timerHandler(e:Event):void
+			{
+				genData();
+			}
+			private function genData():void
+			{
+				var ds:Array = [];
+				for(var i:int = 0;i<40;i++)
+				{
+					ds.push(Math.random() * 100);
+				}
+				dataSet = ds;
+			}
+			
+			[Bindable] public var dataSet:Array;
+		]]>
+	</Script>
+
+	<Binding source="currentPage.value" destination="book.currentPageIndex" />
+	<Binding destination="currentPage.value" source="book.currentPageIndex" />
+
+	<ColorPicker id="c0" selectedColor="#000000" change="updateGradientValues()" left="10" top="307"/>
+	<ColorPicker id="c1" selectedColor="#FFFFFF" change="updateGradientValues()" left="10" top="337"/>
+	<HSlider liveDragging="true" width="74" id="a0" minimum="0" maximum="1" value="1" change="updateGradientValues()" left="40" top="312"/>
+	<HSlider liveDragging="true" width="74" id="a1" minimum="0" maximum="1" value="0" change="updateGradientValues()" left="40" top="338"/>
+	<HSlider liveDragging="true" width="74" id="r1" minimum="0" maximum="255" value="255" change="updateGradientValues()" left="136" top="338"/>
+	<CheckBox label="Animate During Flip" id="updateDuringFlip" left="10" top="10"/>
+	<CheckBox label="Tease Corner" id="teaseCorner" selected="true"  left="10" top="88"/>
+
+	<CheckBox label="Hardback" id="hardBack" selected="true"  left="11" top="36"/>
+	<CheckBox label="Hard Pages" id="hardPages" left="11" top="62"/>
+
+	<Label text="Grab:" left="10" top="116"/>
+	<ComboBox id="grabStyle" selectedIndex="1"  left="54" top="114">
+		<dataProvider>
+			<String>page</String>
+			<String>edge</String>
+			<String>corner</String>
+			<String>none</String>
+		</dataProvider>
+	</ComboBox>
+
+		<Label text="Edge and Corner Size:" left="10" top="144"/>
+		<NumericStepper id="edgeSize" width="87" value="150" minimum="0" stepSize="1"  maximum="500" left="10" top="170"/>
+		<HSlider liveDragging="true" width="150" id="shadowStrength" minimum="0" maximum="3" value="1" left="10" top="240"/>
+
+		<Canvas left="200" right="0" top="0" bottom="0" backgroundColor="#222222" borderStyle="solid" borderSides="left" borderColor="#444444">
+			
+			<controls:Book id="book" y="47" width="592" height="352" horizontalCenter="0" 
+				animateCurrentPageIndex="true"
+				showCornerTease="{teaseCorner.selected}" animatePagesOnTurn="{updateDuringFlip.selected}" 
+				activeGrabArea="{grabStyle.selectedItem}"
+				edgeAndCornerSize="{edgeSize.value}" 
+				hardbackPages="{hardPages.selected}"
+				hardbackCovers="{hardBack.selected}"
+				pageShadowStrength="{shadowStrength.value}"
+				xmlns:bp="qs.controls.bookClasses.*"
+				>
+				<controls:cover>
+					<l:LetterPage text="front" backgroundColor="#000000" color="#FFFFFF" />
+				</controls:cover>
+				<controls:backCover>
+					<l:LetterPage text="back" backgroundColor="#000000" color="#FFFFFF" />
+				</controls:backCover>				
+				<l:LetterPage text="A" backgroundColor="#FF9A16" color="#FFFFFF" />
+				<bp:BookPage isStiff="true">
+					<bp:front>
+						<l:LetterPage text="B" backgroundColor="#1146C4" color="#FFFFFF" />
+					</bp:front>
+					<bp:back>
+						<l:LetterPage text="C" backgroundColor="#16C411" color="#FFFFFF" />						
+					</bp:back>					
+				</bp:BookPage>
+				<l:LetterPage text="D" backgroundColor="#C41132" color="#FFFFFF" />
+				<HBox>					
+					<List backgroundAlpha="0" borderStyle="solid" width="100%" height="100%" dataProvider="{'now is the time for all good men to come home'.split(' ')}" />
+				</HBox>
+				<l:LetterPage text="E" backgroundColor="#C0C44C"  color="#FFFFFF" />
+				<l:LetterPage text="F" backgroundColor="#40A496"  color="#FFFFFF" />
+				<HBox>					
+					<BarChart width="100%" height="100%" showDataTips="true">
+						<series>
+							<BarSeries dataProvider="{dataSet}">
+								<showDataEffect>
+									<SeriesInterpolate duration="500" elementOffset="2"/>
+								</showDataEffect>
+							</BarSeries>
+						</series>
+					</BarChart>
+				</HBox>
+				<HBox horizontalAlign="center">					
+					<VSlider height="100%" value="{v0}" minimum="0" maximum="100" />
+					<Spacer width="100%" />
+					<VSlider height="100%" value="{v1}" minimum="0" maximum="100" />
+					<Spacer width="100%" />				
+					<VSlider height="100%" value="{v2}" minimum="0" maximum="100" />
+					<Button label="HI!" />
+				</HBox>
+				<l:LetterPage text="G" backgroundColor="#A46140"  color="#FFFFFF" />
+				<l:FormPage />
+				<l:LetterPage text="I" backgroundColor="#C41132"  color="#FFFFFF" />
+			</controls:Book>
+
+			<Button label="Prev" click="previous()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="-266" y="407"/>
+			<Button label="Next" click="next()" fillColors="[#f47a00, #ff0000]" fillAlphas="[1.0, 1.0]" color="#ffffff" fontWeight="bold" fontSize="14" horizontalCenter="265" y="407"/>
+			<HSlider y="412" width="454" id="currentPage" snapInterval="2" value="0" minimum="0" maximum="{book.pageCount-2}"  horizontalCenter="0"/>
+
+		</Canvas>
+
+	
+</Application>

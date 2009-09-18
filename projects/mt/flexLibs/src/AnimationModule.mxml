@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.effects.*;
+
+			public var linkages:Array = [
+				AddChildAction,
+				AnimateProperty,
+				Blur,
+				CompositeEffect,
+				Dissolve,
+				Effect,
+				EffectInstance,
+				Fade,
+				Glow,
+				Iris,
+				MaskEffect,
+				Move,
+				Parallel,
+				Pause,
+				RemoveChildAction,
+				Resize,
+				Rotate,
+				Sequence,
+				SetPropertyAction,
+				SetStyleAction,
+				SoundEffect,
+				Tween,
+				TweenEffect,
+				WipeDown,
+				WipeLeft,
+				WipeRight,
+				WipeUp,
+				Zoom
+			];
+		]]>
+	</mx:Script>	
+</mx:Module>

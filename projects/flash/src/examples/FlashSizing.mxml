@@ -1,0 +1,26 @@
+<VBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="Layout" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	creationComplete="setup()">
+		<Script>
+			<![CDATA[
+				
+				private function setup():void
+				{
+					var myComp:RotatingSquare = new RotatingSquare();
+					addChild(myComp);
+				}
+			]]>
+		</Script>		
+
+		<HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+			<local:RotatingSquare id="animation" />
+			<local:RotatingSquare id="animation2" />
+			<Button label="I am a button!" />
+		</HBox>
+		
+		<HBox horizontalScrollPolicy="off" verticalScrollPolicy="off"  >
+			<local:RotatingSquare />
+			<local:RotatingSquare />
+			<Button label="I am a button!" />
+		</HBox>
+		<Button label="I am a button!" />
+</VBox>

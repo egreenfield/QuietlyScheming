@@ -1,0 +1,36 @@
+<PopUpButton label="stroke" xmlns="http://www.adobe.com/2006/mxml" >
+  <Script>
+	<![CDATA[
+		import mx.graphics.*;
+		import flash.events.*;
+
+		[Bindable("strokeChange")]
+		public function set value(v:Stroke):void
+		{
+			_stroke = v;
+			color.selectedColor = v.color;
+			weight.value = v.weight;
+			alphaV.value = v.alpha;
+			dispatchEvent(new Event("strokeChange"));
+		}
+		public function get value():Stroke {return _stroke;}
+		private var _stroke:Stroke;
+
+		private function update():void
+		{
+			_stroke = new Stroke(color.selectedColor,weight.value,alphaV.value,false,"normal","none");
+			dispatchEvent(new Event("strokeChange"));
+		}
+	]]>
+  </Script>
+	<popUp>
+		<VBox  borderStyle="solid" borderColor="#888888" backgroundColor="#FFFFFF">
+			<Label text="alpha" />
+			<HSlider id="alphaV" minimum="0" liveDragging="true" maximum="1" snapInterval=".1" value="1" change="update();" width="100" />
+			<Label text="weight" />
+			<HSlider id="weight" width="100" liveDragging="true" minimum="0" maximum="20" snapInterval="1"  value="1" change="update();"/>
+			<ColorPicker width="100" height="100" change="update()" id="color" />
+		</VBox>
+	</popUp>
+
+</PopUpButton>

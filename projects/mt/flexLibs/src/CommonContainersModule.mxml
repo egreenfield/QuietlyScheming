@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.*;
+			
+			public var linkages:Array = [
+				HBox,
+				VBox,
+				Tile,
+				HDividedBox,
+				Form,
+				FormItem,
+				Panel,
+				TabNavigator,
+				VDividedBox,
+				ViewStack				
+			];
+		]]>
+	</mx:Script>	
+</mx:Module>

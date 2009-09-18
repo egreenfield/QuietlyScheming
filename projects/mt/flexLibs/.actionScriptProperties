@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="1" mainApplicationPath="AnimationModule.mxml">
+  <compiler additionalCompilerArguments="-locale en_US --load-config lib-config.xml --load-externs ../../flex/app-link-report.xml" copyDependentFiles="false" generateAccessible="false" strict="true" warn="true" htmlGenerate="false" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" outputFolderLocation="C:\dev\qs\web\public\mt\flex\libraries" sourceFolderPath="src">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" path="C:\dev\qs\projects\mt\graphicsSrc" linkType="1"/>
+    </compilerSourcePath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="1" path="${FRAMEWORKS}/locale/{locale}" linkType="1"/>
+    </libraryPath>
+    <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+    </sourceAttachmentPath>
+  </compiler>
+  <applications>
+    <application path="CommonContainersModule.mxml"/>
+    <application path="src\GraphicsModule.mxml"/>
+    <application path="AnimationModule.mxml"/>
+    <application path="src\CommonContainersModule.mxml"/>
+    <application path="src\CommonControlsModule.mxml"/>
+    <application path="CommonControlsModule.mxml"/>
+    <application path="GraphicsModule.mxml"/>
+    <application path="src\DataControlsModule.mxml"/>
+    <application path="DataControlsModule.mxml"/>
+    <application path="src\AnimationModule.mxml"/>
+  </applications>
+  <buildCSSFiles/>
+</actionScriptProperties>

@@ -1,0 +1,15 @@
+<data>
+
+  <sample A="A1" B="B1" C="C1" M1="1" M2="-1" />
+  <sample A="A1" B="B1" C="C2" M1="2" M2="-2" />
+
+  <sample A="A1" B="B2" C="C1" M1="3" M2="-3" />
+  <sample A="A1" B="B2" C="C2" M1="4" M2="-4" />
+
+  <sample A="A2" B="B1" C="C1" M1="5" M2="-5" />
+  <sample A="A2" B="B1" C="C2" M1="6" M2="-6" />
+
+  <sample A="A2" B="B2" C="C1" M1="7" M2="-7" />
+  <sample A="A2" B="B2" C="C2" M1="8" M2="-8" />
+
+</data>

@@ -1,0 +1,73 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DropLines.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;s:ExampleBase</span>  
+    xmlns:s=&quot;<span class="mxmlString">qs.samples.*</span>&quot; 
+    xmlns=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot;
+    xmlns:charts=&quot;<span class="mxmlString">qs.charts.*</span>&quot;  xmlns:local=&quot;<span class="mxmlString">*</span>&quot;
+    xmlns:dataShapes=&quot;<span class="mxmlString">qs.charts.dataShapes.*</span>&quot; 
+    xmlns:graphics=&quot;<span class="mxmlString">qs.graphics.*</span>&quot;<span class="mxmlComponent">&gt;</span>
+
+    <span class="mxmlTag">&lt;Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asReserved">import</span> mx.graphics.IStroke;
+            <span class="asReserved">import</span> mx.graphics.Stroke;
+
+        <span class="asReserved">import</span> qs.charts.dataShapes.<span class="asOperator">*</span>;
+
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> descriptions<span class="asBracket">()</span><span class="asOperator">:</span>Array <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asBracket">[</span><span class="asString">&quot;A very simple example that uses the DataDrawingCanvas to &quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; enhance the default appearance of the area series. This probably&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; should be done as a custom renderer, but for simple scenarios the&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; DataDrawingCanvas makes it much simpler. &quot;</span><span class="asBracket">]</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawData<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            canvas.clear<span class="asBracket">()</span>;
+
+            canvas.lineStyle<span class="asBracket">(</span>5,0xFF0000<span class="asBracket">)</span>;
+            <span class="asVar">var</span> points<span class="asOperator">:</span>XMLList <span class="asOperator">=</span> dataSamples.sample;
+            <span class="asVar">var</span> stroke<span class="asOperator">:</span>IStroke <span class="asOperator">=</span> <span class="asReserved">new</span> Stroke<span class="asBracket">(</span>0xFFFFFF,4,1,<span class="asReserved">false</span>,LineScaleMode.NORMAL,CapsStyle.NONE<span class="asBracket">)</span>;
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> i<span class="asOperator">:</span>int <span class="asOperator">=</span>1;i<span class="asOperator">&lt;</span>points.length<span class="asBracket">()</span><span class="asOperator">-</span>1;i<span class="asOperator">++</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> point<span class="asOperator">:</span>XML <span class="asOperator">=</span> points<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                canvas.dashedLine<span class="asBracket">(</span>point.@name,point.@value,point.@name,Edge.BOTTOM,
+                        stroke,<span class="asBracket">[</span>15,15<span class="asBracket">])</span>;
+            <span class="asBracket">}</span>
+
+        <span class="asBracket">}</span>
+
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/Script&gt;</span>
+
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/categories.xml</span>&quot; id=&quot;<span class="mxmlString">categories</span>&quot; <span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/samples.xml</span>&quot; id=&quot;<span class="mxmlString">dataSamples</span>&quot; <span class="mxmlTag">/&gt;</span>
+
+    <span class="mxmlComponent">&lt;AreaChart</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; creationComplete=&quot;drawData<span class="asBracket">()</span>;&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;series&gt;</span>
+            <span class="mxmlComponent">&lt;AreaSeries</span> dataProvider=&quot;<span class="mxmlString">{</span>dataSamples.sample.@value<span class="mxmlString">}</span>&quot; form=&quot;<span class="mxmlString">curve</span>&quot; 
+                itemRenderer=&quot;<span class="mxmlString">mx.charts.renderers.CircleItemRenderer</span>&quot; radius=&quot;<span class="mxmlString">8</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;stroke&gt;</span>
+                    <span class="mxmlComponent">&lt;Stroke</span> color=&quot;<span class="mxmlString">#E48701</span>&quot; weight=&quot;<span class="mxmlString">3</span>&quot; alpha=&quot;<span class="mxmlString">.5</span>&quot; <span class="mxmlComponent">/&gt;</span>                        
+                <span class="mxmlComponent">&lt;/stroke&gt;</span>
+                <span class="mxmlComponent">&lt;fill&gt;</span>
+                    <span class="mxmlComponent">&lt;SolidColor</span> color=&quot;<span class="mxmlString">#FFFFFF</span>&quot; <span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;/fill&gt;</span>
+            <span class="mxmlComponent">&lt;/AreaSeries&gt;</span>
+            <span class="mxmlComponent">&lt;dataShapes:DataDrawingCanvas</span> id=&quot;<span class="mxmlString">canvas</span>&quot; includeInRanges=&quot;<span class="mxmlString">false</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/series&gt;</span>
+        <span class="mxmlComponent">&lt;horizontalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;CategoryAxis</span> dataProvider=&quot;<span class="mxmlString">{</span>categories.category.@name<span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/horizontalAxis&gt;</span>
+    <span class="mxmlComponent">&lt;/AreaChart&gt;</span>
+
+<span class="mxmlComponent">&lt;/s:ExampleBase&gt;</span></pre></body>
+</html>

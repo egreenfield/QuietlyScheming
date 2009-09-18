@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple pie chart"];
+			}
+			public function genData():void
+			{
+				var newData:Array = [];
+				var A:Number = Math.random()*100 - 50;
+				var B:Number = A - Math.random() * 10;
+				var P:Number = Math.random()*100;
+				for(var i:int = 0;i<dataCount.value;i++)
+				{
+					A = A + Math.random()*10 - 5;
+					B = A - Math.random() * 10;
+					P = Math.random()*100;
+					newData.push(
+					{
+						A: A,
+						B: B,
+						P: P
+					}
+					);
+				}
+				dataSet = newData;
+			}
+			public function lfunc(...args):String
+			{
+				return "this is value " + Math.floor(args[0].P);
+			}
+
+			private function updateExplode():void {
+				var ex:Array = [];
+				if(explodeIndex.value >= 0) {
+					ex[explodeIndex.value] = explodeIndexRadius.value;
+				}
+				ps.perWedgeExplodeRadius = ex;
+			}
+
+			[Bindable] public var dataSet:Array;
+
+		]]>
+	</Script>
+
+	<ex:controls>
+		<Button label="change" click="genData();" />
+	  	<Label text="start angle:" />
+	  	<HSlider id="sa" minimum="-720" maximum="720" value="0" snapInterval="5" liveDragging="false"/>
+	  	<Label text="explode radius:" />
+	  	<HSlider id="er" minimum="0" maximum="1" value="0" liveDragging="false" />
+	  	<Label text="reserve radius:" />
+	  	<HSlider id="rr" minimum="0" maximum="1" value="0" liveDragging="false"/>
+	  	<Label text="innerRadius:" />
+  		<HSlider id="ir" minimum="0" maximum="1" snapInterval=".01" value="0" liveDragging="false" />
+		<Label text="data size:" />
+		<HSlider width="1" minimum="0" maximum="15" value="5" snapInterval="1" liveDragging="false" id="dataCount" change="genData()" />
+	  	<Label text="single explode:" />
+	  	<NumericStepper id="explodeIndex" minimum="-1" maximum="{dataCount.value}" value="-1" change="updateExplode()" />
+  		<HSlider id="explodeIndexRadius" minimum="0" maximum="1" snapInterval=".01" value="0" change="updateExplode()" liveDragging="false" />
+	</ex:controls>
+
+
+	<PieChart id="chart" width="100%" height="100%" dataProvider="{dataSet}" initialize="genData();" innerRadius="{ir.value}" >
+		<series>
+			<PieSeries id="ps" field="P" startAngle="{sa.value}" explodeRadius="{er.value}" reserveExplodeRadius="{rr.value}" showDataEffect="{eff}" />
+		</series>
+	</PieChart>
+
+	<SeriesInterpolate id="eff" duration="1000"/>
+
+</ex:ExampleBase>
+

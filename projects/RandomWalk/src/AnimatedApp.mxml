@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	viewSourceURL="srcview/index.html">
+
+	<Style>
+			
+		@font-face
+		{
+		   font-family: MyArial;
+		   src: local("Arial");
+		}
+		
+		AnimatedRandomWalk {
+			font-family: MyArial;
+			font-size: 12;
+			vertical-gap: 3;
+			horizontal-gap: 20;
+			itemHighlightSkin: ClassReference("randomWalkClasses.RandomWalkHighlightSkin");
+			highlightColors: #FFFF99, #FFDD00;
+			highlightRadius: 4; 
+			backgroundSkin: Embed(source="img/graphics.swf", symbol="BackgroundSkin");
+		}
+		
+		.bitmapSkins {
+			itemHighlightSkin: Embed('img/highlight.gif');
+			backgroundSkin: Embed('img/background.png', scaleGridLeft="20", scaleGridTop="20", scaleGridRight="60", scaleGridBottom="60");
+		}
+	</Style>	
+	<VBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+		<local:AnimatedRandomWalk id="randomWalk" width="700" height="300" dataProvider="{dataSet}" 
+			historyManagementEnabled="true" />
+	</VBox>
+	<XML id="dataSet" source="data/productData.xml" />
+</Application>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" 
+	backgroundGradientColors="[#000000, #222222]" backgroundColor="#222222" xmlns:controls="qs.controls.*"
+	xmlns:filters="flash.filters.*"
+	creationComplete="initSteps();"
+	viewSourceURL="/source/Book.zip"
+	>
+	
+	
+	<Style>
+		WalkthroughBook {
+			padding-left: 8;
+			padding-right: 8;	
+			padding-top: 8;
+			padding-bottom: 8;
+			padding-spine: 8;
+			
+			border-color: #888888;
+			border-thickness: 1;
+			border-style: solid;
+			background-color: #EEEEEE
+		}
+		Button {
+			fillColors: #888888, #AAAAAA;
+			fillAlphas: 1.0, 0.63;
+			color: #FFFFFF;
+			fontWeight: bold;
+			fontSize: 14;
+			cornerRadius: 12;
+			text-roll-over-color: #FFFFFF;
+			theme-color: #BBBBBB;
+		}
+	</Style>
+	
+	<XML id="steps" source="data/text.xml" />
+	<Script>
+		<![CDATA[
+			[Bindable] public var currentStep:XML;
+			[Bindable] public var currentStepIndex:Number = 0;
+			private function initSteps():void
+			{
+				currentStep = steps.step[0];
+			}
+			private function nextStep():void
+			{
+				currentStepIndex++;
+				currentStep = steps.step[currentStepIndex];
+				book.turnToPage(0,false);
+				bookSlave.turnToPage(0,false);
+			}
+			private function previousStep():void
+			{
+				currentStepIndex--;
+				currentStep = steps.step[currentStepIndex];
+				book.turnToPage(0,false);
+				bookSlave.turnToPage(0,false);
+			}
+			private function nextPage():void
+			{
+				book.currentPageIndex+=2;
+				bookSlave.currentPageIndex+=2;
+			}
+			private function previousPage():void
+			{
+				book.currentPageIndex-=2;
+				bookSlave.currentPageIndex+=2;
+			}
+			private function moreSteps(index:Number):Boolean
+			{
+				return (index+1 < steps.step.length());						
+			}
+			
+			[Bindable] public var dataSet:Array;
+		]]>
+	</Script>
+
+	<Button label="Prev" enabled="{currentStepIndex > 0}" click="previousStep()" left="10" top="10" width="134"/>
+	<Button label="Next" enabled="{moreSteps(currentStepIndex)}" click="nextStep()"  left="10" top="40" width="134"/>
+
+	<Button label="Turn Back" visible="{currentStep.@canTurn.toString() != 'false'}" enabled="{book.currentPageIndex > 0}" click="previousPage()" left="10" top="70" width="134"/>
+	<Button label="Turn Forward" visible="{currentStep.@canTurn.toString() != 'false'}" enabled="{book.pageCount-2 > book.currentPageIndex}" click="nextPage()"  left="10" top="100" width="134"/>
+
+	<controls:WalkthroughBook id="book" width="366.63635" height="218" 
+		animateCurrentPageIndex="true"
+		step="{currentStepIndex}"
+		edgeAndCornerSize="100"
+		showCornerTease="false"
+		slave="{bookSlave}"
+ 		verticalCenter="19" horizontalCenter="-10">
+		<l:LetterPage text="A" backgroundColor="#FF9A16" color="#FFFFFF" />
+		<l:LetterPage text="B" backgroundColor="#C41132"  color="#FFFFFF" />
+		<l:LetterPage text="C" backgroundColor="#A46140" color="#FFFFFF" />
+		<l:LetterPage text="D" backgroundColor="#000000"  color="#FFFFFF" />
+	</controls:WalkthroughBook>
+
+	<controls:WalkthroughBook id="bookSlave" width="366.63635" height="218" 
+		animateCurrentPageIndex="true"
+		step="99"
+		edgeAndCornerSize="100"
+		showCornerTease="false"
+		verticalCenter="245" horizontalCenter="-10">
+		<l:LetterPage text="A" backgroundColor="#FF9A16" color="#FFFFFF" />
+		<l:LetterPage text="B" backgroundColor="#C41132"  color="#FFFFFF" />
+		<l:LetterPage text="C" backgroundColor="#A46140" color="#FFFFFF" />
+		<l:LetterPage text="D" backgroundColor="#000000"  color="#FFFFFF" />
+	</controls:WalkthroughBook>
+
+	<Text y="10" height="276" right="22" left="152" color="#EEEEEE"  fontSize="14">
+		<text>{currentStep.toString()}</text>
+	</Text>
+	<Label visible="{(currentStep.@canTurn.toString() != 'false') &amp;&amp; (book.pageCount-2 > book.currentPageIndex)}" text="&lt;-- Click and drag corner to turn forward" horizontalCenter="299" color="#FFFFFF" fontWeight="bold" verticalCenter="119"/>
+	<Label visible="{(currentStep.@canTurn.toString() != 'false') &amp;&amp; (book.currentPageIndex > 0)}" text="Click and drag corner to turn back --&gt;" horizontalCenter="-310" color="#FFFFFF" fontWeight="bold" verticalCenter="119"/>
+	
+</Application>

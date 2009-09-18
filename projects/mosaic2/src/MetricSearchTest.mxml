@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication 
+		xmlns:mx="http://www.adobe.com/2006/mxml" 
+		layout="absolute" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#FFFFFF, #FFFFFF]"
+		showFlexChrome="true"
+		>
+	<mx:states>
+		<mx:State name="step2">
+			<mx:AddChild position="lastChild">
+				<mx:Label x="10" y="36" text="2. Choose a Database Type:"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:ComboBox x="10" y="62" id="dbType" width="129">
+					<mx:String>VPTree</mx:String>
+					<mx:String>Linear</mx:String>
+				</mx:ComboBox>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Button x="147" y="62" label="OK" click="setupDB()"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Label y="92" text="Label" left="10" width="180" id="statusUI"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="step3" basedOn="step2">
+			<mx:AddChild position="lastChild">
+				<mx:Label x="10" y="118" text="Move your mouse around"/>
+			</mx:AddChild>
+			<mx:SetProperty target="{statusUI}" name="text"/>
+			<mx:AddChild position="lastChild">
+				<mx:CheckBox x="10" y="144" label="Validate against Linear" id="validateIt"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	
+	<mx:Script>
+		<![CDATA[
+			import mosaic.MosaicLinearDB;
+			import mosaic.MosaicVPTree;
+			import mosaic.MosaicController;
+			import mosaic.IMosaicDatabase;
+			
+			private var dataDirty:Boolean = false;
+			private var points:Array = [];
+			public function generatePoints():void
+			{
+				points = [];
+				var count:Number = ptCount.value;
+				for(var i:int = 0;i<count;i++)
+				{
+					var angle:Number = Math.random() * 2*Math.PI;
+					var rad:Number = Math.random();
+					var x:Number = Math.cos(angle)*rad;
+					var y:Number = Math.sin(angle)*rad;
+					points.push(new Point(x,y));
+					invalidateDisplayList();
+				}
+				dataDirty = true;
+				setStep(2);
+			}
+			
+			private var _database:IMosaicDatabase;
+			private var _linearDB:MosaicLinearDB;
+			private function setupDB():void
+			{
+				_linearDB = new MosaicLinearDB();
+				_linearDB.distance = distance;
+				_linearDB.addDistance = addDistance;
+				_linearDB.vectorFor = pointToVector;
+				_linearDB.build(points);
+				
+				_database = new (MosaicController.instance.resolveDBType(dbType.selectedItem as String))();
+				_database.distance = distance;
+				_database.addDistance = addDistance;
+				_database.vectorFor = pointToVector;
+				_database.build(points,
+				function(success:Boolean,db:*):void
+				{
+					statusUI.text = "database complete";
+					setStep(3);
+				},
+				function(node:*,count:Number):void
+				{
+					statusUI.text = "Processed " + count;
+				}
+				);
+			}
+			
+			private function pointToVector(p:Point):Array
+			{
+				return [p.x,p.y];
+			}
+			private function distance(lhs:Array,rhs:Array):Number
+			{
+				return (lhs[0]-rhs[0])*(lhs[0]-rhs[0]) + (lhs[1]-rhs[1])*(lhs[1]-rhs[1]);
+			}
+			private function addDistance(lhs:Number,rhs:Number):Number
+			{
+				var lhsSign:Number = 1;
+				var rhsSign:Number = 1;
+				if(lhs < 0)
+				{
+					lhsSign = -1;
+					lhs = -lhs;
+				}
+				if(rhs < 0)
+				{
+					rhsSign = -1;
+					rhs = -rhs;
+				}
+				var sqrtResult:Number = lhsSign*Math.sqrt(lhs) + rhsSign*Math.sqrt(rhs);
+				return sqrtResult * sqrtResult; 
+			}
+			
+			
+			private var _step:Number;
+			private function setStep(value:Number):void
+			{
+				_step = value;
+				currentState = "step" + value;
+			}
+
+			private function scaleDataToScreen(v:Number):Number			
+			{
+				var rad:Number = Math.min(testArea.width,testArea.height)/2;
+				return rad*v;
+			}
+			private function dataToScreen(p:Point):Point
+			{
+				var rad:Number = Math.min(testArea.width,testArea.height)/2;
+				var origin:Point = new Point(testArea.width/2, testArea.height/2);
+				return new Point(origin.x + rad * p.x, origin.y + rad * p.y);
+			}
+			private function screenToData(p:Point):Point
+			{
+				var rad:Number = Math.min(testArea.width,testArea.height)/2;
+				var origin:Point = new Point(testArea.width/2, testArea.height/2);
+				return new Point((p.x - origin.x)/rad, (p.y - origin.y)/rad);				
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				if(dataDirty)
+				{
+					dataDirty = false;
+					var g:Graphics = circleRegion.graphics;
+					g.clear();
+					g.lineStyle(1,0x0000FF);
+					for(var i:int  =0;i<points.length;i++)
+					{
+						var p:Point = dataToScreen(points[i]);
+						if(points[i] == sanityPt) //errorPts[points[i]] != null)
+						{
+							var falseHit:Point = dataToScreen(errorPts[points[i]]);
+							g.lineStyle(2,0xFF0000);
+							g.moveTo(p.x-2,p.y-2);
+							g.lineTo(p.x+2,p.y+2);
+							g.moveTo(p.x-2,p.y+2);
+							g.lineTo(p.x+2,p.y-2);
+							g.moveTo(p.x,p.y);
+							g.lineStyle(1,0xFF0000);
+							g.lineTo(falseHit.x,falseHit.y);
+						}
+						else
+						{
+							g.lineStyle(1,0x0000FF);
+							g.drawCircle(p.x,p.y,3);
+						}		
+					}
+				}
+				
+				g=testMask.graphics;
+				g.lineStyle(0,0,0);
+				g.beginFill(0,0);
+				g.drawRect(0,0,unscaledWidth,unscaledHeight);
+				g.endFill();
+				testArea.mask = testMask;
+
+				g = testArea.graphics; 
+				g.clear();
+
+				if(closestPt != null && mousePt != null)
+				{
+					
+					var mpt:Point = dataToScreen(mousePt);
+					var cpt:Point = dataToScreen(closestPt);
+
+					g.lineStyle(0,0);
+					g.moveTo(mpt.x,mpt.y);
+					g.lineTo(cpt.x,cpt.y);		
+
+					g.lineStyle(3,0xFF0000);
+					g.drawCircle(cpt.x,cpt.y,3);
+					if(closestNode != null)
+					{
+						var treeNode:* = closestNode;
+						while(treeNode != null)
+						{
+							g.lineStyle(1,0);
+//							g.moveTo(cpt.x,cpt.y);
+							cpt = dataToScreen(treeNode.vantagePoint);
+//							g.lineTo(cpt.x,cpt.y);
+							g.lineStyle(1,0xFFAA00);
+							g.beginFill(0xFFFF00,.2);
+							g.drawCircle(cpt.x,cpt.y,scaleDataToScreen(Math.sqrt(treeNode.medianDistance)));
+							g.endFill();
+							treeNode = treeNode.parent;
+						}
+						treeNode = closestNode;
+						cpt = null;
+						while(treeNode != null)
+						{
+							g.lineStyle(1,0);
+							if(cpt != null)
+							{
+								g.moveTo(cpt.x,cpt.y);
+								cpt = dataToScreen(treeNode.vantagePoint);
+								g.lineTo(cpt.x,cpt.y);							
+							}
+							else
+							{
+								cpt = dataToScreen(treeNode.vantagePoint);
+							}
+							treeNode = treeNode.parent;
+						}
+
+					}
+				}
+				super.updateDisplayList(unscaledWidth,unscaledHeight);
+			}
+			
+			private var mousePt:Point;
+			private var closestPt:Point;
+			private var closestNode:*;
+			private var sanityPt:Point;
+			private var errorPts:Dictionary = new Dictionary(true);
+			private function updateOverlay(event:MouseEvent):void
+			{
+				if(_database != null)
+				{
+					mousePt = screenToData(new Point(testArea.mouseX,testArea.mouseY));
+					if(_database is MosaicVPTree && event.shiftKey)
+					{
+						closestNode = MosaicVPTree(_database).findVPNode([mousePt.x,mousePt.y]);
+						closestPt = closestNode.vantagePoint;
+					}
+					else
+					{
+						closestNode = null;
+						closestPt = _database.find([mousePt.x,mousePt.y]);
+					}
+					
+					var linearPt:Point = (validateIt.selected)? _linearDB.find([mousePt.x,mousePt.y]):closestPt;
+					 
+					 if(linearPt != closestPt)
+					 {
+					 	sanityPt = linearPt;
+					 	errorPts[sanityPt] = closestPt;
+					 	dataDirty = true;
+					 }
+					 else if(sanityPt != null)
+					 {
+					 	sanityPt = null;
+					 	dataDirty = true;
+					 }
+					invalidateDisplayList();
+					event.updateAfterEvent();
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Label text="Make:" left="10" top="10"/>
+	<mx:Button label="Go" click="generatePoints()"  left="157" top="8"/>
+	<mx:Canvas borderColor="#043F69" borderStyle="solid" backgroundColor="#FFFFFF" mouseMove="updateOverlay(event)" borderThickness="3" left="206" top="10" right="10" bottom="10">
+		<mx:UIComponent id="circleRegion" cacheAsBitmap="true" width="100%" height="100%" resize="dataDirty=true;invalidateDisplayList()"/>
+		<mx:UIComponent id="testMask" width="100%" height="100%" />
+		<mx:UIComponent id="testArea" width="100%" height="100%" />
+	</mx:Canvas>
+	<mx:NumericStepper x="58" y="8" id="ptCount" minimum="1" maximum="100000" value="100" width="91"/>
+	
+</mx:WindowedApplication>

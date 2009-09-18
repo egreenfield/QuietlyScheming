@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Demo xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" >
+	
+	<Style>
+		TiltingPane03 {
+			borderColor: #FFFFFF;
+			borderThickness: 3;	
+		}
+	</Style>
+	<Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			private function toggle(t:UIComponent):void
+			{
+				if (Object(t).angle == 45)
+					showIt.play([t]);
+				else
+					hideIt.play([t]);
+			}
+		]]>
+	</Script>
+	
+	<AnimateProperty property="angle" fromValue="45" toValue="0" id="showIt" />
+	<AnimateProperty property="angle" fromValue="0" toValue="45" id="hideIt" />
+	
+	<HBox horizontalGap="10" horizontalCenter="0" verticalCenter="0" >
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo01.jpg" src2="img/photos400/photo02.jpg" src3="img/photos400/photo03.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo04.jpg" src2="img/photos400/photo05.jpg" src3="img/photos400/photo06.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo07.jpg" src2="img/photos400/photo08.jpg" src3="img/photos400/photo09.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo10.jpg" src2="img/photos400/photo11.jpg" src3="img/photos400/photo12.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo13.jpg" src2="img/photos400/photo14.jpg" src3="img/photos400/photo15.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo16.jpg" src2="img/photos400/photo17.jpg" src3="img/photos400/photo18.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo19.jpg" src2="img/photos400/photo20.jpg" src3="img/photos400/photo21.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+		<local:TiltingPane03 angle="45"   click="toggle(UIComponent(event.currentTarget))">
+			<local:content>
+				<local:ImageGrid src1="img/photos400/photo22.jpg" src2="img/photos400/photo23.jpg" src3="img/photos400/photo24.jpg" />
+			</local:content>
+		</local:TiltingPane03>
+	</HBox>
+
+</local:Demo>

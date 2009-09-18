@@ -1,0 +1,1201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="Matrix3D,org.papervision3d.core.Matrix3D,n11,n12,n13,n14,n21,n22,n23,n24,n31,n32,n33,n34,IDENTITY,det,toString,multiply3x3,rotateAxis,multiply,add,copy,copy3x3,clone,multiplyVector,multiplyVector3x3,matrix2euler,euler2matrix,rotationX,rotationY,rotationZ,rotationMatrix,translationMatrix,scaleMatrix,getTrace,inverse,axisRotationWithReference,quaternion2matrix,euler2quaternion,multiplyQuaternion,axis2quaternion,magnitudeQuaternion,normalizeQuaternion" name="keywords">
+<title>org.papervision3d.core.Matrix3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Matrix3D - Papervision3D API Documentation';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?org/papervision3d/core/Matrix3D.html&amp;org/papervision3d/core/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Matrix3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Matrix3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.core</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Matrix3D</td>
+</tr>
+</table>
+<p></p>
+The Matrix3D class lets you create and manipulate 4x3 3D transformation matrices.
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#det">det</a> : Number<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#IDENTITY">IDENTITY</a> : <a href="../core/Matrix3D.html">Matrix3D</a>
+<div class="summaryTableDescription">[static][read-only]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n11">n11</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n12">n12</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n13">n13</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n14">n14</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n21">n21</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n22">n22</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n23">n23</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n24">n24</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n31">n31</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n32">n32</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n33">n33</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#n34">n34</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#Matrix3D()">Matrix3D</a>(args:Array)</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#axis2quaternion()">axis2quaternion</a>(x:Number, y:Number, z:Number, angle:Number):Object</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#axisRotationWithReference()">axisRotationWithReference</a>(axis:<a href="Number3D.html">Number3D</a>, ref:<a href="Number3D.html">Number3D</a>, pAngle:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clone()">clone</a>(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copy()">copy</a>(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copy3x3()">copy3x3</a>(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#euler2matrix()">euler2matrix</a>(angle:<a href="Number3D.html">Number3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#euler2quaternion()">euler2quaternion</a>(ax:Number, ay:Number, az:Number):Object</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getTrace()">getTrace</a>(m:<a href="Matrix3D.html">Matrix3D</a>):Number</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#inverse()">inverse</a>(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#magnitudeQuaternion()">magnitudeQuaternion</a>(q:Object):Number</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#matrix2euler()">matrix2euler</a>(mat:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Number3D.html">Number3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#multiply()">multiply</a>(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#multiply3x3()">multiply3x3</a>(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#multiplyQuaternion()">multiplyQuaternion</a>(qa:Object, qb:Object):Object</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#multiplyVector()">multiplyVector</a>(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#multiplyVector3x3()">multiplyVector3x3</a>(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#normalizeQuaternion()">normalizeQuaternion</a>(q:Object):Object</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#quaternion2matrix()">quaternion2matrix</a>(x:Number, y:Number, z:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotateAxis()">rotateAxis</a>(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotationMatrix()">rotationMatrix</a>(u:Number, v:Number, w:Number, angle:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotationX()">rotationX</a>(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotationY()">rotationY</a>(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]
+    </div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotationZ()">rotationZ</a>(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]
+    </div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#scaleMatrix()">scaleMatrix</a>(u:Number, v:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#translationMatrix()">translationMatrix</a>(u:Number, v:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Matrix3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="det"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">det</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>det:Number</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get det():Number</code>
+<br>
+</div>
+<a name="IDENTITY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">IDENTITY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>IDENTITY:<a href="../core/Matrix3D.html">Matrix3D</a></code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public static function get IDENTITY():<a href="../core/Matrix3D.html">Matrix3D</a></code>
+<br>
+</div>
+<a name="n11"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n11</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n11:Number</code>
+</div>
+<a name="n12"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n12</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n12:Number</code>
+</div>
+<a name="n13"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n13</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n13:Number</code>
+</div>
+<a name="n14"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n14</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n14:Number</code>
+</div>
+<a name="n21"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n21</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n21:Number</code>
+</div>
+<a name="n22"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n22</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n22:Number</code>
+</div>
+<a name="n23"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n23</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n23:Number</code>
+</div>
+<a name="n24"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n24</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n24:Number</code>
+</div>
+<a name="n31"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n31</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n31:Number</code>
+</div>
+<a name="n32"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n32</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n32:Number</code>
+</div>
+<a name="n33"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n33</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n33:Number</code>
+</div>
+<a name="n34"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">n34</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var n34:Number</code>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="Matrix3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">Matrix3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function Matrix3D(args:Array)</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">args</span>:Array</code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function add(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m1</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">m2</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="axis2quaternion()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">axis2quaternion</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function axis2quaternion(x:Number, y:Number, z:Number, angle:Number):Object</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">z</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
+<a name="axisRotationWithReference()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">axisRotationWithReference</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function axisRotationWithReference(axis:<a href="Number3D.html">Number3D</a>, ref:<a href="Number3D.html">Number3D</a>, pAngle:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">axis</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">ref</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">pAngle</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="clone()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function clone(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="copy()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function copy(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="copy3x3()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copy3x3</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function copy3x3(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="euler2matrix()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">euler2matrix</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function euler2matrix(angle:<a href="Number3D.html">Number3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="euler2quaternion()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">euler2quaternion</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function euler2quaternion(ax:Number, ay:Number, az:Number):Object</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">ax</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">ay</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">az</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
+<a name="getTrace()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getTrace</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function getTrace(m:<a href="Matrix3D.html">Matrix3D</a>):Number</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code></td>
+</tr>
+</table>
+</div>
+<a name="inverse()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">inverse</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function inverse(m:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="magnitudeQuaternion()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">magnitudeQuaternion</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function magnitudeQuaternion(q:Object):Number</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">q</span>:Object</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code></td>
+</tr>
+</table>
+</div>
+<a name="matrix2euler()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">matrix2euler</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function matrix2euler(mat:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Number3D.html">Number3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">mat</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Number3D.html">Number3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="multiply()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">multiply</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function multiply(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m1</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">m2</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="multiply3x3()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">multiply3x3</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function multiply3x3(m1:<a href="Matrix3D.html">Matrix3D</a>, m2:<a href="Matrix3D.html">Matrix3D</a>):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m1</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">m2</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="multiplyQuaternion()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">multiplyQuaternion</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function multiplyQuaternion(qa:Object, qb:Object):Object</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">qa</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">qb</span>:Object</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
+<a name="multiplyVector()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">multiplyVector</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function multiplyVector(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="multiplyVector3x3()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">multiplyVector3x3</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function multiplyVector3x3(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="normalizeQuaternion()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">normalizeQuaternion</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function normalizeQuaternion(q:Object):Object</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">q</span>:Object</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
+<a name="quaternion2matrix()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">quaternion2matrix</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function quaternion2matrix(x:Number, y:Number, z:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">z</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">w</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="rotateAxis()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotateAxis</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function rotateAxis(m:<a href="Matrix3D.html">Matrix3D</a>, v:<a href="Number3D.html">Number3D</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">m</span>:<a href="Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:<a href="Number3D.html">Number3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="rotationMatrix()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationMatrix</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function rotationMatrix(u:Number, v:Number, w:Number, angle:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">u</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">w</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="rotationX()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationX</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function rotationX(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angleRad</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="rotationY()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationY</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function rotationY(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><p>
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angleRad</span>:Number</code> &mdash; Number angle of rotation in degrees
+  </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code> &mdash; 
+                        the computed matrix
+  
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="rotationZ()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotationZ</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function rotationZ(angleRad:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><p>
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">angleRad</span>:Number</code> &mdash; Number angle of rotation in degrees
+  </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code> &mdash; 
+                        the computed matrix
+  
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="scaleMatrix()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scaleMatrix</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function scaleMatrix(u:Number, v:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">u</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">w</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function toString():String</code>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="translationMatrix()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">translationMatrix</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function translationMatrix(u:Number, v:Number, w:Number):<a href="../core/Matrix3D.html">Matrix3D</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">u</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">v</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">w</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../core/Matrix3D.html">Matrix3D</a></code></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

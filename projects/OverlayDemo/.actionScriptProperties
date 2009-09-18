@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="4" mainApplicationPath="OverlayDemo.mxml">
+  <compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" generateAccessible="false" strict="true" coach="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" sourceFolderPath="src">
+    <classPath>
+      <classPathEntry kind="1" path="C:\dev\f2\qs\lib"/>
+    </classPath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1"/>
+      <libraryPathEntry kind="1" path="${FRAMEWORKS}/locale/{locale}" linkType="1"/>
+    </libraryPath>
+    <sourcePath>
+      <sourcePathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
+    </sourcePath>
+  </compiler>
+  <applications>
+    <application path="OverlayDemo.mxml"/>
+  </applications>
+</actionScriptProperties>

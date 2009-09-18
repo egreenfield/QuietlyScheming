@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="MaterialObject3D,org.papervision3d.core.proto.MaterialObject3D,bitmap,animated,smooth,lineColor,lineAlpha,fillColor,fillAlpha,oneSide,invisible,opposite,scene,DEFAULT_COLOR,DEBUG_COLOR,name,id,doubleSided,DEFAULT,DEBUG,updateBitmap,copy,clone,toString" name="keywords">
+<title>org.papervision3d.core.proto.MaterialObject3D</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'MaterialObject3D - Papervision3D API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Papervision3D API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/papervision3d/core/proto/MaterialObject3D.html&amp;org/papervision3d/core/proto/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;MaterialObject3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class MaterialObject3D"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.papervision3d.core.proto</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class MaterialObject3D</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">MaterialObject3D <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../materials/BitmapMaterial.html">BitmapMaterial</a>, <a href="../../materials/ColorMaterial.html">ColorMaterial</a>, <a href="../../materials/WireframeMaterial.html">WireframeMaterial</a></td>
+</tr>
+</table>
+<p></p>
+The MaterialObject3D class is the base class for all materials.
+<p/>
+Materials collects data about how objects appear when rendered.
+<p/>
+A material is data that you assign to objects or faces, so that they appear a certain way when rendered. Materials affect the line and fill colors.
+<p/>
+Materials create greater realism in a scene. A material describes how an object reflects or transmits light.
+<p/>
+You assign materials to individual objects or a selection of faces; a single object can contain different materials.
+<p/>
+MaterialObject3D is an abstract base class; therefore, you cannot call MaterialObject3D directly.
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#animated">animated</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that determines whether the texture is animated.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#bitmap">bitmap</a> : BitmapData<div class="summaryTableDescription">
+ A transparent or opaque BitmapData texture.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#DEBUG">DEBUG</a> : <a href="../proto/MaterialObject3D.html">MaterialObject3D</a>
+<div class="summaryTableDescription">[static][read-only]</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#DEBUG_COLOR">DEBUG_COLOR</a> : int = 0xFF00FF<div class="summaryTableDescription">[static]
+ Color used for DEBUG material.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#DEFAULT">DEFAULT</a> : <a href="../proto/MaterialObject3D.html">MaterialObject3D</a>
+<div class="summaryTableDescription">[static][read-only]
+ Returns a MaterialObject3D object with the default magenta wireframe values.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#DEFAULT_COLOR">DEFAULT_COLOR</a> : int = 0x000000<div class="summaryTableDescription">[static]
+ Color used for DEFAULT material.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#doubleSided">doubleSided</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that indicates whether the faces are double sided.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fillAlpha">fillAlpha</a> : Number<div class="summaryTableDescription">
+ An 8-bit alpha value fill the faces with.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fillColor">fillColor</a> : Number<div class="summaryTableDescription">
+ A RGB color value to fill the faces with.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : Number<div class="summaryTableDescription">
+ [internal-use] [read-only] Unique id of this instance.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#invisible">invisible</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that indicates whether the faces are invisible (not drawn).</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#lineAlpha">lineAlpha</a> : Number<div class="summaryTableDescription">
+ An 8-bit alpha value for the faces outline.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#lineColor">lineColor</a> : Number<div class="summaryTableDescription">
+ A RGB color value to draw the faces outline.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#name">name</a> : String<div class="summaryTableDescription">
+ The name of the material.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#oneSide">oneSide</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that indicates whether the faces are single sided.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#opposite">opposite</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that indicates whether the face is flipped.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scene">scene</a> : <a href="../proto/SceneObject3D.html">SceneObject3D</a>
+<div class="summaryTableDescription">
+ The scene where the object belongs.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#smooth">smooth</a> : Boolean<div class="summaryTableDescription">
+ A Boolean value that determines whether the BitmapData texture is smoothed when rendered.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#MaterialObject3D()">MaterialObject3D</a>(initObject:Object = null)</div>
+<div class="summaryTableDescription">
+ Creates a new MaterialObject3D object.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clone()">clone</a>():<a href="../proto/MaterialObject3D.html">MaterialObject3D</a>
+</div>
+<div class="summaryTableDescription">
+ Creates a copy of the material.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copy()">copy</a>(material:<a href="MaterialObject3D.html">MaterialObject3D</a>):void</div>
+<div class="summaryTableDescription">
+ Copies the properties of a material.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription">
+ Returns a string value representing the material properties.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#updateBitmap()">updateBitmap</a>():void</div>
+<div class="summaryTableDescription">
+ Updates the BitmapData bitmap from the given texture.</div>
+</td><td class="summaryTableOwnerCol">MaterialObject3D</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="animated"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">animated</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var animated:Boolean</code><p>
+ A Boolean value that determines whether the texture is animated.
+  If set, the material must be included into the scene so the BitmapData texture can be updated when rendering. For performance reasons, the default value is false.
+ </p></div>
+<a name="bitmap"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bitmap</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var bitmap:BitmapData</code><p>
+ A transparent or opaque BitmapData texture.
+ </p></div>
+<a name="DEBUG"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DEBUG</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>DEBUG:<a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public static function get DEBUG():<a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code>
+<br>
+</div>
+<a name="DEBUG_COLOR"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DEBUG_COLOR</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var DEBUG_COLOR:int = 0xFF00FF</code><p>
+ Color used for DEBUG material.
+ </p></div>
+<a name="DEFAULT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DEFAULT</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>DEFAULT:<a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code>&nbsp;&nbsp;[read-only]<p>
+ Returns a MaterialObject3D object with the default magenta wireframe values.
+  </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public static function get DEFAULT():<a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code>
+<br>
+</div>
+<a name="DEFAULT_COLOR"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">DEFAULT_COLOR</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var DEFAULT_COLOR:int = 0x000000</code><p>
+ Color used for DEFAULT material.
+ </p></div>
+<a name="doubleSided"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">doubleSided</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>doubleSided:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+ A Boolean value that indicates whether the faces are double sided.
+ </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get doubleSided():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set doubleSided(value:Boolean):void</code>
+<br>
+</div>
+<a name="fillAlpha"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fillAlpha</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var fillAlpha:Number</code><p>
+ An 8-bit alpha value fill the faces with. If this value is zero and no texture is provided or is undefined, a fill is not created.
+ </p></div>
+<a name="fillColor"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fillColor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var fillColor:Number</code><p>
+ A RGB color value to fill the faces with. Only used if no texture is provided.
+ </p></div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:Number</code><p>
+ [internal-use] [read-only] Unique id of this instance.
+ </p></div>
+<a name="invisible"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">invisible</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var invisible:Boolean</code><p>
+ A Boolean value that indicates whether the faces are invisible (not drawn).
+ </p></div>
+<a name="lineAlpha"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lineAlpha</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var lineAlpha:Number</code><p>
+ An 8-bit alpha value for the faces outline. If zero, no outline is drawn.
+ </p></div>
+<a name="lineColor"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lineColor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var lineColor:Number</code><p>
+ A RGB color value to draw the faces outline.
+ </p></div>
+<a name="name"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">name</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var name:String</code><p>
+ The name of the material.
+ </p></div>
+<a name="oneSide"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">oneSide</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var oneSide:Boolean</code><p>
+ A Boolean value that indicates whether the faces are single sided. It has preference over doubleSided.
+ </p></div>
+<a name="opposite"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">opposite</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var opposite:Boolean</code><p>
+ A Boolean value that indicates whether the face is flipped. Only used if doubleSided or not singeSided.
+ </p></div>
+<a name="scene"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scene</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var scene:<a href="../proto/SceneObject3D.html">SceneObject3D</a></code><p>
+ The scene where the object belongs.
+ </p></div>
+<a name="smooth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">smooth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var smooth:Boolean</code><p>
+ A Boolean value that determines whether the BitmapData texture is smoothed when rendered.
+ </p></div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="MaterialObject3D()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">MaterialObject3D</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function MaterialObject3D(initObject:Object = null)</code><p>
+ Creates a new MaterialObject3D object.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">initObject</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; [optional] - An object that contains properties for the newly created material.
+ </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="clone()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function clone():<a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code><p>
+ Creates a copy of the material.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../proto/MaterialObject3D.html">MaterialObject3D</a></code> &mdash; 
+                        A newly created material that contains the same properties.
+ 
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="copy()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function copy(material:<a href="MaterialObject3D.html">MaterialObject3D</a>):void</code><p>
+ Copies the properties of a material.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">material</span>:<a href="MaterialObject3D.html">MaterialObject3D</a></code> &mdash; Material to copy from.
+ </td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function toString():String</code><p>
+ Returns a string value representing the material properties.
+  </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; A string.
+ </td>
+</tr>
+</table>
+</div>
+<a name="updateBitmap()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">updateBitmap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function updateBitmap():void</code><p>
+ Updates the BitmapData bitmap from the given texture.
+  Draws the current MovieClip image onto bitmap.
+ </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">
+<br>Wed Mar 28 2007, 5:46 PM GMT+01:00 </center>
+</div>
+</body>
+</html>
+<!--Wed Mar 28 2007, 5:46 PM GMT+01:00 -->

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Panel xmlns="http://www.adobe.com/2006/mxml" layout="absolute" width="300" height="200" borderColor="#eaebba">
+	<Script>
+		<![CDATA[
+			[Bindable] public var firstName:String;
+			[Bindable] public var position:String;
+		]]>
+	</Script>
+	<Image x="0" y="0" source="img/santa.jpg" width="80" height="80"/>
+	
+	<Form x="73" y="10" width="197" height="140">
+		<FormItem label="name">			
+			<Label text="{firstName}" />
+		</FormItem>
+		<FormItem label="position">			
+			<Label text="{position}" />
+		</FormItem>
+	</Form>
+	
+</Panel>

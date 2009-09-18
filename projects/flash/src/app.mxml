@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" frameRate="99"  xmlns:local="*" xmlns:examples="examples.*">
+	<Style>
+	</Style>
+	<Script>
+		<![CDATA[
+			private function setupEvents():void
+			{
+//					animation.addEventListener("animationEnded",function(e:Event):void { addAnimation(); } );
+			}
+			
+		]]>
+	</Script>
+	<Panel width="100%" height="100%" creationComplete="setupEvents()" >
+		
+		<TabNavigator width="100%" height="100%">
+		
+
+			<examples:Details />
+
+			<VBox label="start" />
+			
+			<examples:FlashContent />
+			<examples:FlashSizing />
+			<examples:EventHandling />
+			<examples:Stateful />			
+			<examples:Transitions />			
+			<examples:Skins />			
+
+		</TabNavigator>
+	</Panel>
+	
+</Application>
+

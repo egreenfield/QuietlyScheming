@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml" xmlns:ns1="support.*">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a chart that defines its own chartSeriesStyles"];
+			}
+
+			private function vLongLabels(value:*,a:*,b:*):String
+			{
+				return vPrefix.text + value;
+			}
+			private function hLongLabels(value:*,a:*,b:*):String
+			{
+				return hPrefix.text + value;
+			}
+
+			[Bindable] public var hRotation:Number;
+			[Bindable] public var vRotation:Number;
+
+			private function updateRotation():void
+			{
+				if(rotateH.selected)
+					hRotation = hui.value;
+				else
+					hRotation = NaN;
+				if(rotateV.selected)
+					vRotation = vui.value;
+				else
+					vRotation = NaN;
+
+			}
+
+
+		]]>
+	</Script>
+
+	<RadioButtonGroup id="hPlacement" selectedValue="bottom" />
+	<RadioButtonGroup id="vPlacement" selectedValue="left" />
+	<ex:controls>
+
+		<Label text="horizontal" />
+		<Label text="prefix:"/><TextInput id="hPrefix" change="hAxis.labelFunction = hLongLabels" />
+		<CheckBox id="showH" label="show" selected="true" />
+		<CheckBox id="rotateH" label="set rotation" selected="true" click="updateRotation()" />
+		<CheckBox id="dropH" label="drop labels" selected="false" />
+		<RadioButton groupName="hPlacement" label="top" value="top"/>
+		<RadioButton groupName="hPlacement" label="bottom" selected="true" value="bottom"/>
+		<HSlider id="hui" minimum="-90" maximum="90" showDataTip="true" width="100"  change="updateRotation()" value="90" liveDragging="true" />
+		<Label text="vertical" />
+		<Label text="prefix:"/><TextInput id="vPrefix" change="vAxis.labelFunction = vLongLabels" />
+		<CheckBox id="showV" label="show" selected="true" />
+		<CheckBox id="rotateV" label="set rotation" selected="true" click="updateRotation()" />
+		<CheckBox id="dropV" label="drop labels" selected="false" />
+		<RadioButton groupName="vPlacement" label="left" selected="true"  value="left"/>
+		<RadioButton groupName="vPlacement" label="right" value="right"/>
+		<HSlider id="vui" minimum="-90" maximum="90" showDataTip="true"  width="100" change="updateRotation()" value="0" liveDragging="true" />
+		<HRule width="100%" />
+		<Label text="Axis:" />
+		<ns1:StrokeButton id="axisStroke">
+			<ns1:value>
+				<Stroke weight="4" color="#000000" caps="none" />
+			</ns1:value>
+		</ns1:StrokeButton>
+		<Label text="Ticks:" />
+		<ns1:StrokeButton id="tickStroke">
+			<ns1:value>
+				<Stroke weight="2" color="#FFFFFF" caps="none" />
+			</ns1:value>
+		</ns1:StrokeButton>
+		<HSlider width="100" minimum="0" maximum="20" snapInterval="1" liveDragging="true" id="tickSize" />
+		<ComboBox dataProvider="{['outside','inside','cross','none']}" id="tickPlacement" />
+	</ex:controls>
+
+			<CartesianChart width="100%" fontSize="14" height="100%" fontFamily="EmbeddedArial" verticalAxisStyleName="hangingNumeric" horizontalAxisStyleName="hangingNumeric">
+				<horizontalAxisRenderer>
+					<AxisRenderer axisStroke="{axisStroke.value}"
+						tickStroke="{tickStroke.value}"
+						tickLength="{tickSize.value}"
+						tickPlacement="{tickPlacement.value}"
+						placement="{hPlacement.selectedValue}" canDropLabels="{dropH.selected}" labelRotation="{hRotation}" showLabels="{showH.selected}" />
+				</horizontalAxisRenderer>
+				<verticalAxisRenderer>
+					<AxisRenderer axisStroke="{axisStroke.value}"
+						tickStroke="{tickStroke.value}"
+						tickLength="{tickSize.value}"
+						tickPlacement="{tickPlacement.value}"
+						labelRotation="{vRotation}" canDropLabels="{dropV.selected}" showLabels="{showV.selected}" placement="{vPlacement.selectedValue}" />
+				</verticalAxisRenderer>
+				<horizontalAxis>
+					<LinearAxis id="hAxis" labelFunction="hLongLabels" />
+				</horizontalAxis>
+				<verticalAxis>
+					<LinearAxis id="vAxis" labelFunction="vLongLabels" />
+				</verticalAxis>
+			</CartesianChart>
+
+</ex:ExampleBase>
+

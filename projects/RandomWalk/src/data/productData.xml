@@ -1,0 +1,201 @@
+		<root xmlns="">
+			<node label="Food">
+				<node label="Fruit">
+					<node label="Apples">
+						<node label="Braeburn">
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+						<node label="McIntosh" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+						<node label="Fuji" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+						<node label="Pink Lady" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+					</node>
+					<node label="Oranges">
+						<node label="Clementine" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+						<node label="Navel" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+					</node>
+					<node label="Pears" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+					<node label="Plums" >
+							<node label="Single" />
+							<node label="Bushel" />
+							<node label="Bag" />
+							<node label="Crate" />							
+						</node>
+				</node>
+				<node label="Snacks">
+					<node label="Fritos" >
+							<node label="Snack Size" />
+							<node label="Big Bag" />
+							<node label="party size" />
+							<node label="Mega Bag" />							
+						</node>
+					<node label="Snickers">
+							<node label="Mini" />
+							<node label="Standard" />
+							<node label="King" />
+						</node>
+					<node label="Triscuts" >
+							<node label="Standard" />
+							<node label="Family Size" />
+							<node label="Bulk" />
+						</node>
+					<node label="Peanuts" >
+							<node label="Single" />
+							<node label="Can" />
+							<node label="Jar" />
+							<node label="Crate" />							
+						</node>					
+					<node label="Oreos">
+							<node label="Lunch Pak" />
+							<node label="Standard" />
+							<node label="Family Size" />
+							<node label="Bulk" />							
+						</node>
+					<node label="Gummy Bears" />					
+					<node label="Pringles" >
+							<node label="Snack Size" />
+							<node label="Can" />
+							<node label="Crate" />
+						</node>					
+					<node label="Chips Ahoy">
+							<node label="Lunch Pak" />
+							<node label="Standard" />
+							<node label="Family Size" />
+							<node label="Bulk" />							
+						</node>
+					<node label="Mint Melties">
+							<node label="Quarter Pound" />
+							<node label="Half Pund" />
+							<node label="Pound" />
+							<node label="Bulk" />							
+						</node>
+				</node>
+				<node label="Meats">
+					<node label="Chicken" >
+							<node label="Leg" />
+							<node label="Thigh" />
+							<node label="Wing" />
+							<node label="Breast" />							
+						</node>
+					<node label="Pork Loin">
+						<node label="Economy" />
+						<node label="Prime" />
+						<node label="Premium" />
+						<node label="Choice" />							
+					</node>
+					<node label="Duck">
+							<node label="One Duck" />
+							<node label="Two Duck" />
+							<node label="Red Duck" />
+							<node label="Blue Duck" />							
+						</node>					
+					<node label="TurDuckEn">
+						<node label="Turkey/Chicken" />
+						<node label="Duck/Chicken" />
+						<node label="Turkey/Duck" />
+						<node label="Turkey/Duck/Chicken" />							
+					</node>
+			</node>
+				<node label="Vegetables">
+					<node label="Tomato" >
+							<node label="Heirloom" />
+							<node label="Hot House" />
+							<node label="Luscious" />
+							<node label="Tom-Ay-To" />							
+							<node label="Tom-AH-To" />							
+						</node>
+					<node label="Zuchini" >
+							<node label="Yellow" />
+							<node label="Green" />
+							<node label="English" />
+							<node label="Brazillian" />							
+						</node>
+					<node label="Bell Peppers">
+							<node label="Red" />
+							<node label="Yellow" />
+							<node label="Orange" />
+							<node label="Green" />							
+						</node>
+					<node label="Endive" >
+							<node label="Boring" />
+						</node>
+					<node label="Potatoes" >
+							<node label="Idaho" />
+							<node label="Red" />
+							<node label="Fingerling" />
+							<node label="Russet Gold" />							
+							<node label="Canadian Blue Select" />							
+						</node>
+				</node>
+			</node>
+			<node label="Home Furnishings">
+				<node label="Electronics">
+					<node label="Televisions" />
+					<node label="Stereos" />
+					<node label="Home Theater" />
+					<node label="MP3 Players" />
+					<node label="CD players" />
+					<node label="personal grooming" />
+				</node>
+				<node label="Furniture">
+					<node label="Sofas" />
+					<node label="Bedroom" />
+					<node label="Lighting" />
+					<node label="Seating" />					
+					<node label="Workspaces" />					
+				</node>
+				<node label="Decorative">
+					<node label="Curtains" />					
+					<node label="Flowers" />					
+					<node label="Moldings" />					
+					<node label="Conversation Pieces" />					
+					<node label="Hummel Figurines" />					
+					<node label="Centerpieces" />					
+				</node>				
+				<node label="Outdoors" />
+			</node>
+			<node label="Clothing">
+				<node label="Dress Shirts" />
+				<node label="Men's Casual" />
+				<node label="Men's Sport" />
+				<node label="Underwear" />
+				<node label="Lingere" />
+				<node label="Women's Footwear" />
+				<node label="Outdoor coats" />
+				<node label="Sporting goods" />
+				<node label="Accessories" />
+				<node label="Headwear" />
+			</node>
+		</root>			

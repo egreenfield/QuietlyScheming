@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["a simple two series column chart"];
+			}
+
+		[Bindable] public var overItem:Boolean = false;
+		]]>
+	</Script>
+
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+
+	<PlotChart id="chart" width="100%" dataProvider="{dataSet.Sample}"  height="100%">
+		<series>
+			<PlotSeries xField="revenue" yField="costs" itemRenderer="mx.charts.renderers.CircleItemRenderer" radius="3"/>
+		</series>
+		<annotationElements>
+			<RangeSelector xmlns="examples.customizing.*" />
+		</annotationElements>
+
+	</PlotChart>
+
+</ex:ExampleBase>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:Show_App xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" backgroundGradientColors="">
+	<Style source="styles.css" />
+
+	<Canvas width="100%" height="100%">
+		<local:ShowLoader id="loader" width="100%" height="100%" />
+		<local:ShowPlayer id="player" width="100%" height="100%" />		
+	</Canvas>
+</local:Show_App>

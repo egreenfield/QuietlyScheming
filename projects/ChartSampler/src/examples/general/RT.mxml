@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml" initialize="initData();">
+
+	<Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+		
+			override public function get descriptions():Array { 
+				return ["a simple two series column chart"];
+			}												
+			
+			[Bindable] public var dataSet:ArrayCollection;
+			[Bindable] public var revenue:Number = 100;
+			private var t:Timer;
+			private function initData():void
+			{
+				dataSet = new ArrayCollection();
+				t = new Timer(500);
+				t.addEventListener(TimerEvent.TIMER,addData);
+			}
+			
+			override public function start():void
+			{
+				t.reset();
+				t.start();
+			}
+			override public function stop():void
+			{
+				t.stop();
+			}
+			private function addData(e:Event):void
+			{
+				dataSet.addItem( { revenue: revenue } );
+				revenue += Math.random() * 10 - 5;
+			}
+			
+		]]>
+	</Script>		
+	
+	<SeriesInterpolate id="interp" elementOffset="0" duration="300" minimumElementDuration="0"/>
+	
+	<ColumnChart width="100%" height="100%" 
+		dataProvider="{dataSet}" maxColumnWidth="10">
+		<series>
+			<ColumnSeries yField="revenue" showDataEffect="{interp}"/>
+		</series>
+		<horizontalAxis>
+			<LinearAxis autoAdjust="false" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</ex:ExampleBase>
+

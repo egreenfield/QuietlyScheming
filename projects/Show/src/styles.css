@@ -1,0 +1,16 @@
+
+
+Application {
+	
+	backgroundColor: #000000;
+	color: #FFFFFF;	
+	fontFamily: labelFont;
+}
+
+@font-face {
+    font-family: labelFont;
+    src: local("Arial");
+  }
+
+.bigTitle {
+}

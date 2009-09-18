@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:ChartBackgrounds_code xmlns="http://www.adobe.com/2006/mxml" 
+							xmlns:charts="qs.charts.*"  xmlns:local="*"
+							backgroundColor="#FFFFFF"  xmlns:dataShapes="qs.charts.dataShapes.*" xmlns:graphics="qs.graphics.*">
+
+	<TabNavigator width="100%" height="100%">
+		
+		<VBox width="100%" height="100%" label='scratch'>
+			<CartesianChart width="100%" height="100%" creationComplete="drawData()">
+				<series>
+					<dataShapes:DataDrawingCanvas id="canvas" includeInRanges="true">
+		
+						<dataShapes:DataChild horizontalCenter="d" verticalCenter="200" content="@Embed('assets/dotFinal.png')" />
+		
+						<dataShapes:DataChild horizontalCenter="d" verticalCenter="{[200,18]}" >
+							<Label text='hello, world' />
+						</dataShapes:DataChild>
+		
+						<dataShapes:DataChild left="c" right="d" top="-100" bottom="-200" >
+							<graphics:RoundedBox cornerRadius="15">
+								<graphics:fill>
+									<SolidColor color="#FFDD44" />
+								</graphics:fill>
+							</graphics:RoundedBox>
+						</dataShapes:DataChild>
+		
+		
+					</dataShapes:DataDrawingCanvas>
+		
+				</series>
+				<horizontalAxis>
+					<CategoryAxis dataProvider="{cats}" />
+				</horizontalAxis>
+				<verticalAxis>
+					<LinearAxis minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+				</verticalAxis>
+			</CartesianChart>
+		</VBox>
+
+		<HBox width="100%" height="100%" label='date range' creationComplete="updateDRAxis()" >
+			<DateChooser id="rangeSelector" allowDisjointSelection="false" allowMultipleSelection="true" scroll="updateDRAxis()" change="updateDRAxis()"/>
+			<CartesianChart width="100%" height="100%" creationComplete="drawData()" 
+				verticalAxisStyleName="linedNumericAxis">
+				<annotationElements>
+					<dataShapes:DataDrawingCanvas id="dateAnnotations">
+					</dataShapes:DataDrawingCanvas>		
+				</annotationElements>
+				<horizontalAxis>
+					<DateTimeAxis id="drAxis"  displayLocalTime="true" />
+				</horizontalAxis>
+				<verticalAxis>
+					<LinearAxis minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+				</verticalAxis>
+			</CartesianChart>
+		</HBox>
+
+		<HBox width="100%" height="100%" label='drag select'  >
+			<CartesianChart id="selectionChart" width="100%" height="100%" 
+				verticalAxisStyleName="linedNumericAxis" mouseDown="startSelectionDrag()">
+				<annotationElements>
+					<dataShapes:DataDrawingCanvas id="selectionAnnotation">
+						<Label id="topLabel" />
+						<Label id="bottomLabel" />
+						<Label id="leftLabel" />
+						<Label id="rightLabel" />
+					</dataShapes:DataDrawingCanvas>		
+				</annotationElements>
+				<verticalAxis>
+					<LinearAxis minimum="{fix.selected? axisValues.values[0]:undefined}" maximum="{fix.selected? axisValues.values[1]:undefined}" />
+				</verticalAxis>
+			</CartesianChart>
+		</HBox>
+
+	</TabNavigator>
+
+
+	<ApplicationControlBar dock="true">
+		<CheckBox label="fix vertical axis" id="fix" /> <HSlider change="fix.selected = true" liveDragging="true" thumbCount="2" values="{[0,100]}" id="axisValues" minimum="-500" maximum="500" width="100%" />
+	</ApplicationControlBar>
+
+</local:ChartBackgrounds_code>

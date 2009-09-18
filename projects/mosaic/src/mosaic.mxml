@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l:Mosaic_code xmlns="http://www.adobe.com/2006/mxml" xmlns:l="*" layout="absolute" backgroundGradientColors="[#ffffff, #ffffff]">
+
+
+	<Label x="10" y="10" text="Tags:"/>
+	<TextInput x="55" y="8" width="220" id="searchTerm" />
+	<Button x="283" y="8" label="Search" click="runSearch()" />
+	
+</l:Mosaic_code>

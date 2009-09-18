@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" horizontalGap="0" xmlns:qs="qs.controls.*" horizontalAlign="left" paddingLeft="0" paddingTop="0" paddingBottom="0" paddingRight="0" layout="horizontal" backgroundColor="#343434"  initialize="createData()"
+viewSourceURL="srcview/index.html" xmlns:f="flash.filters.*" creationComplete="updateControl()">	
+	
+	<Script>
+		<![CDATA[
+			[Bindable] public var textItems:Array;
+			[Bindable] public var images:Array;
+			[Bindable] public var currentDP:Array;
+			
+			
+			private function createData():void
+			{
+				textItems = ("Now is the time for all good men to come to the aid of the party. The quick brown fox jumped over the lazy dog").split(" ");	
+				var images:Array = [];
+				for(var j:int=0;j<1;j++)
+				{
+					for(var i:int=1;i<=14;i++)
+					{
+						images.push("img/img"+i+".jpg");
+					}
+				}
+				this.images = currentDP = images;
+			}
+			
+			private function updateControl():void
+			{
+				fisheye.direction = String(direction.selectedValue);
+				fisheye.setStyle("horizontalAlign",hAlign.selectedValue);
+				fisheye.setStyle("verticalAlign",vAlign.selectedValue);
+				fisheye.setStyle("defaultSpacing",spacing.value);
+				fisheye.setStyle("defaultScale",dscale.value);
+				fisheye.setStyle("hilightMinScale",(mscaleSet.selected)? mscale.value:NaN);
+				fisheye.setStyle("hilightMaxScale",maxscale.value);
+				fisheye.setStyle("hilightScaleRadius",srad.value);
+				fisheye.setStyle("hilightScaleSlope",sslope.value);
+				fisheye.setStyle("animationSpeed",aspeed.value);
+			}
+
+			private function updateData():void
+			{
+				if(content.selectedItem == "images")
+				{
+					currentDP = images;
+					fisheye.itemRenderer = imageRenderer;					
+				}
+				else
+				{
+					currentDP = textItems;
+					fisheye.itemRenderer = textRenderer;					
+				}
+			}
+		]]>
+	</Script>
+	
+	<Style>
+		Fisheye {
+			fontSize: 38;	
+		}
+		RadioButton, CheckBox {
+			text-roll-over-color: #FFFFFF;
+			text-selected-color: #FFFFFF;
+			color: #FFFFFF;	
+		}
+		
+		.insetBox {
+			paddingBottom: 30;
+			paddingLeft: 30;
+			paddingRight: 30;
+			paddingTop: 30;	
+		}
+		
+		FormItemLabel {
+			color: #FFFFFF;	
+		}
+		
+		HRule, VRule {
+			strokeWidth: 1;
+			strokeColor: #FFFFFF;	
+		}
+	</Style>
+
+	<Component id="textRenderer">
+		<qs:CachedLabel useCache="on" color="#FFFFFF">
+			<qs:states>
+				<State name="selected">
+					<SetProperty name="filters">
+						<value>
+							<Array>
+								<f:GlowFilter  color="#888888"/>
+							</Array>
+						</value>
+					</SetProperty>
+					<SetStyle name="color" value="#E27C0E" />
+				</State>
+				<State name="hilighted">
+					<SetProperty name="filters">
+						<value>
+							<Array>
+								<f:GlowFilter  color="#BBBBBB"/>
+							</Array>
+						</value>
+					</SetProperty>
+				</State>
+			</qs:states>
+		</qs:CachedLabel>					
+	</Component>
+
+		<Binding source="sel.value" destination="fisheye.selectedIndex" />
+		<Binding destination="sel.value" source="fisheye.selectedIndex" />
+		
+		<RadioButtonGroup id="direction" selectedValue="horizontal" change="updateControl();"/>
+		<RadioButtonGroup id="hAlign" selectedValue="center" change="updateControl();"/>
+		<RadioButtonGroup id="vAlign" selectedValue="center" change="updateControl();"/>
+		<Form height="100%" backgroundColor="#565656">
+			<FormItem label="direction">
+				<RadioButton groupName="direction" label="horizontal" value="horizontal"/>
+				<RadioButton groupName="direction" label="vertical" value="vertical" />				
+			</FormItem>
+			<HRule width="100%"/>
+			<FormItem label="horizontal-align">
+				<RadioButton groupName="hAlign" label="left" value="left"/>
+				<RadioButton groupName="hAlign" label="center" value="center"/>
+				<RadioButton groupName="hAlign" label="right" value="right"/>
+				<RadioButton groupName="hAlign" label="justified" value="justified"/>
+			</FormItem>
+			<HRule width="100%"/>
+			<FormItem label="vertical-align">
+				<RadioButton groupName="vAlign" label="top" value="top"/>
+				<RadioButton groupName="vAlign" label="center" value="center"/>
+				<RadioButton groupName="vAlign" label="bottom" value="bottom"/>
+				<RadioButton groupName="vAlign" label="justified" value="justified"/>
+			</FormItem>
+			<HRule width="100%"/>
+			<FormItem label="spacing">
+				<NumericStepper id="spacing" stepSize="1" value="4" change="updateControl();" />
+			</FormItem>
+			<FormItem label="defaultScale">
+				<NumericStepper id="dscale" stepSize=".1" value=".5" change="updateControl();" />
+			</FormItem>
+			<FormItem label="min scale">
+				<CheckBox id="mscaleSet" label="set minscale" />
+				<NumericStepper id="mscale" stepSize=".05" value=".1" change="updateControl();" />
+			</FormItem>
+			<FormItem label="max scale">
+				<NumericStepper id="maxscale" stepSize=".05" value="1" change="updateControl();" />
+			</FormItem>
+			<FormItem label="scale radius">
+				<NumericStepper id="srad"  stepSize="1" minimum="0" value="2" change="updateControl();" />
+			</FormItem>
+			<FormItem label="scale slope">
+				<NumericStepper id="sslope"  stepSize=".1" minimum="0" value="1" change="updateControl();" />
+			</FormItem>
+			<FormItem label="animation speed">
+				<NumericStepper id="aspeed" minimum=".05"  stepSize=".05" value=".3" change="updateControl();" />
+			</FormItem>
+			<HRule width="100%"/>
+			<FormItem label="content">
+				<ComboBox id="content" dataProvider="{['images','text']}" change="updateData();" />
+			</FormItem>
+			<FormItem label="selection">
+				<HSlider id="sel" liveDragging="true" width="100" minimum="-1" maximum="{currentDP.length}" snapInterval="1" />
+				
+			</FormItem>
+		</Form>
+		<VRule height="100%" />
+		<HBox width="100%" horizontalGap="0" height="100%" styleName="insetBox" clipContent="true" >
+			
+			
+			<qs:Fisheye id="fisheye" width="100%" height="100%" dataProvider="{currentDP}" 
+				stateProperty="currentState" rolloverValue="hilighted" defaultValue="" selectedValue="selected"
+				verticalAlign="top"
+				horizontalAlign="center" >			
+				<qs:itemRenderer>
+					<Component id="imageRenderer">
+						<qs:BitmapTile>
+<!--							<qs:filters>
+								<f:BlurFilter />								
+							</qs:filters>
+-->							<qs:states>
+								<State name="selected">
+									<SetStyle name="borderColor" value="#E27C0E" />
+									<SetStyle name="borderAlpha" value="1" />
+									<SetStyle name="borderWidth" value="3" />
+									<SetProperty name="filters" />
+								</State>
+								<State name="hilighted">
+									<SetProperty name="filters" />
+								</State>
+							</qs:states>						
+						</qs:BitmapTile>
+					</Component>
+				</qs:itemRenderer>
+				
+			</qs:Fisheye>
+		</HBox>
+</Application>

@@ -1,0 +1,33 @@
+<HBox verticalAlign="top" horizontalScrollPolicy="off" verticalScrollPolicy="off"  label="Event Handling" xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*"
+	xmlns:adobe="http://www.adobe.com/2006/fla"
+	creationComplete="setupTimer()">
+		<Script>
+			<![CDATA[
+				
+				
+				private var t:Timer;
+				private function setupTimer():void
+				{
+					t = new Timer(1000,1);
+					t.addEventListener(TimerEvent.TIMER,hideAlarm);
+				}
+				private function hideAlarm(e:TimerEvent):void
+				{
+					alarm.visible = false;
+				}
+				
+				private function showAlarm():void
+				{
+					alarm.visible = true;
+					t.reset();
+					t.start();
+				}
+			]]>
+		</Script>
+		<HBox verticalAlign="middle" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			
+			<adobe:Clock alarm="showAlarm()" />
+			
+			<Label text="Alarm!" fontSize="36" color="#FF0000" id="alarm" visible="false" />
+		</HBox>
+</HBox>

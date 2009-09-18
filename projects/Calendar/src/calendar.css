@@ -1,0 +1,22 @@
+CalendarHeader {
+	text-align: right;
+	font-size: 10;
+	font-weight: bold;	
+}
+CalendarEventRenderer {
+	font-size: 10;	
+}
+
+CalendarDisplay {
+	hourBackgroundColor: #FFFFFF;
+	hourThickness: 1;
+	hourColor: #BBBBBB;
+	eventDragSkin: Embed('assets/eventDragImage.svg');
+}
+
+CalendarHours {
+	text-align: right;
+	font-size: 10;	
+	color: #000000;
+}
+

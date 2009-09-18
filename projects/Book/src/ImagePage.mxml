@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://www.adobe.com/2006/mxml" width="600" height="400" xmlns:controls="qs.controls.*"
+	backgroundColor="#FFFFFF" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<states>
+		<State name="loadingState">
+			<AddChild position="lastChild">
+<!--				<HBox id="loadingContent" horizontalCenter="0" verticalCenter="-6"  backgroundColor="#000000" backgroundAlpha="0.32" borderStyle="solid" borderThickness="0" paddingLeft="20" paddingRight="20" paddingTop="10" paddingBottom="10" cornerRadius="20">
+					<LinkButton label="Loading" color="#DDDDDD" fontFamily="Arial" fontWeight="bold" fontSize="68" />		 
+				</HBox>
+-->
+					<Image id="loadingContent"  horizontalCenter="0" verticalCenter="-6"   source="@Embed('assets/loading.png')" />				
+			</AddChild>
+		</State>
+	</states>
+	<transitions>
+		<Transition fromState="" toState="loadingState">
+				<Fade alphaTo="1" target="{loadingContent}" duration="1000"/>			
+		</Transition>
+		<Transition toState="" fromState="loadingState">
+			<Sequence>				
+				<Fade alphaTo="0" target="{loadingContent}" duration="1000"/>
+				<RemoveChildAction target="{loadingContent}" />
+			</Sequence>
+		</Transition>
+	</transitions>
+
+	<Script>
+		<![CDATA[
+			private var _loaded:Boolean = false;
+			public function load():void
+			{
+				if(_loaded)
+					return;
+				_loaded = true;
+				full.source = data.@source.toString();
+				currentState = "loadingState";
+			}
+		]]>
+	</Script>
+	<controls:SuperImage left="0" right="0" top="0" bottom="0" id="thumb" source="{data.@thumb.toString()}" />
+	<controls:SuperImage left="0" right="0" top="0" bottom="0" id="full" complete="currentState = ''"/>
+</Canvas>

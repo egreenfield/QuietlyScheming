@@ -1,0 +1,615 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DataDrawingCanvas.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre>    
+
+<span class="asPackage">package</span> qs.charts.dataShapes
+<span class="asBracket">{</span>
+    <span class="asReserved">import</span> mx.charts.chartClasses.ChartElement;
+    <span class="asReserved">import</span> mx.graphics.SolidColor;
+    <span class="asReserved">import</span> mx.charts.chartClasses.IAxis;
+    <span class="asReserved">import</span> mx.charts.chartClasses.CartesianTransform;
+    <span class="asReserved">import</span> mx.graphics.IFill;
+    <span class="asReserved">import</span> flash.display.Graphics;
+    <span class="asReserved">import</span> flash.geom.Rectangle;
+    <span class="asReserved">import</span> flash.utils.Dictionary;
+    <span class="asReserved">import</span> mx.charts.chartClasses.DataDescription;
+    <span class="asReserved">import</span> mx.charts.chartClasses.BoundedValue;
+    <span class="asReserved">import</span> flash.display.BitmapData;
+    <span class="asReserved">import</span> flash.geom.Matrix;
+    <span class="asReserved">import</span> mx.core.UIComponent;
+    <span class="asReserved">import</span> mx.core.IFlexDisplayObject;
+    <span class="asReserved">import</span> flash.display.DisplayObject;
+    <span class="asReserved">import</span> mx.core.IUIComponent;
+    <span class="asReserved">import</span> flash.events.Event;
+    <span class="asReserved">import</span> mx.graphics.IStroke;
+
+    <span class="asBracket">[</span><span class="asMetadata">DefaultProperty</span><span class="asBracket">(</span><span class="asString">&quot;dataChildren&quot;</span><span class="asBracket">)]</span>
+    <span class="asReserved">public</span> <span class="asClass">class</span> DataDrawingCanvas <span class="asReserved">extends</span> ChartElement
+    <span class="asBracket">{</span>
+        <span class="asComment">// a cache of the values and their corresponding pixel values
+</span>        <span class="asReserved">private</span> <span class="asVar">var</span> _xCache<span class="asOperator">:</span>Array;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _yCache<span class="asOperator">:</span>Array;
+        
+        <span class="asReserved">private</span> <span class="asVar">var</span> _xMap<span class="asOperator">:</span>Dictionary;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _yMap<span class="asOperator">:</span>Dictionary;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _hDataDesc<span class="asOperator">:</span>DataDescription;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _vDataDesc<span class="asOperator">:</span>DataDescription;
+        
+        <span class="asReserved">private</span> <span class="asVar">var</span> _dataCache<span class="asOperator">:</span>DataCache;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _opCodes<span class="asOperator">:</span>Array <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _dataCacheDirty<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">true</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _mappingDirty<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">true</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _transformDirty<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">true</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _oldUW<span class="asOperator">:</span>Number;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _oldUH<span class="asOperator">:</span>Number;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _includeInRanges<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _dataChildren<span class="asOperator">:</span>Array <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> borderWidth<span class="asOperator">:</span>Number <span class="asOperator">=</span> 0;
+
+        
+        <span class="asReserved">private</span> <span class="asVar">var</span> _childMap<span class="asOperator">:</span>Dictionary;
+                
+        <span class="asReserved">public</span> <span class="asFunction">function</span> DataDrawingCanvas<span class="asBracket">()</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">super</span><span class="asBracket">()</span>;
+            _hDataDesc <span class="asOperator">=</span> <span class="asReserved">new</span> DataDescription<span class="asBracket">()</span>;
+            _vDataDesc <span class="asOperator">=</span> <span class="asReserved">new</span> DataDescription<span class="asBracket">()</span>;
+            _childMap <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> dataChildren<span class="asBracket">(</span>value<span class="asOperator">:</span>Array<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> aChild<span class="asOperator">:*</span> <span class="asReserved">in</span> _childMap<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                removeChild<span class="asBracket">(</span>_childMap<span class="asBracket">[</span>aChild<span class="asBracket">]</span>.child<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            _childMap <span class="asOperator">=</span> <span class="asReserved">new</span> Dictionary<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>;
+            _dataChildren <span class="asOperator">=</span> value;
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> i<span class="asOperator">:</span>int <span class="asOperator">=</span>0;i<span class="asOperator">&lt;</span>value.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild;
+
+                <span class="asReserved">if</span><span class="asBracket">(</span>value<span class="asBracket">[</span>i<span class="asBracket">]</span> <span class="asReserved">is</span> DataChild<span class="asBracket">)</span>                
+                    dc <span class="asOperator">=</span> value<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                <span class="asReserved">else</span>
+                    dc <span class="asOperator">=</span> <span class="asReserved">new</span> DataChild<span class="asBracket">(</span>value<span class="asBracket">[</span>i<span class="asBracket">])</span>;
+                    
+                _childMap<span class="asBracket">[</span>dc.child<span class="asBracket">]</span> <span class="asOperator">=</span> dc;
+                dc.addEventListener<span class="asBracket">(</span><span class="asString">&quot;change&quot;</span>,dataChildChangeHandler,<span class="asReserved">false</span>,0,<span class="asReserved">true</span><span class="asBracket">)</span>;
+                <span class="asReserved">super</span>.addChild<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;            
+            <span class="asBracket">}</span>
+            invalidateOpCodes<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> dataChildren<span class="asBracket">()</span><span class="asOperator">:</span>Array
+        <span class="asBracket">{</span>
+            <span class="asReserved">return</span> _dataChildren;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> dataChildChangeHandler<span class="asBracket">(</span>e<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            dataChildren <span class="asOperator">=</span> dataChildren;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> addDataChild<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject,left<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, top<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, right<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>, bottom<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> <span class="asReserved">new</span> DataChild<span class="asBracket">(</span>child,left,top,right,bottom<span class="asBracket">)</span>;
+            _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span> <span class="asOperator">=</span> dc;
+            _dataChildren.push<span class="asBracket">(</span>dc<span class="asBracket">)</span>;
+            dc.addEventListener<span class="asBracket">(</span><span class="asString">&quot;change&quot;</span>,dataChildChangeHandler,<span class="asReserved">false</span>,0,<span class="asReserved">true</span><span class="asBracket">)</span>;
+            addChild<span class="asBracket">(</span>child<span class="asBracket">)</span>;
+            invalidateOpCodes<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> addChild<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject<span class="asBracket">)</span><span class="asOperator">:</span>DisplayObject
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> <span class="asReserved">new</span> DataChild<span class="asBracket">(</span>child<span class="asBracket">)</span>;
+            _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span> <span class="asOperator">=</span> dc;            
+            dc.addEventListener<span class="asBracket">(</span><span class="asString">&quot;change&quot;</span>,dataChildChangeHandler,<span class="asReserved">false</span>,0,<span class="asReserved">true</span><span class="asBracket">)</span>;
+            invalidateOpCodes<span class="asBracket">()</span>;
+            <span class="asReserved">return</span> <span class="asReserved">super</span>.addChild<span class="asBracket">(</span>child<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> addChildAt<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject,index<span class="asOperator">:</span>int<span class="asBracket">)</span><span class="asOperator">:</span>DisplayObject
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> <span class="asReserved">new</span> DataChild<span class="asBracket">(</span>child<span class="asBracket">)</span>;
+            _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span> <span class="asOperator">=</span> dc;            
+            dc.addEventListener<span class="asBracket">(</span><span class="asString">&quot;change&quot;</span>,dataChildChangeHandler,<span class="asReserved">false</span>,0,<span class="asReserved">true</span><span class="asBracket">)</span>;
+            invalidateOpCodes<span class="asBracket">()</span>;
+            <span class="asReserved">return</span> <span class="asReserved">super</span>.addChildAt<span class="asBracket">(</span>child,index<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> removeChild<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject<span class="asBracket">)</span><span class="asOperator">:</span>DisplayObject
+        <span class="asBracket">{</span>
+            <span class="asReserved">super</span>.removeChild<span class="asBracket">(</span>child<span class="asBracket">)</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>child <span class="asReserved">in</span> _childMap<span class="asBracket">)</span>
+                <span class="asReserved">delete</span> _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span>;
+            <span class="asReserved">return</span> child;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> removeChildAt<span class="asBracket">(</span>index<span class="asOperator">:</span>int<span class="asBracket">)</span><span class="asOperator">:</span>DisplayObject
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> child<span class="asOperator">:</span>DisplayObject <span class="asOperator">=</span> <span class="asReserved">super</span>.removeChildAt<span class="asBracket">(</span>index<span class="asBracket">)</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>child <span class="asReserved">in</span> _childMap<span class="asBracket">)</span>
+                <span class="asReserved">delete</span> _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span>;
+            <span class="asReserved">return</span> child;
+        <span class="asBracket">}</span>
+
+
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> updateDataChild<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject,values<span class="asOperator">:</span>Object<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> _childMap<span class="asBracket">[</span>child<span class="asBracket">]</span>;
+            dc.left <span class="asOperator">=</span> values.left;
+            dc.top <span class="asOperator">=</span> values.top;
+            dc.right <span class="asOperator">=</span> values.right;
+            dc.bottom <span class="asOperator">=</span> values.bottom;
+            dc.horizontalCenter <span class="asOperator">=</span> values.horizontalCenter;
+            dc.verticalCenter <span class="asOperator">=</span> values.verticalCenter;
+            invalidateOpCodes<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asBracket">[</span><span class="asMetadata">ArrayElementType</span><span class="asBracket">(</span><span class="asString">&quot;qs.charts.dataShapes.OpCode&quot;</span><span class="asBracket">)]</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> opCodes<span class="asBracket">(</span>value<span class="asOperator">:</span>Array<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>        
+            _opCodes <span class="asOperator">=</span> value;
+            invalidateOpCodes<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> opCodes<span class="asBracket">()</span><span class="asOperator">:</span>Array
+        <span class="asBracket">{</span>
+            <span class="asReserved">return</span> _opCodes;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> includeInRanges<span class="asBracket">(</span>value<span class="asOperator">:</span>Boolean<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>_includeInRanges <span class="asOperator">==</span> value<span class="asBracket">)</span>
+                <span class="asReserved">return</span>;
+            _includeInRanges <span class="asOperator">=</span> value;
+            dataChanged<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> includeInRanges<span class="asBracket">()</span><span class="asOperator">:</span>Boolean
+        <span class="asBracket">{</span>
+            <span class="asReserved">return</span> _includeInRanges;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> clear<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            _opCodes <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+            invalidateOpCodes<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+
+
+
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> beginFill<span class="asBracket">(</span>color<span class="asOperator">:</span>uint, alpha<span class="asOperator">:</span>Number <span class="asOperator">=</span> 1<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.BEGIN_FILL,<span class="asBracket">{</span> color<span class="asOperator">:</span> color, alpha<span class="asOperator">:</span> alpha<span class="asBracket">}</span> <span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> beginBitmapFill<span class="asBracket">(</span>bitmap<span class="asOperator">:</span>BitmapData,x<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>,y<span class="asOperator">:*</span> <span class="asOperator">=</span> <span class="asReserved">undefined</span>,matrix<span class="asOperator">:</span>Matrix <span class="asOperator">=</span> <span class="asReserved">null</span>,repeat<span class="asOperator">:</span>Boolean<span class="asOperator">=</span><span class="asReserved">true</span>,smooth<span class="asOperator">:</span>Boolean<span class="asOperator">=</span><span class="asReserved">true</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.BEGIN_BITMAP_FILL,<span class="asBracket">{</span> bitmap<span class="asOperator">:</span>bitmap, x<span class="asOperator">:</span>x, y<span class="asOperator">:</span>y, repeat<span class="asOperator">:</span>repeat, smooth<span class="asOperator">:</span>smooth, matrix<span class="asOperator">:</span>matrix<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> lineStyle<span class="asBracket">(</span>thickness<span class="asOperator">:</span>Number, color<span class="asOperator">:</span>uint <span class="asOperator">=</span> 0, alpha<span class="asOperator">:</span>Number <span class="asOperator">=</span> 1.0, 
+                                    pixelHinting<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>, scaleMode<span class="asOperator">:</span>String <span class="asOperator">=</span> <span class="asString">&quot;normal&quot;</span>, 
+                                    caps<span class="asOperator">:</span>String <span class="asOperator">=</span> <span class="asReserved">null</span>, joints<span class="asOperator">:</span>String <span class="asOperator">=</span> <span class="asReserved">null</span>, 
+                                    miterLimit<span class="asOperator">:</span>Number <span class="asOperator">=</span> 3<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            borderWidth <span class="asOperator">=</span> thickness;
+            pushOp<span class="asBracket">(</span>OpCode.LINE_STYLE,<span class="asBracket">{</span> thickness<span class="asOperator">:</span> thickness, color<span class="asOperator">:</span> color, alpha<span class="asOperator">:</span> alpha, pixelHinting<span class="asOperator">:</span> pixelHinting, scaleMode<span class="asOperator">:</span> scaleMode,
+                                        caps<span class="asOperator">:</span> caps, joints<span class="asOperator">:</span> joints, miterLimit<span class="asOperator">:</span> miterLimit<span class="asBracket">}</span> <span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> endFill<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.END_FILL<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> moveTo<span class="asBracket">(</span>x<span class="asOperator">:*</span>,y<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.MOVE_TO,<span class="asBracket">{</span> x<span class="asOperator">:</span> x, y<span class="asOperator">:</span>y, borderWidth<span class="asOperator">:</span> borderWidth<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> lineTo<span class="asBracket">(</span>x<span class="asOperator">:*</span>,y<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.LINE_TO,<span class="asBracket">{</span> x<span class="asOperator">:</span> x, y<span class="asOperator">:</span>y, borderWidth<span class="asOperator">:</span> borderWidth<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> dashedLine<span class="asBracket">(</span>xFrom<span class="asOperator">:*</span>,yFrom<span class="asOperator">:*</span>,xTo<span class="asOperator">:*</span>,yTo<span class="asOperator">:*</span>,stroke<span class="asOperator">:</span>IStroke,pattern<span class="asOperator">:</span>Array<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.DASHED_LINE,<span class="asBracket">{</span> xFrom<span class="asOperator">:</span> xFrom, yFrom<span class="asOperator">:</span> yFrom, xTo<span class="asOperator">:</span> xTo, yTo<span class="asOperator">:</span> yTo, stroke<span class="asOperator">:</span> stroke, pattern<span class="asOperator">:</span> pattern<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> curveTo<span class="asBracket">(</span>controlX<span class="asOperator">:*</span>,controlY<span class="asOperator">:*</span>,anchorX<span class="asOperator">:*</span>, anchorY<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.CURVE_TO,<span class="asBracket">{</span> controlX<span class="asOperator">:</span> controlX, controlY<span class="asOperator">:</span>controlY, anchorX<span class="asOperator">:</span>anchorX, anchorY<span class="asOperator">:</span>anchorY, borderWidth<span class="asOperator">:</span> borderWidth<span class="asBracket">}</span> <span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawRect<span class="asBracket">(</span>left<span class="asOperator">:*</span>,top<span class="asOperator">:*</span>,right<span class="asOperator">:*</span>,bottom<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.DRAW_RECT,<span class="asBracket">{</span> left<span class="asOperator">:</span> left, top<span class="asOperator">:</span> top, right<span class="asOperator">:</span> right, bottom<span class="asOperator">:</span> bottom, borderWidth<span class="asOperator">:</span> borderWidth<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawEllipse<span class="asBracket">(</span>left<span class="asOperator">:*</span>,top<span class="asOperator">:*</span>,right<span class="asOperator">:*</span>,bottom<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.DRAW_ELLIPSE,<span class="asBracket">{</span> left<span class="asOperator">:</span> left, top<span class="asOperator">:</span> top, right<span class="asOperator">:</span> right, bottom<span class="asOperator">:</span> bottom, borderWidth<span class="asOperator">:</span> borderWidth<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawRoundedRect<span class="asBracket">(</span>left<span class="asOperator">:*</span>,top<span class="asOperator">:*</span>,right<span class="asOperator">:*</span>,bottom<span class="asOperator">:*</span>,cornerRadius<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            pushOp<span class="asBracket">(</span>OpCode.DRAW_ROUNDRECT,<span class="asBracket">{</span> left<span class="asOperator">:</span> left, top<span class="asOperator">:</span> top, right<span class="asOperator">:</span> right, bottom<span class="asOperator">:</span> bottom, 
+                                        borderWidth<span class="asOperator">:</span> borderWidth,
+                                        cornerRadius<span class="asOperator">:</span> cornerRadius<span class="asBracket">})</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">private</span> <span class="asFunction">function</span> invalidateOpCodes<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            _dataCacheDirty <span class="asOperator">=</span> <span class="asReserved">true</span>;
+            dataChanged<span class="asBracket">()</span>;
+            invalidateDisplayList<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> pushOp<span class="asBracket">(</span>code<span class="asOperator">:</span>int, params<span class="asOperator">:</span>Object <span class="asOperator">=</span> <span class="asReserved">null</span><span class="asBracket">)</span><span class="asOperator">:</span>OpCode
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> op<span class="asOperator">:</span>OpCode <span class="asOperator">=</span> <span class="asReserved">new</span> OpCode<span class="asBracket">(</span><span class="asReserved">this</span>,code,params<span class="asBracket">)</span>;
+            _opCodes.push<span class="asBracket">(</span>op<span class="asBracket">)</span>;
+            invalidateOpCodes<span class="asBracket">()</span>;
+            <span class="asReserved">return</span> op;
+        <span class="asBracket">}</span>
+
+        <span class="asComment">// our main drawing routine.
+</span>        <span class="asReserved">override</span> <span class="asReserved">protected</span> <span class="asFunction">function</span> updateDisplayList<span class="asBracket">(</span>unscaledWidth<span class="asOperator">:</span>Number,
+                                                      unscaledHeight<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> i<span class="asOperator">:</span>int;
+            
+            <span class="asComment">// first, make sure we have valid pixel values.
+</span>
+            updateMapping<span class="asBracket">()</span>;
+            <span class="asVar">var</span> updated<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> updateTransform<span class="asBracket">()</span>;
+            
+            <span class="asReserved">if</span><span class="asBracket">(</span>updated<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> g<span class="asOperator">:</span>Graphics <span class="asOperator">=</span> graphics;
+                
+                g.clear<span class="asBracket">()</span>;
+                <span class="asReserved">for</span><span class="asBracket">(</span>i <span class="asOperator">=</span> 0;i<span class="asOperator">&lt;</span>_opCodes.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    _opCodes<span class="asBracket">[</span>i<span class="asBracket">]</span>.render<span class="asBracket">(</span><span class="asReserved">this</span>,_dataCache<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                positionChildren<span class="asBracket">()</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> mapChildren<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> width<span class="asOperator">:</span>Number;
+            <span class="asVar">var</span> height<span class="asOperator">:</span>Number;
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> aChild<span class="asOperator">:*</span> <span class="asReserved">in</span> _childMap<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> _childMap<span class="asBracket">[</span>aChild<span class="asBracket">]</span>;
+                <span class="asReserved">if</span><span class="asBracket">(</span>dc.horizontalCenter <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    width <span class="asOperator">=</span> widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>dc.horizontalCenter<span class="asBracket">)</span>
+                    _dataCache.storeX<span class="asBracket">(</span>_data,width<span class="asOperator">/</span>2 <span class="asOperator">-</span> _offset,width<span class="asOperator">/</span>2 <span class="asOperator">+</span> _offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span><span class="asBracket">(</span>dc.right <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.left<span class="asBracket">)</span>;
+                    _dataCache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span> _offset,widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span> <span class="asOperator">+</span> _offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>dc.left <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>                
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.right<span class="asBracket">)</span>;
+                    _dataCache.storeX<span class="asBracket">(</span>_data,widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span> <span class="asOperator">-</span> _offset,_offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>    
+                <span class="asReserved">else</span>
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.left<span class="asBracket">)</span>;
+                    _dataCache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>dc.right<span class="asBracket">)</span>;
+                    _dataCache.storeX<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+
+                <span class="asReserved">if</span><span class="asBracket">(</span>dc.verticalCenter <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    height <span class="asOperator">=</span> heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>dc.verticalCenter<span class="asBracket">)</span>;
+                    _dataCache.storeY<span class="asBracket">(</span>_data,height<span class="asOperator">/</span>2 <span class="asOperator">-</span> _offset,height<span class="asOperator">/</span>2 <span class="asOperator">+</span> _offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span><span class="asBracket">(</span>dc.bottom<span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.top<span class="asBracket">)</span>;
+                    _dataCache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span> _offset,heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span> <span class="asOperator">+</span> _offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>dc.top <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>                
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.bottom<span class="asBracket">)</span>;
+                    _dataCache.storeY<span class="asBracket">(</span>_data,heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span> <span class="asOperator">-</span> _offset,_offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span>
+                <span class="asBracket">{</span>
+                    split<span class="asBracket">(</span>dc.top<span class="asBracket">)</span>;
+                    _dataCache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                    split<span class="asBracket">(</span>dc.bottom<span class="asBracket">)</span>;
+                    _dataCache.storeY<span class="asBracket">(</span>_data,<span class="asOperator">-</span>_offset,_offset<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> widthFor<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject<span class="asBracket">)</span><span class="asOperator">:</span>Number
+        <span class="asBracket">{</span>
+            <span class="asReserved">return</span>     <span class="asBracket">(</span>child <span class="asReserved">is</span> IUIComponent<span class="asBracket">)</span><span class="asOperator">?</span> IUIComponent<span class="asBracket">(</span>child<span class="asBracket">)</span>.getExplicitOrMeasuredWidth<span class="asBracket">()</span> <span class="asOperator">+</span> 2<span class="asOperator">:</span>
+                    <span class="asBracket">(</span>child <span class="asReserved">is</span> IFlexDisplayObject<span class="asBracket">)</span><span class="asOperator">?</span> IFlexDisplayObject<span class="asBracket">(</span>child<span class="asBracket">)</span>.measuredWidth <span class="asOperator">+</span> 2<span class="asOperator">:</span>
+                    child.width; 
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">private</span> <span class="asFunction">function</span> heightFor<span class="asBracket">(</span>child<span class="asOperator">:</span>DisplayObject<span class="asBracket">)</span><span class="asOperator">:</span>Number
+        <span class="asBracket">{</span>
+            <span class="asReserved">return</span>     <span class="asBracket">(</span>child <span class="asReserved">is</span> IUIComponent<span class="asBracket">)</span><span class="asOperator">?</span> IUIComponent<span class="asBracket">(</span>child<span class="asBracket">)</span>.getExplicitOrMeasuredHeight<span class="asBracket">()</span> <span class="asOperator">+</span> 2<span class="asOperator">:</span>
+                    <span class="asBracket">(</span>child <span class="asReserved">is</span> IFlexDisplayObject<span class="asBracket">)</span><span class="asOperator">?</span> IFlexDisplayObject<span class="asBracket">(</span>child<span class="asBracket">)</span>.measuredHeight <span class="asOperator">+</span> 2<span class="asOperator">:</span>
+                    child.height; 
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> positionChildren<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> aChild<span class="asOperator">:*</span> <span class="asReserved">in</span> _childMap<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> dc<span class="asOperator">:</span>DataChild <span class="asOperator">=</span> _childMap<span class="asBracket">[</span>aChild<span class="asBracket">]</span>;
+                <span class="asVar">var</span> left<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> right<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> top<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> bottom<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> hCenter<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> vCenter<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> width<span class="asOperator">:</span>Number;
+                <span class="asVar">var</span> height<span class="asOperator">:</span>Number;
+                
+                <span class="asReserved">if</span><span class="asBracket">(</span>dc.horizontalCenter <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    hCenter <span class="asOperator">=</span> _dataCache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.horizontalCenter<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.horizontalCenter<span class="asBracket">)</span>;
+                    width <span class="asOperator">=</span> widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                    left <span class="asOperator">=</span> hCenter <span class="asOperator">-</span> width<span class="asOperator">/</span>2;
+                    right <span class="asOperator">=</span> hCenter <span class="asOperator">+</span> width<span class="asOperator">/</span>2;        
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span><span class="asBracket">(</span>dc.right <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    left <span class="asOperator">=</span> _dataCache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.left<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.left<span class="asBracket">)</span>;
+                    right <span class="asOperator">=</span> left <span class="asOperator">+</span> widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>dc.left <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>                
+                <span class="asBracket">{</span>
+                    right <span class="asOperator">=</span> _dataCache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.right<span class="asBracket">)</span> <span class="asBracket">)</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.right<span class="asBracket">)</span>;
+                    left <span class="asOperator">=</span> right <span class="asOperator">-</span> widthFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span>
+                <span class="asBracket">{</span>
+                    left <span class="asOperator">=</span> _dataCache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.left<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.left<span class="asBracket">)</span>;
+                    right <span class="asOperator">=</span> _dataCache.x<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.right<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.right<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                
+                <span class="asReserved">if</span><span class="asBracket">(</span>dc.verticalCenter <span class="asOperator">!=</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    vCenter <span class="asOperator">=</span> _dataCache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.verticalCenter<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.verticalCenter<span class="asBracket">)</span>;
+                    height <span class="asOperator">=</span> heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                    top <span class="asOperator">=</span> vCenter <span class="asOperator">-</span> height<span class="asOperator">/</span>2;
+                    bottom<span class="asOperator">=</span> vCenter <span class="asOperator">+</span> height<span class="asOperator">/</span>2;        
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span><span class="asBracket">(</span>dc.bottom <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    top <span class="asOperator">=</span> _dataCache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.top<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.top<span class="asBracket">)</span>;
+                    bottom <span class="asOperator">=</span> top <span class="asOperator">+</span> heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>dc.top <span class="asOperator">==</span> <span class="asReserved">undefined</span><span class="asBracket">)</span>                
+                <span class="asBracket">{</span>
+                    bottom <span class="asOperator">=</span> _dataCache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.bottom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.bottom<span class="asBracket">)</span>;
+                    top <span class="asOperator">=</span> bottom <span class="asOperator">-</span> heightFor<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span>
+                <span class="asBracket">{</span>
+                    top <span class="asOperator">=</span> _dataCache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.top<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.top<span class="asBracket">)</span>;
+                    bottom <span class="asOperator">=</span> _dataCache.y<span class="asBracket">(</span>data<span class="asBracket">(</span>dc.bottom<span class="asBracket">))</span> <span class="asOperator">+</span> offset<span class="asBracket">(</span>dc.bottom<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>dc.child <span class="asReserved">is</span> IFlexDisplayObject<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    IFlexDisplayObject<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>.setActualSize<span class="asBracket">(</span>right<span class="asOperator">-</span>left,bottom<span class="asOperator">-</span>top<span class="asBracket">)</span>;
+                    IFlexDisplayObject<span class="asBracket">(</span>dc.child<span class="asBracket">)</span>.move<span class="asBracket">(</span>left, top<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span>
+                <span class="asBracket">{</span>
+                    dc.child.width <span class="asOperator">=</span> right <span class="asOperator">-</span> left;
+                    dc.child.height <span class="asOperator">=</span> bottom <span class="asOperator">-</span> top;
+                    dc.child.x <span class="asOperator">=</span> left ;
+                    dc.child.y <span class="asOperator">=</span> top;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+
+        <span class="asComment">// takes our data values and converts them into pixel values. Note that this routine could be a little bit
+</span>        <span class="asComment">// optimizied.
+</span>        <span class="asReserved">private</span> <span class="asFunction">function</span> updateMapping<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>_dataCacheDirty<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                _dataCache <span class="asOperator">=</span> <span class="asReserved">new</span> DataCache<span class="asBracket">()</span>;
+                <span class="asVar">var</span> i<span class="asOperator">:</span>int;
+                <span class="asVar">var</span> key<span class="asOperator">:*</span>;
+                <span class="asVar">var</span> record<span class="asOperator">:*</span>;
+                <span class="asVar">var</span> value<span class="asOperator">:*</span>;
+                <span class="asVar">var</span> boundedValue<span class="asOperator">:</span>BoundedValue;
+
+                <span class="asReserved">for</span><span class="asBracket">(</span>i<span class="asOperator">=</span>0;i<span class="asOperator">&lt;</span>_opCodes.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    _opCodes<span class="asBracket">[</span>i<span class="asBracket">]</span>.collectValues<span class="asBracket">(</span>_dataCache<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+
+                mapChildren<span class="asBracket">()</span>;
+                
+                _dataCache.xCache <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+                _dataCache.yCache <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+                _hDataDesc.min <span class="asOperator">=</span> Number.MAX_VALUE;
+                _hDataDesc.max <span class="asOperator">=</span> Number.MIN_VALUE;
+                _vDataDesc.min <span class="asOperator">=</span> Number.MAX_VALUE;
+                _vDataDesc.max <span class="asOperator">=</span> Number.MIN_VALUE;
+                
+                <span class="asReserved">for</span><span class="asBracket">(</span>key <span class="asReserved">in</span> _dataCache.xMap<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    value <span class="asOperator">=</span> _dataCache.xMap<span class="asBracket">[</span>key<span class="asBracket">]</span>;
+                    _dataCache.xCache.push<span class="asBracket">(</span> <span class="asBracket">{</span> value<span class="asOperator">:</span> value <span class="asBracket">}</span> <span class="asBracket">)</span>;
+                    _hDataDesc.min <span class="asOperator">=</span> Math.min<span class="asBracket">(</span>_hDataDesc.min,value<span class="asBracket">)</span>;
+                    _hDataDesc.max <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>_hDataDesc.max,value<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">for</span><span class="asBracket">(</span>key <span class="asReserved">in</span> _dataCache.yMap<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    value <span class="asOperator">=</span> _dataCache.yMap<span class="asBracket">[</span>key<span class="asBracket">]</span>;
+                    _dataCache.yCache.push<span class="asBracket">(</span> <span class="asBracket">{</span> value<span class="asOperator">:</span> value <span class="asBracket">}</span> <span class="asBracket">)</span>;
+                    _vDataDesc.min <span class="asOperator">=</span> Math.min<span class="asBracket">(</span>_vDataDesc.min,value<span class="asBracket">)</span>;
+                    _vDataDesc.max <span class="asOperator">=</span> Math.max<span class="asBracket">(</span>_vDataDesc.max,value<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                _mappingDirty <span class="asOperator">=</span> <span class="asReserved">true</span>;
+            <span class="asBracket">}</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>_mappingDirty<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                dataTransform.getAxis<span class="asBracket">(</span>CartesianTransform.VERTICAL_AXIS<span class="asBracket">)</span>.mapCache<span class="asBracket">(</span>_dataCache.yCache,<span class="asString">&quot;value&quot;</span>,<span class="asString">&quot;mappedValue&quot;</span>,<span class="asReserved">true</span><span class="asBracket">)</span>;
+                dataTransform.getAxis<span class="asBracket">(</span>CartesianTransform.HORIZONTAL_AXIS<span class="asBracket">)</span>.mapCache<span class="asBracket">(</span>_dataCache.xCache,<span class="asString">&quot;value&quot;</span>,<span class="asString">&quot;mappedValue&quot;</span>,<span class="asReserved">true</span><span class="asBracket">)</span>;
+                _transformDirty <span class="asOperator">=</span> <span class="asReserved">true</span>;
+
+                <span class="asVar">var</span> boundedValues<span class="asOperator">:</span>Array <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+
+                <span class="asReserved">for</span><span class="asBracket">(</span>i <span class="asOperator">=</span> 0;i<span class="asOperator">&lt;</span>_dataCache.xCache.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    value <span class="asOperator">=</span> _dataCache.xCache<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                    boundedValue <span class="asOperator">=</span> _dataCache.xBoundedValues<span class="asBracket">[</span>value.value<span class="asBracket">]</span>;
+                    <span class="asReserved">if</span> <span class="asBracket">(</span>boundedValue <span class="asOperator">!=</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                    <span class="asBracket">{</span>
+                        boundedValue.value <span class="asOperator">=</span> value.mappedValue;
+                        boundedValues.push<span class="asBracket">(</span>boundedValue<span class="asBracket">)</span>;
+                    <span class="asBracket">}</span>
+                <span class="asBracket">}</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>boundedValues.length <span class="asOperator">&gt;</span> 0<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    _hDataDesc.boundedValues <span class="asOperator">=</span> boundedValues;
+                    boundedValues <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">for</span><span class="asBracket">(</span>i<span class="asOperator">=</span>0;i<span class="asOperator">&lt;</span>_dataCache.yCache.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    value <span class="asOperator">=</span> _dataCache.yCache<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                    boundedValue <span class="asOperator">=</span> _dataCache.yBoundedValues<span class="asBracket">[</span>value.value<span class="asBracket">]</span>;
+                    <span class="asReserved">if</span> <span class="asBracket">(</span>boundedValue <span class="asOperator">!=</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                    <span class="asBracket">{</span>
+                        boundedValue.value <span class="asOperator">=</span> value.mappedValue;
+                        boundedValues.push<span class="asBracket">(</span>boundedValue<span class="asBracket">)</span>;
+                    <span class="asBracket">}</span>
+                <span class="asBracket">}</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>boundedValues.length <span class="asOperator">&gt;</span> 0<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    _vDataDesc.boundedValues <span class="asOperator">=</span> boundedValues;
+                <span class="asBracket">}</span>
+                
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">private</span> <span class="asFunction">function</span> updateTransform<span class="asBracket">()</span><span class="asOperator">:</span>Boolean
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> i<span class="asOperator">:</span>int;
+            <span class="asVar">var</span> record<span class="asOperator">:</span>Object;
+            <span class="asVar">var</span> updated<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>_transformDirty <span class="asOperator">==</span> <span class="asReserved">false</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">if</span><span class="asBracket">(</span>unscaledHeight <span class="asOperator">!=</span> _oldUW <span class="asOperator">||</span> unscaledWidth <span class="asOperator">!=</span> _oldUW<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    _transformDirty <span class="asOperator">=</span> <span class="asReserved">true</span>;
+                    _oldUW <span class="asOperator">=</span> unscaledWidth;
+                    _oldUH <span class="asOperator">=</span> unscaledHeight;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+
+            <span class="asReserved">if</span><span class="asBracket">(</span>_transformDirty<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                updated <span class="asOperator">=</span> <span class="asReserved">true</span>;
+                _transformDirty <span class="asOperator">=</span> <span class="asReserved">false</span>;
+                dataTransform.transformCache<span class="asBracket">(</span>_dataCache.xCache,<span class="asString">&quot;mappedValue&quot;</span>,<span class="asString">&quot;pixelValue&quot;</span>,<span class="asReserved">null</span>,<span class="asReserved">null</span><span class="asBracket">)</span>;            
+                dataTransform.transformCache<span class="asBracket">(</span>_dataCache.yCache,<span class="asReserved">null</span>,<span class="asReserved">null</span>,<span class="asString">&quot;mappedValue&quot;</span>,<span class="asString">&quot;pixelValue&quot;</span><span class="asBracket">)</span>;            
+    
+                <span class="asReserved">for</span><span class="asBracket">(</span>i<span class="asOperator">=</span>0;i<span class="asOperator">&lt;</span>_dataCache.xCache.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    record <span class="asOperator">=</span> _dataCache.xCache<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                    _dataCache.xMap<span class="asBracket">[</span>record.value<span class="asBracket">]</span> <span class="asOperator">=</span> record.pixelValue;
+                <span class="asBracket">}</span>
+                <span class="asReserved">for</span><span class="asBracket">(</span>i<span class="asOperator">=</span>0;i<span class="asOperator">&lt;</span>_dataCache.yCache.length;i<span class="asOperator">++</span><span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    record <span class="asOperator">=</span> _dataCache.yCache<span class="asBracket">[</span>i<span class="asBracket">]</span>;
+                    _dataCache.yMap<span class="asBracket">[</span>record.value<span class="asBracket">]</span> <span class="asOperator">=</span> record.pixelValue;
+                <span class="asBracket">}</span>
+                
+                _dataCache.xMap<span class="asBracket">[</span>Edge.LEFT<span class="asBracket">]</span> <span class="asOperator">=</span> 0;
+                _dataCache.xMap<span class="asBracket">[</span>Edge.RIGHT<span class="asBracket">]</span> <span class="asOperator">=</span> unscaledWidth;
+                _dataCache.yMap<span class="asBracket">[</span>Edge.TOP<span class="asBracket">]</span> <span class="asOperator">=</span> 0;
+                _dataCache.yMap<span class="asBracket">[</span>Edge.BOTTOM<span class="asBracket">]</span> <span class="asOperator">=</span> unscaledHeight;
+            <span class="asBracket">}</span>
+            <span class="asReserved">return</span> updated;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> describeData<span class="asBracket">(</span>dimension<span class="asOperator">:</span>String,
+                                              requiredFields<span class="asOperator">:</span>uint<span class="asBracket">)</span><span class="asOperator">:</span>Array
+        <span class="asBracket">{</span>
+            updateMapping<span class="asBracket">()</span>;
+            <span class="asVar">var</span> result<span class="asOperator">:</span>Array <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+    
+            <span class="asReserved">if</span><span class="asBracket">(</span>_includeInRanges<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asReserved">if</span> <span class="asBracket">(</span>dimension <span class="asOperator">==</span> CartesianTransform.VERTICAL_AXIS<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    <span class="asReserved">if</span><span class="asBracket">(</span>_dataCache.xCache.length<span class="asBracket">)</span>
+                        result.push<span class="asBracket">(</span>_vDataDesc<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+                <span class="asReserved">else</span> <span class="asReserved">if</span> <span class="asBracket">(</span>dimension <span class="asOperator">==</span> CartesianTransform.HORIZONTAL_AXIS<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    <span class="asReserved">if</span><span class="asBracket">(</span>_dataCache.yCache.length<span class="asBracket">)</span>
+                        result.push<span class="asBracket">(</span>_hDataDesc<span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+    
+            <span class="asReserved">return</span> result;    
+        <span class="asBracket">}</span>
+        
+        <span class="asComment">// this function is called by the charting package when the axes that affect this element change their mapping some how.
+</span>        <span class="asComment">// that means we need to call the mapCache function again to get new mappings.    
+</span>        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> mappingChanged<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            _mappingDirty <span class="asOperator">=</span> <span class="asReserved">true</span>;
+            invalidateDisplayList<span class="asBracket">()</span>;
+        <span class="asBracket">}</span>          
+
+        <span class="asReserved">private</span> <span class="asVar">var</span> _data<span class="asOperator">:*</span>;
+        <span class="asReserved">private</span> <span class="asVar">var</span> _offset<span class="asOperator">:</span>Number;
+        <span class="asReserved">private</span> <span class="asFunction">function</span> split<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                _data <span class="asOperator">=</span> v<span class="asBracket">[</span>0<span class="asBracket">]</span>;
+                _offset <span class="asOperator">=</span> v<span class="asBracket">[</span>1<span class="asBracket">]</span>;
+                <span class="asReserved">if</span><span class="asBracket">(</span>isNaN<span class="asBracket">(</span>_offset<span class="asBracket">))</span>
+                    _offset <span class="asOperator">=</span> 0;
+            <span class="asBracket">}</span>
+            <span class="asReserved">else</span>
+            <span class="asBracket">{</span>
+                _data <span class="asOperator">=</span> v;
+                _offset <span class="asOperator">=</span> 0;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> data<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:*</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+                <span class="asReserved">return</span> v<span class="asBracket">[</span>0<span class="asBracket">]</span>;
+            <span class="asReserved">else</span>
+                <span class="asReserved">return</span> v;
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asFunction">function</span> offset<span class="asBracket">(</span>v<span class="asOperator">:*</span><span class="asBracket">)</span><span class="asOperator">:</span>Number
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>v <span class="asReserved">is</span> Array<span class="asBracket">)</span>
+                <span class="asReserved">return</span> v<span class="asBracket">[</span>1<span class="asBracket">]</span>;
+            <span class="asReserved">else</span>
+                <span class="asReserved">return</span> 0;
+        <span class="asBracket">}</span>
+    <span class="asBracket">}</span>        
+<span class="asBracket">}</span>
+</pre></body>
+</html>

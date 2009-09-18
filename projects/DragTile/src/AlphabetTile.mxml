@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBox borderStyle="none" width="61" height="67" xmlns="http://www.adobe.com/2006/mxml" styleName="smallBox" backgroundImage="@Embed('tile.png')"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" xmlns:qs="qs.controls.*" 
+	horizontalAlign="center" verticalAlign="middle" alpha="0" creationCompleteEffect="{se}" >
+
+	<Fade id="se" duration="{Math.random() * 500 + 500}" startDelay="200" alphaFrom="0" alphaTo="1"/>
+		
+	<qs:CachedLabel color="#000000" fontWeight="bold" fontSize="24" data="{data}" useCache="on"/>		
+</VBox>

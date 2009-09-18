@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:App_code xmlns="http://www.adobe.com/2006/mxml" xmlns:local="*" layout="absolute" backgroundGradientColors="[#ffffff, #ffffff]"
+	frameRate="99">
+	<local:BookmarkingTextArea id="ta" text="{sampleText}"  right="10" left="158" top="11" bottom="10" itemRenderer="Redaction" fontSize="16"/>
+	<Button x="10" y="10" label="Bookmark Selection" click="ta.bookmarkSelection()" />
+	<Button x="10" y="40" label="Save Text" click="sampleText = ta.text"  width="140"/>
+	
+</local:App_code>

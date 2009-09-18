@@ -1,0 +1,13 @@
+
+@font-face
+{
+   font-family: columnFont;
+   src: local("Arial");
+}
+
+ColumnChart {
+	fontFamily: columnFont;
+	horizontalAxisStyleName: hangingCategoryAxis;
+	verticalAxisStyleName: hangingCategoryAxis;
+	color: #FFFFFF
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBox xmlns="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	verticalAlign="middle" implements="randomWalkClasses.IRandomWalkRenderer">
+	<Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			private var node:XML;
+			public override function set data(value:Object):void
+			{
+				node = XML(value);
+				if("@icon" in node)
+					iconImg.source = node.@icon.toString();
+				else
+					iconImg.source = "img/system/folder.png";				
+				iconName.text = node.@label;
+			}
+			
+			private var _selState:Number;			
+			public function set selectedState(value:Number):void
+			{
+				_selState = value;	
+				if(isNaN(value))
+				{
+					currentState = null;
+				} else if (value == 0)
+				{
+					currentState = "unselected";
+				}
+				else if (value == 1)
+				{
+					if("@icon" in node)
+					{						
+						currentState = "selected";
+					}
+					else
+					{
+						currentState = "opened";
+					}
+				}
+				
+			}
+			
+			public function get selectedState():Number
+			{
+				return _selState;
+			}
+			
+			private var _highlighted:Boolean;
+			public function set highlighted(value:Boolean):void
+			{
+				_highlighted = value;
+			}
+			public function get highlighted():Boolean
+			{
+				return _highlighted;
+			}
+			
+			private function initDownload():void
+			{
+				var request:URLRequest = new URLRequest(node.@icon.toString());
+				navigateToURL(request,"_blank");
+			}
+		]]>
+	</Script>
+	<HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" verticalAlign="middle">
+		<Image id="iconImg" />
+		<Label id="iconName"  />
+	</HBox>
+	<states>
+		<State name="opened">
+			<SetStyle target="{iconName}" name="fontSize" value="14" />
+		</State>
+		<State name="selected">
+			<AddChild>
+				<HBox>
+					<Spacer width="40" />
+					<Label text="size: 16x16"/> 
+					<Label text="format: png"/> 
+					<LinkButton label="download" click="initDownload()" /> 
+				</HBox>
+			</AddChild>
+			<SetStyle name="borderStyle" value="solid" />
+			<SetStyle name="borderThickness" value="0" />
+			<SetStyle name="cornerRadius" value="10" />
+			<SetStyle name="backgroundColor" value="#FFFFDD" />
+		</State>
+		<State name="unselected">
+			<SetProperty target="{iconImg}" name="width" value="16" />
+			<SetProperty target="{iconImg}" name="height" value="16" />
+			<SetStyle target="{iconName}" name="color" value="#AAAAAA" />
+		</State>
+	</states>
+</VBox>

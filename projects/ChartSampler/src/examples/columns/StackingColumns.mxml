@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ex:ExampleBase  xmlns:ex="examples.*" xmlns="http://www.adobe.com/2006/mxml">
+
+	<Script>
+		<![CDATA[
+
+			override public function get descriptions():Array {
+				return ["two column series stacked"];
+			}
+		]]>
+	</Script>
+
+	<Model id="dataSet" source="/data/sampleData.xml" />
+	<ex:controls>
+		<Label text="grouping type:" />
+		<ComboBox  dataProvider="{['overlaid','clustered','stacked','100%']}" id="stackType" selectedItem="clustered" />
+	</ex:controls>
+	<ColumnChart id="chart" type="{stackType.value}" width="100%" height="100%" dataProvider="{dataSet.Sample}">
+		<series>
+			<ColumnSeries yField="revenue" />
+			<ColumnSeries yField="costs" />
+		</series>
+		<horizontalAxis>
+			<CategoryAxis categoryField="month" />
+		</horizontalAxis>
+	</ColumnChart>
+
+</ex:ExampleBase>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" label="Palettes" width="674" height="452">
+	<mx:constraintColumns>
+		<mx:ConstraintColumn id="Canvas1_col3" width="202"/>
+		<mx:ConstraintColumn id="Canvas1_col1"/>
+		<mx:ConstraintColumn id="Canvas1_col2" width="100%"/>
+	</mx:constraintColumns>
+		
+	<mx:Script>
+		<![CDATA[
+			import mosaic.utils.Process;
+			import mx.controls.Text;
+			import mosaic.MosaicController;
+			import mosaic.Palette;
+			import mosaic.MosaicCollection;
+			import mx.collections.ArrayCollection;
+			
+		
+			public function collectionsDiff(all:ArrayCollection,minus:ArrayCollection):ArrayCollection
+			{
+				var result:ArrayCollection = new ArrayCollection();
+				for(var i:int = 0;i<all.length;i++)
+				{
+					var item:Object = all[i];
+					if(minus.contains(item) == false)
+						result.addItem(item);
+				}
+				return result;
+			}
+
+			public function addCollectionToPalette():void
+			{
+				var col:MosaicCollection = collectionsNotInPalette.selectedItem as MosaicCollection;
+				var palette:Palette = palettes.selectedItem as Palette;
+				
+				palette.addCollection(col);
+				palette.save();
+			}
+			
+			public function newPalette():void
+			{
+				var p:Palette = MosaicController.instance.createPalette();
+				p.save();
+				loadNewPalette(p);
+				updateStatus(p,null);
+			}
+			public function deletePalette():void
+			{
+				MosaicController.instance.deletePalette(palettes.selectedItem as Palette);
+			}
+			
+			[Bindable] public var selectedPalette:Palette;
+			[Bindable] public var availableCollections:ArrayCollection;
+			[Bindable] public var status:String;
+				
+			private function paletteDirtyHandler(e:Event):void
+			{
+				updateStatus(selectedPalette,null);
+			}
+			
+			public function loadNewPalette(palette:Palette):void
+			{
+				if(selectedPalette != null)
+					selectedPalette.removeEventListener("dirty",paletteDirtyHandler);
+				selectedPalette= palette;
+				if(selectedPalette != null)
+					selectedPalette.addEventListener("dirty",paletteDirtyHandler);
+				selectedPalette.load(function(success:Boolean,palette:Palette):void
+				{
+					availableCollections = collectionsDiff(MosaicController.instance.collections,selectedPalette.collections);
+					updateStatus(palette,null);
+				}
+				);
+
+			}
+			
+			public function updateStatus(p:Palette,status:String = null):void
+			{
+				if(status == null)
+				{
+					if(p.invalid)
+						status = "needs updating";
+					else
+						status = "up to date";
+				}
+				statusUI.text = status;
+			}
+			
+			public function updateDBType():void
+			{
+				selectedPalette.databaseType = dbTypeUI.selectedItem as String;
+			}
+			
+			public function updateAspectRatio():void
+			{
+				var result:Number= parseFloat(arUI.text);
+				if(!isNaN(result))
+					selectedPalette.aspectRatio = result;; 
+			}
+			public function updateName():void
+			{
+			 	selectedPalette.name = nameUI.text;
+			}
+			
+			public function updateResolution():void
+			{
+				selectedPalette.resolution = parseInt(resolutionUI.text);
+			}
+
+			public function savePalette():void
+			{
+				if(selectedPalette != null)
+					selectedPalette.save();
+			}
+			public function processPalette():void
+			{
+				if(selectedPalette != null)
+					selectedPalette.validate(
+					function(s:Boolean):void
+					{
+						updateStatus(selectedPalette,null); 
+					},
+					function(statuses:Array,statusMessages:Array):void
+					{
+						updateStatus(selectedPalette,statusMessages.join(":")); 
+					},
+					function(statuses:Array,statusMessages:Array,counts:Array):void
+					{
+						updateStatus(selectedPalette,statusMessages.join(":")); 
+					}
+					
+					);
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:constraintRows>
+		<mx:ConstraintRow id="WindowedApplication1_row1" height="42.6%"/>
+		<mx:ConstraintRow id="WindowedApplication1_row2" height="57.4%"/>
+	</mx:constraintRows>
+
+	<mx:Label x="206" y="39" text="Collections:"/>
+	<mx:Label x="402" y="39" text="Available Collections:"/>
+	<mx:Label x="10" y="39" text="Palettes"/>
+	<mx:List x="206" bottom="WindowedApplication1_row1:41" id="collectionsInPalette" 
+		labelField="name" dataProvider="{Palette(palettes.selectedItem).collections}" 
+		top="WindowedApplication1_row1:60" width="188"></mx:List>
+	<mx:List x="10" width="188" bottom="WindowedApplication1_row2:40" top="WindowedApplication1_row1:60" 
+		id="palettes" 
+		change="loadNewPalette(palettes.selectedItem as Palette)" 
+		dataProvider="{MosaicController.instance.palettes}" labelField="name" />
+	<mx:Button label="New" click="newPalette()" bottom="WindowedApplication1_row2:10" left="148"/>
+	<mx:Button label="Delete" click="deletePalette()" bottom="WindowedApplication1_row2:10" height="22" left="76" width="64"/>
+	<mx:Button label="Remove" left="321" bottom="WindowedApplication1_row1:11"/>
+	<mx:List id="collectionsNotInPalette" width="188" bottom="WindowedApplication1_row1:41" top="WindowedApplication1_row1:60" left="402" 
+		labelField="name" dataProvider="{availableCollections}"/>
+	<mx:Button label="Add" left="541" bottom="WindowedApplication1_row1:11" click="addCollectionToPalette()" />
+	<mx:Label text="Name:" right="Canvas1_col1:0" left="Canvas1_col1:43" top="WindowedApplication1_row2:9" textAlign="right"/>
+	<mx:TextInput top="WindowedApplication1_row2:7" text="{selectedPalette.name}" id="nameUI" 
+		change="updateName()"  left="Canvas1_col2:7" width="179"/>
+	<mx:Label text="Aspect Ratio:" right="Canvas1_col2:0" left="Canvas1_col1:11" top="WindowedApplication1_row2:35"  textAlign="right"/>
+	<mx:TextInput id="arUI" top="WindowedApplication1_row2:33" text="{selectedPalette.aspectRatio}" change="updateAspectRatio()" left="Canvas1_col2:8"/>
+	<mx:Button label="Save" top="WindowedApplication1_row2:120" left="Canvas1_col2:132" click="savePalette()" />
+	<mx:Button label="Process" left="Canvas1_col2:53" top="WindowedApplication1_row2:120" click="processPalette()" />
+	<mx:Label text="Resolution:" right="Canvas1_col1:0" left="Canvas1_col1:16" top="WindowedApplication1_row2:65" textAlign="right"/>
+	<mx:Label text="Database:" right="Canvas1_col1:0" left="Canvas1_col1:16" top="WindowedApplication1_row2:91" textAlign="right"/>
+	<mx:TextInput text="{selectedPalette.resolution}" change="updateResolution()" id="resolutionUI"  top="WindowedApplication1_row2:63" left="Canvas1_col2:8" width="178"/>
+	<mx:Label text="Status:" right="Canvas1_col1:2" left="Canvas1_col1:43" top="WindowedApplication1_row2:151"/>
+	<mx:Label id="statusUI" left="Canvas1_col2:6" top="WindowedApplication1_row2:151"  />
+	<mx:ComboBox id="dbTypeUI" selectedItem="{selectedPalette.databaseType}" change="updateDBType()"  left="Canvas1_col2:8" top="WindowedApplication1_row2:89" width="178">
+		<mx:dataProvider>
+			<mx:String>VPTree</mx:String>
+			<mx:String>Linear</mx:String>
+		</mx:dataProvider>
+	</mx:ComboBox>
+</mx:Canvas>

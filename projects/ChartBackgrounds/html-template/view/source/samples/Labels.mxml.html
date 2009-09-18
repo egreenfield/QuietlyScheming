@@ -1,0 +1,104 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Labels.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;s:ExampleBase</span>  
+    xmlns:s=&quot;<span class="mxmlString">qs.samples.*</span>&quot; 
+    xmlns=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot;
+    xmlns:charts=&quot;<span class="mxmlString">qs.charts.*</span>&quot;  xmlns:local=&quot;<span class="mxmlString">*</span>&quot;
+    xmlns:dataShapes=&quot;<span class="mxmlString">qs.charts.dataShapes.*</span>&quot; 
+    xmlns:graphics=&quot;<span class="mxmlString">qs.graphics.*</span>&quot;<span class="mxmlComponent">&gt;</span>
+
+    <span class="mxmlTag">&lt;Style&gt;</span>
+        <span class="cssSelector">.columnLabel </span><span class="cssSymbol">{</span>
+            <span class="cssPropName">color</span><span class="cssSymbol">:</span> <span class="cssPropValue">#000000</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontSize</span><span class="cssSymbol">:</span> <span class="cssPropValue">12</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontFamily</span><span class="cssSymbol">:</span> <span class="cssPropValue">Verdana</span><span class="cssSymbol">;</span>
+        <span class="cssSymbol">}</span>
+    <span class="mxmlTag">&lt;/Style&gt;</span>
+    <span class="mxmlTag">&lt;Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+
+        <span class="asReserved">import</span> mx.controls.Label;
+        <span class="asReserved">import</span> qs.charts.dataShapes.<span class="asOperator">*</span>;
+
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> descriptions<span class="asBracket">()</span><span class="asOperator">:</span>Array <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asBracket">[</span><span class="asString">&quot;An example of how you can use standard flex components inside a chart with&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;the DataDrawingCanvas. Labels on Columns is a fairly common request in flex.  Here we programmatically create&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;one label for every point in our data series.  \n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;We use the DataDrawingCanvas to pin the bottom center of the label&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;to the data point, with a 5 pixel offset to place it just above the column.\n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;Note how the labels are being clipped off by the top of the chart.  If we don&apos;t tell the chart to &quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;include the contents of the DataDrawingCanvas in its min/max calculations, there&apos;s no guarantee the &quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;labels (or any drawing) will show up inside the chart bounds. &quot;</span><span class="asBracket">]</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> updateIncludeInRange<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>fix.selected <span class="asOperator">==</span> <span class="asReserved">true</span><span class="asBracket">)</span>
+                <span class="asReserved">return</span>;
+                
+            canvas.includeInRanges <span class="asOperator">=</span> includeInRange.selected;
+
+            <span class="asComment">// this is a bit of a hack.  There&apos;s a bug in the LinearAxis where it sometimes will not account for margins 
+</span>            <span class="asComment">// correctly if the min/max _without_ accounting for the margins is the same as it was on the last update.
+</span>            <span class="asComment">// this hack forces it to recalculate correctly.
+</span>            vAxis.maximum<span class="asOperator">=</span>1;
+            vAxis.maximum <span class="asOperator">=</span> <span class="asReserved">undefined</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> renderLabels<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asComment">// this is a bit of a hack.  There&apos;s a bug in the LinearAxis where it sometimes will not account for margins 
+</span>            <span class="asComment">// correctly if the min/max _without_ accounting for the margins is the same as it was on the last update.
+</span>            <span class="asComment">// this hack forces it to recalculate correctly.
+</span>            vAxis.maximum<span class="asOperator">=</span>1;
+            vAxis.maximum <span class="asOperator">=</span> <span class="asReserved">undefined</span>;
+            
+            <span class="asReserved">while</span><span class="asBracket">(</span>canvas.numChildren <span class="asOperator">&gt;</span> 0<span class="asBracket">)</span>
+                canvas.removeChildAt<span class="asBracket">(</span>0<span class="asBracket">)</span>;
+            <span class="asVar">var</span> dp<span class="asOperator">:</span>XMLList <span class="asOperator">=</span> dataSamples.sample.@value;
+            <span class="asReserved">for</span><span class="asBracket">(</span><span class="asVar">var</span> i<span class="asOperator">:</span>int <span class="asOperator">=</span> 0;i<span class="asOperator">&lt;</span>dp.length<span class="asBracket">()</span>;i<span class="asOperator">++</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                <span class="asVar">var</span> value<span class="asOperator">:</span>String <span class="asOperator">=</span> dp<span class="asBracket">[</span>i<span class="asBracket">]</span>.toString<span class="asBracket">()</span>;
+                <span class="asVar">var</span> l<span class="asOperator">:</span>Label <span class="asOperator">=</span> <span class="asReserved">new</span> Label<span class="asBracket">()</span>;
+                l.text <span class="asOperator">=</span> value;
+                l.styleName <span class="asOperator">=</span> <span class="asString">&quot;columnLabel&quot;</span>;
+                canvas.addChild<span class="asBracket">(</span>l<span class="asBracket">)</span>;
+                canvas.updateDataChild<span class="asBracket">(</span>l,<span class="asBracket">{</span>horizontalCenter<span class="asOperator">:</span> i, bottom<span class="asOperator">:</span> Number<span class="asBracket">(</span>value<span class="asBracket">)})</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/Script&gt;</span>
+    <span class="mxmlComponent">&lt;s:controls&gt;</span>
+        <span class="mxmlComponent">&lt;CheckBox</span> selected=&quot;<span class="mxmlString">true</span>&quot; label=&quot;<span class="mxmlString">include labels in min/max calculations</span>&quot; id=&quot;<span class="mxmlString">includeInRange</span>&quot; change=&quot;updateIncludeInRange<span class="asBracket">()</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;CheckBox</span> label=&quot;<span class="mxmlString">fix vertical axis</span>&quot; id=&quot;<span class="mxmlString">fix</span>&quot; <span class="mxmlComponent">/&gt;</span> <span class="mxmlComponent">&lt;HSlider</span> change=&quot;fix.selected <span class="asOperator">=</span> <span class="asReserved">true</span>&quot; liveDragging=&quot;<span class="mxmlString">true</span>&quot; thumbCount=&quot;<span class="mxmlString">2</span>&quot; values=&quot;<span class="mxmlString">{</span><span class="asBracket">[</span>0,100<span class="asBracket">]</span><span class="mxmlString">}</span>&quot; id=&quot;<span class="mxmlString">axisValues</span>&quot; minimum=&quot;<span class="mxmlString">-500</span>&quot; maximum=&quot;<span class="mxmlString">500</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; <span class="mxmlComponent">/&gt;</span>        
+    <span class="mxmlComponent">&lt;/s:controls&gt;</span>
+
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/categories.xml</span>&quot; id=&quot;<span class="mxmlString">categories</span>&quot; <span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;XML</span> source=&quot;<span class="mxmlString">/data/samples.xml</span>&quot; id=&quot;<span class="mxmlString">dataSamples</span>&quot; <span class="mxmlTag">/&gt;</span>
+
+    <span class="mxmlComponent">&lt;ColumnChart</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; creationComplete=&quot;renderLabels<span class="asBracket">()</span>;&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;annotationElements&gt;</span>
+            <span class="mxmlComponent">&lt;dataShapes:DataDrawingCanvas</span> id=&quot;<span class="mxmlString">canvas</span>&quot; includeInRanges=&quot;<span class="mxmlString">true</span>&quot; <span class="mxmlComponent">/&gt;</span>            
+        <span class="mxmlComponent">&lt;/annotationElements&gt;</span>
+        <span class="mxmlComponent">&lt;series&gt;</span>
+            <span class="mxmlComponent">&lt;ColumnSeries</span> dataProvider=&quot;<span class="mxmlString">{</span>dataSamples.sample.@value<span class="mxmlString">}</span>&quot; filterData=&quot;<span class="mxmlString">false</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/series&gt;</span>
+        <span class="mxmlComponent">&lt;verticalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;LinearAxis</span> id=&quot;<span class="mxmlString">vAxis</span>&quot; minimum=&quot;<span class="mxmlString">{</span>fix.selected<span class="asOperator">?</span> axisValues.values<span class="asBracket">[</span>0<span class="asBracket">]</span><span class="asOperator">:</span><span class="asReserved">undefined</span><span class="mxmlString">}</span>&quot; maximum=&quot;<span class="mxmlString">{</span>fix.selected<span class="asOperator">?</span> axisValues.values<span class="asBracket">[</span>1<span class="asBracket">]</span><span class="asOperator">:</span><span class="asReserved">undefined</span><span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/verticalAxis&gt;</span>
+        <span class="mxmlComponent">&lt;horizontalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;CategoryAxis</span> dataProvider=&quot;<span class="mxmlString">{</span>categories.category.@name<span class="mxmlString">}</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/horizontalAxis&gt;</span>
+    <span class="mxmlComponent">&lt;/ColumnChart&gt;</span>
+
+<span class="mxmlComponent">&lt;/s:ExampleBase&gt;</span></pre></body>
+</html>

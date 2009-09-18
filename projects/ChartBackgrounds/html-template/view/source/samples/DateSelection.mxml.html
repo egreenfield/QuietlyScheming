@@ -1,0 +1,147 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DateSelection.mxml</title>
+<link rel="stylesheet" type="text/css" href="../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;s:ExampleBase</span>  
+    xmlns:s=&quot;<span class="mxmlString">qs.samples.*</span>&quot; 
+    xmlns=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot;
+    xmlns:charts=&quot;<span class="mxmlString">qs.charts.*</span>&quot;  xmlns:local=&quot;<span class="mxmlString">*</span>&quot;
+    xmlns:dataShapes=&quot;<span class="mxmlString">qs.charts.dataShapes.*</span>&quot; 
+    xmlns:graphics=&quot;<span class="mxmlString">qs.graphics.*</span>&quot;<span class="mxmlComponent">&gt;</span>
+
+    <span class="mxmlTag">&lt;Style&gt;</span>
+        <span class="cssSelector">.quadLabel </span><span class="cssSymbol">{</span>
+            <span class="cssPropName">color</span><span class="cssSymbol">:</span> <span class="cssPropValue">#666666</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontSize</span><span class="cssSymbol">:</span> <span class="cssPropValue">36</span><span class="cssSymbol">;</span>
+            <span class="cssPropName">fontWeight</span><span class="cssSymbol">:</span> <span class="cssPropValue">bold</span><span class="cssSymbol">;</span>    
+            <span class="cssPropName">fontFamily</span><span class="cssSymbol">:</span> <span class="cssPropValue">Verdana</span><span class="cssSymbol">;</span>
+        <span class="cssSymbol">}</span>
+    <span class="mxmlTag">&lt;/Style&gt;</span>
+    <span class="mxmlTag">&lt;Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asReserved">import</span> mx.controls.Button;
+
+        <span class="asReserved">import</span> qs.charts.dataShapes.<span class="asOperator">*</span>;
+
+                
+        <span class="asReserved">override</span> <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> descriptions<span class="asBracket">()</span><span class="asOperator">:</span>Array <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asBracket">[</span><span class="asString">&quot;This example shows how you might use the DataDrawingCanvas to draw a selection in the chart.\n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;The Data Drawing API allows you to specify both a data value and a pixel offset for any coordinate used&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;in the drawing commands.  The canvas will convert the data value, add the offset, and use that as the coordinate&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;in the actual drawing.\n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;In this case, we&apos;re drawing the selection from the top to the bottom of the chart, but offset by 4 pixels. That gives&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot; us a small gap at the top, and hides the rounded corners at the bottom\n\n&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;Click on a bar on the chart or a day on the calendar to set the selection. Click and drag on the chart, or shift-click on the calendar, to select a range.&quot;</span> <span class="asOperator">+</span> 
+                    <span class="asString">&quot;&quot;</span><span class="asBracket">]</span>;
+        <span class="asBracket">}</span>
+
+
+        <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span> <span class="asReserved">public</span> <span class="asVar">var</span> dataSet<span class="asOperator">:</span>Array;
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> updateDateRangeAxis<span class="asBracket">(</span>updateHAxis<span class="asOperator">:</span>Boolean<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asVar">var</span> startDate<span class="asOperator">:</span>Date <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>rangeSelector.displayedYear,rangeSelector.displayedMonth<span class="asBracket">)</span>;
+            <span class="asVar">var</span> endDate<span class="asOperator">:</span>Date <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>startDate<span class="asBracket">)</span>;
+            <span class="asReserved">if</span><span class="asBracket">(</span>updateHAxis<span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                endDate.month <span class="asOperator">+=</span> 1;
+                endDate.date <span class="asOperator">-=</span> 1;
+                drAxis.minimum <span class="asOperator">=</span> startDate;
+                drAxis.maximum <span class="asOperator">=</span> endDate;
+                <span class="asVar">var</span> newSet<span class="asOperator">:</span>Array <span class="asOperator">=</span> <span class="asBracket">[]</span>;
+                <span class="asVar">var</span> d<span class="asOperator">:</span>Date <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>startDate<span class="asBracket">)</span>;
+                <span class="asReserved">while</span><span class="asBracket">(</span>d <span class="asOperator">&lt;</span> endDate<span class="asBracket">)</span>
+                <span class="asBracket">{</span>
+                    newSet.push<span class="asBracket">({</span> value<span class="asOperator">:</span> Math.floor<span class="asBracket">(</span>Math.random<span class="asBracket">()</span><span class="asOperator">*</span>18<span class="asBracket">)</span>, date<span class="asOperator">:</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>d<span class="asBracket">)</span> <span class="asBracket">})</span>;
+                    d.date<span class="asOperator">++</span>;                
+                <span class="asBracket">}</span>
+                dataSet <span class="asOperator">=</span> newSet;
+            <span class="asBracket">}</span>
+            
+        
+            
+            <span class="asVar">var</span> selection<span class="asOperator">:</span>Object <span class="asOperator">=</span> rangeSelector.selectedRanges<span class="asBracket">[</span>0<span class="asBracket">]</span>;
+
+            dateAnnotations.clear<span class="asBracket">()</span>;
+                        
+            <span class="asReserved">if</span><span class="asBracket">(</span>selection <span class="asOperator">!=</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+            <span class="asBracket">{</span>
+                dateAnnotations.beginFill<span class="asBracket">(</span>0x9999BB,.5<span class="asBracket">)</span>;
+                dateAnnotations.lineStyle<span class="asBracket">(</span>2,0x6666AA<span class="asBracket">)</span>;
+                endDate <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>selection.rangeEnd<span class="asBracket">)</span>;
+                endDate.hours <span class="asOperator">+=</span> 12;
+                endDate.milliseconds <span class="asOperator">-=</span> 1;
+                startDate <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>selection.rangeStart<span class="asBracket">)</span>;
+                startDate.hours <span class="asOperator">-=</span> 12;
+                dateAnnotations.drawRoundedRect<span class="asBracket">(</span>startDate,<span class="asBracket">[</span>Edge.TOP,4<span class="asBracket">]</span>,endDate,<span class="asBracket">[</span>Edge.BOTTOM,16<span class="asBracket">]</span>,16<span class="asBracket">)</span>;
+                dateAnnotations.endFill<span class="asBracket">()</span>;
+            <span class="asBracket">}</span>
+        <span class="asBracket">}</span>
+        <span class="asReserved">private</span> <span class="asVar">var</span> dragStart<span class="asOperator">:</span>Date;
+        <span class="asReserved">private</span> <span class="asFunction">function</span> setSelection<span class="asBracket">(</span>start<span class="asOperator">:</span>Date,end<span class="asOperator">:</span>Date<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>start <span class="asOperator">&lt;</span> end<span class="asBracket">)</span>
+                rangeSelector.selectedRanges <span class="asOperator">=</span> <span class="asBracket">[</span> <span class="asBracket">{</span>rangeStart<span class="asOperator">:</span> start, rangeEnd<span class="asOperator">:</span> end<span class="asBracket">}</span> <span class="asBracket">]</span>;
+            <span class="asReserved">else</span>
+                rangeSelector.selectedRanges <span class="asOperator">=</span> <span class="asBracket">[</span> <span class="asBracket">{</span>rangeStart<span class="asOperator">:</span> end, rangeEnd<span class="asOperator">:</span> start<span class="asBracket">}</span> <span class="asBracket">]</span>;
+            rangeSelector.validateNow<span class="asBracket">()</span>;
+            updateDateRangeAxis<span class="asBracket">(</span><span class="asReserved">false</span><span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> beginDrag<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>    
+            dragStart <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>chart.localToData<span class="asBracket">(</span><span class="asReserved">new</span> Point<span class="asBracket">(</span>chart.mouseX,chart.mouseY<span class="asBracket">))[</span>0<span class="asBracket">])</span>;
+            dragStart.minutes <span class="asOperator">=</span> dragStart.seconds <span class="asOperator">=</span> dragStart.milliseconds <span class="asOperator">=</span> 0;
+            dragStart.hours <span class="asOperator">=</span> 24 <span class="asOperator">*</span> Math.round<span class="asBracket">(</span>dragStart.hours <span class="asOperator">/</span> 24<span class="asBracket">)</span>;
+            <span class="asVar">var</span> endDate<span class="asOperator">:</span>Date <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>dragStart<span class="asBracket">)</span>;
+            setSelection<span class="asBracket">(</span>dragStart,endDate<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> continueDrag<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>dragStart <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                <span class="asReserved">return</span>;
+            <span class="asVar">var</span> newEnd<span class="asOperator">:</span>Date <span class="asOperator">=</span> <span class="asReserved">new</span> Date<span class="asBracket">(</span>chart.localToData<span class="asBracket">(</span><span class="asReserved">new</span> Point<span class="asBracket">(</span>chart.mouseX,chart.mouseY<span class="asBracket">))[</span>0<span class="asBracket">])</span>;
+            newEnd.minutes <span class="asOperator">=</span> newEnd.seconds <span class="asOperator">=</span> newEnd.milliseconds <span class="asOperator">=</span> 0;
+            <span class="asVar">var</span> dt<span class="asOperator">:</span>Number<span class="asOperator">=</span> newEnd.date;
+            <span class="asVar">var</span> hrs<span class="asOperator">:</span>Number<span class="asOperator">=</span>  newEnd.hours;
+            <span class="asReserved">if</span><span class="asBracket">(</span>newEnd.hours <span class="asOperator">&gt;</span> 12<span class="asBracket">)</span>
+                newEnd.date<span class="asOperator">++</span>;
+            newEnd.hours <span class="asOperator">=</span> 0;
+            setSelection<span class="asBracket">(</span>dragStart,newEnd<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        <span class="asReserved">public</span> <span class="asFunction">function</span> completeDrag<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span>
+        <span class="asBracket">{</span>
+            <span class="asReserved">if</span><span class="asBracket">(</span>dragStart <span class="asOperator">==</span> <span class="asReserved">null</span><span class="asBracket">)</span>
+                <span class="asReserved">return</span>;
+            dragStart <span class="asOperator">=</span> <span class="asReserved">null</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/Script&gt;</span>
+
+    <span class="mxmlComponent">&lt;s:controls&gt;</span>
+        <span class="mxmlComponent">&lt;DateChooser</span> id=&quot;<span class="mxmlString">rangeSelector</span>&quot; allowDisjointSelection=&quot;<span class="mxmlString">false</span>&quot; allowMultipleSelection=&quot;<span class="mxmlString">true</span>&quot; scroll=&quot;updateDateRangeAxis<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>&quot; change=&quot;updateDateRangeAxis<span class="asBracket">(</span><span class="asReserved">false</span><span class="asBracket">)</span>&quot;<span class="mxmlComponent">/&gt;</span>
+    <span class="mxmlComponent">&lt;/s:controls&gt;</span>
+
+    <span class="mxmlComponent">&lt;CartesianChart</span> id=&quot;<span class="mxmlString">chart</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">200</span>&quot; creationComplete=&quot;updateDateRangeAxis<span class="asBracket">(</span><span class="asReserved">true</span><span class="asBracket">)</span>&quot; 
+        verticalAxisStyleName=&quot;<span class="mxmlString">linedNumericAxis</span>&quot; mouseDown=&quot;beginDrag<span class="asBracket">()</span>;&quot; mouseMove=&quot;continueDrag<span class="asBracket">()</span>&quot; mouseUp=&quot;completeDrag<span class="asBracket">()</span>;&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;annotationElements&gt;</span>
+            <span class="mxmlComponent">&lt;dataShapes:DataDrawingCanvas</span> id=&quot;<span class="mxmlString">dateAnnotations</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/annotationElements&gt;</span>
+        <span class="mxmlComponent">&lt;series&gt;</span>
+            <span class="mxmlComponent">&lt;ColumnSeries</span> dataProvider=&quot;<span class="mxmlString">{</span>dataSet<span class="mxmlString">}</span>&quot; xField=&quot;<span class="mxmlString">date</span>&quot; yField=&quot;<span class="mxmlString">value</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/series&gt;</span>
+        <span class="mxmlComponent">&lt;horizontalAxis&gt;</span>
+            <span class="mxmlComponent">&lt;DateTimeAxis</span> id=&quot;<span class="mxmlString">drAxis</span>&quot;  displayLocalTime=&quot;<span class="mxmlString">true</span>&quot; <span class="mxmlComponent">/&gt;</span>
+        <span class="mxmlComponent">&lt;/horizontalAxis&gt;</span>
+    <span class="mxmlComponent">&lt;/CartesianChart&gt;</span>
+
+<span class="mxmlComponent">&lt;/s:ExampleBase&gt;</span></pre></body>
+</html>

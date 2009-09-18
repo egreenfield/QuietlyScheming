@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="1" mainApplicationPath="DisplayLib.as">
+  <compiler additionalCompilerArguments="--load-config ../lib-config.xml" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="false" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" outputFolderLocation="C:\dev\qs\web\public\mt\simple\libraries" sourceFolderPath="src">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" path="C:\dev\qs\projects\mt\src" linkType="1"/>
+      <compilerSourcePathEntry kind="1" path="C:\dev\qs\projects\mt\graphicsSrc" linkType="1"/>
+    </compilerSourcePath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+    </libraryPath>
+    <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+    </sourceAttachmentPath>
+  </compiler>
+  <applications>
+    <application path="DisplayLib.as"/>
+    <application path="GraphicsLib.as"/>
+  </applications>
+  <buildCSSFiles/>
+</actionScriptProperties>

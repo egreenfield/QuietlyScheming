@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:WPA_code xmlns="http://www.adobe.com/2006/mxml" xmlns:qc="qs.containers.*" xmlns:local="*" 	
+	creationComplete="updateSelection();" layout="absolute"
+	viewSourceURL="srcview/WPA.html"> 
+	<Style source="styles.css" />
+	
+	<XML id="posterSet" source="data/posters.xml" />
+	
+	<Label text="Posters of the WPA (1936-1943)" styleName="title" top="10" left="10" right="10"/>
+
+	<Canvas width="672" height="283" horizontalCenter="-15.5" verticalCenter="-77.5">
+		
+		<List id="posterList" dataProvider="{posterSet..poster}" labelField="title" change="updateSelection()"
+		x="58" top="10" width="142" bottom="17" />
+		<VBox styleName="posterBorder" width="166" height="256" x="208" y="10">
+			<qc:Landscape width="160" height="250" id="landscape" animationSpeed=".15">
+				<qc:DataTile id="posterViewer" dataProvider="{posterSet..poster}" cacheAsBitmap="true">
+					<qc:itemRenderer>
+						<Component>
+							<VBox>
+								<Image source="img/posters/{data.@url}" />
+							</VBox>
+						</Component>
+					</qc:itemRenderer>				
+				</qc:DataTile>
+			</qc:Landscape>
+		</VBox>
+		<VBox top="10" bottom="10" left="382" right="10" color="#FFFFFF">
+			<Text width="100%" styleName="subTitle" text="{posterList.selectedItem.title}"/>
+			<Text width="100%" styleName="detailText" text="{posterList.selectedItem.text}" />
+		</VBox>
+	</Canvas>
+	<Text text="This Application shows one use of the Landscape component. In this example, the Landscape component is used to display the current poster selected from the list to the left. The Posters are tiled, and the landscape is explicitly sized to fit one poster exactly. Since all the children match the size of the Landscape, when the selection is set, no zooming happens -- just panning. The Landscape gives the illusion here of a window into an infinite plane of WPA posters." styleName="instructions" left="20" right="20" bottom="20"/>
+
+</local:WPA_code>

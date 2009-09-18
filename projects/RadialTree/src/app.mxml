@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" layout="absolute" backgroundColor="#FFFFFF" xmlns:controls="qs.controls.*" xmlns:graphics="qs.graphics.*">
+	<XML id="dataSet" source="data/icons.xml" />
+	<controls:RadialTree width="100%" height="100%" dataProvider="{dataSet}">
+		<controls:itemRenderer>
+			<Component>
+				<graphics:Ellipse width="20" height="20">
+					<graphics:fill>
+						<SolidColor color="#AAAAFF" />
+					</graphics:fill>
+					<graphics:stroke>
+						<Stroke color="#5555BB" weight="2" />
+					</graphics:stroke>
+				</graphics:Ellipse>
+			</Component>
+		</controls:itemRenderer>
+		<controls:stroke>
+			<Stroke color="#5555BB" weight="2" />
+		</controls:stroke>
+	</controls:RadialTree>
+</Application>

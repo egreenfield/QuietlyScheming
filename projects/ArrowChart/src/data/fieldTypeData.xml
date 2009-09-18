@@ -1,0 +1,5 @@
+<YearlyData>
+	<Sample month="January" revenue="120" costs="45" />
+	<Sample month="February" revenue="108" costs="422" />
+	<Sample month="March" revenue="150" costs="82" />
+</YearlyData>

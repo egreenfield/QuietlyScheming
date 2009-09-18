@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://www.adobe.com/2006/mxml" xmlns:ex="examples.*"
+	horizontalGap="0" horizontalAlign="left" paddingLeft="0" paddingTop="0" paddingBottom="0" paddingRight="0"
+	layout="horizontal"
+	width="100%" height="100%"
+	creationComplete="initApp()">
+
+	<Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+
+			[Bindable] public var currentExampleInstance:ExampleBase;
+			[Bindable] public var currentExampleIndex:int;
+			[Bindable] public var currentExample:Example;
+			[Bindable] public var exampleSet:Array;
+			
+			private var state:SharedObject;
+			
+			public function initApp():void
+			{
+				state = SharedObject.getLocal("state");
+				var path:Array = state.data.path;
+				if(path != null)
+				{
+					var c:Array = exampleSet;
+					var p:Example = null;
+					while(path.length > 0)
+					{
+						var part:String = path.shift();
+						for(var i:int = 0;i<c.length;i++)
+						{
+							if(c[i].label == part)
+							{
+								p = c[i];
+								c = p.children;
+								exTree.expandItem(c,true);
+								break;
+							}
+						}
+					}
+					if(p != null)
+					{
+						exTree.selectedItem = p;
+						showExample(p);
+					}
+				}
+			}
+			public function showExample(ex:Example):void
+			{
+				if(ex == currentExample)
+					return;
+
+				if(ex.classRef != null)
+				{
+					if(currentExampleInstance != null)
+					{
+						currentExampleInstance.stop();
+						holder.removeChild(currentExampleInstance);
+					}
+					currentExample = ex;
+					var c:Class = ex.classRef;
+					currentExampleInstance = new c();
+					holder.addChild(currentExampleInstance);
+
+					if(currentExampleInstance.controls != null)
+					{
+						controlOwner.removeAllChildren();
+						for(var i:int=0;i<currentExampleInstance.controls.length;i++)
+						{
+							controlOwner.addChild(currentExampleInstance.controls[i]);
+						}
+					}
+					currentExampleInstance.start();
+				}
+				exTree.selectedItem = currentExample;
+
+				var p:Example = ex;
+				var path:Array = [];
+				while(p != null)
+				{
+					path.unshift(p.label);
+					p = p.parent;
+				}
+				state.data.path = path;
+				state.flush();
+				
+			}
+			private function nextExample():void
+			{
+//				if (currentExampleIndex < exampleSet.length - 1)
+//					showExample(currentExampleIndex+1);
+			}
+			private function prevExample():void
+			{
+//				if (currentExampleIndex > 0)
+//					showExample(currentExampleIndex-1);
+			}
+
+		]]>
+	</Script>
+
+
+
+	<Tree id="exTree" width="200" backgroundColor="#565656" height="100%" dataProvider="{exampleSet}" labelField="label" showRoot="true" change="showExample(Example(exTree.selectedItem))" />
+	<VRule height="100%"  />
+	<Form height="100%" backgroundColor="#565656" minHeight="0">
+		<FormItem label="example">
+			<Label text="{currentExample.label}"/>
+		</FormItem>
+		<FormItem label="description">
+			<Text width="200" text="{currentExampleInstance.currentStepDescription}" />
+		</FormItem>
+		<FormItem label="controls" id="controlOwner" visible="{currentExampleInstance.controls != null}" includeInLayout="{currentExampleInstance.controls != null}">
+		</FormItem>
+		</Form>
+	<HBox id="frame" width="100%" height="100%" styleName="frame">
+		<HBox id="holder" width="100%" height="100%" styleName="frame" backgroundColor="#FFFFFF">
+		</HBox>
+	</HBox>
+</Application>
