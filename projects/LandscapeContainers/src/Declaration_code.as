@@ -38,7 +38,7 @@ package
 
 			viewer.selection = targets;
 
-			for(var i:int = 0;i<viewer.selection.length;i++)
+			for(i = 0;i<viewer.selection.length;i++)
 			{
 				if(viewer.selection[i] is Hilight)
 					Hilight(viewer.selection[i]).currentState= "selected";			

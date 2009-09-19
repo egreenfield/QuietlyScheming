@@ -32,7 +32,7 @@ package qs.controls
 
 	override public function set text(value:String):void
 	{
-		super.htmlText = "<a href='event:link'>" + value </a>";		
+		super.htmlText = "<a href='event:link'>" + value + "</a>";		
 	}
 	override protected function createChildren():void
 	{

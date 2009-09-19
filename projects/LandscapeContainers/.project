@@ -17,14 +17,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>bin</name>
+			<name>bin-debug</name>
 			<type>2</type>
-			<location>C:/dev/qs/web/public/landscape</location>
-		</link>
-		<link>
-			<name>[source path] lib</name>
-			<type>2</type>
-			<location>C:/dev/f2/qs/lib</location>
+			<location>/Users/egreenfi/dev/qsg/web/public/landscape</location>
 		</link>
 	</linkedResources>
 </projectDescription>

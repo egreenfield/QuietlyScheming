@@ -10,7 +10,6 @@ package qs.charts
 	import mx.charts.chartClasses.CartesianTransform;
 	import flash.display.Graphics;
 	import flash.geom.Rectangle;
-	import mx.graphics.RoundedRectangle;
 	import qs.graphics.RoundedBox;
 
 	[Style(name="padding", type="Number", inherit="no")]

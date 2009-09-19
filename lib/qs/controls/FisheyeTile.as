@@ -61,12 +61,12 @@ package qs.controls
 			_tileWidth = Math.max(_tileWidth,_tileHeight);
 			_tileHeight = _tileWidth;
 						
-			for(var i:int=0;i<_rowLength;i++)
+			for(i=0;i<_rowLength;i++)
 			{
 				_hItems[i].eomWidth = _hMouseItems[i].eomWidth = _tileWidth;
 				_hItems[i].eomHeight = _hMouseItems[i].eomHeight = _tileHeight;
 			}
-			for(var i:int=0;i<_colLength;i++)
+			for(i=0;i<_colLength;i++)
 			{
 				_vItems[i].eomWidth = _vMouseItems[i].eomWidth = _tileWidth;
 				_vItems[i].eomHeight = _vMouseItems[i].eomHeight = _tileHeight;
@@ -95,7 +95,7 @@ package qs.controls
 					_hItems[i] = new FisheyeItem();
 					_hMouseItems[i] = new FisheyeItem();
 				}
-				for(var i:int = 0;i<_colLength;i++)
+				for(i = 0;i<_colLength;i++)
 				{
 					_vItems[i] = new FisheyeItem();
 					_vMouseItems[i] = new FisheyeItem();
@@ -130,14 +130,14 @@ package qs.controls
 					hTargetPosition = unscaledWidth - _tileWidth*maxScaleWithDefault;
 					
 				populateMajorAxisFor(_hItems.slice(hTargetIndex),0,unscaledWidth - hTargetPosition,hAxis);
-				for (var i:int = hTargetIndex;i<_rowLength;i++)
+				for (i = hTargetIndex;i<_rowLength;i++)
 					_hItems[i].x += hTargetPosition;
 				if(hTargetIndex > 0)
 				{
 					populateMajorAxisFor(_hItems.slice(0,hTargetIndex),hTargetIndex,hTargetPosition - defaultSpacingWithDefault,hAxis);
 					hData = _hItems[hTargetIndex - 1];
 					var offset:Number = hTargetPosition - (hData.x + hData.eomWidth * hData.scale + defaultSpacingWithDefault);
-					for(var i:int = 0;i<hTargetIndex;i++)
+					for(i = 0;i<hTargetIndex;i++)
 						_hItems[i].x += offset;
 				}				
 
@@ -152,14 +152,14 @@ package qs.controls
 					vTargetPosition = unscaledHeight - _tileHeight*maxScaleWithDefault;
 					
 				populateMajorAxisFor(_vItems.slice(vTargetIndex),0,unscaledHeight - vTargetPosition,vAxis);
-				for (var i:int = vTargetIndex;i<_colLength;i++)
+				for (i = vTargetIndex;i<_colLength;i++)
 					_vItems[i].y += vTargetPosition;
 				if(vTargetIndex > 0)
 				{
 					populateMajorAxisFor(_vItems.slice(0,vTargetIndex),vTargetIndex,vTargetPosition - defaultSpacingWithDefault,vAxis);
 					vData = _vItems[vTargetIndex - 1];
-					var offset:Number = vTargetPosition - (vData.y + vData.eomHeight * vData.scale + defaultSpacingWithDefault);
-					for(var i:int = 0;i<vTargetIndex;i++)
+					offset = vTargetPosition - (vData.y + vData.eomHeight * vData.scale + defaultSpacingWithDefault);
+					for(i = 0;i<vTargetIndex;i++)
 						_vItems[i].y += offset;
 				}				
 
@@ -171,8 +171,8 @@ package qs.controls
 			for(var i:int=0;i<itemCount;i++)
 			{
 				var itemRenderer:UIComponent = renderers[i];
-				var hData:FisheyeItem = _hItems[ i % _rowLength];
-				var vData:FisheyeItem = _vItems[Math.floor(i / _rowLength)];
+				hData = _hItems[ i % _rowLength];
+				vData = _vItems[Math.floor(i / _rowLength)];
 
 				var target:LayoutTarget = animator.targetFor(itemRenderer);
 				
@@ -195,7 +195,7 @@ package qs.controls
 					else
 					{
 						// the item is more vertical than the area.
-						var scale:Number = vData.eomHeight * vData.scale / itemRenderer.getExplicitOrMeasuredHeight();
+						scale = vData.eomHeight * vData.scale / itemRenderer.getExplicitOrMeasuredHeight();
 						if(isNaN(scale))
 							scale = 0;
 						target.scaleX = target.scaleY = scale;
@@ -271,12 +271,12 @@ package qs.controls
 			
 			minDist = Infinity;
 			
-			for(var i:int = 0; i < _vMouseItems.length; i++)
+			for(i = 0; i < _vMouseItems.length; i++)
 			{
-				var item:FisheyeItem = _vMouseItems[i];
-				var midPoint:Number = item.y + item.eomHeight * item.scale/2;
+				item = _vMouseItems[i];
+				midPoint = item.y + item.eomHeight * item.scale/2;
 			
-				var dist:Number = yPos - midPoint;
+				dist = yPos - midPoint;
 				if (Math.abs(dist) < Math.abs(minDist))				
 				{
 					minDist = dist;

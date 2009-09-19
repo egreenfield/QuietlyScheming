@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/halo" width="1024" height="768" xmlns:local="*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+        <local:Blarg fx:id="part" local:id="25" />
+        <s:ArrayList id="scurve">
+            
+            <local:Knot x="0" y=".2" z="-200"   rX="0" rY="0" rZ="1" sX=".5" sY=".5" />
+            <local:Knot x=".5" y=".3" z="100"   rX="1" rY="0" rZ="0" sX=".5" sY=".5" /> 
+            <local:Knot x=".6" y=".4" z="50"    rX="1" rY="0" rZ="0" sX=".5" sY=".5" /> 
+            <local:Knot x=".5" y=".5" z="0"     rX="1" rY="0" rZ="0" sX="2" sY="2" sZ="2" /> 
+            <local:Knot x=".4" y=".6" z="50"    rX="1" rY="0" rZ="0" sX=".5" sY=".5" />
+            <local:Knot x=".5" y=".7" z="100"   rX="1" rY="0" rZ="0" sX=".5" sY=".5" />
+            <local:Knot x="1" y=".7" z="-200"   rX="0" rY="0" rZ="-1" sX=".5" sY=".5" />
+        </s:ArrayList>
+        <s:ArrayList id="playKnots">
+            
+            <local:Knot x="0" y=".5" /> 
+            <local:Knot x="1" y=".5" /> 
+        </s:ArrayList>
+        
+        <local:LayoutModel id="model" knots="{scurve}" />
+	</fx:Declarations>
+    
+    <fx:Script>
+        
+                <![CDATA[
+            import mx.collections.ArrayList;
+        ]]>
+    </fx:Script>
+    <s:VGroup x="520">           
+        <local:KnotUI model="{model}" width="300" height="640" />
+    </s:VGroup>
+	<s:List width="500" height="500" maintainProjectionCenter="true" useVirtualLayout="true" allowMultipleSelection="true"  
+             dataProvider="{new ArrayList(('now is the time for all good men to come to the aid of the party the quick brown fox jumped over the lazy dog now is the time for all good men to come to the aid of the party the quick brown fox jumped over the lazy dog').split(' '))}">
+        <s:layout>
+            <local:CatmullLayout  rangeMin="{model.rangeMin}" 
+                                  autoRotate="{model.autoRotate}" 
+                                  rangeMax="{model.rangeMax}" 
+                                  requestedItemCount="{model.itemCount}"  
+                                  rX="{model.rX}"
+                                  rY="{model.rY}"
+                                  rZ="{model.rZ}"
+                                  knots="{model.knots}"
+                                  xmlns:fl="flash.geom.*"
+                                  >
+<!--                <local:at>
+                    <fl:Vector3D x="-1" />
+                </local:at>
+-->
+                <!--                
+                <local:knots >
+                    <local:Knot x="-50" y="240" z="150" /> 
+                    <local:Knot x="0" y="260" z="50" /> 
+                    <local:Knot x="50" y="260" z="-50"/> 
+                    <local:Knot x="150" y="250" z="-150"/> 
+                    <local:Knot x="200" y="250" z="-250"/> 
+                    <local:Knot x="250" y="240" z="-350"/> 
+                    <local:Knot x="220" y="240" z="-400"/> 
+                    <local:Knot x="200" y="260" z="-450"/> 
+                    <local:Knot x="240" y="270" z="-500"/> 
+                    <local:Knot x="320" y="280" z="-450"/> 
+                    <local:Knot x="450" y="290" z="-400"/> 
+                    <local:Knot x="550" y="300" z="-200"/> 
+
+
+                    <local:Knot x="0" y="290" /> 
+                    <local:Knot x="250" y="250" z="-250"/> 
+                    <local:Knot x="500" y="290" />
+ 
+
+                    <local:Knot x="0" y="500" z="500" /> 
+                    <local:Knot x="150" y="450" z="480" /> 
+                    <local:Knot x="150" y="300" z="200"/> 
+                    <local:Knot x="250" y="250" z="0"/> 
+                    <local:Knot x="350" y="300" z="200"/> 
+                    <local:Knot x="350" y="450" z="480" /> 
+                       <local:Knot x="500" y="500" z="500" /> 
+
+                </local:knots>
+                -->
+            </local:CatmullLayout>
+        </s:layout>
+        <s:itemRenderer>
+            <fx:Component>
+                <s:ItemRenderer width="75" height="75">
+                    <fx:Script>
+                        <![CDATA[
+                            override public function set data(value:Object):void
+                            {
+                                super.data = value;
+                            }
+                            override public function setCurrentState(value:String,a:Boolean=true):void
+                            {
+                                super.setCurrentState(value,a);
+                                invalidateDisplayList();
+                            }
+                            override protected function updateDisplayList(uw:Number,uh:Number):void
+                            {
+                                super.updateDisplayList(uw,uh);
+                                var l:Number = data.length;
+                                var sz:Number = uw/l;
+                                var g:Graphics = graphics;
+                                graphics.clear();
+                                g.beginFill((currentState == "normal")? 0xAAAAFF: (currentState == "hovered")? 0xDDDDFF:0x2222AA);
+                                g.lineStyle(2,0x666666);
+                                g.drawRoundRect(0,0,uw,uh,sz,sz);
+                                g.endFill();
+                                g.lineStyle(0,0,0);
+                                for(var i:int = 0;i<l;i++)
+                                    for(var j:int = 0;j<l;j++)
+                                    {
+                                        g.beginFill((currentState == "normal")? 0xFFFFAA: (currentState == "hovered")? 0xFFFFDD:0xAAAA22);
+                                        g.drawEllipse(i*sz,j*sz,sz,sz);
+                                        g.endFill();
+                                    }
+                            }
+                        ]]>
+                    </fx:Script>
+                    <s:states>
+                        <s:State name="normal" />
+                        <s:State name="hovered" />
+                        <s:State name="selected" />
+                    </s:states>
+                    <s:Label id="labelDisplay" left="10" right="10" top="10" bottom="10" verticalAlign="middle" textAlign="center" fontWeight="bold" fontSize.selected="18" fontSize="14" color="black" color.selected="white" />
+                             
+                </s:ItemRenderer>
+            </fx:Component>
+        </s:itemRenderer>
+    </s:List>
+    
+</s:Application>
+

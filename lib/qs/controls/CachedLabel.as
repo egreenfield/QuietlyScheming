@@ -73,7 +73,7 @@ package qs.controls
  *  Possible values are <code>"none"</code> and <code>"underline"</code>.
  *  The default value is <code>none</code>.
  */
-[Style(name="textDecoration", type="String", enumeration="none,underline", inherit="no")]
+[Style(name="textDecoration", type="String", enumeration="none,underline", inherit="yes")]
 
 /**
  *  Offset of first line of text from the left side of the container.

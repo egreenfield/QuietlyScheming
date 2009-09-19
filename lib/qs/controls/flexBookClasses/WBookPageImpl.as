@@ -1,4 +1,4 @@
-package qs.controls.bookClasses
+package qs.controls.flexBookClasses
 {
 	import mx.core.UIComponent;
 	import mx.skins.Border;

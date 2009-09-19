@@ -194,7 +194,7 @@ package qs.data
 			}
 			else
 			{
-				var chart:ChartBase = buildChart(_cubeBuilder.getSlice(),catAxis,vertAxis)
+				chart = buildChart(_cubeBuilder.getSlice(),catAxis,vertAxis)
 				chart.percentHeight = 100;
 				chart.percentWidth = 100;
 	

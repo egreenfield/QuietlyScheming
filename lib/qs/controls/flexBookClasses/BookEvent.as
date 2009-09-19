@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-package qs.controls.bookClasses
+package qs.controls.flexBookClasses
 {
 	import flash.events.Event;
 	import mx.core.IFlexDisplayObject;

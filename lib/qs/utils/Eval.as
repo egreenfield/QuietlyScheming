@@ -124,18 +124,18 @@ package qs.utils
 						else if (cc == plus)
 							state = "plus";
 						else if (cc == minus)
-							state = 
+							state = "minus";
 						switch(cc)
 						{
 							case ws:
 								break;
-							case 
 						}
 					break;
 				}
 				
 				getCharCode();
 			}
+			return null;
 		}
 	}
 }

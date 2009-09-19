@@ -21,7 +21,7 @@ package qs.controls
 			return _dataProvider;
 		}
 		
-		private funciton clearTo(level:int):void
+		private function clearTo(level:int):void
 		{
 			for(var i:int = level;i<_links.length;i++)
 			{
@@ -44,14 +44,13 @@ package qs.controls
 			_animator = new LayoutAnimator();
 			_animator.layoutFunction = generateLayout;
 		}
-		protected function override commitProperties():void
+		override protected function  commitProperties():void
 		{
 			
 		}
 		
 		private function generateLayout():void
 		{
-			var node
 		}
 	
 		

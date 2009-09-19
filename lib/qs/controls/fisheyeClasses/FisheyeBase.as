@@ -267,7 +267,7 @@ package qs.controls.fisheyeClasses
 				renderers = [];
 
 				// allocate new renderers, assign the data.
-				for(var i:int = 0;i<_items.length;i++)
+				for(i = 0;i<_items.length;i++)
 				{
 					var renderer:UIComponent = _itemRendererFactory.newInstance();
 					IDataRenderer(renderer).data = _items[i];
@@ -387,7 +387,7 @@ package qs.controls.fisheyeClasses
 			}
 			
 			vp = 0;
-			for(var i:int=0;i<itemCount;i++)
+			for(i=0;i<itemCount;i++)
 			{
 				pdataInst = pdata[i];
 				pdataInst.scale = params.minScale;
@@ -538,13 +538,13 @@ package qs.controls.fisheyeClasses
 					break;
 				case "center":					
 				default:			
-					var offset:Number;
+					
 					var midIndex:int = Math.floor(itemCount/2);
 	
 					pdataInst = pdata[itemCount-1];
 					var rightPos:Number = pdataInst[axis.pos] + pdataInst[axis.EOM]*pdataInst.scale;
 					offset = (this[axis.unscaled]/2 - (rightPos)/2);
-					for(var i:int = 0;i<itemCount;i++)
+					for(i = 0;i<itemCount;i++)
 					{
 						pdata[i][axis.pos] += offset;
 					}

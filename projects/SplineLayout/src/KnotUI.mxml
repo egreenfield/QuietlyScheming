@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+         xmlns:s="library://ns.adobe.com/flex/spark" 
+         xmlns:mx="library://ns.adobe.com/flex/halo" width="400" height="300" xmlns:local="*">
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+        
+    </fx:Declarations>
+    <fx:Script>
+        <![CDATA[
+			import qs.layouts.Knot;
+            import mx.collections.IList;
+            [Bindable] public var view:String;
+            [Bindable] public var selectedKnot:Knot;
+            public function deleteSelected():void
+            {
+                if(selectedKnot == null)
+                    return;
+                for(var i:int = 0;i<model.knots.length;i++)
+                    if(model.knots.getItemAt(i) == selectedKnot)
+                    {
+                        model.knots.removeItemAt(i);
+                        return;
+                    }
+            }
+            public function reset():void
+            {
+                model.knots.removeAll();
+            }
+            private function setSelectedKnot(k:Knot):void
+            {
+                if(selectedKnot == k)
+                    return;
+                
+                selectedKnot = k;
+				enableScale.selected = !isNaN(selectedKnot.sX);
+            }
+			public function updateSelectedKnot():void
+			{
+				if(selectedKnot == null)
+					return;
+				if(enableScale.selected)
+				{
+					selectedKnot.sX = scale.value;
+					selectedKnot.sY = scale.value;
+				}
+				else
+				{
+					selectedKnot.sX = NaN;
+					selectedKnot.sX = NaN;					
+				}
+				model.knots.itemUpdated(selectedKnot);
+			}
+            
+            [Bindable] public var model:LayoutModel;
+            
+            private function dump():void
+            {
+                trace("<Layout rX='"+model.rX+"' rY="+ model.rY+"' rZ='"+model.rZ+ "' autoRotate='"+model.autoRotate+ "'itemCount='"+model.itemCount+"' />");
+                for(var i:int = 0;i<model.knots.length;i++)
+                    trace(model.knots.getItemAt(i).toString());
+            }
+        ]]>
+    </fx:Script>
+    <s:layout><s:VerticalLayout /></s:layout>
+    
+    <fx:Binding source="ric.value" destination="model.itemCount" />
+    <fx:Binding source="rangeMin.value" destination="model.rangeMin" />
+    <fx:Binding source="rangeMax.value" destination="model.rangeMax" />
+    <fx:Binding source="autoRotate.selected" destination="model.autoRotate" />
+	<fx:Binding source="varySpeed.selected" destination="model.varySpeed" />
+
+    <fx:Binding source="rX.value" destination="model.rX" />
+    <fx:Binding source="rY.value" destination="model.rY" />
+    <fx:Binding source="rZ.value" destination="model.rZ" />
+
+	<fx:Binding source="margin.value" destination="p1.margin" />
+
+    <s:HSlider minimum="3" maximum="21" value="11"  id="ric"  width="100%" />
+    <s:HSlider minimum="0" maximum=".5" snapInterval=".01" value="0" id="rangeMin"  width="100%" />
+    <s:HSlider minimum=".5" maximum="1" snapInterval=".01" value="1" id="rangeMax"  width="100%" />
+    <s:HGroup>
+        <s:CheckBox id="autoRotate" selected="true" label="autoRotate" />
+		<s:CheckBox id="varySpeed" selected="true" label="vary speed" />
+    </s:HGroup>
+    <s:HSlider minimum="-180" maximum="180" value="0"  id="rX"  width="100%" />
+    <s:HSlider minimum="-180" maximum="180" value="0"  id="rY"  width="100%" />
+    <s:HSlider minimum="-180" maximum="180" value="0"  id="rZ"  width="100%" />
+    <s:HGroup>
+        <s:Button label="reset" click="reset()" />
+        <s:Button label="delete" x="80" click="deleteSelected()" />
+        <s:Button label="dump" x="160" click="dump()" />
+		<s:Label text="show:" />
+		<s:DropDownList id="viewCHooser" selectedIndex="0">
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:String>front</fx:String>
+					<fx:String>top</fx:String>
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:DropDownList>
+    </s:HGroup>
+	 <s:HSlider minimum="0" maximum="{width/2}" value="30"  id="margin"  width="100%" />
+     <local:KnotPanel id="p1" selectionChange="setSelectedKnot(p1.selectedKnot)"  width="100%" height="{p1.width}" knots="{model.knots}"  view="{viewCHooser.selectedItem}" />
+	 <s:CheckBox label="Scale" id="enableScale" change="updateSelectedKnot()"  />
+	 <s:HSlider id="scale" enabled="{enableScale.selected}" snapInterval=".01" minimum="0" maximum="5"  value="{selectedKnot.sX}"    width="100%" change="updateSelectedKnot()" />
+</s:Group>

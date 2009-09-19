@@ -1,22 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties version="1" mainApplicationPath="Declaration.mxml">
-  <compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" outputFolderLocation="C:\dev\qs\web\public\landscape" rootURL="http://localhost:3000/landscape" sourceFolderPath="src">
-    <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" path="C:\dev\qs\lib" linkType="1"/>
-    </compilerSourcePath>
-    <libraryPath>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/rpc.swc" linkType="1"/>
-      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
-      <libraryPathEntry kind="1" path="${FRAMEWORKS}/locale/{locale}" linkType="1"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties mainApplicationPath="Declaration.mxml" projectUUID="41e55561-86f5-4e9d-b9e6-d58e1ede435f" version="6">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="false" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderLocation="/Users/egreenfi/dev/qsg/web/public/landscape" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+    <compilerSourcePath/>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path="">
+        <modifiedEntries>
+          <libraryPathEntry index="1" kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" sourcepath="${PROJECT_FRAMEWORKS}/source" useDefaultLinkType="true"/>
+        </modifiedEntries>
+        <excludedEntries>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/qtp.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_dmv.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
+        </excludedEntries>
+      </libraryPathEntry>
+      <libraryPathEntry kind="3" linkType="1" path="/qslib/bin/qslib.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath>
-      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
-      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
-      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry index="1" kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" sourcepath="${PROJECT_FRAMEWORKS}/source" useDefaultLinkType="true"/>
+      <sourceAttachmentPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/datavisualization.swc" sourcepath="${PROJECT_FRAMEWORKS}/source" useDefaultLinkType="false"/>
     </sourceAttachmentPath>
   </compiler>
   <applications>
@@ -24,5 +27,6 @@
     <application path="WPA.mxml"/>
     <application path="LightTable.mxml"/>
   </applications>
+  <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CartesianChart xmlns="http://www.adobe.com/2006/mxml" 
-	verticalAxisStyleName="tileAxisStyle" secondVerticalAxisStyleName="tileAxisStyle"
-	horizontalAxisStyleName="tileAxisStyle" secondHorizontalAxisStyleName="tileAxisStyle"
+	verticalAxisStyleNames="[tileAxisStyle,tileAxisStyle]" 
+	horizontalAxisStyleNames="[tileAxisStyle,tileAxisStyle]" 
 	paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20" xmlns:s="qs.styles.*" initialize="initAxes()">
 
 
@@ -40,14 +40,13 @@
 	<backgroundElements>
 		<GridLines styleName="bothGridLines" horizontalShowOrigin="false" verticalShowOrigin="false" />
 	</backgroundElements>
-	<horizontalAxisRenderer>
+	<horizontalAxisRenderers>
 		<AxisRenderer placement="top" />
-	</horizontalAxisRenderer>	
-	<secondHorizontalAxisRenderer>
 		<AxisRenderer showLabels="false"/>		
-	</secondHorizontalAxisRenderer>
-	<secondVerticalAxisRenderer>
+	</horizontalAxisRenderers>	
+	<verticalAxisRenderers>
+		<AxisRenderer />				
 		<AxisRenderer showLabels="false"/>				
-	</secondVerticalAxisRenderer>
+	</verticalAxisRenderers>
 	
 </CartesianChart>

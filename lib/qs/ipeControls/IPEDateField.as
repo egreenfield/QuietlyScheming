@@ -1,14 +1,13 @@
 package qs.ipeControls
 {
-	import mx.controls.Label;
-	import qs.ipeControls.classes.IPEBase;
 	import mx.controls.DateField;
-	import mx.controls.CheckBox;
-	import mx.controls.ComboBox;
-	import mx.formatters.DateFormatter;
-	import mx.resources.ResourceBundle;
+	import mx.controls.Label;
 	import mx.controls.listClasses.BaseListData;
 	import mx.controls.listClasses.IDropInListItemRenderer;
+	import mx.formatters.DateFormatter;
+	import mx.resources.ResourceBundle;
+	
+	import qs.ipeControls.classes.IPEBase;
 
 [Event(name="change", type="mx.events.CalendarLayoutChangeEvent")]
 [Event(name="close", type="mx.events.DropdownEvent")]
@@ -82,7 +81,7 @@ public class IPEDateField extends IPEBase implements IDropInListItemRenderer
 	public function set displayedYear(value:int):void { df.displayedYear = value; }
 	
 	[Bindable("firstDayOfWeekChanged")]
-	public function get firstDayOfWeek():int { return df.firstDayOfWeek; }
+	public function get firstDayOfWeek():int { return df.firstDayOfWeek as int; }
 	public function set firstDayOfWeek(value:int):void { df.firstDayOfWeek = value; }
 	
 	

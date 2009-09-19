@@ -48,7 +48,7 @@ package qs.charts {
 
 			_labelCache.count = labelCount;
 			
-			for(var i:int = 0;i<labelCount;i++)
+			for(i=0;i<labelCount;i++)
 			{
 				var l:Label = _labelCache.instances[i];
 				l.text = cache[i].value.fullYear.toString();

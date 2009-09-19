@@ -55,9 +55,9 @@ package qs.containers
 						animator.releaseTarget(aChild);
 				}
 																					
-				for(var i:int=0;i<numChildren;i++)
+				for(i=0;i<numChildren;i++)
 				{
-					var target:LayoutTarget = animator.targetFor(UIComponent(getChildAt(i)));
+					target = animator.targetFor(UIComponent(getChildAt(i)));
 					target.release();
 				}
 

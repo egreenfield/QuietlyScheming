@@ -35,7 +35,7 @@ package qs.utils
 		public function invalidateRenderers():void
 		{
 			_renderersDirty = true;
-			invalidateProperties();
+//TODO: Fix Itemrenderer cache			invalidateProperties();
 		}
 		
 		
@@ -124,14 +124,14 @@ package qs.utils
 				if (renderer is IDataRenderer)
 					IDataRenderer(renderer).data = item;
 			}
-			addChild(DisplayObject(renderer));
+			//TODO: Fix Itemrenderer cache			addChild(DisplayObject(renderer));
 			return renderer;
 		}
 
 		protected function destroyRenderer(renderer:IFlexDisplayObject):void
 		{
-			if(renderer.parent == this)
-				removeChild(DisplayObject(renderer));
+//TODO: Fix Itemrenderer cache			if(renderer.parent == this)
+//TODO: Fix Itemrenderer cache				removeChild(DisplayObject(renderer));
 		}		
 	}
 }

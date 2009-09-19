@@ -18,7 +18,6 @@
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
-	import qs.controls.Book;
 //	import mx.events.StateChangeEvent;
 	import flash.text.TextField;
 
@@ -716,10 +715,10 @@
 	    
 	    
 	    private var _contentOwners:Dictionary;
-		private var _lastContent:FlexContentHolder;
+		private var _lastContent:qs.flash.FlexContentHolder;
 	    private var _content:Object;
 	    
-	    public function registerContentRegion(owner:FlexContentHolder):void
+	    public function registerContentRegion(owner:qs.flash.FlexContentHolder):void
 	    {
 	    	if(_contentOwners == null)
 	    		_contentOwners = new Dictionary(true);
@@ -769,7 +768,7 @@
 	    	else
 	    		content = contentSet[name];
 	    		
-			var owner:FlexContentHolder = (_contentOwners == null)? null:_contentOwners[name];
+			var owner:qs.flash.FlexContentHolder = (_contentOwners == null)? null:_contentOwners[name];
 	    	if(owner != null)
 	    	{
 	    		owner.flexContent = content;

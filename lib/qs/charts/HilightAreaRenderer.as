@@ -75,7 +75,7 @@ package qs.charts
 			
 			for(var i:int=rStart;i<rEnd;i++)
 			{
-				var item:AreaSeriesItem = boundary[i];
+				item = boundary[i];
 				g.lineTo(item.x,item.y);
 			}
 			
@@ -104,9 +104,9 @@ package qs.charts
 			if (!isNaN(boundary[rStart].min))
 			{
 				g.lineTo(xEnd,minEnd);
-				for(var i:int=rEnd-1;i>=rStart;i--)
+				for(i=rEnd-1;i>=rStart;i--)
 				{
-					var item:AreaSeriesItem = boundary[i];
+					item = boundary[i];
 					g.lineTo(item.x,item.min);
 				}
 				g.lineTo(xStart,minStart);
@@ -156,8 +156,8 @@ package qs.charts
 					}
 					if(maxIdx < 0 && _maxWindow < boundary[i].xNumber)
 					{
-						var prevItem:AreaSeriesItem = boundary[i-1];
-						var ratio:Number = (_maxWindow - prevItem.xNumber)/(boundary[i].xNumber - prevItem.xNumber);
+						prevItem = boundary[i-1];
+						ratio = (_maxWindow - prevItem.xNumber)/(boundary[i].xNumber - prevItem.xNumber);
 						maxIdx = i-1 + ratio;
 					}
 				}

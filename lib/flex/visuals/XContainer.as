@@ -47,7 +47,7 @@ package flex.visuals
 			if(_contentListDirty)
 			{
 				_contentListDirty= false;
-				_contentList = ListUtilities.listFromValue(_content);
+//				_contentList = ListUtilities.listFromValue(_content);
 				invalidateSize();
 			}
 		}
