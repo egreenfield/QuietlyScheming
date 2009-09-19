@@ -103,5 +103,5 @@
 	 <s:HSlider minimum="0" maximum="{width/2}" value="30"  id="margin"  width="100%" />
      <local:KnotPanel id="p1" selectionChange="setSelectedKnot(p1.selectedKnot)"  width="100%" height="{p1.width}" knots="{model.knots}"  view="{viewCHooser.selectedItem}" />
 	 <s:CheckBox label="Scale" id="enableScale" change="updateSelectedKnot()"  />
-	 <s:HSlider id="scale" enabled="{enableScale.selected}" snapInterval=".01" minimum="0" maximum="5"  value="{selectedKnot.sX}"    width="100%" change="updateSelectedKnot()" />
+	 <s:HSlider id="scale" enabled="{enableScale.selected}" snapInterval=".01" minimum=".01" maximum="5"  value="{selectedKnot.sX}"    width="100%" change="updateSelectedKnot()" />
 </s:Group>

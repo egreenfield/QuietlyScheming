@@ -30,6 +30,7 @@ package qs.geom
   {
     // core
     private var __controlPoints:Vector.<Vector.<Number>> = new Vector.<Vector.<Number>>();
+	private var __tValues:Vector.<Number> = new Vector.<Number>();
     private var __hold:Vector.<Number>;
     private var __tangent:String;         // endpoint (implicit tangent) specification
     private var __coef:Array;             // coefficients for each segment
@@ -62,6 +63,8 @@ package qs.geom
       __controlPoints[0].push(0);
       __controlPoints[1].push(0);
       __controlPoints[2].push(0);
+	  
+	  __tValues.push(0);
 
       __tangent    = Consts.AUTO;
       __param      = Consts.UNIFORM;
@@ -111,6 +114,11 @@ package qs.geom
 * @since 1.0
 *
 */
+	public function addControlPointAtT( t:Number,... rest):void
+	{
+			__tValues.push(t);
+			addControlPointN.apply(null,rest);
+	}
     public function addControlPointN( ... rest):void
     {
         if(rest.length > dimensionality)
@@ -163,7 +171,7 @@ package qs.geom
       }
       else
       {
-          __hold.splice(0,-1);
+          __hold.splice(0,__hold.length);
           for(i = 0;i<__controlPoints.length;i++)
               __hold.push(rest[i]); 
       }
@@ -183,6 +191,8 @@ package qs.geom
         __controlPoints.splice(0,__controlPoints.length);
       __coef.splice(0);
 
+	  __tValues.splice(0,__tValues.length);
+	  
       __controlPoints.push(new Vector.<Number>);
       __controlPoints.push(new Vector.<Number>);
       __controlPoints.push(new Vector.<Number>);
@@ -191,7 +201,7 @@ package qs.geom
       __controlPoints[1].push(0);
       __controlPoints[2].push(0);
       
-      __hold.splice(0,-1);
+      __hold.splice(0,__hold.length);
       __hold.push(0);
       __hold.push(0);
       __hold.push(0);
@@ -618,6 +628,18 @@ package qs.geom
       // each of the C-R knots and two knots in between.  If spline knots are already in place, then
       // this method was most likely called as a result of moving one or more C-R knots, so regenerate
       // the entire set of interpolation knots.
+	  if( __param == "variable")
+	  {
+		  if( __spline.knotCount > 0 )
+			  __spline.deleteAllKnots();
+		  var distribution:Number = 1.0/(__knots-1);
+		  
+		  for(i = 0;i<__knots;i++)
+		  {
+			  __spline.addControlPoint(__tValues[i],i*distribution);
+		  }
+		  
+	  }
       if( __param == Consts.ARC_LENGTH )
       {
         if( __arcLength == -1 )
@@ -670,7 +692,7 @@ package qs.geom
       t            = (t>1)  ? 1 : t;
 
       // if arc-length parameterization, approximate L^-1(s)
-      if( __param == Consts.ARC_LENGTH )
+      if( __param == Consts.ARC_LENGTH || __param == "variable")
       {
         if( t != __s )
         {
@@ -693,7 +715,7 @@ package qs.geom
     {
         var t:Number = (_t<0) ? 0 : _t;
         t            = (t>1)  ? 1 : t;
-        if( __param == Consts.ARC_LENGTH )
+        if( __param == Consts.ARC_LENGTH || __param == "variable" )
         {
             if( t == __s )
             {

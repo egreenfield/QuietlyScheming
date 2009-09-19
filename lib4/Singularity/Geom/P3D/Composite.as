@@ -93,7 +93,7 @@ package Singularity.Geom.P3D
     
     public function set parameterize(_s:String):void
     {
-      if( _s == Consts.ARC_LENGTH || _s == Consts.UNIFORM )
+      if( _s == Consts.ARC_LENGTH || _s == Consts.UNIFORM || _s == "variable")
       {
         __param      = _s;
         __invalidate = true;

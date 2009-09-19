@@ -69,7 +69,10 @@ package qs.layouts
             m.prependRotation(rY,Vector3D.Y_AXIS);
             m.prependRotation(rX,Vector3D.X_AXIS);
             
-            m.prependScale(curve.getV(6,t),curve.getV(7,t),1);
+//            m.prependScale(curve.getV(6,t),curve.getV(7,t),1);
+			var uniformT:Number = curve.chordTFor(t);
+			if(scaleCurve.numControlPoints >= 2)
+				m.prependScale(scaleCurve.getV(0,uniformT),scaleCurve.getV(1,uniformT),1);
         }
         
         private var curve:NCatmullRom = new NCatmullRom();
@@ -121,13 +124,16 @@ package qs.layouts
             curve.reset();
             rotationCurve.reset();
 			scaleCurve.reset();
+			scaleCurve.parameterize = "variable";
+			
 	        curve.parameterize = (varySpeed)?  Consts.UNIFORM : Consts.ARC_LENGTH;
+			var distribution:Number = 1/(knots.length-1);
             for(var i:int = 0;i<knots.length;i++)
             {
                 var k:Knot = knots.getItemAt(i) as Knot;
                 curve.addControlPointN(k.x * w,k.y * h,k.z,k.rX,k.rY,k.rZ,k.sX,k.sY,k.sZ);
 				if(!isNaN(k.sX) && !isNaN(k.sY))
-					scaleCurve.addControlPointN(k.sX,k.sY);					
+					scaleCurve.addControlPointAtT(i*distribution,k.sX,k.sY,1);					
             }
             for(i = 0;i<knots.length;i++)
             {
