@@ -261,6 +261,7 @@ package
 			curve.draw();
 			var g:Graphics = curveSurface.graphics;
 			
+			/*			
 			if(_shadowKnots != null)
 			{
 				for(i=0;i<_shadowKnots.length;i++) {
@@ -271,14 +272,13 @@ package
 					g.endFill();
 				}
 			}
-
-/*			
-			if(_shadowKnots != null)
+*/
+			if(_knots != null)
             {
                 for(var i:int = 0;i<knots.length;i++)
                 {
                     var k:Knot = knots.getItemAt(i) as Knot;
-                    var p:Point = KSToPixels(k);
+                    var p:Point = KToPixels(k);
                     if(prev)
                     {
                         g.lineStyle(0,0xCCCCFF);
@@ -300,7 +300,7 @@ package
                     g.endFill();
                 }
             }
-*/			
+			
 
         }
     }

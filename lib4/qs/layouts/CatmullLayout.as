@@ -56,30 +56,39 @@ package qs.layouts
             if(curve.numControlPoints < 2)
                 return;
             
+			var uniformT:Number = curve.chordTFor(t);
+			
             if(autoRotate)
             {
-                m.pointAt(/*new Vector3D(rotationCurve.getX(t),rotationCurve.getY(t),rotationCurve.getZ(t)),*/
+                m.pointAt(
                             new Vector3D(curve.getXPrime(t),curve.getYPrime(t),curve.getZPrime(t)),
                     at,
                     up);
             }
+			else if (_rotationKnots != null)
+			{
+				m.pointAt(
+					new Vector3D(rotationCurve.getX(t),rotationCurve.getY(t),rotationCurve.getZ(t)),
+					at,
+					up);				
+			}
             m.appendTranslation(curve.getX(t),curve.getY(t),curve.getZ(t));
             
             m.prependRotation(rZ,Vector3D.Z_AXIS);
             m.prependRotation(rY,Vector3D.Y_AXIS);
             m.prependRotation(rX,Vector3D.X_AXIS);
             
-//            m.prependScale(curve.getV(6,t),curve.getV(7,t),1);
-			var uniformT:Number = curve.chordTFor(t);
 			if(scaleCurve.numControlPoints >= 2)
-				m.prependScale(scaleCurve.getV(0,uniformT),scaleCurve.getV(0,uniformT),1);
+				m.prependScale(scaleCurve.getV(0,t),scaleCurve.getV(0,t),1);
         }
         
         private var curve:NCatmullRom = new NCatmullRom();
         private var rotationCurve:NCatmullRom = new NCatmullRom();
 		private var scaleCurve:NCatmullRom = new NCatmullRom();
+		
         private var _knots:IList;
 		private var _scaleKnots:IList;
+		private var _rotationKnots:IList;
         
         public var up:Vector3D = new Vector3D(0,-1,0);
         public var at:Vector3D = new Vector3D(1,0,0);
@@ -141,16 +150,14 @@ package qs.layouts
 					k = _scaleKnots.getItemAt(i) as Knot;
 					scaleCurve.addControlPointAtT(k.t,k.x,k.y,1);
 				}
-				
-            for(i = 0;i<knots.length;i++)
-            {
-                var t:Number = curve.tAtKnot(i);
-                k = knots.getItemAt(i) as Knot;
-                if(isNaN(k.rX) || isNaN(k.rY) || isNaN(k.rZ))
-                    rotationCurve.addControlPoint(curve.getXPrime(t),curve.getYPrime(t),curve.getZPrime(t));
-                else
-                    rotationCurve.addControlPoint(k.rX,k.rY,k.rZ);
-            }
+			if(_rotationKnots != null) 
+			{
+				for(i = 0;i<_rotationKnots.length;i++)
+				{
+					k = _rotationKnots.getItemAt(i) as Knot;
+					rotationCurve.addControlPointAtT(k.t,k.x,k.y,k.z);
+				}				
+			}
         }
         private function knotsChangeHandler(e:Event):void
         {
@@ -163,7 +170,17 @@ package qs.layouts
 			
 			invalidateCurve();
 		}
-        public function set knots(value:IList):void    
+		public function set rotationKnots(value:IList):void
+		{
+			if(_rotationKnots != null)
+				_rotationKnots.removeEventListener(CollectionEvent.COLLECTION_CHANGE,knotsChangeHandler);
+			_rotationKnots = value;
+			_rotationKnots.addEventListener(CollectionEvent.COLLECTION_CHANGE,knotsChangeHandler);
+			
+			invalidateCurve();
+		}
+
+		public function set knots(value:IList):void    
         {
             _knots = value;
             _knots.addEventListener(CollectionEvent.COLLECTION_CHANGE,knotsChangeHandler);
