@@ -9,7 +9,9 @@ package
         {
         }
         public var knots:IList;
-
+		
+		public var scale:IList;
+		
         public var rX:Number = 0;
         public var rY:Number = 0;
         public var rZ:Number = 0;

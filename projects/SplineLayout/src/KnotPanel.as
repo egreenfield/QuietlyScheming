@@ -38,7 +38,7 @@ package
 			_view = value;
 			invalidateCurve();
 		}
-		public function get view() { return _view;}
+		public function get view():String { return _view;}
         
         private function knotsChangeHandler(e:Event):void
         {
@@ -163,6 +163,11 @@ package
             k.x = tx;
             k.y = ty;
             k.z = tz;
+			k.t = 1;
+			var tDist:Number = 1/knots.length;
+			for(var i:int = 0;i<knots.length;i++) {
+				knots.getItemAt(i).t = i*tDist;
+			}
             knots.addItem(k);
             invalidateCurve();
             return k;

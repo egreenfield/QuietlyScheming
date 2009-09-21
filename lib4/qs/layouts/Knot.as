@@ -11,9 +11,12 @@ package qs.layouts
         public var rX:Number;
         public var rY:Number;
         public var rZ:Number;
-        public var sX:Number;
-        public var sY:Number;
-        public var sZ:Number;
+		
+		public var sX:Number;
+		public var sY:Number;
+		public var sZ:Number;
+
+		public var t:Number;
         
         public function toString():String
         {

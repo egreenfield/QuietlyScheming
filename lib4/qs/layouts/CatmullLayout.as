@@ -72,13 +72,14 @@ package qs.layouts
 //            m.prependScale(curve.getV(6,t),curve.getV(7,t),1);
 			var uniformT:Number = curve.chordTFor(t);
 			if(scaleCurve.numControlPoints >= 2)
-				m.prependScale(scaleCurve.getV(0,uniformT),scaleCurve.getV(1,uniformT),1);
+				m.prependScale(scaleCurve.getV(0,uniformT),scaleCurve.getV(0,uniformT),1);
         }
         
         private var curve:NCatmullRom = new NCatmullRom();
         private var rotationCurve:NCatmullRom = new NCatmullRom();
 		private var scaleCurve:NCatmullRom = new NCatmullRom();
         private var _knots:IList;
+		private var _scaleKnots:IList;
         
         public var up:Vector3D = new Vector3D(0,-1,0);
         public var at:Vector3D = new Vector3D(1,0,0);
@@ -132,9 +133,15 @@ package qs.layouts
             {
                 var k:Knot = knots.getItemAt(i) as Knot;
                 curve.addControlPointN(k.x * w,k.y * h,k.z,k.rX,k.rY,k.rZ,k.sX,k.sY,k.sZ);
-				if(!isNaN(k.sX) && !isNaN(k.sY))
-					scaleCurve.addControlPointAtT(i*distribution,k.sX,k.sY,1);					
             }
+
+			if(_scaleKnots != null)
+				for(i = 0;i<_scaleKnots.length;i++)
+				{
+					k = _scaleKnots.getItemAt(i) as Knot;
+					scaleCurve.addControlPointAtT(k.t,k.x,k.y,1);
+				}
+				
             for(i = 0;i<knots.length;i++)
             {
                 var t:Number = curve.tAtKnot(i);
@@ -147,6 +154,13 @@ package qs.layouts
         }
         private function knotsChangeHandler(e:Event):void
         {
+			invalidateCurve();
+		}
+		public function set scaleKnots(value:IList):void
+		{
+			_scaleKnots = value;
+			_scaleKnots.addEventListener(CollectionEvent.COLLECTION_CHANGE,knotsChangeHandler);
+			
 			invalidateCurve();
 		}
         public function set knots(value:IList):void    

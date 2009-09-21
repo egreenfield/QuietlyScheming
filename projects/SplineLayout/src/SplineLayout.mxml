@@ -5,13 +5,24 @@
 	<fx:Declarations>
 		<s:ArrayList id="scurve">
 			
-			<layouts:Knot x="0" y=".2" z="-200"   rX="0" rY="0" rZ="1" sX=".5" sY=".5" />
-			<layouts:Knot x=".5" y=".3" z="100"   rX="1" rY="0" rZ="0" sX=".5" sY=".5" /> 
-			<layouts:Knot x=".6" y=".4" z="50"    rX="1" rY="0" rZ="0" sX=".5" sY=".5" /> 
-			<layouts:Knot x=".5" y=".5" z="0"     rX="1" rY="0" rZ="0" sX="2" sY="2" sZ="2" /> 
-			<layouts:Knot x=".4" y=".6" z="50"    rX="1" rY="0" rZ="0" sX=".5" sY=".5" />
-			<layouts:Knot x=".5" y=".7" z="100"   rX="1" rY="0" rZ="0" sX=".5" sY=".5" />
-			<layouts:Knot x="1" y=".7" z="-200"   rX="0" rY="0" rZ="-1" sX=".5" sY=".5" />
+			<layouts:Knot x="0" y=".2" z="-200"   rX="0" rY="0" rZ="1" />
+			<layouts:Knot x=".5" y=".3" z="100"   rX="1" rY="0" rZ="0" /> 
+			<layouts:Knot x=".6" y=".4" z="50"    rX="1" rY="0" rZ="0" /> 
+			<layouts:Knot x=".5" y=".5" z="0"     rX="1" rY="0" rZ="0" /> 
+			<layouts:Knot x=".4" y=".6" z="50"    rX="1" rY="0" rZ="0" />
+			<layouts:Knot x=".5" y=".7" z="100"   rX="1" rY="0" rZ="0" />
+			<layouts:Knot x="1" y=".7" z="-200"   rX="0" rY="0" rZ="-1" />
+		</s:ArrayList>
+
+		<s:ArrayList id="scurveScale">
+			
+			<layouts:Knot x=".5" y=".5" t="0" />
+			<layouts:Knot x=".5" y=".5" t=".2" /> 
+			<layouts:Knot x=".5" y=".5" t=".4" /> 
+			<layouts:Knot x="2" y="2" sZ="2" t=".5" /> 
+			<layouts:Knot x=".5" y=".5" t=".6" />
+			<layouts:Knot x=".5" y=".5" t=".8" />
+			<layouts:Knot x=".5" y=".5" t="1" />
 		</s:ArrayList>
 
 		<s:ArrayList id="playKnots">
@@ -19,8 +30,44 @@
 			<layouts:Knot x="0" y=".5" /> 
 			<layouts:Knot x="1" y=".5" /> 
 		</s:ArrayList>
+
+		<!--                <local:at>
+		<fl:Vector3D x="-1" />
+		</local:at>
+		-->
+		<!--                
+		<layouts:Knots >
+		<layouts:Knot x="-50" y="240" z="150" /> 
+		<layouts:Knot x="0" y="260" z="50" /> 
+		<layouts:Knot x="50" y="260" z="-50"/> 
+		<layouts:Knot x="150" y="250" z="-150"/> 
+		<layouts:Knot x="200" y="250" z="-250"/> 
+		<layouts:Knot x="250" y="240" z="-350"/> 
+		<layouts:Knot x="220" y="240" z="-400"/> 
+		<layouts:Knot x="200" y="260" z="-450"/> 
+		<layouts:Knot x="240" y="270" z="-500"/> 
+		<layouts:Knot x="320" y="280" z="-450"/> 
+		<layouts:Knot x="450" y="290" z="-400"/> 
+		<layouts:Knot x="550" y="300" z="-200"/> 
 		
-		<local:LayoutModel id="model" knots="{scurve}" />
+		
+		<layouts:Knot x="0" y="290" /> 
+		<layouts:Knot x="250" y="250" z="-250"/> 
+		<layouts:Knot x="500" y="290" />
+		
+		
+		<layouts:Knot x="0" y="500" z="500" /> 
+		<layouts:Knot x="150" y="450" z="480" /> 
+		<layouts:Knot x="150" y="300" z="200"/> 
+		<layouts:Knot x="250" y="250" z="0"/> 
+		<layouts:Knot x="350" y="300" z="200"/> 
+		<layouts:Knot x="350" y="450" z="480" /> 
+		<layouts:Knot x="500" y="500" z="500" /> 
+		
+		</layouts:Knots>
+		-->
+
+		<local:LayoutModel id="model" knots="{scurve}" scale="{scurveScale}" />
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -30,6 +77,9 @@
 		]]>
 	</fx:Script>
 	<s:Panel skinClass="RightPanelSkin" width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
 		<s:controlBarContent>
 			<local:KnotUI model="{model}"  height="640" />			
 		</s:controlBarContent>		
@@ -44,44 +94,10 @@
 									  rY="{model.rY}"
 									  rZ="{model.rZ}"
 									  knots="{model.knots}"
+									  scaleKnots="{model.scale}"
 									  varySpeed="{model.varySpeed}"
 									  xmlns:fl="flash.geom.*"
 									  >
-					<!--                <local:at>
-					<fl:Vector3D x="-1" />
-					</local:at>
-					-->
-					<!--                
-					<layouts:Knots >
-					<layouts:Knot x="-50" y="240" z="150" /> 
-					<layouts:Knot x="0" y="260" z="50" /> 
-					<layouts:Knot x="50" y="260" z="-50"/> 
-					<layouts:Knot x="150" y="250" z="-150"/> 
-					<layouts:Knot x="200" y="250" z="-250"/> 
-					<layouts:Knot x="250" y="240" z="-350"/> 
-					<layouts:Knot x="220" y="240" z="-400"/> 
-					<layouts:Knot x="200" y="260" z="-450"/> 
-					<layouts:Knot x="240" y="270" z="-500"/> 
-					<layouts:Knot x="320" y="280" z="-450"/> 
-					<layouts:Knot x="450" y="290" z="-400"/> 
-					<layouts:Knot x="550" y="300" z="-200"/> 
-					
-					
-					<layouts:Knot x="0" y="290" /> 
-					<layouts:Knot x="250" y="250" z="-250"/> 
-					<layouts:Knot x="500" y="290" />
-					
-					
-					<layouts:Knot x="0" y="500" z="500" /> 
-					<layouts:Knot x="150" y="450" z="480" /> 
-					<layouts:Knot x="150" y="300" z="200"/> 
-					<layouts:Knot x="250" y="250" z="0"/> 
-					<layouts:Knot x="350" y="300" z="200"/> 
-					<layouts:Knot x="350" y="450" z="480" /> 
-					<layouts:Knot x="500" y="500" z="500" /> 
-					
-					</layouts:Knots>
-					-->
 				</layouts:CatmullLayout>
 			</s:layout>
 			<s:itemRenderer>
@@ -131,6 +147,7 @@
 				</fx:Component>
 			</s:itemRenderer>
 		</s:List>
+		<local:Timeline width="100%" height="100%" knots="{model.scale}" shadowKnots="{model.knots}" />
 	</s:Panel>
 	
 </s:Application>
